@@ -63,7 +63,7 @@
 											"top": 191,
 											"width": 97.20166015625,
 											"height": 13,
-											"text": "AereoPorto"
+											"text": "AeroPorto"
 										},
 										{
 											"_type": "LabelView",
@@ -135,7 +135,7 @@
 											"top": 214,
 											"width": 97.20166015625,
 											"height": 13,
-											"text": "+CodAereoPorto",
+											"text": "+CodAeroPorto",
 											"horizontalAlignment": 0
 										},
 										{
@@ -240,7 +240,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "AereoPorto",
+					"name": "AeroPorto",
 					"attributes": [
 						{
 							"_type": "UMLAttribute",
@@ -248,7 +248,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF2N6ljQ0IWY7E="
 							},
-							"name": "CodAereoPorto"
+							"name": "CodAeroPorto"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -256,7 +256,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF2N6ljQ0IWY7E="
 							},
-							"name": "Città"
+							"name": "Città",
+							"type": ""
 						}
 					]
 				}
