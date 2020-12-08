@@ -409,24 +409,7 @@
 											"top": 331,
 											"width": 155.71435546875,
 											"height": 13,
-											"text": "+DataVolo",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAF2PFvHaF8PZnA=",
-											"_parent": {
-												"$ref": "AAAAAAF2PFXEul1zaIY="
-											},
-											"model": {
-												"$ref": "AAAAAAF2PFvHLl8MNOM="
-											},
-											"font": "Arial;13;0",
-											"left": 557,
-											"top": 346,
-											"width": 155.71435546875,
-											"height": 13,
-											"text": "+OraVolo",
+											"text": "+DataOra: DateTime",
 											"horizontalAlignment": 0
 										},
 										{
@@ -440,7 +423,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 557,
-											"top": 361,
+											"top": 346,
 											"width": 155.71435546875,
 											"height": 13,
 											"text": "+NumeroPosti: int",
@@ -457,7 +440,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 557,
-											"top": 376,
+											"top": 361,
 											"width": 155.71435546875,
 											"height": 13,
 											"text": "+NumeroPostiPrenotati: int",
@@ -486,7 +469,7 @@
 									"left": 552,
 									"top": 281,
 									"width": 165.71435546875,
-									"height": 113
+									"height": 98
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -499,7 +482,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 552,
-									"top": 394,
+									"top": 379,
 									"width": 165.71435546875,
 									"height": 10
 								},
@@ -3593,7 +3576,6 @@
 									"model": {
 										"$ref": "AAAAAAF2Qaj78oGh2S8="
 									},
-									"visible": false,
 									"font": "Arial;13;0",
 									"left": 313,
 									"top": 381,
@@ -3909,17 +3891,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF2PFXEtV1rZ8g="
 							},
-							"name": "DataVolo",
-							"type": ""
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAF2PFvHLl8MNOM=",
-							"_parent": {
-								"$ref": "AAAAAAF2PFXEtV1rZ8g="
-							},
-							"name": "OraVolo",
-							"type": ""
+							"name": "DataOra",
+							"type": "DateTime"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4043,7 +4016,8 @@
 								"name": "appartiene",
 								"reference": {
 									"$ref": "AAAAAAF2N6ljQ0IWY7E="
-								}
+								},
+								"multiplicity": "1"
 							}
 						}
 					],
@@ -4063,7 +4037,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF2PFc7Al20uUA="
 							},
-							"name": "AeroportoGate"
+							"name": "AeroportoGate",
+							"type": ""
 						}
 					]
 				},
