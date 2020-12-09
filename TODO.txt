@@ -1,0 +1,5 @@
+Aggiungere attributi
+Segnarci eventuali vincoli che aggiungiamo
+creare le sequenze per i codici e trigger
+Aggiungere espressioni regolari
+Popolare il db
