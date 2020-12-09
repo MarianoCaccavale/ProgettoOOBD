@@ -1780,8 +1780,8 @@
 												"$ref": "AAAAAAF2PGCfJ2YCX5Q="
 											},
 											"font": "Arial;13;0",
-											"left": 245,
-											"top": 701,
+											"left": 397,
+											"top": 685,
 											"width": 106.9326171875,
 											"height": 13,
 											"text": "«enumeration»"
@@ -1793,8 +1793,8 @@
 												"$ref": "AAAAAAF2PGCfJ2YCX5Q="
 											},
 											"font": "Arial;13;1",
-											"left": 245,
-											"top": 716,
+											"left": 397,
+											"top": 700,
 											"width": 106.9326171875,
 											"height": 13,
 											"text": "TipoCoda"
@@ -1807,8 +1807,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 64,
-											"top": 16,
+											"left": 368,
+											"top": -16,
 											"width": 73.67724609375,
 											"height": 13,
 											"text": "(from Model)"
@@ -1821,15 +1821,15 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 64,
-											"top": 16,
+											"left": 368,
+											"top": -16,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 240,
-									"top": 696,
+									"left": 392,
+									"top": 680,
 									"width": 116.9326171875,
 									"height": 38,
 									"stereotypeLabel": {
@@ -1856,8 +1856,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 32,
-									"top": 8,
+									"left": 184,
+									"top": -8,
 									"width": 10,
 									"height": 10
 								},
@@ -1872,8 +1872,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 32,
-									"top": 8,
+									"left": 184,
+									"top": -8,
 									"width": 10,
 									"height": 10
 								},
@@ -1888,8 +1888,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 32,
-									"top": 8,
+									"left": 184,
+									"top": -8,
 									"width": 10,
 									"height": 10
 								},
@@ -1904,8 +1904,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 32,
-									"top": 8,
+									"left": 184,
+									"top": -8,
 									"width": 10,
 									"height": 10
 								},
@@ -1929,8 +1929,8 @@
 												"$ref": "AAAAAAF2PGFbTWatHjk="
 											},
 											"font": "Arial;13;0",
-											"left": 245,
-											"top": 739,
+											"left": 397,
+											"top": 723,
 											"width": 106.9326171875,
 											"height": 13,
 											"text": "Famiglia",
@@ -1946,8 +1946,8 @@
 												"$ref": "AAAAAAF2PGFx72bzjl0="
 											},
 											"font": "Arial;13;0",
-											"left": 245,
-											"top": 754,
+											"left": 397,
+											"top": 738,
 											"width": 106.9326171875,
 											"height": 13,
 											"text": "Diversamente abili",
@@ -1963,8 +1963,8 @@
 												"$ref": "AAAAAAF2PGGFFWc5ank="
 											},
 											"font": "Arial;13;0",
-											"left": 245,
-											"top": 769,
+											"left": 397,
+											"top": 753,
 											"width": 106.9326171875,
 											"height": 13,
 											"text": "Priority",
@@ -1980,27 +1980,61 @@
 												"$ref": "AAAAAAF2PGGnFGeaGS8="
 											},
 											"font": "Arial;13;0",
-											"left": 245,
-											"top": 784,
+											"left": 397,
+											"top": 768,
 											"width": 106.9326171875,
 											"height": 13,
 											"text": "Business Class",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLEnumerationLiteralView",
+											"_id": "AAAAAAF2R7g5vimXeKI=",
+											"_parent": {
+												"$ref": "AAAAAAF2PGCfKWYLLQg="
+											},
+											"model": {
+												"$ref": "AAAAAAF2R7g5gCmOqmg="
+											},
+											"font": "Arial;13;0",
+											"left": 397,
+											"top": 783,
+											"width": 106.9326171875,
+											"height": 13,
+											"text": "Economy",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLEnumerationLiteralView",
+											"_id": "AAAAAAF2R7haHypGUY0=",
+											"_parent": {
+												"$ref": "AAAAAAF2PGCfKWYLLQg="
+											},
+											"model": {
+												"$ref": "AAAAAAF2R7hZ7Co94Yw="
+											},
+											"font": "Arial;13;0",
+											"left": 397,
+											"top": 798,
+											"width": 106.9326171875,
+											"height": 13,
+											"text": "Prima Classe",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 240,
-									"top": 734,
+									"left": 392,
+									"top": 718,
 									"width": 116.9326171875,
-									"height": 68
+									"height": 98
 								}
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 240,
-							"top": 696,
+							"left": 392,
+							"top": 680,
 							"width": 116.9326171875,
-							"height": 121,
+							"height": 136,
 							"nameCompartment": {
 								"$ref": "AAAAAAF2PGCfJ2YCX5Q="
 							},
@@ -4805,6 +4839,22 @@
 								"$ref": "AAAAAAF2PGCfJmX/2Ns="
 							},
 							"name": "Business Class"
+						},
+						{
+							"_type": "UMLEnumerationLiteral",
+							"_id": "AAAAAAF2R7g5gCmOqmg=",
+							"_parent": {
+								"$ref": "AAAAAAF2PGCfJmX/2Ns="
+							},
+							"name": "Economy"
+						},
+						{
+							"_type": "UMLEnumerationLiteral",
+							"_id": "AAAAAAF2R7hZ7Co94Yw=",
+							"_parent": {
+								"$ref": "AAAAAAF2PGCfJmX/2Ns="
+							},
+							"name": "Prima Classe"
 						}
 					]
 				},
@@ -4992,7 +5042,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF2Qry/jLr/uA8="
 							},
-							"name": "CodVolo: varchar(50)"
+							"name": "CodVolo: varchar(50)",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -5000,7 +5051,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF2Qry/jLr/uA8="
 							},
-							"name": "DataVolo: Datetime"
+							"name": "DataVolo: Datetime",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -5008,7 +5060,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF2Qry/jLr/uA8="
 							},
-							"name": "NumeroPosti: int"
+							"name": "NumeroPosti: int",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
