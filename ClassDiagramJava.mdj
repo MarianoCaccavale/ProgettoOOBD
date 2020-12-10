@@ -445,7 +445,7 @@
 											"top": 620,
 											"width": 373.21044921875,
 											"height": 13,
-											"text": "+GetAeroportoByNome(string Nome): Aeroporto",
+											"text": "+getAeroportoByNome(string Nome): Aeroporto",
 											"horizontalAlignment": 0
 										},
 										{
@@ -5275,7 +5275,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2SGz5DqT5dYE="
 									},
-									"name": "String Codice"
+									"name": "String Codice",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -5283,7 +5284,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2SGz5DqT5dYE="
 									},
-									"name": "String Nome"
+									"name": "String Nome",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -5291,7 +5293,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2SGz5DqT5dYE="
 									},
-									"name": "String Città"
+									"name": "String Città",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -5346,7 +5349,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2SEa5LXdCyHk="
 									},
-									"name": "string Codice"
+									"name": "string Codice",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -5367,7 +5371,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF2SEY7dXcPBL8="
 							},
-							"name": "GetAeroportoByNome",
+							"name": "getAeroportoByNome",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -5375,8 +5379,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF2SEhJfndaFWc="
 									},
-									"name": "string Nome",
-									"type": ""
+									"name": "string Nome"
 								},
 								{
 									"_type": "UMLParameter",
@@ -6072,7 +6075,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2SFT53ofEKAU="
 									},
-									"name": "String Codice"
+									"name": "String Codice",
+									"type": ""
 								}
 							]
 						},
@@ -6193,7 +6197,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2SInOr7yMoDE="
 									},
-									"name": "String Codice"
+									"name": "String Codice",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -6201,7 +6206,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2SInOr7yMoDE="
 									},
-									"name": "Date DataVolo"
+									"name": "Date DataVolo",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -6209,7 +6215,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2SInOr7yMoDE="
 									},
-									"name": "int NumeroPosti"
+									"name": "int NumeroPosti",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -6217,7 +6224,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2SInOr7yMoDE="
 									},
-									"name": "CompagniaAerea CompagniaDiAppartenenza"
+									"name": "CompagniaAerea CompagniaDiAppartenenza",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -6253,7 +6261,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2SIqVxr29mQs="
 									},
-									"name": "String Codice"
+									"name": "String Codice",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -6261,7 +6270,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2SIqVxr29mQs="
 									},
-									"name": "Date DataVolo"
+									"name": "Date DataVolo",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -6269,7 +6279,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2SIqVxr29mQs="
 									},
-									"name": "int NumeroPosti"
+									"name": "int NumeroPosti",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -6277,7 +6288,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2SIqVxr29mQs="
 									},
-									"name": "int NumeroPostiDisponibili"
+									"name": "int NumeroPostiDisponibili",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -6285,7 +6297,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2SIqVxr29mQs="
 									},
-									"name": "CompagniaAerea CompagniaDiAppartenenza"
+									"name": "CompagniaAerea CompagniaDiAppartenenza",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
