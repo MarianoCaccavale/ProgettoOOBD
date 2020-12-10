@@ -49,3 +49,9 @@ class ComboItem
 comboBox.addItem(new ComboItem("Visible String 1", "Value 1"));
 comboBox.addItem(new ComboItem("Visible String 2", "Value 2"));
 comboBox.addItem(new ComboItem("Visible String 3", "Value 3"));
+
+non possiamo inserire oraFine in slotImbarco se non quando Data è minore di CURRENT_TIMESTAMP
+
+
+gestione volo:
+per prima cosa creo un volo. Se tutto va a buon fine, apro una JDialog in primo piano che mi gestisce la creazione dello slotImbarco. La scelta degli orari avviene tramite una ricerca che mi fa scegliere solo gli orari che non sono occuapati da altri voli, la scelta dei gate invece c'è tramite un menù a tendina che offre solo i gate che non sono occupati in quel lasso di tempo.
