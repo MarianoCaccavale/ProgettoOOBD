@@ -1,0 +1,3 @@
+PASSI
+1)Login: scelgo l'aeroporto su cui voglio lavorare
+2)Creazione dell'entità e scelta operazioni sull'aeroporto scelto (modifico solo quella che ha aeroporto partenza nel mio): gestione delle tratte (aggiunta/eliminazione tratte), gestione dei voli (aggiunta/modifica/eliminazione voli) e consecutiva gestione dello SlotImbarco, gestione delle compagnie (aggiunta/modifica/eliminazione compagnie), gestione dei gate (aggiunta/modifica/eliminazione gate), update dello slot imbarco, statistiche
