@@ -6,9 +6,12 @@ INSERIMENTO DI UN AEROPORTO CON CODICE AUTOGENERATO
 insert into aeroporto
 values (?, ?, ?)
 
-string codice = new String();
-codice = substr(nomeaeroporto, 3);
-codice = codice.appends(codice, substr(città, 3));
+
+codaeroporto = treconsonti(nomeaeroporto)
+offset = select count( distinct codaeroporto)
+from aeroporto
+where aeroporto.nomeaerporto = this.nomeaeroporto
+codaeroporto = codaeroporto + toString(offset+1)
 
 
 quando lascio vuota una textbox faccio un'interrogazione particolare che mi permette di cercare tratte da <tot> a dappertutto e viceversa. Quando loggo creo un'entità aeroporto in modo da avere sempre Aeroporto.NomeAeroporto a portata.
@@ -52,6 +55,13 @@ comboBox.addItem(new ComboItem("Visible String 3", "Value 3"));
 
 non possiamo inserire oraFine in slotImbarco se non quando Data è minore di CURRENT_TIMESTAMP
 
+select count(distinct codaeroporto)
+from aeroporto
+where codaeroporto like 'mln%'		<mln> ovviamente è un esempio, starebbe per l'aeroporto di milano.
+
+in modo da contare quanti aeroporti ci sono già in quella città e sommare quel numero al codice numerico da inserire nella seconda parte del codice
+
+c'è un problema con validificadata() in sql
 
 gestione volo:
 per prima cosa creo un volo. Se tutto va a buon fine, apro una JDialog in primo piano che mi gestisce la creazione dello slotImbarco. La scelta degli orari avviene tramite una ricerca che mi fa scegliere solo gli orari che non sono occuapati da altri voli, la scelta dei gate invece c'è tramite un menù a tendina che offre solo i gate che non sono occupati in quel lasso di tempo, poichè i gate apriranno sempre due ore prima del volo. l'ora di fine dello slotimbarco invece verrà chiesta di inserire a che ora è partito l'aereo. questo ci servirà per calcolare eventuali ritardi
