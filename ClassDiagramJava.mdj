@@ -290,7 +290,7 @@
 											"font": "Arial;13;1",
 											"left": 21,
 											"top": 279,
-											"width": 373.21044921875,
+											"width": 387.65771484375,
 											"height": 13,
 											"text": "AeroportoDAO"
 										},
@@ -325,7 +325,7 @@
 									"font": "Arial;13;0",
 									"left": 16,
 									"top": 272,
-									"width": 383.21044921875,
+									"width": 397.65771484375,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF2SEY7dncT1YA="
@@ -352,7 +352,7 @@
 									"font": "Arial;13;0",
 									"left": 16,
 									"top": 297,
-									"width": 383.21044921875,
+									"width": 397.65771484375,
 									"height": 10
 								},
 								{
@@ -377,9 +377,9 @@
 											"font": "Arial;13;0",
 											"left": 21,
 											"top": 312,
-											"width": 373.21044921875,
+											"width": 387.65771484375,
 											"height": 13,
-											"text": "+insertAeroporto(String Codice, String Nome, String Città): void",
+											"text": "+insertAeroporto(String Codice, String Nome, String Città): boolean",
 											"horizontalAlignment": 0
 										},
 										{
@@ -394,7 +394,7 @@
 											"font": "Arial;13;0",
 											"left": 21,
 											"top": 327,
-											"width": 373.21044921875,
+											"width": 387.65771484375,
 											"height": 13,
 											"text": "+updateAeroporto(String Codice, String Nome, String Città): void",
 											"horizontalAlignment": 0
@@ -411,7 +411,7 @@
 											"font": "Arial;13;0",
 											"left": 21,
 											"top": 342,
-											"width": 373.21044921875,
+											"width": 387.65771484375,
 											"height": 13,
 											"text": "+deleteAeroporto(String Codice): void",
 											"horizontalAlignment": 0
@@ -428,7 +428,7 @@
 											"font": "Arial;13;0",
 											"left": 21,
 											"top": 357,
-											"width": 373.21044921875,
+											"width": 387.65771484375,
 											"height": 13,
 											"text": "+getAeroportoByCod(string Codice): Aeroporto",
 											"horizontalAlignment": 0
@@ -445,7 +445,7 @@
 											"font": "Arial;13;0",
 											"left": 21,
 											"top": 372,
-											"width": 373.21044921875,
+											"width": 387.65771484375,
 											"height": 13,
 											"text": "+getAeroportoByNome(string Nome): Aeroporto",
 											"horizontalAlignment": 0
@@ -462,7 +462,7 @@
 											"font": "Arial;13;0",
 											"left": 21,
 											"top": 387,
-											"width": 373.21044921875,
+											"width": 387.65771484375,
 											"height": 13,
 											"text": "+getAeroportiByCittà(string Città): LinkedList<Aeroporto>",
 											"horizontalAlignment": 0
@@ -471,7 +471,7 @@
 									"font": "Arial;13;0",
 									"left": 16,
 									"top": 307,
-									"width": 383.21044921875,
+									"width": 397.65771484375,
 									"height": 98
 								},
 								{
@@ -511,7 +511,7 @@
 							"containerChangeable": true,
 							"left": 16,
 							"top": 272,
-							"width": 383.21044921875,
+							"width": 397.65771484375,
 							"height": 133,
 							"nameCompartment": {
 								"$ref": "AAAAAAF2SEY7dncS+8Y="
@@ -5327,8 +5327,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 706,
-									"top": 209,
+									"left": 714,
+									"top": 208,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -5348,8 +5348,8 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 710,
-									"top": 223,
+									"left": 718,
+									"top": 222,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -5369,8 +5369,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 699,
-									"top": 180,
+									"left": 705,
+									"top": 179,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -5453,8 +5453,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 428,
-									"top": 286,
+									"left": 443,
+									"top": 284,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 30,
@@ -5473,8 +5473,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 433,
-									"top": 298,
+									"left": 448,
+									"top": 296,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -5493,8 +5493,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 416,
-									"top": 261,
+									"left": 431,
+									"top": 259,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -5539,7 +5539,7 @@
 								"$ref": "AAAAAAF2UqqLqS809Ao="
 							},
 							"lineStyle": 1,
-							"points": "1007:118;399:285",
+							"points": "1007:118;414:283",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF2UqwLujrdpO8="
@@ -6134,7 +6134,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 279,
+									"left": 283,
 									"top": 466,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -6155,7 +6155,7 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 293,
+									"left": 297,
 									"top": 460,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -6176,7 +6176,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 252,
+									"left": 256,
 									"top": 477,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -6197,7 +6197,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 258,
+									"left": 264,
 									"top": 417,
 									"height": 13,
 									"alpha": 0.5235987755982988,
@@ -6218,8 +6218,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 272,
-									"top": 413,
+									"left": 277,
+									"top": 414,
 									"height": 13,
 									"alpha": 0.7853981633974483,
 									"distance": 40,
@@ -6239,7 +6239,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 231,
+									"left": 237,
 									"top": 423,
 									"height": 13,
 									"alpha": -0.5235987755982988,
@@ -6260,7 +6260,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 300,
+									"left": 303,
 									"top": 515,
 									"height": 13,
 									"alpha": -0.5235987755982988,
@@ -6280,8 +6280,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 311,
-									"top": 507,
+									"left": 314,
+									"top": 508,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -6300,7 +6300,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 277,
+									"left": 279,
 									"top": 529,
 									"height": 13,
 									"alpha": 0.5235987755982988,
@@ -6346,7 +6346,7 @@
 								"$ref": "AAAAAAF2SEY7dncRLB0="
 							},
 							"lineStyle": 1,
-							"points": "235:405;297:551",
+							"points": "241:405;299:551",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF2Uq1gQVLevIo="
@@ -8658,8 +8658,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF2SGxCM6KOnHs="
 									},
-									"name": "String Codice",
-									"type": ""
+									"name": "String Codice"
 								},
 								{
 									"_type": "UMLParameter",
@@ -8667,8 +8666,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF2SGxCM6KOnHs="
 									},
-									"name": "String Nome",
-									"type": ""
+									"name": "String Nome"
 								},
 								{
 									"_type": "UMLParameter",
@@ -8676,8 +8674,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF2SGxCM6KOnHs="
 									},
-									"name": "String Città",
-									"type": ""
+									"name": "String Città"
 								},
 								{
 									"_type": "UMLParameter",
@@ -8685,7 +8682,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF2SGxCM6KOnHs="
 									},
-									"type": "void",
+									"type": "boolean",
 									"direction": "return"
 								}
 							]
@@ -10210,7 +10207,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2Uq6mkm7mip8="
 									},
-									"name": "String Codice"
+									"name": "String Codice",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -10218,7 +10216,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2Uq6mkm7mip8="
 									},
-									"name": "String Nome"
+									"name": "String Nome",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -10226,7 +10225,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2Uq6mkm7mip8="
 									},
-									"name": "Aeroporto AeroportoAppartenenza"
+									"name": "Aeroporto AeroportoAppartenenza",
+									"type": ""
 								}
 							]
 						},
@@ -10253,7 +10253,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2UrQywYB9b9U="
 									},
-									"name": "String Codice"
+									"name": "String Codice",
+									"type": ""
 								}
 							]
 						},
@@ -10271,7 +10272,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2UrRIvoHWE7Q="
 									},
-									"name": "String Codice"
+									"name": "String Codice",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -10337,7 +10339,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2Ur8n3LVjr6c="
 									},
-									"name": "String Codice"
+									"name": "String Codice",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -10345,7 +10348,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2Ur8n3LVjr6c="
 									},
-									"name": "Aeroporto AeroportoPartenza"
+									"name": "Aeroporto AeroportoPartenza",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -10353,7 +10357,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF2Ur8n3LVjr6c="
 									},
-									"name": "Aeroporto AeroportoArrivo"
+									"name": "Aeroporto AeroportoArrivo",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
