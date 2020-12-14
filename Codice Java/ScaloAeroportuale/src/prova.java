@@ -88,7 +88,7 @@ public class prova {
 			
 		}
 		
-		if(aeroporto.insertAeroporto("MLN1", "Manzoni", "Milano") == false) {
+		if(aeroporto.insertAeroporto("Capodichino", "Napoli") == false) {
 			
 			System.out.println("Errore nell'inserimento");
 			

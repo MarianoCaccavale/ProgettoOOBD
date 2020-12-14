@@ -2,9 +2,6 @@ Nel nome dell'aeroporto inseriamo anche la città dello stesso, con magari un "-
 
 La ricerca per tratte sarà fatta sia su CodTratta che su i due aeroporti. In questo modo possiamo sia cercare una tratta singola che tutte le tratte che vanno da un aeroporto ad un altro. Questo ammettendo sempre che le tratte siano i voli.
 
-INSERIMENTO DI UN AEROPORTO CON CODICE AUTOGENERATO
-insert into aeroporto
-values (?, ?, ?)
 
 
 codaeroporto = treconsonti(nomeaeroporto)
