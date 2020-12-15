@@ -66,6 +66,49 @@ public class AeroportoDAO{
 		return buonfine;
 	}
 	
+	//aggiungere "Città" solo per completezza?
+	public boolean updateAeroporto(String Codice, String Nome) {
+			
+			boolean buonfine = false;
+			
+			try {
+				conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery("Select * from Aeroporto Where CodAeroporto = '"+Codice+"'");
+				PreparedStatement pst = conn.prepareStatement("Update Aeroporto set Nome = ? Where CodAeroporto = '"+Codice+"'");
+				
+				//il nome dell'aeroporto viene mai usato? se sì, va trovato il modo di aggiornarlo "on cascade"
+				pst.setString(2, Nome);
+	
+				buonfine = true;
+				
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return buonfine;
+	}
+
+	public boolean deleteAeroporto(String Codice) {
+		
+		boolean buonfine = false;
+		
+		try {
+			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery("Delete from Aeroporto Where CodAeroporto = '"+Codice+"'");
+	
+			buonfine = true;
+			
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return buonfine;
+	}
+	
 	
 	
 	public Aeroporto getAeroportoByCod(String Codice) {
