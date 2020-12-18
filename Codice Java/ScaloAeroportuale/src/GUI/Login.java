@@ -44,15 +44,15 @@ public class Login extends JFrame {
 		});
 		ListaAeroportiCombo.setModel(new DefaultComboBoxModel<String>());
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton LoginBtn = new JButton("Login");
+		LoginBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				c.LogintoHub();
+				c.LoginToHub();
 			}
 		});
-		btnNewButton.setBounds(594, 416, 89, 23);
-		contentPane.add(btnNewButton);
-		/*	Qui va richiamato il controller che restituisce tanti aeroporti quanto sono gli aeroporti nel db*/
+		
+		LoginBtn.setBounds(594, 416, 89, 23);
+		contentPane.add(LoginBtn);
 		
 		Aeroporti = aer.getAeroporti();
 		Iterator<Aeroporto> i = Aeroporti.iterator();

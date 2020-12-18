@@ -10,6 +10,7 @@ import GUI.Login;
 public class Controller {
 
 	Login LoginWindow;
+	Hub HubWindow;
 	
 	
 	
@@ -23,13 +24,24 @@ public class Controller {
 		
 		LoginWindow = new Login(this);
 		LoginWindow.setVisible(true);
+		
 	}
 	
-	public void LogintoHub() {
+	public void LoginToHub() {
 		
+		LoginWindow = new Login(this);
 		LoginWindow.setVisible(false);
-		Hub HubWindow = new Hub(this);
+		HubWindow = new Hub(this);
 		HubWindow.setVisible(true);
+		
+	}
+	
+	public void Logout() {
+		
+		HubWindow = new Hub(this);
+		HubWindow.setVisible(false);
+		LoginWindow = new Login(this);
+		LoginWindow.setVisible(true);
 		
 	}
 
