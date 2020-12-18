@@ -2,6 +2,8 @@ package Classi;
 
 import java.util.ArrayList;
 
+import DAO.AeroportoDAO;
+
 public class Aeroporto {
 
 	private String CodAeroporto = new String();
@@ -60,6 +62,15 @@ public class Aeroporto {
 		CompagnieStanziate = compagnieStanziate;
 	}
 	
-	
+	public ArrayList<Aeroporto> getAeroporti() {
+		
+		ArrayList<Aeroporto> listaAeroporti = new ArrayList<>();
+		
+		AeroportoDAO ad = new AeroportoDAO();
+		
+		listaAeroporti = ad.getAllAeroporti();
+		
+		return listaAeroporti;
+	}
 	
 }

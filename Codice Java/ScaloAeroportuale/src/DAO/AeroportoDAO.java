@@ -1,5 +1,6 @@
 package DAO;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import Classi.Aeroporto;
@@ -191,6 +192,35 @@ public class AeroportoDAO{
 		
 		return ListaAeroporti;
 			
+	}
+
+	public ArrayList<Aeroporto> getAllAeroporti() {
+		
+		Aeroporto Aeroporto = new Aeroporto();
+		ArrayList<Aeroporto> ListaAeroporti = new ArrayList<Aeroporto>();
+		
+		try {
+			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery("Select * from Aeroporto");
+			
+			while (rs.next()) {
+				
+				Aeroporto = new Aeroporto(rs.getString("CodAeroporto"), rs.getString("NomeAeroporto"), rs.getString("Città"));
+				ListaAeroporti.add(Aeroporto);
+				
+			}
+			
+			st.close();
+			rs.close();
+			conn.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return ListaAeroporti;
 	}
 	
 	
