@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Classi.Aeroporto;
 import Controller.Controller;
 import javax.swing.JSplitPane;
 import javax.swing.JToggleButton;
@@ -15,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JSeparator;
+import javax.swing.JLabel;
 
 public class Hub extends JFrame {
 
@@ -24,7 +26,7 @@ public class Hub extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Hub(Controller c) {
+	public Hub(Controller c, Aeroporto a) {
 		controller = c;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 833, 492);
@@ -47,6 +49,11 @@ public class Hub extends JFrame {
 		BottoniPanel.add(GestioneVoliBtn);
 		
 		JButton GestioneCompagnieBtn = new JButton("Gestione Compagnie");
+		GestioneCompagnieBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				c.HubToCompagnie(a);
+			}
+		});
 		BottoniPanel.add(GestioneCompagnieBtn);
 		
 		JButton GestioneGateBtn = new JButton("Gestione Gate");
@@ -60,11 +67,23 @@ public class Hub extends JFrame {
 		BasePanel.add(HubPanel);
 		HubPanel.setLayout(null);
 		
+		JLabel AeroportoInformazioniLbl = new JLabel("");
+		AeroportoInformazioniLbl.setBounds(10, 11, 627, 23);
+		/*migliorare la grafica*/
+		AeroportoInformazioniLbl.setText(a.getCodAeroporto() + " - " +a.getNomeAeroporto() + " - " + a.getCittà());
+		HubPanel.add(AeroportoInformazioniLbl);
+		
+		
 		JPanel LogoutPanel = new JPanel();
 		LogoutPanel.setBounds(10, 414, 85, 31);
 		BasePanel.add(LogoutPanel);
 		
 		JButton LogoutBtn = new JButton("Logout");
+		LogoutBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				c.Logout();
+			}
+		});
 		LogoutPanel.add(LogoutBtn);
 	}
 }

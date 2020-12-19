@@ -10,31 +10,6 @@ public class AeroportoDAO{
 	
 	Connection conn = null;
 	
-	public static String treconsonanti(String s) {
-		
-		String stringa = new String();
-		stringa = s;
-		String result = new String();
-		int i = 0;
-		
-		for (char c : stringa.toCharArray()){
-			
-			if(c != 'A' && c != 'E' && c != 'O' && c != 'U' && c != 'I') {
-				
-				result = result + c;
-				i++;
-				
-			}else if  (i >= 3) {
-				
-				break;
-				
-			}
-			
-		}
-		
-		return result;
-	}
-	
 	public boolean insertAeroporto(String Nome, String Città) {
 		
 		boolean buonfine = false;
@@ -43,18 +18,8 @@ public class AeroportoDAO{
 		try {
 			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
 			PreparedStatement pst = conn.prepareStatement("Insert into Aeroporto values(?,?,?)");
-			Statement st_codice = conn.createStatement();
-			ResultSet rs = st_codice.executeQuery("select count(distinct codaeroporto) from aeroporto where città = '"+ Città + "'");
 			
-			if (rs.next()) {
-				
-				offset = Integer.parseInt(rs.getString(1));
-				offset += 1;
-			}
-		
-			String CodiceCorretto = new String();
-			CodiceCorretto = treconsonanti(Città.toUpperCase());
-			pst.setString(1, CodiceCorretto + String.valueOf(offset).toString());
+			pst.setString(1, "nextval('sequenza_aeroporto')");
 			pst.setString(2, Nome);
 			pst.setString(3, Città);
 			pst.execute();

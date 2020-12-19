@@ -44,16 +44,6 @@ public class Login extends JFrame {
 		});
 		ListaAeroportiCombo.setModel(new DefaultComboBoxModel<String>());
 		
-		JButton LoginBtn = new JButton("Login");
-		LoginBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				c.LoginToHub();
-			}
-		});
-		
-		LoginBtn.setBounds(594, 416, 89, 23);
-		contentPane.add(LoginBtn);
-		
 		Aeroporti = aer.getAeroporti();
 		Iterator<Aeroporto> i = Aeroporti.iterator();
 		
@@ -64,5 +54,17 @@ public class Login extends JFrame {
 			ListaAeroportiCombo.addItem(tmp.getNomeAeroporto());
 			
 		}
+		
+		JButton LoginBtn = new JButton("Login");
+		LoginBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				c.LoginToHub(ListaAeroportiCombo.getSelectedItem().toString());
+			}
+		});
+		
+		LoginBtn.setBounds(594, 416, 89, 23);
+		contentPane.add(LoginBtn);
+		
+		
 	}
 }

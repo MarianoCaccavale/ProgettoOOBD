@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Classi.Aeroporto;
 import DAO.AeroportoDAO;
+import GUI.GestioneCompagnie;
 import GUI.Hub;
 import GUI.Login;
 
@@ -11,6 +12,7 @@ public class Controller {
 
 	Login LoginWindow;
 	Hub HubWindow;
+	GestioneCompagnie CompagnieWindow;
 	
 	
 	
@@ -27,20 +29,35 @@ public class Controller {
 		
 	}
 	
-	public void LoginToHub() {
+	public void LoginToHub(String nomeAeroporto) {
 		
-		LoginWindow = new Login(this);
+		AeroportoDAO aDAO = new AeroportoDAO();
+		Aeroporto a = new Aeroporto();
 		LoginWindow.setVisible(false);
-		HubWindow = new Hub(this);
+		a= aDAO.getAeroportoByNome(nomeAeroporto);
+		HubWindow = new Hub(this, a);
+		HubWindow.setVisible(true);
+		
+	}
+	
+	public void HubToCompagnie(Aeroporto a) {
+		
+		HubWindow.setVisible(false);
+		CompagnieWindow = new GestioneCompagnie(this, a);
+		CompagnieWindow.setVisible(true);
+		
+	}
+	
+	public void CompagnieToHub() {
+		
+		CompagnieWindow.setVisible(false);
 		HubWindow.setVisible(true);
 		
 	}
 	
 	public void Logout() {
 		
-		HubWindow = new Hub(this);
 		HubWindow.setVisible(false);
-		LoginWindow = new Login(this);
 		LoginWindow.setVisible(true);
 		
 	}

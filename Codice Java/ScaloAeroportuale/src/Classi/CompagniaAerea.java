@@ -9,8 +9,15 @@ public class CompagniaAerea {
 	
 	public CompagniaAerea() {}
 	
-	
-	
+	public CompagniaAerea(String codCompagnia, String nomeCompagnia, int grandezzaFlotta) {
+		super();
+		CodCompagnia = codCompagnia;
+		NomeCompagnia = nomeCompagnia;
+		GrandezzaFlotta = grandezzaFlotta;
+	}
+
+
+
 	public String getCodCompagnia() {
 		return CodCompagnia;
 	}

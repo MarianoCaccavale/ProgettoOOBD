@@ -6,32 +6,22 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Controller.Controller;
+
 import javax.swing.JButton;
 
 public class GestioneGate extends JFrame {
 
 	private JPanel BasePanel;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GestioneGate frame = new GestioneGate();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
+	Controller controller;
 
 	/**
 	 * Create the frame.
 	 */
-	public GestioneGate() {
+	public GestioneGate(Controller c) {
+		controller = c;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 963, 507);
 		BasePanel = new JPanel();
