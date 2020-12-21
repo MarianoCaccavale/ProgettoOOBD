@@ -69,16 +69,12 @@ public class GestioneCompagnie extends JFrame {
 		NomeTf.setColumns(10);
 		
 		JLabel FlottaLbl = new JLabel("Inserire Grandezza Flotta:");
-		FlottaLbl.setBounds(163, 11, 143, 25);
+		FlottaLbl.setBounds(279, 11, 190, 25);
 		AggiuntaPanel.add(FlottaLbl);
 		
 		JSpinner FlottaSpn = new JSpinner();
-		FlottaSpn.setBounds(163, 49, 143, 20);
+		FlottaSpn.setBounds(279, 47, 143, 25);
 		AggiuntaPanel.add(FlottaSpn);
-		
-		JLabel lblNewLabel = new JLabel("(Max 500)");
-		lblNewLabel.setBounds(316, 52, 118, 14);
-		AggiuntaPanel.add(lblNewLabel);
 		
 		JPanel ModifcaPanel = new JPanel();
 		tabbedPane.addTab("New tab", null, ModifcaPanel, null);
@@ -93,18 +89,41 @@ public class GestioneCompagnie extends JFrame {
 		ElencoPanel.setBorder(null);
 		tabbedPane.addTab("New tab", null, ElencoPanel, null);
 		
+		JLabel NomeVuotoLbl = new JLabel();
+		NomeVuotoLbl.setBounds(10, 83, 143, 25);
+		AggiuntaPanel.add(NomeVuotoLbl);
+		
+		JLabel FlottaInvalidaLbl = new JLabel();
+		FlottaInvalidaLbl.setBounds(279, 83, 143, 25);
+		AggiuntaPanel.add(FlottaInvalidaLbl);
+		
 		JButton btnNewButton = new JButton("Inserisci");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				cc.Insert(NomeTf.getText().toString(), (Integer) FlottaSpn.getValue(), a);
-				NomeTf.setText("");
-				FlottaSpn.setValue(0);
+				if (NomeTf.getText() == "") {
+					
+					NomeVuotoLbl.setText("Nome Inserito vuoto!");
+					
+				}else if ((Integer) FlottaSpn.getValue() < 100 && (Integer) FlottaSpn.getValue() > 500) {
+					
+					FlottaInvalidaLbl.setText("Valore non valido! Inserire un valore tra 100(min) e 500(max)");
+					
+				}else {
+					
+					cc.Insert(NomeTf.getText().toString(), (Integer) FlottaSpn.getValue(), a);
+					NomeTf.setText("");
+					FlottaSpn.setValue(0);
+					
+				}
+				
 				
 			}
 		});
 		btnNewButton.setBounds(436, 424, 106, 35);
 		AggiuntaPanel.add(btnNewButton);
+		
+		
 		
 		
 		
@@ -127,6 +146,7 @@ public class GestioneCompagnie extends JFrame {
 				
 			}
 		});
+		
 		ModificareBtn.setBounds(10, 42, 138, 21);
 		BottoniPanel.add(ModificareBtn);
 		

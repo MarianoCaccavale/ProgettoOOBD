@@ -28,34 +28,34 @@ public class CompagniaAereaDao {
 			rs.close();
 			conn.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		
 		return Comp;
 		
 	}
 	
-	public boolean InsertCompagnia(String Nome, int Flotta, Aeroporto AerAppartenenza) {
+	public String InsertCompagnia(String Nome, int Flotta, Aeroporto AerAppartenenza) {
 		
+		String errore = new String("");
 		
 		try {
 			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
 			PreparedStatement pr = conn.prepareStatement("Insert into compagniaaerea values(nextval('sequenza_compagnia'),?,?,?)");
 			
-			pr.setString(1, Nome);
+			pr.setString(1, Nome.toUpperCase());
 			pr.setInt(2, Flotta);
 			pr.setString(3, AerAppartenenza.getCodAeroporto());
 			pr.executeUpdate();
 			pr.close();
 			conn.close();
 			
-			return true;
+			return errore;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			errore = e.getMessage().toString();
 		}
 		
-		
-		return false;
+		return errore;
 		
 	}
 	

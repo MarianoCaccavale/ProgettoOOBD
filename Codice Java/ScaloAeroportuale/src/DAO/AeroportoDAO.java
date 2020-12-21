@@ -26,7 +26,7 @@ public class AeroportoDAO{
 			buonfine = true;
 			conn.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		
 		return buonfine;
@@ -50,7 +50,7 @@ public class AeroportoDAO{
 				
 				conn.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 			
 			return buonfine;
@@ -69,7 +69,7 @@ public class AeroportoDAO{
 			
 			conn.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		
 		return buonfine;
@@ -95,7 +95,7 @@ public class AeroportoDAO{
 			rs.close();
 			conn.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		
 		return Aeroporto;
@@ -122,7 +122,7 @@ public class AeroportoDAO{
 			conn.close();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		
 		return Aeroporto;
@@ -151,7 +151,7 @@ public class AeroportoDAO{
 			conn.close();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		
 		
@@ -181,7 +181,7 @@ public class AeroportoDAO{
 			conn.close();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		
 		
