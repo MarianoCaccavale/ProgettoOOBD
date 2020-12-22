@@ -118,7 +118,7 @@ public class CompagniaAereaDao{
 			
 			if (errore.contains("compagniaaerea_grandezzaflotta_check")) {
 				
-				throw new CompagniaException("Grandezza flotta errata, inserire un valore compreso tr 50 e 500");
+				throw new CompagniaException("Grandezza flotta errata, inserire un valore compreso tra 50 e 500");
 				
 			}
 			
@@ -144,6 +144,7 @@ public class CompagniaAereaDao{
 			rs.close();
 			conn.close();
 		} catch (SQLException e) {
+			/*levare print*/
 			System.out.println(e.getMessage());
 		}
 		
@@ -154,17 +155,60 @@ public class CompagniaAereaDao{
 		
 		try {
 			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+	
 			PreparedStatement pr = conn.prepareStatement("Delete from compagniaaerea where nomecompagnia = ?");
 			
 			pr.setString(1, nome);
 			pr.executeUpdate();
 			
 			conn.close();
+	
 		} catch (SQLException e) {
+			/*levare print*/
 			System.out.println(e.getMessage());
 		}
 		
 	}
+
+	public ArrayList<CompagniaAerea> ricercaByFlotta(Integer min, Integer max, String codAeroporto) throws CompagniaException {
+
+		String errore = new String("");
+		ArrayList<CompagniaAerea> Compagnie = new ArrayList<CompagniaAerea>();
+		
+		try {
+			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			PreparedStatement pr = conn.prepareStatement("select * from compagniaaerea where grandezzaflotta > ? AND grandezzaflotta < ? && aeroportoappartenenza like ?");
+			
+			pr.setInt(1, min);
+			pr.setInt(2, max);
+			pr.setString(3, codAeroporto);
+			ResultSet rs = pr.executeQuery();
+			
+			while (rs.next()) {
+				
+				CompagniaAerea tmp = new CompagniaAerea(rs.getString(0), rs.getString(1), rs.getInt(2));
+				Compagnie.add(tmp);
+			}
+				
+			conn.close();
+			return Compagnie;
+			
+	
+		} catch (SQLException e) {
+			
+			throw new CompagniaException(errore = e.getMessage().toString());
+		
+		}
+	}
+
+	public ArrayList<CompagniaAerea> ricercaByAll(String nome, Integer min, Integer max, String codAeroporto) {
+
+		ArrayList<CompagniaAerea> Compagnie = new ArrayList<CompagniaAerea>();
+		/*ricerca con like*/
+		return Compagnie;
+	}
+	
+	
 		
 }
 	

@@ -22,6 +22,10 @@ import javax.swing.JTextField;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JComboBox;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+import javax.swing.JTextPane;
 
 public class GestioneCompagnie extends JFrame {
 
@@ -29,6 +33,7 @@ public class GestioneCompagnie extends JFrame {
 	Controller controller;
 	private JTextField NomeTf;
 	private JTable RisultatiTable;
+	private JTextField RicercaNomeTxt;
 
 	/**
 	 * Create the frame.
@@ -93,6 +98,7 @@ public class GestioneCompagnie extends JFrame {
 		AggiuntaPanel.add(FlottaLbl);
 		
 		JSpinner FlottaSpn = new JSpinner();
+		FlottaSpn.setModel(new SpinnerNumberModel(0, 0, 500, 1));
 		FlottaSpn.setBounds(279, 47, 143, 25);
 		AggiuntaPanel.add(FlottaSpn);
 		
@@ -141,6 +147,7 @@ public class GestioneCompagnie extends JFrame {
 		ModifcaPanel.add(FlottaModificaLbl);
 		
 		JSpinner ModificaGrandezzaFlottaSpn = new JSpinner();
+		ModificaGrandezzaFlottaSpn.setModel(new SpinnerNumberModel(0, 0, 500, 1));
 		ModificaGrandezzaFlottaSpn.setBounds(251, 48, 281, 26);
 		ModifcaPanel.add(ModificaGrandezzaFlottaSpn);
 		
@@ -207,10 +214,66 @@ public class GestioneCompagnie extends JFrame {
 		ElencoPanel.add(RicercaPanel);
 		RicercaPanel.setLayout(null);
 		
-		JPanel RisultatiPanel = new JPanel();
-		RisultatiPanel.setBounds(10, 97, 522, 351);
-		ElencoPanel.add(RisultatiPanel);
-		RisultatiPanel.setLayout(null);
+		JLabel RicercaNomeLbl = new JLabel("Inserire nome compagnia:");
+		RicercaNomeLbl.setBounds(10, 11, 189, 26);
+		RicercaPanel.add(RicercaNomeLbl);
+		
+		RicercaNomeTxt = new JTextField();
+		RicercaNomeTxt.setBounds(10, 44, 189, 31);
+		RicercaPanel.add(RicercaNomeTxt);
+		RicercaNomeTxt.setColumns(10);
+		
+		JLabel RicercaGrandezzaLbl = new JLabel("Scegliere grandezza flotta:");
+		RicercaGrandezzaLbl.setBounds(278, 11, 234, 26);
+		RicercaPanel.add(RicercaGrandezzaLbl);
+		
+		JSpinner RicercaGrandezzaMinimaSpn = new JSpinner();
+		RicercaGrandezzaMinimaSpn.setModel(new SpinnerNumberModel(0, 0, 500, 1));
+		RicercaGrandezzaMinimaSpn.setBounds(258, 44, 122, 31);
+		RicercaPanel.add(RicercaGrandezzaMinimaSpn);
+		
+		JSpinner RicercaGrandezzaMassimaSpn = new JSpinner();
+		RicercaGrandezzaMassimaSpn.setModel(new SpinnerNumberModel(500, 0, 500, 1));
+		RicercaGrandezzaMassimaSpn.setBounds(390, 44, 122, 31);
+		RicercaPanel.add(RicercaGrandezzaMassimaSpn);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 97, 522, 317);
+		ElencoPanel.add(scrollPane);
+		
+		JLabel lblNewLabel = new JLabel();
+		scrollPane.setViewportView(lblNewLabel);
+		
+		Compagnie = controllerCompagnia.getCompagnie(a);
+		Iterator<CompagniaAerea> i = Compagnie.iterator();
+		/*Prima formattazione che si crea quando avviamo il panel, ovvero il display di TUTTE le compagnie*/
+		while (i.hasNext()) {
+			
+			CompagniaAerea tmp = i.next();
+			lblNewLabel.setText(lblNewLabel.getText() + tmp.getCodCompagnia() + " " + tmp.getGrandezzaFlotta() +" ");
+			
+			
+		}
+		
+		JButton RicercaBtn = new JButton("Ricerca");
+		RicercaBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ArrayList<CompagniaAerea> CompagnieTrovate = controllerCompagnia.ricerca(RicercaNomeTxt.getText(), (Integer) RicercaGrandezzaMinimaSpn.getValue(), (Integer) RicercaGrandezzaMassimaSpn.getValue(), a);
+				Iterator<CompagniaAerea> i = CompagnieTrovate.iterator();
+				/*Prima formattazione che si crea quando avviamo il panel, ovvero il display di TUTTE le compagnie*/
+				while (i.hasNext()) {
+					
+					CompagniaAerea tmp = i.next();
+					lblNewLabel.setText(lblNewLabel.getText() + tmp.getCodCompagnia() + " " + tmp.getGrandezzaFlotta() +" ");
+					
+					
+				}
+			}
+		});
+		RicercaBtn.setBounds(443, 425, 89, 23);
+		ElencoPanel.add(RicercaBtn);
+		
 		
 		//Pannello dei bottoni per le scelte
 		JPanel BottoniPanel = new JPanel();

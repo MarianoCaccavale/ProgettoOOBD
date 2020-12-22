@@ -7,6 +7,7 @@ import javax.swing.JTextField;
 
 import Classi.Aeroporto;
 import Classi.CompagniaAerea;
+import DAO.AeroportoDAO;
 import DAO.CompagniaAereaDao;
 import Eccezioni.CompagniaException;
 
@@ -84,6 +85,28 @@ public class ControllerCompagnie {
 		successo.add(testo);
 		successo.setVisible(true);
 		
+		
+	}
+
+	public ArrayList<CompagniaAerea> ricerca(String Nome, Integer Min, Integer Max, Aeroporto aer) {
+		
+		CompagniaAereaDao DAO = new CompagniaAereaDao();
+		ArrayList<CompagniaAerea> Compagnie = new ArrayList<CompagniaAerea>();
+		if (Nome.isBlank()) {
+			
+			try {
+				Compagnie = DAO.ricercaByFlotta(Min, Max, aer.getCodAeroporto());
+			} catch (CompagniaException e) {
+				System.out.println(e.getMessage().toString());
+			}
+			
+		}else {
+			
+			Compagnie = DAO.ricercaByAll(Nome, Min, Max, aer.getCodAeroporto());
+			
+		}
+		
+		return Compagnie;
 		
 	}
 	
