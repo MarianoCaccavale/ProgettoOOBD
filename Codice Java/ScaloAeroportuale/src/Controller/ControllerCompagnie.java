@@ -1,10 +1,14 @@
 package Controller;
 
+import java.util.ArrayList;
+
 import javax.swing.JDialog;
 import javax.swing.JTextField;
 
 import Classi.Aeroporto;
+import Classi.CompagniaAerea;
 import DAO.CompagniaAereaDao;
+import Eccezioni.CompagniaException;
 
 public class ControllerCompagnie {
 
@@ -12,49 +16,75 @@ public class ControllerCompagnie {
 	
 	public void Insert(String Nome, int Flotta, Aeroporto a) {
 		
-		CompagniaAereaDao comp = new CompagniaAereaDao();
+		CompagniaAereaDao DAO = new CompagniaAereaDao();
+		JDialog successo = new JDialog();
 		
-		String errore = comp.InsertCompagnia(Nome, Flotta, a);
 		JTextField testo = new JTextField();
 		
-		if ( errore == "") {
+		
+		try {
+			DAO.InsertCompagnia(Nome, Flotta, a);
 			
-			JDialog successo = new JDialog();
 			testo.setText("Inserimento avvenuto con successo!");
-			successo.setBounds(200,200,200,200);
+			successo.setBounds(200,200,400,200);
 			successo.add(testo);
 			successo.setVisible(true);
 			
-		}else {
-			
-			JDialog successo = new JDialog();
-			if (errore.contains("compagniaaerea_grandezzaflotta_check")) {
+		} catch (CompagniaException e) {
+			successo.setBounds(200,200,400,200);
+			testo.setText(e.getMessage().toString()); 
+			successo.add(testo);
+			successo.setVisible(true);
+		}	
 				
-				testo.setText("Inserimento fallito! La dimensione della flotta è errata. La grandezza dev'essere compresa tra 50 e 500 unità.");
-				
-				
-			}else if (errore.contains("La chiave (nomecompagnia)=")) {
-				
-				testo.setText("Inserimento fallito! Esiste già una compagnia con questo nome.");
-				
-			}else if (errore.contains("nomevuoto")) {
-				
-				testo.setText("Inserimento fallito! Non è possibile inserire una compagnia con nome vuoto.");
-				
-			}else {
-				
-				testo.setText("Inserimento fallito!");
-				
-			}
-			
-			successo.setBounds(200,200,200,200);
+	}
+	
+	public void Update(String Nome, Integer NuovaGrandezza, Aeroporto aer) {
+		
+		CompagniaAereaDao DAO = new CompagniaAereaDao();
+		
+		JDialog successo = new JDialog();
+		JTextField testo = new JTextField();
+		
+		try {
+			DAO.updateByNome(Nome, NuovaGrandezza, aer.getCodAeroporto());
+			testo.setText("Modifica avvenuta con successo!");
+			successo.setBounds(200,200,400,200);
 			successo.add(testo);
 			successo.setVisible(true);
 			
+		} catch (CompagniaException e) {
+			successo.setBounds(200,200,400,200);
+			testo.setText(e.getMessage().toString()); 
+			successo.add(testo);
+			successo.setVisible(true);
 		}
 		
 	}
 	
+	public ArrayList<CompagniaAerea> getCompagnie(Aeroporto aer) {
+		
+		ArrayList<CompagniaAerea> Compagnie = new ArrayList<CompagniaAerea>();
+		CompagniaAereaDao DAO = new CompagniaAereaDao();
+		Compagnie = DAO.getCompagnieByAeroporto(aer.getCodAeroporto());
 	
+		return Compagnie;
+	}
+
+	public void delete(String nome) {
+		
+		CompagniaAereaDao DAO = new CompagniaAereaDao();
+		
+		JDialog successo = new JDialog();
+		JTextField testo = new JTextField();
+		
+		DAO.deleteByNome(nome);
+		testo.setText("Cancellazione avvenuta con successo!");
+		successo.setBounds(200,200,400,200);
+		successo.add(testo);
+		successo.setVisible(true);
+		
+		
+	}
 	
 }

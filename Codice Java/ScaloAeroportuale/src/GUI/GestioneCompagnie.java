@@ -1,38 +1,46 @@
 package GUI;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.TableColumn;
 
 import Classi.Aeroporto;
+import Classi.CompagniaAerea;
 import Controller.Controller;
 import Controller.ControllerCompagnie;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.awt.event.ActionEvent;
 import javax.swing.JTabbedPane;
-import java.awt.Color;
 import javax.swing.UIManager;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
+import javax.swing.JTable;
+import javax.swing.JComboBox;
 
 public class GestioneCompagnie extends JFrame {
 
 	private JPanel contentPane;
 	Controller controller;
 	private JTextField NomeTf;
+	private JTable RisultatiTable;
 
 	/**
 	 * Create the frame.
 	 */
 	public GestioneCompagnie(Controller c, Aeroporto a) {
+		
+		
 		controller = c;
-		ControllerCompagnie cc = new ControllerCompagnie();
+		ControllerCompagnie controllerCompagnia = new ControllerCompagnie();
+		ArrayList<CompagniaAerea> Compagnie = new ArrayList<CompagniaAerea>();
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 751, 548);
 		contentPane = new JPanel();
@@ -45,16 +53,28 @@ public class GestioneCompagnie extends JFrame {
 		panel.setBounds(178, 11, 547, 23);
 		contentPane.add(panel);
 		
-		JPanel BottoniPanel = new JPanel();
-		BottoniPanel.setLayout(null);
-		BottoniPanel.setBounds(10, 11, 158, 252);
-		contentPane.add(BottoniPanel);
+		
+		//Pannello Ritorno Hub
+		JPanel IndietroPanel = new JPanel();
+		IndietroPanel.setBounds(10, 467, 158, 31);
+		contentPane.add(IndietroPanel);
+		
+		JButton IndietroBtn = new JButton("Indietro");
+		IndietroBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				c.CompagnieToHub();
+			}
+		});
+		IndietroPanel.add(IndietroBtn);
 		
 		
+		
+		//Sezione TabbedPanel
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(178, 11, 547, 487);
 		contentPane.add(tabbedPane);
 		
+		//Pannello Aggiunta
 		JPanel AggiuntaPanel = new JPanel();
 		tabbedPane.addTab("Aggiunta", null, AggiuntaPanel, null);
 		AggiuntaPanel.setLayout(null);
@@ -76,68 +96,139 @@ public class GestioneCompagnie extends JFrame {
 		FlottaSpn.setBounds(279, 47, 143, 25);
 		AggiuntaPanel.add(FlottaSpn);
 		
-		JPanel ModifcaPanel = new JPanel();
-		tabbedPane.addTab("New tab", null, ModifcaPanel, null);
-		
-		JLabel lblNewLabel_1 = new JLabel("secondo");
-		ModifcaPanel.add(lblNewLabel_1);
-		
-		JPanel EliminaPanel = new JPanel();
-		tabbedPane.addTab("New tab", null, EliminaPanel, null);
-		
-		JPanel ElencoPanel = new JPanel();
-		ElencoPanel.setBorder(null);
-		tabbedPane.addTab("New tab", null, ElencoPanel, null);
-		
-		JLabel NomeVuotoLbl = new JLabel();
-		NomeVuotoLbl.setBounds(10, 83, 143, 25);
-		AggiuntaPanel.add(NomeVuotoLbl);
-		
-		JLabel FlottaInvalidaLbl = new JLabel();
-		FlottaInvalidaLbl.setBounds(279, 83, 143, 25);
-		AggiuntaPanel.add(FlottaInvalidaLbl);
-		
 		JButton btnNewButton = new JButton("Inserisci");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if (NomeTf.getText() == "") {
-					
-					NomeVuotoLbl.setText("Nome Inserito vuoto!");
-					
-				}else if ((Integer) FlottaSpn.getValue() < 100 && (Integer) FlottaSpn.getValue() > 500) {
-					
-					FlottaInvalidaLbl.setText("Valore non valido! Inserire un valore tra 100(min) e 500(max)");
-					
-				}else {
-					
-					cc.Insert(NomeTf.getText().toString(), (Integer) FlottaSpn.getValue(), a);
-					NomeTf.setText("");
-					FlottaSpn.setValue(0);
-					
+				controllerCompagnia.Insert(NomeTf.getText().toString(), (Integer) FlottaSpn.getValue(), a);
+				NomeTf.setText("");
+				FlottaSpn.setValue(0);
+				
 				}
-				
-				
-			}
 		});
 		btnNewButton.setBounds(436, 424, 106, 35);
 		AggiuntaPanel.add(btnNewButton);
 		
 		
 		
+		//Pannello Modifica
+		JPanel ModifcaPanel = new JPanel();
+		tabbedPane.addTab("New tab", null, ModifcaPanel, null);
+		ModifcaPanel.setLayout(null);
 		
+		JLabel NomeModificaLbl = new JLabel("Scegli l'aeroporto da modificare:");
+		NomeModificaLbl.setBounds(10, 11, 231, 26);
+		ModifcaPanel.add(NomeModificaLbl);
+		
+		JComboBox<String> ModificaNomeCombo = new JComboBox<String>();
+		
+		Compagnie = controllerCompagnia.getCompagnie(a);
+		Iterator<CompagniaAerea> modificaIterator = Compagnie.iterator();
+		while (modificaIterator.hasNext()) {
+			
+			CompagniaAerea tmp = new CompagniaAerea();
+			tmp = modificaIterator.next();
+			ModificaNomeCombo.addItem(tmp.getNomeCompagnia());
+			
+		}
+		
+		ModificaNomeCombo.setBounds(10, 48, 231, 26);
+		ModifcaPanel.add(ModificaNomeCombo);
+		
+		
+		JLabel FlottaModificaLbl = new JLabel("Nuova grandezza della flotta: ");
+		FlottaModificaLbl.setBounds(251, 11, 281, 26);
+		ModifcaPanel.add(FlottaModificaLbl);
+		
+		JSpinner ModificaGrandezzaFlottaSpn = new JSpinner();
+		ModificaGrandezzaFlottaSpn.setBounds(251, 48, 281, 26);
+		ModifcaPanel.add(ModificaGrandezzaFlottaSpn);
+		
+		JButton ModificaBtn = new JButton("Modifica");
+		ModificaBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				controllerCompagnia.Update(ModificaNomeCombo.getSelectedItem().toString(), (Integer) ModificaGrandezzaFlottaSpn.getValue(), a);
+				ModificaNomeCombo.setSelectedIndex(0);
+				ModificaGrandezzaFlottaSpn.setValue(0);
+			}
+		});
+		ModificaBtn.setBounds(415, 412, 117, 36);
+		ModifcaPanel.add(ModificaBtn);
+		
+		
+		
+		//Pannello Eliminazione
+		JPanel EliminaPanel = new JPanel();
+		tabbedPane.addTab("New tab", null, EliminaPanel, null);
+		EliminaPanel.setLayout(null);
+		
+		JLabel CancellazioneNomeLbl = new JLabel("Scegliere il nome della compagnia da cancellare:");
+		CancellazioneNomeLbl.setBounds(107, 11, 309, 31);
+		EliminaPanel.add(CancellazioneNomeLbl);
+		
+		JComboBox<String> CancellazioneNomeComboBox = new JComboBox<String>();
+		
+		Compagnie = controllerCompagnia.getCompagnie(a);
+		Iterator<CompagniaAerea> cancellazioneIterator = Compagnie.iterator();
+		
+		while(cancellazioneIterator.hasNext()) {
+			
+			CompagniaAerea tmp = cancellazioneIterator.next();
+			CancellazioneNomeComboBox.addItem(tmp.getNomeCompagnia());
+			
+		}
+				
+		CancellazioneNomeComboBox.setBounds(107, 53, 260, 31);
+		EliminaPanel.add(CancellazioneNomeComboBox);
+		
+		JButton EliminaBtn = new JButton("Elimina");
+		EliminaBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				/*PROBLEMA, NON AGGIORNA LA LISTA, QUINDI UN AEROPORTO CANCELLATO RIMANE NELLA COMBOBOX FIN QUANDO NON SI RESETTA LA FINESTRA*/
+				controllerCompagnia.delete(CancellazioneNomeComboBox.getSelectedItem().toString());
+				
+			}
+		});
+		EliminaBtn.setBounds(411, 410, 121, 38);
+		EliminaPanel.add(EliminaBtn);
+		
+		
+		
+		
+		//Pannello Elenco
+		JPanel ElencoPanel = new JPanel();
+		ElencoPanel.setBorder(null);
+		tabbedPane.addTab("New tab", null, ElencoPanel, null);
+		ElencoPanel.setLayout(null);
+		
+		JPanel RicercaPanel = new JPanel();
+		RicercaPanel.setBounds(10, 11, 522, 75);
+		ElencoPanel.add(RicercaPanel);
+		RicercaPanel.setLayout(null);
+		
+		JPanel RisultatiPanel = new JPanel();
+		RisultatiPanel.setBounds(10, 97, 522, 351);
+		ElencoPanel.add(RisultatiPanel);
+		RisultatiPanel.setLayout(null);
+		
+		//Pannello dei bottoni per le scelte
+		JPanel BottoniPanel = new JPanel();
+		BottoniPanel.setLayout(null);
+		BottoniPanel.setBounds(10, 11, 158, 252);
+		contentPane.add(BottoniPanel);
 		
 		JButton AggiungereBtn = new JButton("Aggiungere");
 		AggiungereBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			
+		public void actionPerformed(ActionEvent e) {
+		
 				tabbedPane.setSelectedIndex(0);
-				
+			
 			}
 		});
 		AggiungereBtn.setBounds(10, 10, 138, 22);
 		BottoniPanel.add(AggiungereBtn);
-		
+				
 		JButton ModificareBtn = new JButton("Modificare");
 		ModificareBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -146,10 +237,10 @@ public class GestioneCompagnie extends JFrame {
 				
 			}
 		});
-		
+				
 		ModificareBtn.setBounds(10, 42, 138, 21);
 		BottoniPanel.add(ModificareBtn);
-		
+			
 		JButton EliminareBtn = new JButton("Eliminare");
 		EliminareBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -160,7 +251,7 @@ public class GestioneCompagnie extends JFrame {
 		});
 		EliminareBtn.setBounds(10, 73, 138, 21);
 		BottoniPanel.add(EliminareBtn);
-		
+			
 		JButton ElencoBtn = new JButton("Elenco");
 		ElencoBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -171,17 +262,5 @@ public class GestioneCompagnie extends JFrame {
 		});
 		ElencoBtn.setBounds(10, 104, 138, 21);
 		BottoniPanel.add(ElencoBtn);
-		
-		JPanel IndietroPanel = new JPanel();
-		IndietroPanel.setBounds(10, 467, 158, 31);
-		contentPane.add(IndietroPanel);
-		
-		JButton IndietroBtn = new JButton("Indietro");
-		IndietroBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				c.CompagnieToHub();
-			}
-		});
-		IndietroPanel.add(IndietroBtn);
-	}
+		}
 }
