@@ -3,9 +3,12 @@ package Controller;
 import java.util.ArrayList;
 
 import Classi.Aeroporto;
+import Classi.Gate;
 import DAO.AeroportoDAO;
 import DAO.CompagniaAereaDao;
 import GUI.GestioneCompagnie;
+import GUI.GestioneGate;
+import GUI.GestioneTratte;
 import GUI.Hub;
 import GUI.Login;
 
@@ -14,6 +17,8 @@ public class Controller {
 	Login LoginWindow;
 	Hub HubWindow;
 	GestioneCompagnie CompagnieWindow;
+	GestioneGate GateWindow;
+	GestioneTratte TratteWindow;
 	
 	
 	
@@ -40,6 +45,12 @@ public class Controller {
 		HubWindow.setVisible(true);
 		
 	}
+	public void Logout() {
+		
+		HubWindow.setVisible(false);
+		LoginWindow.setVisible(true);
+		
+	}
 	
 	public void HubToCompagnie(Aeroporto a) {
 		
@@ -48,18 +59,38 @@ public class Controller {
 		CompagnieWindow.setVisible(true);
 		
 	}
-	
-	public void CompagnieToHub() {
+	public void CompagnieToHub(Aeroporto a) {
 		
 		CompagnieWindow.setVisible(false);
 		HubWindow.setVisible(true);
 		
 	}
 	
-	public void Logout() {
+	public void HubToGate(Aeroporto a) {
 		
 		HubWindow.setVisible(false);
-		LoginWindow.setVisible(true);
+		GateWindow = new GestioneGate(this, a);
+		GateWindow.setVisible(true);
+	}
+	public void GateToHub(Aeroporto a) {
+		
+		GateWindow.setVisible(false);
+		HubWindow.setVisible(true);
+		
+	}
+	
+	public void HubToTratte(Aeroporto a) {
+		
+		HubWindow.setVisible(false);
+		TratteWindow = new GestioneTratte(this, a);
+		TratteWindow.setVisible(true);
+		
+		
+	}
+	public void TratteToHub(Aeroporto a) {
+		
+		TratteWindow.setVisible(false);
+		HubWindow.setVisible(true);
 		
 	}
 

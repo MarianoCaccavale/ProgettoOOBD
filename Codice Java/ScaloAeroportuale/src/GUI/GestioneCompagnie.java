@@ -39,6 +39,7 @@ public class GestioneCompagnie extends JFrame {
 	 * Create the frame.
 	 */
 	public GestioneCompagnie(Controller c, Aeroporto a) {
+		setTitle("Gestione Compagnia");
 		
 		
 		controller = c;
@@ -67,7 +68,7 @@ public class GestioneCompagnie extends JFrame {
 		JButton IndietroBtn = new JButton("Indietro");
 		IndietroBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				c.CompagnieToHub();
+				c.CompagnieToHub(a);
 			}
 		});
 		IndietroPanel.add(IndietroBtn);

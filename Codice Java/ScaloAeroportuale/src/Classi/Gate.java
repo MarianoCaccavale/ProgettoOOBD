@@ -13,6 +13,9 @@ public class Gate {
 		NomeGate = nomeGate;
 	}
 
+	public Gate() {
+	}
+
 	public String getCodGate() {
 		return CodGate;
 	}

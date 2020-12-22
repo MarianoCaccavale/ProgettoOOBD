@@ -27,6 +27,7 @@ public class Hub extends JFrame {
 	 * Create the frame.
 	 */
 	public Hub(Controller c, Aeroporto a) {
+		setTitle("Hub");
 		controller = c;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 833, 492);
@@ -43,6 +44,13 @@ public class Hub extends JFrame {
 		BottoniPanel.add(StatisticheBtn);
 		
 		JButton GestioneTratteBtn = new JButton("Gestione Tratte");
+		GestioneTratteBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				controller.HubToTratte(a);
+				
+			}
+		});
 		BottoniPanel.add(GestioneTratteBtn);
 		
 		JButton GestioneVoliBtn = new JButton("Gestione Voli");
@@ -57,6 +65,13 @@ public class Hub extends JFrame {
 		BottoniPanel.add(GestioneCompagnieBtn);
 		
 		JButton GestioneGateBtn = new JButton("Gestione Gate");
+		GestioneGateBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				c.HubToGate(a);
+				
+			}
+		});
 		BottoniPanel.add(GestioneGateBtn);
 		
 		JButton ServizioClientiBtn = new JButton("Servizio Clienti");
