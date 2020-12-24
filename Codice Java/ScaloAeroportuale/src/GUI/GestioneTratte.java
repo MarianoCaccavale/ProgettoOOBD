@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Classi.Aeroporto;
+import Classi.Tratta;
 import Controller.Controller;
 import Controller.ControllerAeroporti;
 import Controller.ControllerTratte;
@@ -32,6 +33,7 @@ public class GestioneTratte extends JFrame {
 		setTitle("Gestione Tratte");
 		controller = c;
 		ControllerTratte controllerTratte = new ControllerTratte();
+		ControllerAeroporti controllerAeroporti = new ControllerAeroporti();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 734, 509);
@@ -79,25 +81,35 @@ public class GestioneTratte extends JFrame {
 		TrattaAggiuntaLbl.setBounds(161, 11, 218, 36);
 		AggiuntaPanel.add(TrattaAggiuntaLbl);
 		
+		JComboBox<String> AggiuntaNomeCombo = new JComboBox<String>();
 		
-		JComboBox<String> AggiungereNomeCombo = new JComboBox<String>();
 		ArrayList<Aeroporto> Aeroporti = new ArrayList<Aeroporto>();
-		
-		ControllerAeroporti controllerAeroporti = new ControllerAeroporti();
 		Aeroporti = controllerAeroporti.getAllAeroportiExceptThis(a);
 		Iterator<Aeroporto> iAeroporti = Aeroporti.iterator();
 		
-		Aeroporto tmp = new Aeroporto();
-		
-		while(iAeroporti.hasNext()) {
+		while (iAeroporti.hasNext()) {
 			
-			tmp = iAeroporti.next();
-			AggiungereNomeCombo.addItem(tmp.getNomeAeroporto());
+			Aeroporto tmp = iAeroporti.next();
+			AggiuntaNomeCombo.addItem(tmp.getNomeAeroporto());
 			
 		}
 		
-		AggiungereNomeCombo.setBounds(161, 58, 218, 36);
-		AggiuntaPanel.add(AggiungereNomeCombo);
+		AggiuntaNomeCombo.setBounds(161, 58, 189, 22);
+		AggiuntaPanel.add(AggiuntaNomeCombo);
+		
+		JButton AggiungiTrattaBtn = new JButton("Aggiungi Tratta");
+		AggiungiTrattaBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				controllerTratte.InsertTratta(a.getCodAeroporto(), AggiuntaNomeCombo.getSelectedItem().toString());
+				AggiuntaNomeCombo.setSelectedIndex(-1);
+			}
+		});
+		AggiungiTrattaBtn.setBounds(383, 373, 135, 36);
+		AggiuntaPanel.add(AggiungiTrattaBtn);
+		
+		
+		
 		
 		JPanel EliminazionePanel = new JPanel();
 		tabbedPane.addTab("New tab", null, EliminazionePanel, null);

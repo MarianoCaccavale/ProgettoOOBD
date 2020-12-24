@@ -13,7 +13,6 @@ public class AeroportoDAO{
 	public boolean insertAeroporto(String Nome, String Città) {
 		
 		boolean buonfine = false;
-		int offset = 10;
 		
 		try {
 			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
@@ -186,6 +185,36 @@ public class AeroportoDAO{
 		
 		
 		return ListaAeroporti;
+	}
+
+	public ArrayList<Aeroporto> getAllAeroportiExceptThis(String codAeroporto) {
+		
+		Aeroporto Aeroporto = new Aeroporto();
+		ArrayList<Aeroporto> Aeroporti = new ArrayList<Aeroporto>();
+		
+		try {
+			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			PreparedStatement st = conn.prepareStatement("Select * from Aeroporto where codaeroporto <> ?");
+			st.setString(1, codAeroporto);
+			ResultSet rs = st.executeQuery();
+			
+			while (rs.next()) {
+				
+				Aeroporto = new Aeroporto(rs.getString("CodAeroporto"), rs.getString("NomeAeroporto"), rs.getString("Città"));
+				Aeroporti.add(Aeroporto);
+				
+			}
+			
+			st.close();
+			rs.close();
+			conn.close();
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
+		return Aeroporti;
 	}
 	
 	
