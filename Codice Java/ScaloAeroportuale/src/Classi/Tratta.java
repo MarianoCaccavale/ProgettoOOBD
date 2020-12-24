@@ -4,15 +4,19 @@ public class Tratta {
 
 	
 	private String CodTratta = new String();
-	private Aeroporto AeroportoDiPartenza;
-	private Aeroporto AeroportoDiArrivo;
+	private String AeroportoDiPartenza;
+	private String AeroportoDiArrivo;
 	
 	
-	public Tratta(String codTratta) {
+	public Tratta() {}
+	
+	public Tratta(String codTratta, String aeroportoDiPartenza, String aeroportoDiArrivo) {
 		super();
 		CodTratta = codTratta;
+		AeroportoDiPartenza = aeroportoDiPartenza;
+		AeroportoDiArrivo = aeroportoDiArrivo;
 	}
-	
+
 	public String getCodTratta() {
 		return CodTratta;
 	}
@@ -21,19 +25,19 @@ public class Tratta {
 		CodTratta = codTratta;
 	}
 	
-	public Aeroporto getAeroportoDiPartenza() {
+	public String getAeroportoDiPartenza() {
 		return AeroportoDiPartenza;
 	}
 	
-	public void setAeroportoDiPartenza(Aeroporto aeroportoDiPartenza) {
+	public void setAeroportoDiPartenza(String aeroportoDiPartenza) {
 		AeroportoDiPartenza = aeroportoDiPartenza;
 	}
 	
-	public Aeroporto getAeroportoDiArrivo() {
+	public String getAeroportoDiArrivo() {
 		return AeroportoDiArrivo;
 	}
 	
-	public void setAeroportoDiArrivo(Aeroporto aeroportoDiArrivo) {
+	public void setAeroportoDiArrivo(String aeroportoDiArrivo) {
 		AeroportoDiArrivo = aeroportoDiArrivo;
 	}
 	

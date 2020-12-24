@@ -113,6 +113,35 @@ public class GestioneTratte extends JFrame {
 		
 		JPanel EliminazionePanel = new JPanel();
 		tabbedPane.addTab("New tab", null, EliminazionePanel, null);
+		EliminazionePanel.setLayout(null);
+		
+		JLabel EliminazioneTrattaLbl = new JLabel("Scegliere la tratta da cancellare:");
+		EliminazioneTrattaLbl.setBounds(80, 11, 376, 29);
+		EliminazionePanel.add(EliminazioneTrattaLbl);
+		
+		JComboBox<String> EliminazioneTrattaCombo = new JComboBox<String>();
+		ArrayList<Tratta> Tratte = new ArrayList<Tratta>();
+		Tratte = controllerTratte.getTratteFromThisAirport(a.getCodAeroporto());
+		Iterator<Tratta> TratteDaCancellare = Tratte.iterator();
+		
+		while (TratteDaCancellare.hasNext()) {
+			
+			Tratta tmp = TratteDaCancellare.next();
+			EliminazioneTrattaCombo.addItem(tmp.getAeroportoDiPartenza() + " - " + tmp.getAeroportoDiArrivo());
+			
+		}
+		
+		
+		EliminazioneTrattaCombo.setBounds(80, 51, 376, 29);
+		EliminazionePanel.add(EliminazioneTrattaCombo);
+		
+		JButton EliminaBtn = new JButton("Elimina");
+		EliminaBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		EliminaBtn.setBounds(405, 375, 113, 34);
+		EliminazionePanel.add(EliminaBtn);
 		
 		JPanel ElencoPanel = new JPanel();
 		tabbedPane.addTab("New tab", null, ElencoPanel, null);
