@@ -59,7 +59,7 @@ public class GestioneGate extends JFrame {
 		tabbedPane.addTab("New tab", null, AggiuntaPanel, null);
 		AggiuntaPanel.setLayout(null);
 		
-		JLabel AggiuntaNomeLbl = new JLabel("Seleziona il nome del gate:");
+		JLabel AggiuntaNomeLbl = new JLabel("Inserire il nome del gate:");
 		AggiuntaNomeLbl.setBounds(193, 11, 189, 32);
 		AggiuntaPanel.add(AggiuntaNomeLbl);
 		

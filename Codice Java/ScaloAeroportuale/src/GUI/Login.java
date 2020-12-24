@@ -49,8 +49,7 @@ public class Login extends JFrame {
 		
 		while(i.hasNext()) {
 			
-			Aeroporto tmp = new Aeroporto();
-			tmp = i.next();
+			Aeroporto tmp = i.next();
 			ListaAeroportiCombo.addItem(tmp.getNomeAeroporto());
 			
 		}

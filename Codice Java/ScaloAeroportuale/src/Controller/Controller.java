@@ -45,6 +45,7 @@ public class Controller {
 		HubWindow.setVisible(true);
 		
 	}
+	
 	public void Logout() {
 		
 		HubWindow.setVisible(false);

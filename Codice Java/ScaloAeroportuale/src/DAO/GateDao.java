@@ -75,7 +75,7 @@ public class GateDao {
 			
 			while(rs.next()) {
 				
-				Gate tmp = new Gate(rs.getString(0), rs.getString(1));
+				Gate tmp = new Gate(rs.getString("codgate"), rs.getString("nomegate"));
 				AllGate.add(tmp);
 			}
 			

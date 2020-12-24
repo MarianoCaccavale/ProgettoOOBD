@@ -107,7 +107,7 @@ public class GestioneCompagnie extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				controllerCompagnia.Insert(NomeTf.getText().toString(), (Integer) FlottaSpn.getValue(), a);
+				controllerCompagnia.Insert(NomeTf.getText(), (Integer) FlottaSpn.getValue(), a);
 				NomeTf.setText("");
 				FlottaSpn.setValue(0);
 				
@@ -123,7 +123,7 @@ public class GestioneCompagnie extends JFrame {
 		tabbedPane.addTab("New tab", null, ModifcaPanel, null);
 		ModifcaPanel.setLayout(null);
 		
-		JLabel NomeModificaLbl = new JLabel("Scegli l'aeroporto da modificare:");
+		JLabel NomeModificaLbl = new JLabel("Scegli la compagnia da modificare:");
 		NomeModificaLbl.setBounds(10, 11, 231, 26);
 		ModifcaPanel.add(NomeModificaLbl);
 		
@@ -244,6 +244,8 @@ public class GestioneCompagnie extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel();
 		scrollPane.setViewportView(lblNewLabel);
+		
+		//ELENCO DA SISTEMARE
 		
 		Compagnie = controllerCompagnia.getCompagnie(a);
 		Iterator<CompagniaAerea> i = Compagnie.iterator();
