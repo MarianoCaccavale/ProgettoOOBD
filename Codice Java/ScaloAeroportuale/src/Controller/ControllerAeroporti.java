@@ -16,28 +16,6 @@ public class ControllerAeroporti {
 		
 		return AllAeroporti;
 		
-		
-		/*ArrayList<Aeroporto> tmp = new ArrayList<Aeroporto>();
-		AeroportoDAO DAO = new AeroportoDAO();
-		tmp = DAO.getAllAeroporti();
-		
-		Iterator<Aeroporto> i = tmp.iterator();
-		
-		while(i.hasNext()) {
-			
-			Aeroporto tmp2 = i.next();
-			
-			if (tmp2.getNomeAeroporto() == aer.getNomeAeroporto()) {
-				
-				i.next();
-				
-			}else {
-				
-				AllAeroporti.add(tmp2);
-				
-			}
-			
-		}*/
 	}
 
 }

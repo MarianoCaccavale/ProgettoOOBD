@@ -102,7 +102,6 @@ public class GestioneTratte extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				controllerTratte.InsertTratta(a.getCodAeroporto(), AggiuntaNomeCombo.getSelectedItem().toString());
-				AggiuntaNomeCombo.setSelectedIndex(-1);
 			}
 		});
 		AggiungiTrattaBtn.setBounds(383, 373, 135, 36);
@@ -138,6 +137,10 @@ public class GestioneTratte extends JFrame {
 		JButton EliminaBtn = new JButton("Elimina");
 		EliminaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				String nomeAeroportoArrivo = new String(EliminazioneTrattaCombo.getSelectedItem().toString().substring(EliminazioneTrattaCombo.getSelectedItem().toString().indexOf("-")+2));
+				controllerTratte.delete(a.getCodAeroporto(), nomeAeroportoArrivo);
+				
 			}
 		});
 		EliminaBtn.setBounds(405, 375, 113, 34);
