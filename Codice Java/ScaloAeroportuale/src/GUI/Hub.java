@@ -39,11 +39,14 @@ public class Hub extends JFrame {
 		JPanel BottoniPanel = new JPanel();
 		BottoniPanel.setBounds(10, 10, 158, 252);
 		BasePanel.add(BottoniPanel);
+		BottoniPanel.setLayout(null);
 		
 		JButton StatisticheBtn = new JButton("Statistiche");
+		StatisticheBtn.setBounds(13, 5, 131, 23);
 		BottoniPanel.add(StatisticheBtn);
 		
 		JButton GestioneTratteBtn = new JButton("Gestione Tratte");
+		GestioneTratteBtn.setBounds(13, 33, 131, 23);
 		GestioneTratteBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -54,9 +57,11 @@ public class Hub extends JFrame {
 		BottoniPanel.add(GestioneTratteBtn);
 		
 		JButton GestioneVoliBtn = new JButton("Gestione Voli");
+		GestioneVoliBtn.setBounds(13, 61, 131, 23);
 		BottoniPanel.add(GestioneVoliBtn);
 		
 		JButton GestioneCompagnieBtn = new JButton("Gestione Compagnie");
+		GestioneCompagnieBtn.setBounds(13, 89, 131, 23);
 		GestioneCompagnieBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				c.HubToCompagnie(a);
@@ -65,6 +70,7 @@ public class Hub extends JFrame {
 		BottoniPanel.add(GestioneCompagnieBtn);
 		
 		JButton GestioneGateBtn = new JButton("Gestione Gate");
+		GestioneGateBtn.setBounds(13, 117, 131, 23);
 		GestioneGateBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -75,6 +81,7 @@ public class Hub extends JFrame {
 		BottoniPanel.add(GestioneGateBtn);
 		
 		JButton ServizioClientiBtn = new JButton("Servizio Clienti");
+		ServizioClientiBtn.setBounds(13, 145, 131, 23);
 		BottoniPanel.add(ServizioClientiBtn);
 		
 		JPanel HubPanel = new JPanel();
