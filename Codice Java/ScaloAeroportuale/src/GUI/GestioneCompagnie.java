@@ -85,7 +85,7 @@ public class GestioneCompagnie extends JFrame {
 		tabbedPane.addTab("Aggiunta", null, AggiuntaPanel, null);
 		AggiuntaPanel.setLayout(null);
 		
-		JLabel InsertLbl = new JLabel("Inserire Nome Aeroporto:");
+		JLabel InsertLbl = new JLabel("Inserire nome compagnia:");
 		InsertLbl.setBounds(10, 11, 143, 25);
 		AggiuntaPanel.add(InsertLbl);
 		

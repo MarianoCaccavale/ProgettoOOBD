@@ -74,4 +74,27 @@ public class ControllerTratte {
 		
 	}
 
+	public void update(String vecchioCodAeroporto, String nuovoNomeAeroporto, String codAeroporto) {
+		
+		try {
+			AeroportoDAO DAOAer = new AeroportoDAO();
+			Aeroporto nuovoAeroporto = DAOAer.getAeroportoByNome(nuovoNomeAeroporto);
+			
+			
+			DAO.update(vecchioCodAeroporto, nuovoAeroporto.getCodAeroporto(), codAeroporto);
+			successo.setBounds(200,200,400,200);
+			testo.setText("Modifica avvenuta con successo!"); 
+			successo.add(testo);
+			successo.setVisible(true);
+		} catch (TrattaException e) {
+			
+			successo.setBounds(200,200,400,200);
+			testo.setText(e.getMessage()); 
+			successo.add(testo);
+			successo.setVisible(true);
+		}
+		
+		
+	}
+
 }

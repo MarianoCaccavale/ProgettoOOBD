@@ -34,6 +34,8 @@ public class GestioneTratte extends JFrame {
 		controller = c;
 		ControllerTratte controllerTratte = new ControllerTratte();
 		ControllerAeroporti controllerAeroporti = new ControllerAeroporti();
+		ArrayList<Aeroporto> Aeroporti = new ArrayList<Aeroporto>();
+		ArrayList<Tratta> Tratte = new ArrayList<Tratta>();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 734, 509);
@@ -83,7 +85,6 @@ public class GestioneTratte extends JFrame {
 		
 		JComboBox<String> AggiuntaNomeCombo = new JComboBox<String>();
 		
-		ArrayList<Aeroporto> Aeroporti = new ArrayList<Aeroporto>();
 		Aeroporti = controllerAeroporti.getAllAeroportiExceptThis(a);
 		Iterator<Aeroporto> iAeroporti = Aeroporti.iterator();
 		
@@ -119,7 +120,7 @@ public class GestioneTratte extends JFrame {
 		EliminazionePanel.add(EliminazioneTrattaLbl);
 		
 		JComboBox<String> EliminazioneTrattaCombo = new JComboBox<String>();
-		ArrayList<Tratta> Tratte = new ArrayList<Tratta>();
+		
 		Tratte = controllerTratte.getTratteFromThisAirport(a.getCodAeroporto());
 		Iterator<Tratta> TratteDaCancellare = Tratte.iterator();
 		
@@ -149,6 +150,60 @@ public class GestioneTratte extends JFrame {
 		JPanel ElencoPanel = new JPanel();
 		tabbedPane.addTab("New tab", null, ElencoPanel, null);
 		
+		JPanel ModificaPanel = new JPanel();
+		tabbedPane.addTab("New tab", null, ModificaPanel, null);
+		ModificaPanel.setLayout(null);
+		
+		JLabel ModificaVecchiaTrattaLbl = new JLabel("Scegliere la tratta di cui modificare l'aeroporto di destinazione");
+		ModificaVecchiaTrattaLbl.setBounds(10, 11, 306, 27);
+		ModificaPanel.add(ModificaVecchiaTrattaLbl);
+		
+		JComboBox<String> ModificaVecchiaTrattaCombo = new JComboBox<String>();
+		Tratte = controllerTratte.getTratteFromThisAirport(a.getCodAeroporto());
+		Iterator<Tratta> TratteDaModificare = Tratte.iterator();
+		
+		while (TratteDaModificare.hasNext()) {
+			
+			Tratta tmp = TratteDaModificare.next();
+			ModificaVecchiaTrattaCombo.addItem(tmp.getAeroportoDiPartenza() + " - " + tmp.getAeroportoDiArrivo());
+			
+		}
+		
+		ModificaVecchiaTrattaCombo.setBounds(10, 49, 306, 27);
+		ModificaPanel.add(ModificaVecchiaTrattaCombo);
+		
+		JLabel ModificaNuovaTrattaLbl = new JLabel("Scegli il nuovo aeroporto di destinazione");
+		ModificaNuovaTrattaLbl.setBounds(326, 11, 192, 27);
+		ModificaPanel.add(ModificaNuovaTrattaLbl);
+		
+		JComboBox<String> ModificaNuovaTrattaCombo = new JComboBox<String>();
+		
+		Aeroporti = controllerAeroporti.getAllAeroportiExceptThis(a);
+		Iterator<Aeroporto> NuoviAeroporti = Aeroporti.iterator();
+		
+		while (NuoviAeroporti.hasNext()) {
+			
+			Aeroporto tmp = NuoviAeroporti.next();
+			ModificaNuovaTrattaCombo.addItem(tmp.getNomeAeroporto());
+			
+		}
+		
+		ModificaNuovaTrattaCombo.setBounds(326, 49, 192, 27);
+		ModificaPanel.add(ModificaNuovaTrattaCombo);
+		
+		JButton ModificaBtn = new JButton("Modifica");
+		ModificaBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String vecchioNomeAeroporto = new String(ModificaVecchiaTrattaCombo.getSelectedItem().toString().substring(ModificaVecchiaTrattaCombo.getSelectedItem().toString().indexOf("-")+2));
+				controllerTratte.update(vecchioNomeAeroporto ,ModificaNuovaTrattaCombo.getSelectedItem().toString() , a.getCodAeroporto());
+				
+				
+			}
+		});
+		ModificaBtn.setBounds(409, 369, 109, 40);
+		ModificaPanel.add(ModificaBtn);
+		
 		JButton TratteAggiuntaBtn = new JButton("Aggiungere");
 		TratteAggiuntaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -169,7 +224,7 @@ public class GestioneTratte extends JFrame {
 				
 			}
 		});
-		TratteEliminaBtn.setBounds(10, 53, 135, 31);
+		TratteEliminaBtn.setBounds(10, 95, 135, 31);
 		SceltaPanel.add(TratteEliminaBtn);
 		
 		
@@ -181,8 +236,19 @@ public class GestioneTratte extends JFrame {
 				
 			}
 		});
-		TratteElencoBtn.setBounds(10, 95, 135, 31);
+		TratteElencoBtn.setBounds(10, 137, 135, 31);
 		SceltaPanel.add(TratteElencoBtn);
+		
+		JButton TrattaModificaBtn = new JButton("Modifica");
+		TrattaModificaBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				tabbedPane.setSelectedIndex(3);
+				
+			}
+		});
+		TrattaModificaBtn.setBounds(10, 53, 135, 31);
+		SceltaPanel.add(TrattaModificaBtn);
 		
 		
 	}

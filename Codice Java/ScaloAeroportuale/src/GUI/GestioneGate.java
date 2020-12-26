@@ -28,8 +28,8 @@ public class GestioneGate extends JFrame {
 	private JPanel BasePanel;
 	
 	Controller controller;
-	private JTextField textField;
 	private JTextField AggiuntaNomeTxt;
+	private JTextField ModificaNuovoNomeTf;
 
 	
 	
@@ -37,7 +37,7 @@ public class GestioneGate extends JFrame {
 		setTitle("Gestione Gate");
 		controller = c;
 		ControllerGate controllerGate = new ControllerGate();
-		
+		ArrayList<Gate> AllGate = new ArrayList<Gate>();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 753, 507);
@@ -83,15 +83,48 @@ public class GestioneGate extends JFrame {
 		tabbedPane.addTab("New tab", null, ModificaPanel, null);
 		ModificaPanel.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(180, 51, 196, 29);
-		textField.setText("");
-		ModificaPanel.add(textField);
-		textField.setColumns(10);
+		JLabel ModificaVecchioNomeLbl = new JLabel("Scegli il gate da modificare:");
+		ModificaVecchioNomeLbl.setBounds(10, 11, 226, 29);
+		ModificaPanel.add(ModificaVecchioNomeLbl);
 		
-		JLabel ModificaNomeLbl = new JLabel("INUTILE, DA CANCELLARE?");
-		ModificaNomeLbl.setBounds(180, 11, 196, 29);
-		ModificaPanel.add(ModificaNomeLbl);
+		JLabel ModificaNuovoNomeLbl = new JLabel("Inserire il nuovo nome del Gate:");
+		ModificaNuovoNomeLbl.setBounds(295, 11, 226, 29);
+		ModificaPanel.add(ModificaNuovoNomeLbl);
+		
+		JComboBox<String> ModificaVecchioNomeSpn = new JComboBox<String>();
+		
+		AllGate = controllerGate.getGate(a.getCodAeroporto());
+		
+		Iterator<Gate> iModificaGate = AllGate.iterator();
+		
+		while(iModificaGate.hasNext()) {
+			
+			Gate tmp = new Gate();
+			tmp = iModificaGate.next();
+			ModificaVecchioNomeSpn.addItem(tmp.getNomeGate());
+			
+		}
+		
+		ModificaVecchioNomeSpn.setBounds(10, 51, 226, 29);
+		ModificaPanel.add(ModificaVecchioNomeSpn);
+		
+		ModificaNuovoNomeTf = new JTextField();
+		ModificaNuovoNomeTf.setBounds(295, 51, 226, 29);
+		ModificaPanel.add(ModificaNuovoNomeTf);
+		ModificaNuovoNomeTf.setColumns(10);
+		
+		JButton ModificaBtn = new JButton("Modifica");
+		ModificaBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				controllerGate.update(ModificaVecchioNomeSpn.getSelectedItem().toString(), ModificaNuovoNomeTf.getText(), a.getCodAeroporto());
+				ModificaNuovoNomeTf.setText("");
+				
+				
+			}
+		});
+		ModificaBtn.setBounds(409, 372, 125, 39);
+		ModificaPanel.add(ModificaBtn);
 		
 		JPanel EliminaPanel = new JPanel();
 		tabbedPane.addTab("New tab", null, EliminaPanel, null);
@@ -104,14 +137,14 @@ public class GestioneGate extends JFrame {
 		JComboBox<String> EliminaNomeSpn = new JComboBox<String>();
 		EliminaNomeSpn.setBounds(177, 55, 230, 33);
 		
-		ArrayList<Gate> AllGate = new ArrayList<Gate>();
-		AllGate = controllerGate.getGate(a.getCodAeroporto());
-		Iterator<Gate> i = AllGate.iterator();
 		
-		while(i.hasNext()) {
+		AllGate = controllerGate.getGate(a.getCodAeroporto());
+		Iterator<Gate> iEliminaGate = AllGate.iterator();
+		
+		while(iEliminaGate.hasNext()) {
 			
 			Gate tmp = new Gate();
-			tmp = i.next();
+			tmp = iEliminaGate.next();
 			EliminaNomeSpn.addItem(tmp.getNomeGate());
 			
 		}

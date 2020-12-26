@@ -5,17 +5,20 @@ import java.util.ArrayList;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
+import Classi.Aeroporto;
 import Classi.Gate;
 import DAO.GateDao;
 import Eccezioni.GateException;
 
 public class ControllerGate {
 
+	GateDao DAO = new GateDao();
+	JDialog successo = new JDialog();
+	JLabel testo = new JLabel();
+	
 	public void insertGate(String nomeGate, String codAeroporto) {
 		
-		GateDao DAO = new GateDao();
-		JDialog successo = new JDialog();
-		JLabel testo = new JLabel();
+		
 		
 		if (nomeGate.isBlank() == false) {
 			
@@ -45,23 +48,54 @@ public class ControllerGate {
 		
 		
 	}
+	
+	public void update(String vecchioNome, String nuovoNome, String codAeroporto) {
+		
+		try {
+			DAO.updateGate(vecchioNome, nuovoNome, codAeroporto);
+			testo.setText("Modifica avvenuta con successo!");
+			successo.setBounds(200,200,400,200);
+			successo.add(testo);
+			successo.setVisible(true);
+			
+		} catch (GateException e) {
+			
+			testo.setText(e.getMessage().toString());
+			successo.setBounds(200,200,400,200);
+			successo.add(testo);
+			successo.setVisible(true);
+			
+		}
+		
+	}
+	
+	public void deleteByName(String nomeGate, String codAeroporto) {
+		
+		try {
+			DAO.delete(nomeGate, codAeroporto);
+			testo.setText("Eliminazione avvenuta con successo!");
+			successo.setBounds(200,200,400,200);
+			successo.add(testo);
+			successo.setVisible(true);
+			
+		} catch (GateException e) {
+			
+			testo.setText(e.getMessage());
+			successo.setBounds(200,200,400,200);
+			successo.add(testo);
+			successo.setVisible(true);
+		}
+		
+	}
 
 	public ArrayList<Gate> getGate(String codAeroporto) {
 
 		ArrayList<Gate> AllGate = new ArrayList<Gate>();
 		
-		GateDao DAO = new GateDao();
 		AllGate= DAO.getAllGate(codAeroporto);
 		
 		return AllGate;
 	}
 
-	public void deleteByName(String nomeGate, String codAeroporto) {
-		
-		GateDao DAO = new GateDao();
-		
-		DAO.delete(nomeGate, codAeroporto);
-		
-	}
 
 }

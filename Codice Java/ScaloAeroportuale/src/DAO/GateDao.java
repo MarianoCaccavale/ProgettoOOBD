@@ -3,7 +3,6 @@ package DAO;
 import java.sql.*;
 import java.util.ArrayList;
 
-import Classi.CompagniaAerea;
 import Classi.Gate;
 import Eccezioni.GateException;
 
@@ -43,20 +42,60 @@ public class GateDao {
 		
 	}
 	
-	public void delete(String nomeGate, String codAeroporto) {
+	public void updateGate(String vecchioNome, String nuovoNome, String codAeroporto) throws GateException {
+		
+		try {
+			
+			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			PreparedStatement ps = conn.prepareStatement("Update gate set nomegate = ? where nomegate = ? AND codaeroporto = ?");
+			
+			ps.setString(1, nuovoNome);
+			ps.setString(2, vecchioNome);
+			ps.setString(3, codAeroporto);
+			ps.executeUpdate();
+			
+			ps.close();
+			conn.close();
+			
+		}catch (SQLException e) {
+			
+			errore = e.getMessage();
+			
+			if (errore.contains("nomeunique")) {
+				
+				throw new GateException("Impossibile aggiorare! Esiste già un Gate con questo nome");
+				
+			}else if (errore.contains("nomegate")) {
+				
+				throw new GateException("Nome gate errato! Il nome del gate deve essere una lettera maiuscola seguita da un numero");
+				
+			}else {
+				
+				throw new GateException(errore);
+				
+			}
+			
+		}
+		
+	}
+	
+	public void delete(String nomeGate, String codAeroporto) throws GateException {
 		
 		try {
 			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
-			PreparedStatement pr = conn.prepareStatement("Select from gate where nomegate = ? AND codaeroporto = ?");
+			PreparedStatement pr = conn.prepareStatement("delete from gate where nomegate = ? AND codaeroporto = ?");
 			
 			pr.setString(1, nomeGate);
 			pr.setString(2, codAeroporto);
 			
-			pr.executeQuery();
+			pr.executeUpdate();
 			pr.close();
 			conn.close();
 			
 		} catch (SQLException e) {
+			
+			errore = e.getMessage();
+			throw new GateException(errore);
 			
 		}
 		
@@ -90,6 +129,8 @@ public class GateDao {
 		
 		return AllGate;
 	}
+
+	
 
 	
 

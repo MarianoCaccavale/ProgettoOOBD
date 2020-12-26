@@ -101,4 +101,39 @@ public class TrattaDao {
 		}
 	}
 
+	public void update(String vecchioCodAeroporto, String nuovoCodAeroporto, String codAeroporto) throws TrattaException {
+		
+		try{
+			
+			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			PreparedStatement ps = conn.prepareStatement("update tratta set aeroportoarrivo = ? where aeroportoarrivo = ? AND aeroportopartenza = ?");
+			
+			ps.setString(1, nuovoCodAeroporto);
+			ps.setString(2, vecchioCodAeroporto);
+			ps.setString(3, codAeroporto);
+			
+			ps.executeUpdate();
+			ps.close();
+			conn.close();
+			
+			
+		}catch(SQLException e) {
+			
+			errore = e.getMessage();
+			
+			if(errore.contains("trattacorretta")) {
+				
+				throw new TrattaException("Impossibile aggiornare la tratta! Esiste già una tratta tra questi due aeroporto.");
+				
+			}else {
+				
+				throw new TrattaException(errore);
+				
+			}
+			
+		}
+		
+		
+	}
+
 }
