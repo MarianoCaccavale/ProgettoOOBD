@@ -155,7 +155,7 @@ public class GestioneTratte extends JFrame {
 		ModificaPanel.setLayout(null);
 		
 		JLabel ModificaVecchiaTrattaLbl = new JLabel("Scegliere la tratta di cui modificare l'aeroporto di destinazione");
-		ModificaVecchiaTrattaLbl.setBounds(10, 11, 306, 27);
+		ModificaVecchiaTrattaLbl.setBounds(96, 54, 364, 27);
 		ModificaPanel.add(ModificaVecchiaTrattaLbl);
 		
 		JComboBox<String> ModificaVecchiaTrattaCombo = new JComboBox<String>();
@@ -169,11 +169,11 @@ public class GestioneTratte extends JFrame {
 			
 		}
 		
-		ModificaVecchiaTrattaCombo.setBounds(10, 49, 306, 27);
+		ModificaVecchiaTrattaCombo.setBounds(123, 91, 306, 27);
 		ModificaPanel.add(ModificaVecchiaTrattaCombo);
 		
 		JLabel ModificaNuovaTrattaLbl = new JLabel("Scegli il nuovo aeroporto di destinazione");
-		ModificaNuovaTrattaLbl.setBounds(326, 11, 192, 27);
+		ModificaNuovaTrattaLbl.setBounds(144, 171, 262, 27);
 		ModificaPanel.add(ModificaNuovaTrattaLbl);
 		
 		JComboBox<String> ModificaNuovaTrattaCombo = new JComboBox<String>();
@@ -188,7 +188,7 @@ public class GestioneTratte extends JFrame {
 			
 		}
 		
-		ModificaNuovaTrattaCombo.setBounds(326, 49, 192, 27);
+		ModificaNuovaTrattaCombo.setBounds(180, 202, 192, 27);
 		ModificaPanel.add(ModificaNuovaTrattaCombo);
 		
 		JButton ModificaBtn = new JButton("Modifica");

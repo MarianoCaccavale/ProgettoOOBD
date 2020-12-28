@@ -9,6 +9,7 @@ import DAO.CompagniaAereaDao;
 import GUI.GestioneCompagnie;
 import GUI.GestioneGate;
 import GUI.GestioneTratte;
+import GUI.GestioneVoli;
 import GUI.Hub;
 import GUI.Login;
 
@@ -19,6 +20,7 @@ public class Controller {
 	GestioneCompagnie CompagnieWindow;
 	GestioneGate GateWindow;
 	GestioneTratte TratteWindow;
+	GestioneVoli VoliWindow;
 	
 	
 	
@@ -95,6 +97,19 @@ public class Controller {
 		
 	}
 
-	
+	public void HubToVoli(Aeroporto a) {
+		
+		HubWindow.setVisible(false);
+		VoliWindow = new GestioneVoli(this, a);
+		VoliWindow.setVisible(true);
+		
+		
+	}
+	public void VoliToHub(Aeroporto a) {
+		
+		VoliWindow.setVisible(false);
+		HubWindow.setVisible(true);
+		
+	}
 
 }
