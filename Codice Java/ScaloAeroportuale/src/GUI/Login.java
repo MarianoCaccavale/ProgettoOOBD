@@ -40,12 +40,11 @@ public class Login extends JFrame {
 		
 		ArrayList<Aeroporto> Aeroporti = new ArrayList<>();
 		Aeroporto aer = new Aeroporto();
-		ListaAeroportiCombo.addMouseListener(new MouseAdapter() {
-		});
 		ListaAeroportiCombo.setModel(new DefaultComboBoxModel<String>());
 		
 		Aeroporti = aer.getAeroporti();
 		Iterator<Aeroporto> i = Aeroporti.iterator();
+		
 		
 		while(i.hasNext()) {
 			
