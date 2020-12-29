@@ -4,18 +4,26 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import Classi.Aeroporto;
+import Connessione.ConnessioneDB;
 
 
 public class AeroportoDAO{
 	
-	Connection conn = null;
+	private Connection conn = null;
+	private ConnessioneDB connessioneDB;
 	
+	
+	/*Aggiungere i throw*/
 	public boolean insertAeroporto(String Nome, String Città) {
 		
 		boolean buonfine = false;
 		
+		
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
+			
 			PreparedStatement pst = conn.prepareStatement("Insert into Aeroporto values(?,?,?)");
 			
 			pst.setString(1, "nextval('sequenza_aeroporto')");
@@ -31,13 +39,14 @@ public class AeroportoDAO{
 		return buonfine;
 	}
 	
-	//aggiungere "Città" solo per completezza?
+	
 	public boolean updateAeroporto(String Codice, String Nome) {
 			
 			boolean buonfine = false;
 			
 			try {
-				conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+				connessioneDB = ConnessioneDB.getIstanza();
+				conn = connessioneDB.getConnection();
 				Statement st = conn.createStatement();
 				ResultSet rs = st.executeQuery("Select * from Aeroporto Where CodAeroporto = '"+Codice+"'");
 				PreparedStatement pst = conn.prepareStatement("Update Aeroporto set Nome = ? Where CodAeroporto = '"+Codice+"'");
@@ -60,7 +69,8 @@ public class AeroportoDAO{
 		boolean buonfine = false;
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery("Delete from Aeroporto Where CodAeroporto = '"+Codice+"'");
 	
@@ -81,7 +91,8 @@ public class AeroportoDAO{
 		Aeroporto Aeroporto = new Aeroporto("", "", "");
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery("Select * from Aeroporto Where CodAeroporto = '"+ Codice+ "'");
 			
@@ -107,7 +118,9 @@ public class AeroportoDAO{
 		Aeroporto Aeroporto = new Aeroporto("", "", "");
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
+			
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery("Select * from Aeroporto Where NomeAeroporto = '"+ Nome + "'");
 			
@@ -134,7 +147,8 @@ public class AeroportoDAO{
 		LinkedList<Aeroporto> ListaAeroporti = new LinkedList<Aeroporto>();
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery("Select * from Aeroporto Where Città = '"+ Città + "'");
 			
@@ -164,7 +178,8 @@ public class AeroportoDAO{
 		ArrayList<Aeroporto> ListaAeroporti = new ArrayList<Aeroporto>();
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery("Select * from Aeroporto");
 			
@@ -193,7 +208,8 @@ public class AeroportoDAO{
 		ArrayList<Aeroporto> Aeroporti = new ArrayList<Aeroporto>();
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
 			PreparedStatement st = conn.prepareStatement("Select * from Aeroporto where codaeroporto <> ?");
 			st.setString(1, codAeroporto);
 			ResultSet rs = st.executeQuery();
