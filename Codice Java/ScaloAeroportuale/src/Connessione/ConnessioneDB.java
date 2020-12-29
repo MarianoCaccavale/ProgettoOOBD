@@ -12,7 +12,7 @@ public class ConnessioneDB {
 	private final String PASSWORD = "progettooobd";
 	private final String IP = "localhost";
 	private final String PORT = "5432";
-	private String url = "jdbc:postgresql://" + IP + ":" + PORT + "/Gestione Scalo Aeroportuale";
+	private String url = "jdbc:postgresql://" + IP + ":" + PORT + "/prova";
 	
 	private ConnessioneDB() throws SQLException {
 		

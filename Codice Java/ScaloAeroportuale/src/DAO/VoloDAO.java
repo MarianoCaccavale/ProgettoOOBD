@@ -2,30 +2,46 @@ package DAO;
 
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
 
-
-import Eccezioni.TrattaException;
+import Classi.Volo;
+import Connessione.ConnessioneDB;
 import Eccezioni.VoloException;
 
 public class VoloDAO {
 	
-	Connection conn = null;
+	private Connection conn = null;
+	private ConnessioneDB connessioneDB;
 	String errore = new String("");
 	
 	
-	public void Insert (Date data, int numPosti, String Compagnia, String Tratta) throws VoloException {
+	public void Insert (Volo volo) throws VoloException {
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
-			PreparedStatement st = conn.prepareStatement("Insert into volo values(nextval('sequenza_volo'), ?, ?, ?, ?, ?)");
-			st.setDate(1, data);
-			st.setInt(2, numPosti);
-			st.setInt(3, 0);
-			st.setString(4, Compagnia);
-			st.setString(5, Tratta);
-			st.execute();
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
+			
+			PreparedStatement ps = conn.prepareStatement("Insert into volo values(nextval('sequenza_volo'), ?, ?, ?, ?, ?)");
+			
+			java.util.Date dataTmp = (java.util.Date)volo.getData();
+			Timestamp dataVolo = new Timestamp(dataTmp.getTime());
+			
+			
+			ps.setTimestamp(1, dataVolo);
+			ps.setInt(2, volo.getNumeroPosti());
+			ps.setInt(3, 0);
+			ps.setString(4, volo.getTrattaAssociata());
+			ps.setString(5, volo.getCompagniaDiAppartenenza());
+			ps.executeUpdate();
+			
+			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery("select last_value from sequenza_volo");
+			rs.next();
+			volo.setCodVolo(rs.getString("last_value"));
+			
 			st.close();
 			conn.close();
 			

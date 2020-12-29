@@ -8,8 +8,10 @@ public class Volo {
 	private Date Data = new Date();
 	private int NumeroPosti;
 	private int NumeroPostiDisponibili;
-	private CompagniaAerea CompagniaDiAppartenenza;
-	private Tratta TrattaAssociata;
+	private String CompagniaDiAppartenenza;
+	private String TrattaAssociata;
+	
+	public Volo() {}
 	
 	
 	public Volo(String codVolo, Date data, int numeroPosti, int numeroPostiDisponibili) {
@@ -45,16 +47,16 @@ public class Volo {
 	public void setNumeroPostiDisponibili(int numeroPostiDisponibili) {
 		NumeroPostiDisponibili = numeroPostiDisponibili;
 	}
-	public CompagniaAerea getCompagniaDiAppartenenza() {
+	public String getCompagniaDiAppartenenza() {
 		return CompagniaDiAppartenenza;
 	}
-	public void setCompagniaDiAppartenenza(CompagniaAerea compagniaDiAppartenenza) {
+	public void setCompagniaDiAppartenenza(String compagniaDiAppartenenza) {
 		CompagniaDiAppartenenza = compagniaDiAppartenenza;
 	}
-	public Tratta getTrattaAssociata() {
+	public String getTrattaAssociata() {
 		return TrattaAssociata;
 	}
-	public void setTrattaAssociata(Tratta trattaAssociata) {
+	public void setTrattaAssociata(String trattaAssociata) {
 		TrattaAssociata = trattaAssociata;
 	}
 	

@@ -1,33 +1,41 @@
 package Controller;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.swing.JDialog;
 import javax.swing.JTextField;
 
 import Classi.Aeroporto;
-import DAO.AeroportoDAO;
+import Classi.Volo;
+import DAO.SlotImbarcoDAO;
 import DAO.VoloDAO;
-import Eccezioni.TrattaException;
+import Eccezioni.SlotImbarcoException;
 import Eccezioni.VoloException;
 import GUI.SlotImbarcoJDialog;
 
 public class ControllerVoli {
 		
-	VoloDAO DAO = new VoloDAO();
+	VoloDAO VoloDAO = new VoloDAO();
+	SlotImbarcoDAO ImbarcoDAO = new SlotImbarcoDAO();
 	
 	JDialog successo = new JDialog();
 	JTextField testo = new JTextField();
 	
-	public void InsertVolo(Date data, int numPosti, String Compagnia, String Tratta) {
+	public void InsertVoloAndImbarco(Volo volo, String codGate, String coda, Timestamp dataChiusura) {
 		
 		try {
-			DAO.Insert(data, numPosti, Compagnia, Tratta);
+			VoloDAO.Insert(volo);
+			
+			java.util.Date dataTmp = (java.util.Date) volo.getData();
+			Timestamp dataInizio = new Timestamp(dataTmp.getTime());
+			
+			ImbarcoDAO.insert(volo.getCodVolo(), codGate, coda, dataInizio, dataChiusura);
 			successo.setBounds(200,200,400,200);
 			testo.setText("Inserimento avvenuto con successo!"); 
 			successo.add(testo);
 			successo.setVisible(true);
-		} catch (VoloException e) {
+		} catch (VoloException | SlotImbarcoException e) {
 
 			successo.setBounds(200,200,400,200);
 			testo.setText(e.getMessage().toString()); 
@@ -38,8 +46,8 @@ public class ControllerVoli {
 		
 	}
 	
-	public void apriSlotImbarco(Aeroporto aer) {
-		SlotImbarcoJDialog SlotImbarco = new SlotImbarcoJDialog(aer);
+	public void apriSlotImbarco(Aeroporto aer, Volo volo) {
+		SlotImbarcoJDialog SlotImbarco = new SlotImbarcoJDialog(aer, volo);
 		SlotImbarco.setVisible(true);
 	}
 

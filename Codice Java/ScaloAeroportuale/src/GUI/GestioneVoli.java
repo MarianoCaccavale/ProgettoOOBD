@@ -1,8 +1,5 @@
 package GUI;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -10,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import Classi.Aeroporto;
 import Classi.CompagniaAerea;
 import Classi.Tratta;
+import Classi.Volo;
 import Controller.Controller;
 import Controller.ControllerCompagnie;
 import Controller.ControllerTratte;
@@ -19,6 +17,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.awt.event.ActionEvent;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
@@ -26,7 +26,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.Calendar;
-import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
 public class GestioneVoli extends JFrame {
@@ -68,7 +67,7 @@ public class GestioneVoli extends JFrame {
 		AggiuntaPanel.setLayout(null);
 		
 		JSpinner DateSpn = new JSpinner();
-		DateSpn.setModel(new SpinnerDateModel(new Date(1609196400000L), null, null, Calendar.DAY_OF_YEAR));
+		DateSpn.setModel(new SpinnerDateModel());
 		DateSpn.setBounds(197, 49, 131, 33);
 		AggiuntaPanel.add(DateSpn);
 		
@@ -100,7 +99,7 @@ public class GestioneVoli extends JFrame {
 		AggiuntaPanel.add(NumeroPostiLbl);
 		
 		JSpinner NumeroPostiDisponibiliSpn = new JSpinner();
-		NumeroPostiDisponibiliSpn.setModel(new SpinnerNumberModel(0, 0, 500, 1));
+		NumeroPostiDisponibiliSpn.setModel(new SpinnerNumberModel(50, 50, 500, 1));
 		NumeroPostiDisponibiliSpn.setBounds(214, 217, 96, 33);
 		AggiuntaPanel.add(NumeroPostiDisponibiliSpn);
 		
@@ -125,8 +124,15 @@ public class GestioneVoli extends JFrame {
 		JButton AggiuntaVoloBtn = new JButton("Inserisci");
 		AggiuntaVoloBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				controllerVoli.InsertVolo(DateSpn.getTime(), NumeroPostiDisponibiliSpn.getValue(), SceltaCompagniaCombo.getSelectedIndex(), SceltaTrattaCombo.getSelectedItem());
-				controllerVoli.apriSlotImbarco(a);
+				Date data = (Date) DateSpn.getValue();
+				SimpleDateFormat format = new SimpleDateFormat("YYYY:mm:dd HH:mm:ss");
+				Volo volo = new Volo();
+				volo.setData(data);
+				volo.setNumeroPosti((Integer) NumeroPostiDisponibiliSpn.getValue());
+				volo.setNumeroPostiDisponibili((Integer) NumeroPostiDisponibiliSpn.getValue());
+				volo.setCompagniaDiAppartenenza(SceltaCompagniaCombo.getSelectedItem().toString());
+				volo.setTrattaAssociata(SceltaTrattaCombo.getSelectedItem().toString());
+				controllerVoli.apriSlotImbarco(a, volo);
 			}
 		});
 		AggiuntaVoloBtn.setBounds(433, 390, 85, 21);
