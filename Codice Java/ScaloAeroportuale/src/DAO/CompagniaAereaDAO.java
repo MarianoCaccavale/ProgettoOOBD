@@ -8,7 +8,7 @@ import Classi.CompagniaAerea;
 import Eccezioni.CompagniaException;
 
 
-public class CompagniaAereaDao{
+public class CompagniaAereaDAO{
 
 	Connection conn = null;
 	

@@ -7,12 +7,12 @@ import javax.swing.JLabel;
 
 import Classi.Aeroporto;
 import Classi.Gate;
-import DAO.GateDao;
+import DAO.GateDAO;
 import Eccezioni.GateException;
 
 public class ControllerGate {
 
-	GateDao DAO = new GateDao();
+	GateDAO DAO = new GateDAO();
 	JDialog successo = new JDialog();
 	JLabel testo = new JLabel();
 	

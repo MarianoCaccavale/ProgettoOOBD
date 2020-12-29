@@ -7,7 +7,7 @@ import Classi.Gate;
 import Eccezioni.GateException;
 
 
-public class GateDao {
+public class GateDAO {
 
 	Connection conn = null;
 	String errore = new String("");

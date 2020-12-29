@@ -8,22 +8,22 @@ import javax.swing.JTextField;
 import Classi.Aeroporto;
 import Classi.Tratta;
 import DAO.AeroportoDAO;
-import DAO.TrattaDao;
+import DAO.TrattaDAO;
 import Eccezioni.TrattaException;
 
 public class ControllerTratte {
 
-	TrattaDao DAO = new TrattaDao();
+	TrattaDAO DAO = new TrattaDAO();
 	
 	JDialog successo = new JDialog();
 	JTextField testo = new JTextField();
 	
 	
-	public void InsertTratta(String codAeroportoPartenza, String nomeAeroportoArrivo) {
+	public void InsertTratta(String codAeroportoPartenza, String codAeroportoArrivo) {
 		
 		Aeroporto AeroportoArrivo = new Aeroporto();
 		AeroportoDAO DAOAer = new AeroportoDAO();
-		AeroportoArrivo = DAOAer.getAeroportoByNome(nomeAeroportoArrivo);
+		AeroportoArrivo = DAOAer.getAeroportoByNome(codAeroportoArrivo);
 		
 		try {
 			DAO.Insert(codAeroportoPartenza, AeroportoArrivo.getCodAeroporto());

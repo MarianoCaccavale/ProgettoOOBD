@@ -7,7 +7,7 @@ import Classi.Aeroporto;
 import Classi.Tratta;
 import Eccezioni.TrattaException;
 
-public class TrattaDao {
+public class TrattaDAO {
 
 	Connection conn = null;
 	String errore = new String("");

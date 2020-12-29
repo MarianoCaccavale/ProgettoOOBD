@@ -8,7 +8,7 @@ import javax.swing.JTextField;
 import Classi.Aeroporto;
 import Classi.CompagniaAerea;
 import DAO.AeroportoDAO;
-import DAO.CompagniaAereaDao;
+import DAO.CompagniaAereaDAO;
 import Eccezioni.CompagniaException;
 
 public class ControllerCompagnie {
@@ -17,7 +17,7 @@ public class ControllerCompagnie {
 	
 	public void Insert(String Nome, int Flotta, Aeroporto a) {
 		
-		CompagniaAereaDao DAO = new CompagniaAereaDao();
+		CompagniaAereaDAO DAO = new CompagniaAereaDAO();
 		JDialog successo = new JDialog();
 		
 		JTextField testo = new JTextField();
@@ -42,7 +42,7 @@ public class ControllerCompagnie {
 	
 	public void Update(String Nome, Integer NuovaGrandezza, Aeroporto aer) {
 		
-		CompagniaAereaDao DAO = new CompagniaAereaDao();
+		CompagniaAereaDAO DAO = new CompagniaAereaDAO();
 		
 		JDialog successo = new JDialog();
 		JTextField testo = new JTextField();
@@ -66,7 +66,7 @@ public class ControllerCompagnie {
 	public ArrayList<CompagniaAerea> getCompagnie(Aeroporto aer) {
 		
 		ArrayList<CompagniaAerea> Compagnie = new ArrayList<CompagniaAerea>();
-		CompagniaAereaDao DAO = new CompagniaAereaDao();
+		CompagniaAereaDAO DAO = new CompagniaAereaDAO();
 		Compagnie = DAO.getCompagnieByAeroporto(aer.getCodAeroporto());
 	
 		return Compagnie;
@@ -74,7 +74,7 @@ public class ControllerCompagnie {
 
 	public void delete(String nome) {
 		
-		CompagniaAereaDao DAO = new CompagniaAereaDao();
+		CompagniaAereaDAO DAO = new CompagniaAereaDAO();
 		
 		JDialog successo = new JDialog();
 		JTextField testo = new JTextField();
@@ -90,7 +90,7 @@ public class ControllerCompagnie {
 
 	public ArrayList<CompagniaAerea> ricerca(String Nome, Integer Min, Integer Max, Aeroporto aer) {
 		
-		CompagniaAereaDao DAO = new CompagniaAereaDao();
+		CompagniaAereaDAO DAO = new CompagniaAereaDAO();
 		ArrayList<CompagniaAerea> Compagnie = new ArrayList<CompagniaAerea>();
 		if (Nome.isBlank()) {
 			

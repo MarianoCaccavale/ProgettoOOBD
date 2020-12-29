@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import Classi.Aeroporto;
 import Classi.Gate;
 import DAO.AeroportoDAO;
-import DAO.CompagniaAereaDao;
+import DAO.CompagniaAereaDAO;
 import GUI.GestioneCompagnie;
 import GUI.GestioneGate;
 import GUI.GestioneTratte;
