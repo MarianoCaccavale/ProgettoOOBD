@@ -5,17 +5,20 @@ import java.util.ArrayList;
 
 import Classi.Aeroporto;
 import Classi.Tratta;
+import Connessione.ConnessioneDB;
 import Eccezioni.TrattaException;
 
 public class TrattaDao {
 
-	Connection conn = null;
+	private Connection conn = null;
+	private ConnessioneDB connessioneDB;
 	String errore = new String("");
 	
 	public void Insert(String codAeroportoPartenza, String codAeroportoArrivo) throws TrattaException {
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
 			PreparedStatement st = conn.prepareStatement("Insert into tratta values(nextval('sequenza_tratta'),? , ?)");
 			st.setString(1, codAeroportoPartenza);
 			st.setString(2, codAeroportoArrivo);
@@ -47,7 +50,8 @@ public class TrattaDao {
 		}
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
 			PreparedStatement st = conn.prepareStatement("Select * from tratta where aeroportopartenza = ?");
 			st.setString(1, codAeroportoPartenza);
 			
@@ -65,13 +69,10 @@ public class TrattaDao {
 			return Tratte;
 			
 		} catch (SQLException e) {
-			errore = e.getMessage();	
 			
-			//throw new TrattaException(errore);
+			throw new TrattaException(errore);
 			
 		}
-		
-		return Tratte;
 		
 	}
 
@@ -85,7 +86,8 @@ public class TrattaDao {
 		
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
 			PreparedStatement st = conn.prepareStatement("Delete from tratta where aeroportopartenza = ? AND aeroportoarrivo = ?");
 			st.setString(1, codAeroportoPartenza);
 			st.setString(2, codAeroportoArrivo);
@@ -105,7 +107,8 @@ public class TrattaDao {
 		
 		try{
 			
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
 			PreparedStatement ps = conn.prepareStatement("update tratta set aeroportoarrivo = ? where aeroportoarrivo = ? AND aeroportopartenza = ?");
 			
 			ps.setString(1, nuovoCodAeroporto);

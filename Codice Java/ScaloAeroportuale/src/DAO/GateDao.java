@@ -4,18 +4,21 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import Classi.Gate;
+import Connessione.ConnessioneDB;
 import Eccezioni.GateException;
 
 
 public class GateDao {
 
-	Connection conn = null;
+	private Connection conn = null;
+	private ConnessioneDB connessioneDB;
 	String errore = new String("");
 	
 	public void insertGate(String nomeGate, String codAeroporto) throws GateException{
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
 			PreparedStatement pr = conn.prepareStatement("Insert into gate values(nextval('sequenza_gate'), ?, ?)");
 			
 			pr.setString(1, codAeroporto);
@@ -46,7 +49,8 @@ public class GateDao {
 		
 		try {
 			
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
 			PreparedStatement ps = conn.prepareStatement("Update gate set nomegate = ? where nomegate = ? AND codaeroporto = ?");
 			
 			ps.setString(1, nuovoNome);
@@ -82,7 +86,8 @@ public class GateDao {
 	public void delete(String nomeGate, String codAeroporto) throws GateException {
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
 			PreparedStatement pr = conn.prepareStatement("delete from gate where nomegate = ? AND codaeroporto = ?");
 			
 			pr.setString(1, nomeGate);
@@ -105,7 +110,8 @@ public class GateDao {
 		
 		ArrayList<Gate> AllGate = new ArrayList<Gate>();
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
 			PreparedStatement pr = conn.prepareStatement("Select * from gate where codaeroporto = ?");
 			
 			pr.setString(1, codAeroporto);

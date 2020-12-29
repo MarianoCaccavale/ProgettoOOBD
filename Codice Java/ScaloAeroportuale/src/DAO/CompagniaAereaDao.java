@@ -5,19 +5,22 @@ import java.util.ArrayList;
 
 import Classi.Aeroporto;
 import Classi.CompagniaAerea;
+import Connessione.ConnessioneDB;
 import Eccezioni.CompagniaException;
 
 
 public class CompagniaAereaDao{
 
-	Connection conn = null;
+	private Connection conn = null;
+	private ConnessioneDB connessioneDB;
 	
 	public ArrayList<CompagniaAerea> getAllCompagnie(){
 		
 		ArrayList<CompagniaAerea> result = new ArrayList<CompagniaAerea>();
 		CompagniaAerea tmp;
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery("Select * from compagniaaerea");
 			
@@ -42,7 +45,8 @@ public class CompagniaAereaDao{
 		String errore = new String("");
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
 			PreparedStatement pr = conn.prepareStatement("Insert into compagniaaerea values(nextval('sequenza_compagnia'),?,?,?)");
 			
 			pr.setString(1, Nome.toUpperCase());
@@ -92,7 +96,8 @@ public class CompagniaAereaDao{
 		String errore = new String("");
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
 			Statement ricerca = conn.createStatement();
 			ResultSet rs = ricerca.executeQuery("select nomecompagnia from compagniaaerea where nomecompagnia ='"+ nome + "' AND aeroportoappartenenza = '"+ codAeroporto + "'");
 			if (rs.next()) {
@@ -130,7 +135,8 @@ public class CompagniaAereaDao{
 		ArrayList<CompagniaAerea> result = new ArrayList<CompagniaAerea>();
 		CompagniaAerea tmp;
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery("Select * from compagniaaerea where aeroportoappartenenza = '" + codAeroporto + "'");
 			
@@ -154,7 +160,8 @@ public class CompagniaAereaDao{
 	public void deleteByNome(String nome) {
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
 	
 			PreparedStatement pr = conn.prepareStatement("Delete from compagniaaerea where nomecompagnia = ?");
 			
@@ -176,7 +183,8 @@ public class CompagniaAereaDao{
 		ArrayList<CompagniaAerea> Compagnie = new ArrayList<CompagniaAerea>();
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Gestione Scalo Aeroportuale", "postgres", "progettooobd");
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
 			PreparedStatement pr = conn.prepareStatement("select * from compagniaaerea where grandezzaflotta > ? AND grandezzaflotta < ? && aeroportoappartenenza like ?");
 			
 			pr.setInt(1, min);
