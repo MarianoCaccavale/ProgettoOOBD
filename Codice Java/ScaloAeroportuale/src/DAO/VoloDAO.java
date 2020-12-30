@@ -48,7 +48,10 @@ public class VoloDAO {
 		} catch (SQLException e) {
 			errore = e.getMessage();	
 			
-			throw new VoloException(errore);
+			if (errore.contains("validificadata()")){
+				throw new VoloException("Impossibile inserire un volo antecedente ad ora");
+			}
+				
 		}
 	}
 

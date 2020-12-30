@@ -10,6 +10,7 @@ import java.time.Period;
 
 import Connessione.ConnessioneDB;
 import Eccezioni.SlotImbarcoException;
+import Eccezioni.VoloException;
 
 public class SlotImbarcoDAO {
 
@@ -24,17 +25,13 @@ public class SlotImbarcoDAO {
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
 			
-			PreparedStatement pst = conn.prepareStatement("Insert into SlotImbarco values(? ,? ,? ,? ,? ,?)");
+			PreparedStatement pst = conn.prepareStatement("Insert into SlotImbarco values(?, ?, ?, ?, null, ?)");
 			pst.setString(1, codVolo);
 			pst.setString(2, codGate);
-			pst.setString(3, coda);
-			Timestamp tempoMax = dataInizio;
-			tempoMax.setHours(dataInizio.getHours()+1);
-			
-			pst.setTimestamp(4, tempoMax);
-			pst.setTimestamp(5, dataInizio);
-			pst.setTimestamp(6, dataChiusura);
-			
+			pst.setTimestamp(3, dataChiusura);
+			pst.setTimestamp(4, dataInizio);
+			pst.setString(5, coda);
+					
 			pst.executeUpdate();
 			pst.close();
 			conn.close();
@@ -43,7 +40,9 @@ public class SlotImbarcoDAO {
 			
 			errore = e.getMessage();
 			
-			throw new SlotImbarcoException(errore);
+			if (errore.contains("tempomax_check")) {
+				throw new SlotImbarcoException("Impossibile inserire un volo con chiusura gate stimata antecedente al volo.");
+			}
 			
 		}
 		
