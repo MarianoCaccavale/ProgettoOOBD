@@ -42,6 +42,13 @@ public class Hub extends JFrame {
 		BottoniPanel.setLayout(null);
 		
 		JButton StatisticheBtn = new JButton("Statistiche");
+		StatisticheBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				controller.HubToStatistiche(a);
+				
+			}
+		});
 		StatisticheBtn.setBounds(13, 5, 195, 23);
 		BottoniPanel.add(StatisticheBtn);
 		

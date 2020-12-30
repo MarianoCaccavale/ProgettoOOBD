@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import Classi.Volo;
 import Connessione.ConnessioneDB;
@@ -20,6 +21,7 @@ public class VoloDAO {
 	
 	
 	public void Insert (Volo volo) throws VoloException {
+		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
@@ -53,6 +55,99 @@ public class VoloDAO {
 			}
 				
 		}
+	}
+
+
+	public ArrayList<Volo> getAllVoli(String codAeroporto) throws VoloException {
+		
+		ArrayList<Volo> risultato = new ArrayList<Volo>();
+		
+		try {
+			
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
+			
+			PreparedStatement ps = conn.prepareStatement("Select * from volo as v inner join tratta as t on v.codtratta = t.codtratta where t.aeroportopartenza = ?");
+			ps.setString(1, codAeroporto);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				Volo tmp = new Volo(rs.getString(1), (java.util.Date) rs.getTimestamp(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getString(6));
+				
+				risultato.add(tmp);
+				
+			}
+			
+			ps.close();
+			rs.close();
+			conn.close();
+			
+		}catch(SQLException e) {
+			
+			errore = e.getMessage();
+				
+			throw new VoloException(errore);
+			
+		}
+		
+		return risultato;
+	}
+
+
+	public void delete(String codVolo) throws VoloException {
+		
+		
+		try {
+			
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
+			
+			PreparedStatement ps = conn.prepareStatement("Delete from volo where codvolo = ?");
+			ps.setString(1, codVolo);
+			
+			ps.executeUpdate();
+			ps.close();
+			conn.close();
+			
+			
+		}catch(SQLException e) {
+			
+			errore = e.getMessage();
+				
+			throw new VoloException(errore);
+			
+		}
+		
+	}
+
+
+	public void updateVolo(int numeroPosti, String codVolo) throws VoloException {
+		
+		try {
+			
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
+			
+			PreparedStatement ps = conn.prepareStatement("update on volo set numeroposti = ? where codvolo = ?");
+			ps.setInt(1, numeroPosti);
+			ps.setString(2, codVolo);
+			
+			ps.executeUpdate();
+			ps.close();
+			conn.close();
+			
+			
+		}catch(SQLException e) {
+			
+			errore = e.getMessage();
+				
+			throw new VoloException(errore);
+			
+		}
+		
+		
 	}
 
 }

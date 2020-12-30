@@ -12,16 +12,14 @@ import DAO.CompagniaAereaDAO;
 import Eccezioni.CompagniaException;
 
 public class ControllerCompagnie {
-
-	public ControllerCompagnie() {}
+	
+	CompagniaAereaDAO DAO = new CompagniaAereaDAO();
+	JDialog successo = new JDialog();
+	JTextField testo = new JTextField();
 	
 	public void Insert(String Nome, int Flotta, Aeroporto a) {
 		
-		CompagniaAereaDAO DAO = new CompagniaAereaDAO();
-		JDialog successo = new JDialog();
-		
-		JTextField testo = new JTextField();
-		
+		CompagniaAereaDAO DAO = new CompagniaAereaDAO();		
 		
 		try {
 			DAO.InsertCompagnia(Nome, Flotta, a);
@@ -44,9 +42,6 @@ public class ControllerCompagnie {
 		
 		CompagniaAereaDAO DAO = new CompagniaAereaDAO();
 		
-		JDialog successo = new JDialog();
-		JTextField testo = new JTextField();
-		
 		try {
 			DAO.updateByNome(Nome, NuovaGrandezza, aer.getCodAeroporto());
 			testo.setText("Modifica avvenuta con successo!");
@@ -55,10 +50,12 @@ public class ControllerCompagnie {
 			successo.setVisible(true);
 			
 		} catch (CompagniaException e) {
+			
 			successo.setBounds(200,200,400,200);
 			testo.setText(e.getMessage().toString()); 
 			successo.add(testo);
 			successo.setVisible(true);
+			
 		}
 		
 	}
@@ -67,7 +64,16 @@ public class ControllerCompagnie {
 		
 		ArrayList<CompagniaAerea> Compagnie = new ArrayList<CompagniaAerea>();
 		CompagniaAereaDAO DAO = new CompagniaAereaDAO();
-		Compagnie = DAO.getCompagnieByAeroporto(aer.getCodAeroporto());
+		try {
+			Compagnie = DAO.getCompagnieByAeroporto(aer.getCodAeroporto());
+		} catch (CompagniaException e) {
+			
+			testo.setText(e.getMessage());
+			successo.setBounds(200,200,400,200);
+			successo.add(testo);
+			successo.setVisible(true);
+		
+		}
 	
 		return Compagnie;
 	}
@@ -76,14 +82,17 @@ public class ControllerCompagnie {
 		
 		CompagniaAereaDAO DAO = new CompagniaAereaDAO();
 		
-		JDialog successo = new JDialog();
-		JTextField testo = new JTextField();
+		try {
+			DAO.deleteByNome(nome);
+		} catch (CompagniaException e) {
+			
+			testo.setText("Cancellazione avvenuta con successo!");
+			successo.setBounds(200,200,400,200);
+			successo.add(testo);
+			successo.setVisible(true);
+			
+		}
 		
-		DAO.deleteByNome(nome);
-		testo.setText("Cancellazione avvenuta con successo!");
-		successo.setBounds(200,200,400,200);
-		successo.add(testo);
-		successo.setVisible(true);
 		
 		
 	}
@@ -108,6 +117,27 @@ public class ControllerCompagnie {
 		
 		return Compagnie;
 		
+	}
+
+	public CompagniaAerea getCompagniaByCod(String compagniaDiAppartenenza) {
+		
+		CompagniaAerea risultato = new CompagniaAerea();
+				
+		try {
+			
+			risultato = DAO.getCompagniaByCod(compagniaDiAppartenenza);
+			
+		}catch(CompagniaException e){
+			
+			testo.setText(e.getMessage());
+			successo.setBounds(200,200,400,200);
+			successo.add(testo);
+			successo.setVisible(true);
+			
+			
+		}
+		
+		return risultato;
 	}
 	
 }

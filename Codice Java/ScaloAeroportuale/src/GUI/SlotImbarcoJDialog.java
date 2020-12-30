@@ -103,7 +103,7 @@ public class SlotImbarcoJDialog extends JDialog {
 						java.util.Date dataTmp = (java.util.Date) spinner.getValue();
 						Timestamp dataChiusura = new Timestamp(dataTmp.getTime());
 						
-						controllerVoli.InsertVoloAndImbarco(volo, GateCombo.getSelectedItem().toString(), CodaCombo.getSelectedItem().toString(), dataChiusura);
+						controllerVoli.InsertVoloAndImbarco(volo, GateCombo.getSelectedItem().toString().substring(0,  GateCombo.getSelectedItem().toString().indexOf(":")), CodaCombo.getSelectedItem().toString(), dataChiusura);
 					}
 				});
 				okButton.setActionCommand("OK");

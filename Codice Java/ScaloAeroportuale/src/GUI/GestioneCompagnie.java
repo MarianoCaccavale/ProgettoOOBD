@@ -193,7 +193,7 @@ public class GestioneCompagnie extends JFrame {
 		JButton EliminaBtn = new JButton("Elimina");
 		EliminaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*PROBLEMA, NON AGGIORNA LA LISTA, QUINDI UN AEROPORTO CANCELLATO RIMANE NELLA COMBOBOX FIN QUANDO NON SI RESETTA LA FINESTRA*/
+				
 				controllerCompagnia.delete(CancellazioneNomeComboBox.getSelectedItem().toString());
 				
 			}

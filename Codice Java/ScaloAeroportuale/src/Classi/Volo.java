@@ -21,8 +21,19 @@ public class Volo {
 		NumeroPosti = numeroPosti;
 		NumeroPostiDisponibili = numeroPostiDisponibili;
 	}
-	
-	
+		
+	public Volo(String codVolo, Date data, int numeroPosti, int numeroPostiDisponibili, String compagniaDiAppartenenza,
+			String trattaAssociata) {
+		super();
+		CodVolo = codVolo;
+		Data = data;
+		NumeroPosti = numeroPosti;
+		NumeroPostiDisponibili = numeroPostiDisponibili;
+		CompagniaDiAppartenenza = compagniaDiAppartenenza;
+		TrattaAssociata = trattaAssociata;
+	}
+
+
 	public String getCodVolo() {
 		return CodVolo;
 	}

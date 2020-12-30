@@ -97,4 +97,26 @@ public class ControllerTratte {
 		
 	}
 
+	public Tratta getTratteByCod(String trattaAssociata) {
+	
+		Tratta tratta = new Tratta();
+		
+		try {
+				
+			tratta = DAO.getTratteByCod(trattaAssociata);
+			
+		} catch (TrattaException e) {
+	
+			JDialog successo = new JDialog();
+			JTextField testo = new JTextField();
+			successo.setBounds(200,200,400,200);
+			testo.setText(e.getMessage().toString()); 
+			successo.add(testo);
+			successo.setVisible(true);
+		}
+		
+		return tratta;
+		
+	}
+
 }

@@ -13,8 +13,9 @@ public class CompagniaAereaDAO{
 
 	private Connection conn = null;
 	private ConnessioneDB connessioneDB;
+	String errore = new String("");
 	
-	public ArrayList<CompagniaAerea> getAllCompagnie(){
+	public ArrayList<CompagniaAerea> getAllCompagnie() throws CompagniaException{
 		
 		ArrayList<CompagniaAerea> result = new ArrayList<CompagniaAerea>();
 		CompagniaAerea tmp;
@@ -34,15 +35,16 @@ public class CompagniaAereaDAO{
 			rs.close();
 			conn.close();
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			
+			errore = e.getMessage();
+			throw new CompagniaException(errore);
+			
 		}
 		
 		return result;
 	}
 	
 	public void InsertCompagnia(String Nome, int Flotta, Aeroporto AerAppartenenza) throws CompagniaException {
-		
-		String errore = new String("");
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
@@ -93,8 +95,6 @@ public class CompagniaAereaDAO{
 
 	public void updateByNome(String nome, Integer nuovaGrandezza, String codAeroporto) throws CompagniaException {
 		
-		String errore = new String("");
-		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
@@ -130,7 +130,7 @@ public class CompagniaAereaDAO{
 		}
 	}
 
-	public ArrayList<CompagniaAerea> getCompagnieByAeroporto(String codAeroporto) {
+	public ArrayList<CompagniaAerea> getCompagnieByAeroporto(String codAeroporto) throws CompagniaException {
 		
 		ArrayList<CompagniaAerea> result = new ArrayList<CompagniaAerea>();
 		CompagniaAerea tmp;
@@ -150,14 +150,18 @@ public class CompagniaAereaDAO{
 			rs.close();
 			conn.close();
 		} catch (SQLException e) {
-			/*levare print*/
-			System.out.println(e.getMessage());
+			
+			errore = e.getMessage();
+		
+			throw new CompagniaException(errore);
+			
+			
 		}
 		
 		return result;
 	}
 
-	public void deleteByNome(String nome) {
+	public void deleteByNome(String nome) throws CompagniaException {
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
@@ -168,18 +172,21 @@ public class CompagniaAereaDAO{
 			pr.setString(1, nome);
 			pr.executeUpdate();
 			
+			pr.close();
 			conn.close();
 	
 		} catch (SQLException e) {
-			/*levare print*/
-			System.out.println(e.getMessage());
+
+			errore = e.getMessage();
+			
+			throw new CompagniaException(errore);
+			
 		}
 		
 	}
 
 	public ArrayList<CompagniaAerea> ricercaByFlotta(Integer min, Integer max, String codAeroporto) throws CompagniaException {
 
-		String errore = new String("");
 		ArrayList<CompagniaAerea> Compagnie = new ArrayList<CompagniaAerea>();
 		
 		try {
@@ -197,7 +204,9 @@ public class CompagniaAereaDAO{
 				CompagniaAerea tmp = new CompagniaAerea(rs.getString(0), rs.getString(1), rs.getInt(2));
 				Compagnie.add(tmp);
 			}
-				
+			
+			pr.close();
+			rs.close();
 			conn.close();
 			return Compagnie;
 			
@@ -214,6 +223,39 @@ public class CompagniaAereaDAO{
 		ArrayList<CompagniaAerea> Compagnie = new ArrayList<CompagniaAerea>();
 		/*ricerca con like*/
 		return Compagnie;
+	}
+
+	public CompagniaAerea getCompagniaByCod(String compagniaDiAppartenenza) throws CompagniaException {
+		
+		CompagniaAerea compagnia = new CompagniaAerea();
+		
+		try {
+			
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
+			PreparedStatement ps = conn.prepareStatement("select * from compagniaaerea where codcompagnia = ?");
+			
+			ps.setString(1, compagniaDiAppartenenza);
+			ResultSet rs = ps.executeQuery();
+			
+			rs.next();
+			compagnia = new CompagniaAerea(rs.getString(1), rs.getString(2), rs.getInt(3));
+			
+			ps.close();
+			rs.close();
+			conn.close();
+			
+		}catch (SQLException e) {
+			
+			errore = e.getMessage();
+			
+			throw new CompagniaException(errore);
+			
+			
+		}
+		
+		
+		return compagnia;
 	}
 	
 	

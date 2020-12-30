@@ -2,6 +2,7 @@ package Controller;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import javax.swing.JDialog;
 import javax.swing.JTextField;
@@ -49,6 +50,60 @@ public class ControllerVoli {
 	public void apriSlotImbarco(Aeroporto aer, Volo volo) {
 		SlotImbarcoJDialog SlotImbarco = new SlotImbarcoJDialog(aer, volo);
 		SlotImbarco.setVisible(true);
+	}
+
+	public ArrayList<Volo> getAllVoli(Aeroporto a) {
+		
+		ArrayList<Volo> Voli = new ArrayList<Volo>();
+		
+		try {
+			Voli = VoloDAO.getAllVoli(a.getCodAeroporto());
+		} catch (VoloException e) {
+			successo.setBounds(200,200,400,200);
+			testo.setText(e.getMessage().toString()); 
+			successo.add(testo);
+			successo.setVisible(true);
+		}
+		
+		
+		return Voli;
+	}
+	
+	public void deleteVolo(String codVolo) {
+		
+		try {
+			
+			VoloDAO.delete(codVolo);
+			
+		}catch(VoloException e) {
+			
+			successo.setBounds(200,200,400,200);
+			testo.setText(e.getMessage().toString()); 
+			successo.add(testo);
+			successo.setVisible(true);
+			
+		}
+		
+		
+		
+	}
+
+	public void updateVolo(int numeroPosti, String codVolo) {
+
+		try {
+			
+			VoloDAO.updateVolo(numeroPosti, codVolo);
+			
+		}catch(VoloException e) {
+			
+			successo.setBounds(200,200,400,200);
+			testo.setText(e.getMessage().toString()); 
+			successo.add(testo);
+			successo.setVisible(true);
+			
+		}
+		
+		
 	}
 
 }

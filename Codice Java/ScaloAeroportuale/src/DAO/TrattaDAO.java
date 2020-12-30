@@ -139,4 +139,36 @@ public class TrattaDAO {
 		
 	}
 
+	public Tratta getTratteByCod(String trattaAssociata) throws TrattaException {
+		
+		Tratta risultato = new Tratta();
+		
+		try{
+			
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
+			
+			PreparedStatement ps = conn.prepareStatement("Select * from tratta where codtratta = ?");
+
+			ps.setString(1, trattaAssociata);
+			ResultSet rs = ps.executeQuery();
+		
+			
+			rs.next();			
+			risultato = new Tratta(rs.getString(1), rs.getString(2), rs.getString(3));
+				
+			
+			
+			
+		}catch(SQLException e) {
+			
+			errore = e.getMessage();
+			
+			throw new TrattaException(errore);
+			
+		}
+		
+		return risultato;
+	}
+
 }

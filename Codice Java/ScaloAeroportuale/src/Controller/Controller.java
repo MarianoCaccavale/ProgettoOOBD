@@ -12,6 +12,7 @@ import GUI.GestioneTratte;
 import GUI.GestioneVoli;
 import GUI.Hub;
 import GUI.Login;
+import GUI.Statistiche;
 
 public class Controller {
 
@@ -21,6 +22,7 @@ public class Controller {
 	GestioneGate GateWindow;
 	GestioneTratte TratteWindow;
 	GestioneVoli VoliWindow;
+	Statistiche StatisticheWindow;
 	
 	
 	
@@ -108,6 +110,20 @@ public class Controller {
 	public void VoliToHub(Aeroporto a) {
 		
 		VoliWindow.setVisible(false);
+		HubWindow.setVisible(true);
+		
+	}
+	
+	public void HubToStatistiche(Aeroporto a) {
+		
+		HubWindow.setVisible(false);
+		StatisticheWindow = new Statistiche(this, a);
+		StatisticheWindow.setVisible(true);
+	}
+
+	public void statisticheToHub(Aeroporto a) {
+		
+		StatisticheWindow.setVisible(false);
 		HubWindow.setVisible(true);
 		
 	}
