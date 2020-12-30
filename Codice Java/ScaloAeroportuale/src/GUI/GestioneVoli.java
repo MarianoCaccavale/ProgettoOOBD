@@ -12,6 +12,8 @@ import Controller.Controller;
 import Controller.ControllerCompagnie;
 import Controller.ControllerTratte;
 import Controller.ControllerVoli;
+import DAO.AeroportoDAO;
+
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
@@ -43,8 +45,10 @@ public class GestioneVoli extends JFrame {
 		ControllerVoli controllerVoli = new ControllerVoli();
 		ControllerTratte controllerTratte = new ControllerTratte();
 		ControllerCompagnie controllerCompagnie = new ControllerCompagnie();
+		AeroportoDAO aeroportoDAO = new AeroportoDAO();
 		ArrayList<Tratta> Tratte = new ArrayList<Tratta>();
 		ArrayList<CompagniaAerea> CompagnieAeree = new ArrayList<CompagniaAerea>();
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 504);
@@ -87,7 +91,11 @@ public class GestioneVoli extends JFrame {
 		while(TratteDaCaricare.hasNext()) {
 			
 			Tratta tmp = TratteDaCaricare.next();
-			SceltaTrattaCombo.addItem(tmp.getCodTratta());
+			String nomeAeroportoPartenza = new String();
+			String nomeAeroportoArrivo = new String();
+			nomeAeroportoPartenza = (aeroportoDAO.getAeroportoByCod(tmp.getAeroportoDiPartenza())).getNomeAeroporto();
+			nomeAeroportoArrivo = (aeroportoDAO.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getNomeAeroporto();
+			SceltaTrattaCombo.addItem(tmp.getCodTratta()+ ": " +nomeAeroportoArrivo + " - " + nomeAeroportoPartenza);
 			
 		}
 		
@@ -114,7 +122,7 @@ public class GestioneVoli extends JFrame {
 		while(CompagnieDaCaricare.hasNext()) {
 			
 			CompagniaAerea tmp = CompagnieDaCaricare.next();
-			SceltaCompagniaCombo.addItem(tmp.getCodCompagnia());
+			SceltaCompagniaCombo.addItem(tmp.getCodCompagnia() + ":" + tmp.getNomeCompagnia());
 			
 		}
 		
@@ -130,8 +138,8 @@ public class GestioneVoli extends JFrame {
 				volo.setData(data);
 				volo.setNumeroPosti((Integer) NumeroPostiDisponibiliSpn.getValue());
 				volo.setNumeroPostiDisponibili((Integer) NumeroPostiDisponibiliSpn.getValue());
-				volo.setCompagniaDiAppartenenza(SceltaCompagniaCombo.getSelectedItem().toString());
-				volo.setTrattaAssociata(SceltaTrattaCombo.getSelectedItem().toString());
+				volo.setCompagniaDiAppartenenza(SceltaCompagniaCombo.getSelectedItem().toString().substring(0, SceltaCompagniaCombo.getSelectedItem().toString().indexOf(":")).toString());
+				volo.setTrattaAssociata(SceltaTrattaCombo.getSelectedItem().toString().subSequence(0, SceltaTrattaCombo.getSelectedItem().toString().indexOf(":")).toString());
 				controllerVoli.apriSlotImbarco(a, volo);
 			}
 		});

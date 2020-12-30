@@ -93,7 +93,7 @@ public class GestioneGate extends JFrame {
 		
 		JComboBox<String> ModificaVecchioNomeSpn = new JComboBox<String>();
 		
-		AllGate = controllerGate.getGate(a.getCodAeroporto());
+		AllGate = controllerGate.getAllGate(a.getCodAeroporto());
 		
 		Iterator<Gate> iModificaGate = AllGate.iterator();
 		
@@ -138,7 +138,7 @@ public class GestioneGate extends JFrame {
 		EliminaNomeSpn.setBounds(177, 55, 230, 33);
 		
 		
-		AllGate = controllerGate.getGate(a.getCodAeroporto());
+		AllGate = controllerGate.getAllGate(a.getCodAeroporto());
 		Iterator<Gate> iEliminaGate = AllGate.iterator();
 		
 		while(iEliminaGate.hasNext()) {

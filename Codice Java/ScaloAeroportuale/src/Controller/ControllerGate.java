@@ -1,5 +1,7 @@
 package Controller;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.swing.JDialog;
@@ -17,7 +19,6 @@ public class ControllerGate {
 	JLabel testo = new JLabel();
 	
 	public void insertGate(String nomeGate, String codAeroporto) {
-		
 		
 		
 		if (nomeGate.isBlank() == false) {
@@ -88,13 +89,27 @@ public class ControllerGate {
 		
 	}
 
-	public ArrayList<Gate> getGate(String codAeroporto) {
+	public ArrayList<Gate> getAllGate(String codAeroporto) {
 
 		ArrayList<Gate> AllGate = new ArrayList<Gate>();
 		
 		AllGate= DAO.getAllGate(codAeroporto);
 		
 		return AllGate;
+	}
+
+	
+	public ArrayList<Gate> getGateLiberi(String codAeroporto, Timestamp dataVolo) {
+		
+		ArrayList<Gate> GateLiberi = new ArrayList<Gate>();
+		
+		try {
+			GateLiberi = DAO.getGateLiberi(codAeroporto, dataVolo);
+		} catch (GateException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return GateLiberi;
 	}
 
 

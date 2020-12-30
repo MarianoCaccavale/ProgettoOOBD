@@ -49,12 +49,16 @@ public class SlotImbarcoJDialog extends JDialog {
 		
 		
 			JComboBox<String> GateCombo = new JComboBox<String>();
-			ElencoGate = controllerGate.getGate(a.getCodAeroporto());
+			java.util.Date dataTmp = (java.util.Date) volo.getData();
+			Timestamp dataVolo = new Timestamp(dataTmp.getTime());
+			ElencoGate = controllerGate.getGateLiberi(a.getCodAeroporto(), dataVolo);
 			Iterator<Gate> GateDaCaricare = ElencoGate.iterator();
 			
 			while(GateDaCaricare.hasNext()) {
+				
 				Gate tmp = GateDaCaricare.next();
-				GateCombo.addItem(tmp.getCodGate());
+				GateCombo.addItem(tmp.getCodGate() + ":" + tmp.getNomeGate());
+				
 			}
 			
 			GateCombo.setBounds(78, 46, 120, 21);

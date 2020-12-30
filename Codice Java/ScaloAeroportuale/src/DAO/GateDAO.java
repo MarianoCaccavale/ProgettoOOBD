@@ -136,6 +136,42 @@ public class GateDAO {
 		return AllGate;
 	}
 
+	public ArrayList<Gate> getGateLiberi(String codAeroporto, Timestamp dataVolo) throws GateException {
+		
+		ArrayList<Gate> GateLiberi = new ArrayList<Gate>();
+		
+		try {
+			
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
+					
+			PreparedStatement pt = conn.prepareStatement("select DISTINCT(g.codgate), g.nomegate from Gate as G inner join SlotImbarco as SI on g.codgate = SI.codgate where (g.codaeroporto = ? AND SI.datainizio <= ? AND SI.tempomax <= ?)");
+			
+			pt.setString(1, codAeroporto);
+			pt.setTimestamp(2, dataVolo);
+			pt.setTimestamp(3, dataVolo);
+			
+			ResultSet rs = pt.executeQuery();
+			
+			while (rs.next()) {
+				
+				Gate tmp = new Gate(rs.getString(1), rs.getString(2));
+				GateLiberi.add(tmp);
+			}
+			
+			return GateLiberi;
+	
+			
+		}catch(SQLException e) {
+			
+			errore = e.getMessage();
+			
+			throw new GateException(errore);
+			
+		}
+		
+	}
+
 	
 
 	
