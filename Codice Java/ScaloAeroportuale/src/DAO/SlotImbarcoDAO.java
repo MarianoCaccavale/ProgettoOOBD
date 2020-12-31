@@ -13,7 +13,7 @@ public class SlotImbarcoDAO {
 	private ConnessioneDB connessioneDB;
 	String errore = new String("");
 	
-	public void insert(String codVolo, String codGate, String coda, Timestamp dataInizio, Timestamp dataChiusura) throws SlotImbarcoException {
+	public void insert(String codVolo, String codGate, String coda, Timestamp dataInizio) throws SlotImbarcoException {
 		
 		try{
 			
@@ -24,8 +24,12 @@ public class SlotImbarcoDAO {
 			pst.setString(1, codVolo);
 			pst.setString(2, codGate);
 			pst.setString(3, coda);
-			pst.setTimestamp(4, dataChiusura);
 			pst.setTimestamp(5, dataInizio);
+			Timestamp dataChiusura = dataInizio;
+			dataChiusura.setHours(dataInizio.getHours() + 1);
+			
+			pst.setTimestamp(4, dataChiusura);
+			
 					
 			pst.executeUpdate();
 			pst.close();

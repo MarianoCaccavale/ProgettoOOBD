@@ -23,7 +23,7 @@ public class ControllerVoli {
 	JDialog successo = new JDialog();
 	JTextField testo = new JTextField();
 	
-	public void InsertVoloAndImbarco(Volo volo, String codGate, String coda, Timestamp dataChiusura) {
+	public void InsertVoloAndImbarco(Volo volo, String codGate, String coda){
 		
 		try {
 			VoloDAO.Insert(volo);
@@ -31,7 +31,7 @@ public class ControllerVoli {
 			java.util.Date dataTmp = (java.util.Date) volo.getData();
 			Timestamp dataInizio = new Timestamp(dataTmp.getTime());
 			
-			ImbarcoDAO.insert(volo.getCodVolo(), codGate, coda, dataInizio, dataChiusura);
+			ImbarcoDAO.insert(volo.getCodVolo(), codGate, coda, dataInizio);
 			successo.setBounds(200,200,400,200);
 			testo.setText("Inserimento avvenuto con successo!"); 
 			successo.add(testo);

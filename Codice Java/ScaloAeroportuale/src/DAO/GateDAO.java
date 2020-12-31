@@ -144,12 +144,21 @@ public class GateDAO {
 			
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
-					
-			PreparedStatement pt = conn.prepareStatement("select DISTINCT(g.codgate), g.nomegate from Gate as G inner join SlotImbarco as SI on g.codgate = SI.codgate where (g.codaeroporto = ? AND SI.datainizio <= ? AND SI.tempomax <= ?)");
+			
+			String query = new String("(select DISTINCT(g.codgate), g.nomegate from gate as g where g.codaeroporto = ?) EXCEPT (select DISTINCT(gv.codgate), gv.nomegate from gate_view as gv where (gv.codaeroporto = ? AND ( gv.datainizio < ? AND ? < gv.tempomax) OR ( gv.datainizio < ? AND ? < gv.tempomax)))");
+			
+			PreparedStatement pt = conn.prepareStatement(query);
 			
 			pt.setString(1, codAeroporto);
-			pt.setTimestamp(2, dataVolo);
+			pt.setString(2, codAeroporto);
 			pt.setTimestamp(3, dataVolo);
+			pt.setTimestamp(4, dataVolo);
+			
+			Timestamp dataFine = dataVolo;
+			dataFine.setHours(dataFine.getHours()+1);
+			
+			pt.setTimestamp(5, dataFine);
+			pt.setTimestamp(6, dataFine);
 			
 			ResultSet rs = pt.executeQuery();
 			

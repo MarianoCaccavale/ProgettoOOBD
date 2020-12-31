@@ -23,9 +23,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 
 public class SlotImbarcoJDialog extends JDialog {
 
@@ -81,17 +79,6 @@ public class SlotImbarcoJDialog extends JDialog {
 			contentPanel.add(CodaCombo);
 		
 		
-			JLabel TempoMaxLbl = new JLabel("Data stimata di chiusura del gate");
-			TempoMaxLbl.setBounds(48, 182, 210, 13);
-			contentPanel.add(TempoMaxLbl);
-		
-		
-			JSpinner spinner = new JSpinner();
-			spinner.setModel(new SpinnerDateModel());
-			spinner.setBounds(65, 205, 135, 30);
-			contentPanel.add(spinner);
-		
-		
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
@@ -100,10 +87,8 @@ public class SlotImbarcoJDialog extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-						java.util.Date dataTmp = (java.util.Date) spinner.getValue();
-						Timestamp dataChiusura = new Timestamp(dataTmp.getTime());
-						
-						controllerVoli.InsertVoloAndImbarco(volo, GateCombo.getSelectedItem().toString().substring(0,  GateCombo.getSelectedItem().toString().indexOf(":")), CodaCombo.getSelectedItem().toString(), dataChiusura);
+						controllerVoli.InsertVoloAndImbarco(volo, GateCombo.getSelectedItem().toString().substring(0,  GateCombo.getSelectedItem().toString().indexOf(":")), CodaCombo.getSelectedItem().toString());
+					
 					}
 				});
 				okButton.setActionCommand("OK");

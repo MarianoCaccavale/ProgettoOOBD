@@ -21,9 +21,7 @@ public class Login extends JFrame {
 
 	private JPanel contentPane;
 	Controller controller;
-	/**
-	 * Create the frame.
-	 */
+	
 	public Login(Controller c) {
 		controller = c;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
