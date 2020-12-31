@@ -1,44 +1,53 @@
 package Classi;
 
-import java.sql.Time;
+
+import java.sql.Timestamp;
 
 public class SlotImbarco {
 
-	private Volo Volo;
-	private Tratta Tratta;
-	private Gate Gate;
-	private Time OraInizio = new Time(0);
+	private String Volo;
+	private String Tratta;
+	private String Gate;
+	private Timestamp OraInizio;
 	
 
-	public Volo getVolo() {
+	public SlotImbarco(String volo, String tratta, String gate, Timestamp oraInizio) {
+		super();
+		Volo = volo;
+		Tratta = tratta;
+		Gate = gate;
+		OraInizio = oraInizio;
+	}
+
+	public String getVolo() {
 		return Volo;
 	}
 	
-	public void setVolo(Volo volo) {
+	public void setVolo(String volo) {
 		Volo = volo;
 	}
 	
-	public Tratta getTratta() {
+	public String getTratta() {
 		return Tratta;
 	}
 	
-	public void setTratta(Tratta tratta) {
+	public void setTratta(String tratta) {
 		Tratta = tratta;
 	}
 	
-	public Gate getGate() {
+	public String getGate() {
 		return Gate;
 	}
 	
-	public void setGate(Gate gate) {
+	public void setGate(String gate) {
 		Gate = gate;
 	}
 	
-	public Time getOraInizio() {
+	public Timestamp getOraInizio() {
 		return OraInizio;
 	}
 	
-	public void setOraInizio(Time oraInizio) {
+	public void setOraInizio(Timestamp oraInizio) {
 		OraInizio = oraInizio;
 	} 
 	

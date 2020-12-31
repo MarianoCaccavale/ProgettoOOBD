@@ -6,11 +6,13 @@ import javax.swing.border.EmptyBorder;
 
 import Classi.Aeroporto;
 import Classi.CompagniaAerea;
+import Classi.SlotImbarco;
 import Classi.Tratta;
 import Classi.Volo;
 import Controller.Controller;
 import Controller.ControllerAeroporti;
 import Controller.ControllerCompagnie;
+import Controller.ControllerSlotImbarco;
 import Controller.ControllerTratte;
 import Controller.ControllerVoli;
 import DAO.AeroportoDAO;
@@ -45,13 +47,17 @@ public class GestioneVoli extends JFrame {
 	public GestioneVoli(Controller c, Aeroporto a) {
 		setTitle("Gestione Voli");
 		controller = c;
+		
 		ControllerAeroporti controllerAeroporti = new ControllerAeroporti();
 		ControllerVoli controllerVoli = new ControllerVoli();
 		ControllerTratte controllerTratte = new ControllerTratte();
 		ControllerCompagnie controllerCompagnie = new ControllerCompagnie();
+		ControllerSlotImbarco controllerSlotImbarco = new ControllerSlotImbarco();
+		
 		AeroportoDAO aeroportoDAO = new AeroportoDAO();
 		TrattaDAO trattaDAO = new TrattaDAO();
 		CompagniaAereaDAO compagniaDAO = new CompagniaAereaDAO();
+		
 		ArrayList<Tratta> Tratte = new ArrayList<Tratta>();
 		ArrayList<CompagniaAerea> CompagnieAeree = new ArrayList<CompagniaAerea>();
 		
@@ -69,7 +75,7 @@ public class GestioneVoli extends JFrame {
 		
 		JPanel SceltaPanel = new JPanel();
 		SceltaPanel.setLayout(null);
-		SceltaPanel.setBounds(10, 10, 155, 307);
+		SceltaPanel.setBounds(10, 10, 206, 307);
 		contentPane.add(SceltaPanel);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -259,13 +265,42 @@ public class GestioneVoli extends JFrame {
 		EliminaLbl.setBounds(0, 11, 528, 23);
 		EliminazionePanel.add(EliminaLbl);
 		
+		JPanel ChiusuraPanel = new JPanel();
+		tabbedPane.addTab("New tab", null, ChiusuraPanel, null);
+		ChiusuraPanel.setLayout(null);
+		
+		JComboBox<String> ChiusuraComboBox = new JComboBox<String>();
+		ChiusuraComboBox.setBounds(10, 45, 508, 33);
+		
+		ArrayList<SlotImbarco> listaSlotImbarco = new ArrayList<SlotImbarco>();
+		listaSlotImbarco = controllerSlotImbarco.getImbarchi(a.getCodAeroporto());
+		
+		Iterator<SlotImbarco> iSlotImbarco = listaSlotImbarco.iterator();
+		
+		while(iSlotImbarco.hasNext()) {
+			
+			SlotImbarco tmp = iSlotImbarco.next();
+			ChiusuraComboBox.addItem(tmp.getVolo() + " - " + tmp.getTratta() + " - " + tmp.getGate() + " - " + tmp.getOraInizio());
+			
+		}
+		
+		ChiusuraPanel.add(ChiusuraComboBox);
+		
+		JLabel ChiusuraLbl = new JLabel("Scegli il volo/slotimbarco da chiudere:");
+		ChiusuraLbl.setBounds(10, 12, 508, 22);
+		ChiusuraPanel.add(ChiusuraLbl);
+		
+		JButton ChiudiBtn = new JButton("Chiudi");
+		ChiudiBtn.setBounds(407, 375, 111, 34);
+		ChiusuraPanel.add(ChiudiBtn);
+		
 		JButton VoliAggiuntaBtn = new JButton("Aggiungere");
 		VoliAggiuntaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.setSelectedIndex(0);
 			}
 		});
-		VoliAggiuntaBtn.setBounds(10, 11, 135, 31);
+		VoliAggiuntaBtn.setBounds(10, 11, 186, 31);
 		SceltaPanel.add(VoliAggiuntaBtn);
 		
 		JButton VoliEliminaBtn = new JButton("Elimina");
@@ -274,7 +309,7 @@ public class GestioneVoli extends JFrame {
 				tabbedPane.setSelectedIndex(3);
 			}
 		});
-		VoliEliminaBtn.setBounds(10, 95, 135, 31);
+		VoliEliminaBtn.setBounds(10, 95, 186, 31);
 		SceltaPanel.add(VoliEliminaBtn);
 		
 		JButton VoliElencoBtn = new JButton("Elenco");
@@ -283,7 +318,7 @@ public class GestioneVoli extends JFrame {
 				tabbedPane.setSelectedIndex(2);
 			}
 		});
-		VoliElencoBtn.setBounds(10, 137, 135, 31);
+		VoliElencoBtn.setBounds(10, 137, 186, 31);
 		SceltaPanel.add(VoliElencoBtn);
 		
 		JButton VoliModificaBtn = new JButton("Modifica");
@@ -292,8 +327,19 @@ public class GestioneVoli extends JFrame {
 				tabbedPane.setSelectedIndex(1);
 			}
 		});
-		VoliModificaBtn.setBounds(10, 53, 135, 31);
+		VoliModificaBtn.setBounds(10, 53, 186, 31);
 		SceltaPanel.add(VoliModificaBtn);
+		
+		JButton ChiudiImbarcoBtn = new JButton("Chiusura Slot Imbarco");
+		ChiudiImbarcoBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				tabbedPane.setSelectedIndex(4);
+				
+			}
+		});
+		ChiudiImbarcoBtn.setBounds(10, 179, 186, 31);
+		SceltaPanel.add(ChiudiImbarcoBtn);
 		
 		JPanel IndietroPanel = new JPanel();
 		IndietroPanel.setLayout(null);

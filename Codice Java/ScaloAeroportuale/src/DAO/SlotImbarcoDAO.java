@@ -2,8 +2,12 @@ package DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+
+import Classi.SlotImbarco;
 import Connessione.ConnessioneDB;
 import Eccezioni.SlotImbarcoException;
 
@@ -49,6 +53,43 @@ public class SlotImbarcoDAO {
 			
 		}
 		
+	}
+
+	public ArrayList<SlotImbarco> getAllImbarchi(String codAeroporto) throws SlotImbarcoException{
+		
+		ArrayList<SlotImbarco> risultato = new ArrayList<SlotImbarco>();
+		
+		try{
+			
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
+			
+			PreparedStatement pst = conn.prepareStatement("select part.codvolo, v.codtratta, part.codgate, part.datainizio from (slotimbarco as s natural join gate as g) as part natural join volo as v where part.codaeroporto = ?");
+			
+			pst.setString(1, codAeroporto);
+			
+			ResultSet rs = pst.executeQuery();
+			
+			while (rs.next()) {
+				
+				SlotImbarco tmp = new SlotImbarco(rs.getString(1), rs.getString(2), rs.getString(3), rs.getTimestamp(4));
+				risultato.add(tmp);
+				
+			}
+			pst.close();
+			conn.close();
+			
+		}catch(SQLException e) {
+			
+			errore = e.getMessage();
+			
+			throw new SlotImbarcoException(errore);
+			
+			
+		}
+		
+		
+		return risultato;
 	}
 	
 	
