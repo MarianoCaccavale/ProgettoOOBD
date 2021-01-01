@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 import Classi.SlotImbarco;
 import Connessione.ConnessioneDB;
@@ -25,10 +26,12 @@ public class SlotImbarcoDAO {
 			conn = connessioneDB.getConnection();
 			
 			PreparedStatement pst = conn.prepareStatement("Insert into SlotImbarco values(?, ?, ?, ?, ?)");
+			
 			pst.setString(1, codVolo);
 			pst.setString(2, codGate);
 			pst.setString(3, coda);
 			pst.setTimestamp(5, dataInizio);
+			
 			Timestamp dataChiusura = dataInizio;
 			dataChiusura.setHours(dataInizio.getHours() + 1);
 			
@@ -64,7 +67,7 @@ public class SlotImbarcoDAO {
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
 			
-			PreparedStatement pst = conn.prepareStatement("select part.codvolo, v.codtratta, part.codgate, part.datainizio from (slotimbarco as s natural join gate as g) as part natural join volo as v where part.codaeroporto = ?");
+			PreparedStatement pst = conn.prepareStatement("select part.codvolo, v.codtratta, part.codgate, part.datainizio from (slotimbarco as s natural join gate as g) as part natural join volo as v where part.codaeroporto = ? AND part.datafine IS NULL");
 			
 			pst.setString(1, codAeroporto);
 			
@@ -91,7 +94,35 @@ public class SlotImbarcoDAO {
 		
 		return risultato;
 	}
-	
+
+	public void closeSlotImbarco(String codVolo, String codGate, Timestamp dataFine) throws SlotImbarcoException {
+		
+		try{
+			
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
+			
+			PreparedStatement pst = conn.prepareStatement("update SlotImbarco set datafine = ? where codVolo = ? AND codGate = ?");
+			
+			pst.setTimestamp(1, dataFine);
+			pst.setString(2, codVolo);
+			pst.setString(3, codGate);
+			
+			pst.executeUpdate();
+			
+			pst.close();
+			conn.close();
+			
+		}catch(SQLException e) {
+			
+			errore = e.getMessage();
+			
+			throw new SlotImbarcoException(errore);
+			
+			
+		}
+		
+	}
 	
 	
 	

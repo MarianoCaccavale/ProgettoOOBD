@@ -1,6 +1,8 @@
 package Controller;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JDialog;
 import javax.swing.JTextField;
@@ -22,17 +24,38 @@ public class ControllerSlotImbarco {
 		try {
 			listaSlotImbarco = DAO.getAllImbarchi(codAeroporto);
 		} catch (SlotImbarcoException e) {
-
-			System.out.println(e.getMessage());
-			
-//			successo.setBounds(200,200,400,200);
-//			testo.setText(e.getMessage().toString()); 
-//			successo.add(testo);
-//			successo.setVisible(true);
+	
+			successo.setBounds(200,200,400,200);
+			testo.setText(e.getMessage().toString()); 
+			successo.add(testo);
+			successo.setVisible(true);
 			
 		}
 		
 		return listaSlotImbarco;
+	}
+
+	public void closeSlotImbarco(String codVolo, String codGate, Timestamp dataFine) {
+		
+		try {
+			
+			DAO.closeSlotImbarco(codVolo, codGate, dataFine);
+			successo.setBounds(200,200,400,200);
+			testo.setText("Chiusura avvenuta con successo!"); 
+			successo.add(testo);
+			successo.setVisible(true);
+			
+		}catch(SlotImbarcoException e) {
+			
+			successo.setBounds(200,200,400,200);
+			testo.setText(e.getMessage().toString()); 
+			successo.add(testo);
+			successo.setVisible(true);
+			
+		}
+		
+		
+		
 	}
 	
 	

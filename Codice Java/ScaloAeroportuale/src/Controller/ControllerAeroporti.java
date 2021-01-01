@@ -8,14 +8,25 @@ import DAO.AeroportoDAO;
 
 public class ControllerAeroporti {
 
+	AeroportoDAO DAO = new AeroportoDAO();
+	
 	public ArrayList<Aeroporto> getAllAeroportiExceptThis(Aeroporto aer) {
 		
 		ArrayList<Aeroporto> AllAeroporti = new ArrayList<Aeroporto>();
-		AeroportoDAO DAO = new AeroportoDAO();
+		
 		AllAeroporti = DAO.getAllAeroportiExceptThis(aer.getCodAeroporto());
 		
 		return AllAeroporti;
 		
+	}
+
+	public Aeroporto getAeroportoByCod(String codAeroporto) {
+
+		Aeroporto aeroporto = new Aeroporto();
+		
+		aeroporto = DAO.getAeroportoByCod(codAeroporto);
+		
+		return aeroporto;
 	}
 
 }

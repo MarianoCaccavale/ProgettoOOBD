@@ -23,6 +23,7 @@ public class Login extends JFrame {
 	Controller controller;
 	
 	public Login(Controller c) {
+		setTitle("Login Aeroporto");
 		controller = c;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 727, 489);

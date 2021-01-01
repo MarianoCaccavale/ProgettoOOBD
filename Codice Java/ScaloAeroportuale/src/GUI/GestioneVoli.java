@@ -28,6 +28,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import javax.swing.JSpinner;
@@ -36,6 +37,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.ArrayList;
 import javax.swing.SpinnerNumberModel;
+import java.util.Calendar;
 
 public class GestioneVoli extends JFrame {
 
@@ -47,30 +49,25 @@ public class GestioneVoli extends JFrame {
 	public GestioneVoli(Controller c, Aeroporto a) {
 		setTitle("Gestione Voli");
 		controller = c;
-		
-		ControllerAeroporti controllerAeroporti = new ControllerAeroporti();
+		ControllerAeroporti controllerAeroporto = new ControllerAeroporti();
 		ControllerVoli controllerVoli = new ControllerVoli();
 		ControllerTratte controllerTratte = new ControllerTratte();
 		ControllerCompagnie controllerCompagnie = new ControllerCompagnie();
 		ControllerSlotImbarco controllerSlotImbarco = new ControllerSlotImbarco();
-		
-		AeroportoDAO aeroportoDAO = new AeroportoDAO();
-		TrattaDAO trattaDAO = new TrattaDAO();
-		CompagniaAereaDAO compagniaDAO = new CompagniaAereaDAO();
 		
 		ArrayList<Tratta> Tratte = new ArrayList<Tratta>();
 		ArrayList<CompagniaAerea> CompagnieAeree = new ArrayList<CompagniaAerea>();
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 783, 504);
+		setBounds(100, 100, 827, 504);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(226, 0, 531, 24);
+		panel.setBounds(226, 0, 575, 24);
 		contentPane.add(panel);
 		
 		JPanel SceltaPanel = new JPanel();
@@ -79,7 +76,7 @@ public class GestioneVoli extends JFrame {
 		contentPane.add(SceltaPanel);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(226, 0, 533, 448);
+		tabbedPane.setBounds(226, 0, 575, 448);
 		contentPane.add(tabbedPane);
 		
 		JPanel AggiuntaPanel = new JPanel();
@@ -109,8 +106,8 @@ public class GestioneVoli extends JFrame {
 			Tratta tmp = TratteDaCaricare.next();
 			String nomeAeroportoPartenza = new String();
 			String nomeAeroportoArrivo = new String();
-			nomeAeroportoPartenza = (aeroportoDAO.getAeroportoByCod(tmp.getAeroportoDiPartenza())).getNomeAeroporto();
-			nomeAeroportoArrivo = (aeroportoDAO.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getNomeAeroporto();
+			nomeAeroportoPartenza = (controllerAeroporto.getAeroportoByCod(tmp.getAeroportoDiPartenza())).getNomeAeroporto();
+			nomeAeroportoArrivo = (controllerAeroporto.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getNomeAeroporto();
 			SceltaTrattaCombo.addItem(tmp.getCodTratta()+ ": " +nomeAeroportoArrivo + " - " + nomeAeroportoPartenza);
 			
 		}
@@ -149,7 +146,6 @@ public class GestioneVoli extends JFrame {
 		AggiuntaVoloBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Date data = (Date) DateSpn.getValue();
-				SimpleDateFormat format = new SimpleDateFormat("YYYY:mm:dd HH:mm:ss");
 				Volo volo = new Volo();
 				volo.setData(data);
 				volo.setNumeroPosti((Integer) NumeroPostiDisponibiliSpn.getValue());
@@ -159,7 +155,7 @@ public class GestioneVoli extends JFrame {
 				controllerVoli.apriSlotImbarco(a, volo);
 			}
 		});
-		AggiuntaVoloBtn.setBounds(433, 390, 85, 21);
+		AggiuntaVoloBtn.setBounds(475, 388, 85, 21);
 		AggiuntaPanel.add(AggiuntaVoloBtn);
 		
 		JPanel ModificaPanel = new JPanel();
@@ -174,7 +170,7 @@ public class GestioneVoli extends JFrame {
 		
 		
 		JComboBox<String> ModificaComboBox = new JComboBox<String>();
-		ModificaComboBox.setBounds(10, 54, 508, 27);
+		ModificaComboBox.setBounds(10, 54, 550, 27);
 		
 		ArrayList<Volo> VoliModifica = new ArrayList<Volo>();
 		VoliModifica = controllerVoli.getAllVoli(a);
@@ -190,8 +186,8 @@ public class GestioneVoli extends JFrame {
 			compagnia =  controllerCompagnie.getCompagniaByCod(tmp.getTrattaAssociata());
 			String nomeAeroportoPartenza = new String();
 			String nomeAeroportoArrivo = new String();
-			nomeAeroportoPartenza = (aeroportoDAO.getAeroportoByCod(tratta.getAeroportoDiPartenza())).getNomeAeroporto();
-			nomeAeroportoArrivo = (aeroportoDAO.getAeroportoByCod(tratta.getAeroportoDiArrivo())).getNomeAeroporto();
+			nomeAeroportoPartenza = (controllerAeroporto.getAeroportoByCod(tratta.getAeroportoDiPartenza())).getNomeAeroporto();
+			nomeAeroportoArrivo = (controllerAeroporto.getAeroportoByCod(tratta.getAeroportoDiArrivo())).getNomeAeroporto();
 			ModificaComboBox.addItem(tmp.getCodVolo() + " - " + nomeAeroportoPartenza +" - " + nomeAeroportoArrivo +" - " + compagnia.getNomeCompagnia() + " - " + tmp.getData().toString());;
 			
 		}
@@ -206,7 +202,7 @@ public class GestioneVoli extends JFrame {
 				
 			}
 		});
-		ModificaBtn.setBounds(396, 386, 122, 23);
+		ModificaBtn.setBounds(438, 386, 122, 23);
 		ModificaPanel.add(ModificaBtn);
 		
 		JLabel ModificaLbl = new JLabel("Scegliere il volo da modifiare:");
@@ -227,7 +223,7 @@ public class GestioneVoli extends JFrame {
 		tabbedPane.addTab("New tab", null, EliminazionePanel, null);
 		
 		JComboBox<String> EliminazioneComboBox = new JComboBox<String>();
-		EliminazioneComboBox.setBounds(0, 41, 528, 29);
+		EliminazioneComboBox.setBounds(0, 41, 560, 29);
 		ArrayList<Volo> VoliElimina = new ArrayList<Volo>();
 		VoliElimina = controllerVoli.getAllVoli(a);
 		Iterator<Volo> iVoloElimina = VoliElimina.iterator();
@@ -242,8 +238,8 @@ public class GestioneVoli extends JFrame {
 			compagnia =  controllerCompagnie.getCompagniaByCod(tmp.getTrattaAssociata());
 			String nomeAeroportoPartenza = new String();
 			String nomeAeroportoArrivo = new String();
-			nomeAeroportoPartenza = (aeroportoDAO.getAeroportoByCod(tratta.getAeroportoDiPartenza())).getNomeAeroporto();
-			nomeAeroportoArrivo = (aeroportoDAO.getAeroportoByCod(tratta.getAeroportoDiArrivo())).getNomeAeroporto();
+			nomeAeroportoPartenza = (controllerAeroporto.getAeroportoByCod(tratta.getAeroportoDiPartenza())).getNomeAeroporto();
+			nomeAeroportoArrivo = (controllerAeroporto.getAeroportoByCod(tratta.getAeroportoDiArrivo())).getNomeAeroporto();
 			EliminazioneComboBox.addItem(tmp.getCodVolo() + " - " + nomeAeroportoPartenza +" - " + nomeAeroportoArrivo +" - " + compagnia.getNomeCompagnia() + " - " + tmp.getData().toString());;
 			
 		}
@@ -258,7 +254,7 @@ public class GestioneVoli extends JFrame {
 				
 			}
 		});
-		EliminaBtn.setBounds(415, 373, 103, 36);
+		EliminaBtn.setBounds(457, 373, 103, 36);
 		EliminazionePanel.add(EliminaBtn);
 		
 		JLabel EliminaLbl = new JLabel("Scegliere il volo da cancellare:");
@@ -270,7 +266,7 @@ public class GestioneVoli extends JFrame {
 		ChiusuraPanel.setLayout(null);
 		
 		JComboBox<String> ChiusuraComboBox = new JComboBox<String>();
-		ChiusuraComboBox.setBounds(10, 45, 508, 33);
+		ChiusuraComboBox.setBounds(10, 45, 550, 33);
 		
 		ArrayList<SlotImbarco> listaSlotImbarco = new ArrayList<SlotImbarco>();
 		listaSlotImbarco = controllerSlotImbarco.getImbarchi(a.getCodAeroporto());
@@ -280,7 +276,7 @@ public class GestioneVoli extends JFrame {
 		while(iSlotImbarco.hasNext()) {
 			
 			SlotImbarco tmp = iSlotImbarco.next();
-			ChiusuraComboBox.addItem(tmp.getVolo() + " - " + tmp.getTratta() + " - " + tmp.getGate() + " - " + tmp.getOraInizio());
+			ChiusuraComboBox.addItem("Codice volo: " + tmp.getVolo() + " - Codice Tratta: " + tmp.getTratta() + " - Codice Gate: " + tmp.getGate() + " - Ora di partenza: " + tmp.getOraInizio());
 			
 		}
 		
@@ -290,9 +286,32 @@ public class GestioneVoli extends JFrame {
 		ChiusuraLbl.setBounds(10, 12, 508, 22);
 		ChiusuraPanel.add(ChiusuraLbl);
 		
+		JSpinner ChiusuraDataSpn = new JSpinner();
+		ChiusuraDataSpn.setModel(new SpinnerDateModel());
+		ChiusuraDataSpn.setBounds(227, 111, 111, 33);
+		ChiusuraPanel.add(ChiusuraDataSpn);
+		
 		JButton ChiudiBtn = new JButton("Chiudi");
-		ChiudiBtn.setBounds(407, 375, 111, 34);
+		ChiudiBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String itemSelezionato = new String(ChiusuraComboBox.getSelectedItem().toString());
+				
+				String codVolo = new String(itemSelezionato.substring(13, itemSelezionato.indexOf("-")-1));
+				String codGate = new String(itemSelezionato.substring(itemSelezionato.indexOf("Codice Gate: ")+13, itemSelezionato.indexOf("Ora")-3));
+				
+				Date dataFineTmp = (Date) ChiusuraDataSpn.getValue();
+				
+				Timestamp dataFine = new Timestamp(dataFineTmp.getTime());
+				
+				controllerSlotImbarco.closeSlotImbarco(codVolo, codGate, dataFine);
+				
+			}
+		});
+		ChiudiBtn.setBounds(449, 375, 111, 34);
 		ChiusuraPanel.add(ChiudiBtn);
+		
+		
 		
 		JButton VoliAggiuntaBtn = new JButton("Aggiungere");
 		VoliAggiuntaBtn.addActionListener(new ActionListener() {
