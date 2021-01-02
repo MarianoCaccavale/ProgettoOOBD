@@ -192,7 +192,7 @@ public class CompagniaAereaDAO{
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
-			PreparedStatement pr = conn.prepareStatement("select * from compagniaaerea where grandezzaflotta > ? AND grandezzaflotta < ? AND aeroportoappartenenza like ?");
+			PreparedStatement pr = conn.prepareStatement("select * from compagniaaerea where grandezzaflotta >= ? AND grandezzaflotta <= ? AND aeroportoappartenenza like ?");
 			
 			pr.setInt(1, min);
 			pr.setInt(2, max);

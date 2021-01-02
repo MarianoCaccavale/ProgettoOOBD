@@ -249,7 +249,8 @@ public class GestioneCompagnie extends JFrame {
 		while (i.hasNext()) {
 			
 			CompagniaAerea tmp = i.next();
-			RicercaTextPane.setText(RicercaTextPane.getText() + tmp.getCodCompagnia() + " " + tmp.getGrandezzaFlotta() +" ");
+			RicercaTextPane.setText(RicercaTextPane.getText() + "\n");
+			RicercaTextPane.setText(RicercaTextPane.getText() + "Codice Compagnia: " + tmp.getCodCompagnia() + " Nome compagnia: " + tmp.getNomeCompagnia() + " Grandezza Flotta: " + tmp.getGrandezzaFlotta() +" ");
 			
 		}
 		
@@ -266,7 +267,7 @@ public class GestioneCompagnie extends JFrame {
 					
 					CompagniaAerea tmp = i.next();
 					RicercaTextPane.setText(RicercaTextPane.getText() + "\n");
-					RicercaTextPane.setText(RicercaTextPane.getText() + "<b>Codice Compagnia:<b> " + tmp.getCodCompagnia() + " Nome comapgnia: " + tmp.getNomeCompagnia() + " Grandezza Flotta: " + tmp.getGrandezzaFlotta() +" ");
+					RicercaTextPane.setText(RicercaTextPane.getText() + "Codice Compagnia: " + tmp.getCodCompagnia() + " Nome compagnia: " + tmp.getNomeCompagnia() + " Grandezza Flotta: " + tmp.getGrandezzaFlotta() +" ");
 					
 					
 				}

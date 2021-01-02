@@ -24,7 +24,7 @@ public class ControllerSlotImbarco {
 		try {
 			listaSlotImbarco = DAO.getAllImbarchi(codAeroporto);
 		} catch (SlotImbarcoException e) {
-	
+			
 			successo.setBounds(200,200,400,200);
 			testo.setText(e.getMessage().toString()); 
 			successo.add(testo);
