@@ -1,31 +1,35 @@
 package GUI;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Classi.Aeroporto;
 import Controller.Controller;
+import Controller.ControllerStatistiche;
 
 import javax.swing.JButton;
-import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.awt.event.ActionEvent;
 import javax.swing.JTabbedPane;
+import javax.swing.JLabel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
 
 public class Statistiche extends JFrame {
 
 	private JPanel BasePanel;
 	Controller controller;
 	
-	/**
-	 * Create the frame.
-	 */
+	
 	public Statistiche(Controller c, Aeroporto a) {
 		controller = c;
+		ControllerStatistiche controllerStatistiche = new ControllerStatistiche();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 798, 504);
 		BasePanel = new JPanel();
@@ -38,6 +42,9 @@ public class Statistiche extends JFrame {
 		BasePanel.add(BottoniPanel);
 		BottoniPanel.setLayout(null);
 		
+		JPanel panel = new JPanel();
+		panel.setBounds(178, 10, 594, 23);
+		BasePanel.add(panel);		
 		
 		JPanel IndietroPanel = new JPanel();
 		IndietroPanel.setBounds(10, 426, 85, 31);
@@ -65,6 +72,53 @@ public class Statistiche extends JFrame {
 		
 		JPanel GatePanel = new JPanel();
 		tabbedPane.addTab("New tab", null, GatePanel, null);
+		GatePanel.setLayout(null);
+		
+		JLabel GateDataInizioRicercaLbl = new JLabel("Data di partenza della ricerca:");
+		GateDataInizioRicercaLbl.setBounds(10, 11, 197, 26);
+		GatePanel.add(GateDataInizioRicercaLbl);
+		
+		JLabel GateDataFineRicerca = new JLabel("Data di fine ricerca: ");
+		GateDataFineRicerca.setBounds(355, 11, 197, 26);
+		GatePanel.add(GateDataFineRicerca);
+		
+		JSpinner GateDataInizioSpn = new JSpinner();
+		GateDataInizioSpn.setModel(new SpinnerDateModel());
+		GateDataInizioSpn.setBounds(10, 47, 197, 26);
+		GatePanel.add(GateDataInizioSpn);
+		
+		JSpinner GateDataFineSpn = new JSpinner();
+		GateDataFineSpn.setModel(new SpinnerDateModel());
+		GateDataFineSpn.setBounds(347, 48, 205, 26);
+		GatePanel.add(GateDataFineSpn);
+		
+		JScrollPane RicercaGateScroll = new JScrollPane();
+		RicercaGateScroll.setBounds(10, 84, 569, 291);
+		GatePanel.add(RicercaGateScroll);
+		
+		JTextPane RicercaGateText = new JTextPane();
+		RicercaGateText.setEditable(false);
+		RicercaGateScroll.setViewportView(RicercaGateText);
+		
+		JButton RicercaGateBtn = new JButton("Ricerca");
+		RicercaGateBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ArrayList<String[]> listaTempi = new ArrayList<String[]>();
+				listaTempi = controllerStatistiche.getGateChiusi(a.getCodAeroporto(), (Date) GateDataInizioSpn.getValue(), (Date)GateDataFineSpn.getValue());
+				
+				Iterator<String[]> iListaTempi = listaTempi.iterator();
+				
+				while (iListaTempi.hasNext()) {
+					
+					String[] tmp = iListaTempi.next();
+					RicercaGateText.setText(RicercaGateText.getText() + " - " + tmp[0] + " - " + tmp[1] + " - " + tmp[2]);
+					
+				}
+			}
+		});
+		RicercaGateBtn.setBounds(442, 384, 137, 23);
+		GatePanel.add(RicercaGateBtn);
 		
 		
 		JButton CompagnieBtn = new JButton("Compagnie");
@@ -75,7 +129,7 @@ public class Statistiche extends JFrame {
 				
 			}
 		});
-		CompagnieBtn.setBounds(23, 10, 98, 21);
+		CompagnieBtn.setBounds(10, 10, 138, 21);
 		BottoniPanel.add(CompagnieBtn);
 		
 		JButton VoliBtn = new JButton("Voli");
@@ -86,7 +140,7 @@ public class Statistiche extends JFrame {
 				
 			}
 		});
-		VoliBtn.setBounds(23, 42, 98, 21);
+		VoliBtn.setBounds(10, 42, 138, 21);
 		BottoniPanel.add(VoliBtn);
 		
 		JButton GateBtn = new JButton("Gate");
@@ -97,7 +151,9 @@ public class Statistiche extends JFrame {
 				
 			}
 		});
-		GateBtn.setBounds(23, 73, 98, 21);
+		GateBtn.setBounds(10, 73, 138, 21);
 		BottoniPanel.add(GateBtn);
+		
+		
 	}
 }
