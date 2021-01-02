@@ -93,6 +93,13 @@ public class Hub extends JFrame {
 		BottoniPanel.add(GestioneGateBtn);
 		
 		JButton ServizioClientiBtn = new JButton("Servizio Clienti");
+		ServizioClientiBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				c.HubToServizioClienti(a);
+				
+			}
+		});
 		ServizioClientiBtn.setBounds(13, 145, 195, 23);
 		BottoniPanel.add(ServizioClientiBtn);
 		
@@ -115,7 +122,9 @@ public class Hub extends JFrame {
 		JButton LogoutBtn = new JButton("Logout");
 		LogoutBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				c.Logout();
+				
 			}
 		});
 		LogoutPanel.add(LogoutBtn);

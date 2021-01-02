@@ -1,17 +1,15 @@
 package Controller;
 
-import java.util.ArrayList;
 
 import Classi.Aeroporto;
-import Classi.Gate;
 import DAO.AeroportoDAO;
-import DAO.CompagniaAereaDAO;
 import GUI.GestioneCompagnie;
 import GUI.GestioneGate;
 import GUI.GestioneTratte;
 import GUI.GestioneVoli;
 import GUI.Hub;
 import GUI.Login;
+import GUI.ServizioClienti;
 import GUI.Statistiche;
 
 public class Controller {
@@ -23,6 +21,7 @@ public class Controller {
 	GestioneTratte TratteWindow;
 	GestioneVoli VoliWindow;
 	Statistiche StatisticheWindow;
+	ServizioClienti ClientiWindow;
 	
 	
 	
@@ -124,6 +123,22 @@ public class Controller {
 	public void statisticheToHub(Aeroporto a) {
 		
 		StatisticheWindow.setVisible(false);
+		HubWindow.setVisible(true);
+		
+	}
+	
+	public void HubToServizioClienti(Aeroporto a) {
+		
+		ClientiWindow = new ServizioClienti(this, a);
+		ClientiWindow.setVisible(true);
+		HubWindow.setVisible(false);
+		
+		
+	}
+
+	public void ServizioClientiToHub(Aeroporto a) {
+		
+		ClientiWindow.setVisible(false);
 		HubWindow.setVisible(true);
 		
 	}
