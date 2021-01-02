@@ -217,13 +217,6 @@ public class GestioneVoli extends JFrame {
 		
 		JPanel ElencoPanel = new JPanel();
 		tabbedPane.addTab("New tab", null, ElencoPanel, null);
-		
-		JPanel EliminazionePanel = new JPanel();
-		EliminazionePanel.setLayout(null);
-		tabbedPane.addTab("New tab", null, EliminazionePanel, null);
-		
-		JComboBox<String> EliminazioneComboBox = new JComboBox<String>();
-		EliminazioneComboBox.setBounds(0, 41, 560, 29);
 		ArrayList<Volo> VoliElimina = new ArrayList<Volo>();
 		VoliElimina = controllerVoli.getAllVoli(a);
 		Iterator<Volo> iVoloElimina = VoliElimina.iterator();
@@ -240,26 +233,9 @@ public class GestioneVoli extends JFrame {
 			String nomeAeroportoArrivo = new String();
 			nomeAeroportoPartenza = (controllerAeroporto.getAeroportoByCod(tratta.getAeroportoDiPartenza())).getNomeAeroporto();
 			nomeAeroportoArrivo = (controllerAeroporto.getAeroportoByCod(tratta.getAeroportoDiArrivo())).getNomeAeroporto();
-			EliminazioneComboBox.addItem(tmp.getCodVolo() + " - " + nomeAeroportoPartenza +" - " + nomeAeroportoArrivo +" - " + compagnia.getNomeCompagnia() + " - " + tmp.getData().toString());;
+//			EliminazioneComboBox.addItem(tmp.getCodVolo() + " - " + nomeAeroportoPartenza +" - " + nomeAeroportoArrivo +" - " + compagnia.getNomeCompagnia() + " - " + tmp.getData().toString());;
 			
 		}
-		
-		EliminazionePanel.add(EliminazioneComboBox);
-		
-		JButton EliminaBtn = new JButton("Elimina");
-		EliminaBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				controllerVoli.deleteVolo(EliminazioneComboBox.getSelectedItem().toString().substring(0, EliminazioneComboBox.getSelectedItem().toString().indexOf("-")-1));
-				
-			}
-		});
-		EliminaBtn.setBounds(457, 373, 103, 36);
-		EliminazionePanel.add(EliminaBtn);
-		
-		JLabel EliminaLbl = new JLabel("Scegliere il volo da cancellare:");
-		EliminaLbl.setBounds(0, 11, 528, 23);
-		EliminazionePanel.add(EliminaLbl);
 		
 		JPanel ChiusuraPanel = new JPanel();
 		tabbedPane.addTab("New tab", null, ChiusuraPanel, null);
@@ -322,22 +298,13 @@ public class GestioneVoli extends JFrame {
 		VoliAggiuntaBtn.setBounds(10, 11, 186, 31);
 		SceltaPanel.add(VoliAggiuntaBtn);
 		
-		JButton VoliEliminaBtn = new JButton("Elimina");
-		VoliEliminaBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				tabbedPane.setSelectedIndex(3);
-			}
-		});
-		VoliEliminaBtn.setBounds(10, 95, 186, 31);
-		SceltaPanel.add(VoliEliminaBtn);
-		
 		JButton VoliElencoBtn = new JButton("Elenco");
 		VoliElencoBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.setSelectedIndex(2);
 			}
 		});
-		VoliElencoBtn.setBounds(10, 137, 186, 31);
+		VoliElencoBtn.setBounds(10, 95, 186, 31);
 		SceltaPanel.add(VoliElencoBtn);
 		
 		JButton VoliModificaBtn = new JButton("Modifica");
@@ -353,11 +320,11 @@ public class GestioneVoli extends JFrame {
 		ChiudiImbarcoBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				tabbedPane.setSelectedIndex(4);
+				tabbedPane.setSelectedIndex(3);
 				
 			}
 		});
-		ChiudiImbarcoBtn.setBounds(10, 179, 186, 31);
+		ChiudiImbarcoBtn.setBounds(10, 137, 186, 31);
 		SceltaPanel.add(ChiudiImbarcoBtn);
 		
 		JPanel IndietroPanel = new JPanel();

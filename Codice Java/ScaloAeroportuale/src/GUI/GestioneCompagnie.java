@@ -3,7 +3,6 @@ package GUI;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.TableColumn;
 
 import Classi.Aeroporto;
 import Classi.CompagniaAerea;
@@ -20,11 +19,11 @@ import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
-import javax.swing.JTable;
 import javax.swing.JComboBox;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
+import java.awt.FlowLayout;
+import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 
 public class GestioneCompagnie extends JFrame {
@@ -32,12 +31,8 @@ public class GestioneCompagnie extends JFrame {
 	private JPanel contentPane;
 	Controller controller;
 	private JTextField NomeTf;
-	private JTable RisultatiTable;
 	private JTextField RicercaNomeTxt;
 
-	/**
-	 * Create the frame.
-	 */
 	public GestioneCompagnie(Controller c, Aeroporto a) {
 		setTitle("Gestione Compagnia");
 		
@@ -242,8 +237,9 @@ public class GestioneCompagnie extends JFrame {
 		scrollPane.setBounds(10, 97, 522, 317);
 		ElencoPanel.add(scrollPane);
 		
-		JLabel lblNewLabel = new JLabel();
-		scrollPane.setViewportView(lblNewLabel);
+		JTextPane RicercaTextPane = new JTextPane();
+		RicercaTextPane.setEditable(false);
+		scrollPane.setViewportView(RicercaTextPane);
 		
 		//ELENCO DA SISTEMARE
 		
@@ -253,8 +249,7 @@ public class GestioneCompagnie extends JFrame {
 		while (i.hasNext()) {
 			
 			CompagniaAerea tmp = i.next();
-			lblNewLabel.setText(lblNewLabel.getText() + tmp.getCodCompagnia() + " " + tmp.getGrandezzaFlotta() +" ");
-			
+			RicercaTextPane.setText(RicercaTextPane.getText() + tmp.getCodCompagnia() + " " + tmp.getGrandezzaFlotta() +" ");
 			
 		}
 		
@@ -262,13 +257,16 @@ public class GestioneCompagnie extends JFrame {
 		RicercaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				RicercaTextPane.setText("");
+				
 				ArrayList<CompagniaAerea> CompagnieTrovate = controllerCompagnia.ricerca(RicercaNomeTxt.getText(), (Integer) RicercaGrandezzaMinimaSpn.getValue(), (Integer) RicercaGrandezzaMassimaSpn.getValue(), a);
 				Iterator<CompagniaAerea> i = CompagnieTrovate.iterator();
 				/*Prima formattazione che si crea quando avviamo il panel, ovvero il display di TUTTE le compagnie*/
 				while (i.hasNext()) {
 					
 					CompagniaAerea tmp = i.next();
-					lblNewLabel.setText(lblNewLabel.getText() + tmp.getCodCompagnia() + " " + tmp.getGrandezzaFlotta() +" ");
+					RicercaTextPane.setText(RicercaTextPane.getText() + "\n");
+					RicercaTextPane.setText(RicercaTextPane.getText() + "<b>Codice Compagnia:<b> " + tmp.getCodCompagnia() + " Nome comapgnia: " + tmp.getNomeCompagnia() + " Grandezza Flotta: " + tmp.getGrandezzaFlotta() +" ");
 					
 					
 				}
