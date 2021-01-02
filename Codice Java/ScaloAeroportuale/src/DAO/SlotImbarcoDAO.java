@@ -67,7 +67,7 @@ public class SlotImbarcoDAO {
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
 			
-			PreparedStatement pst = conn.prepareStatement("select part.codvolo, v.codtratta, part.codgate, part.datainizio from (slotimbarco as s natural join gate as g) as part natural join volo as v where part.codaeroporto = ? AND part.datafine IS NULL");
+			PreparedStatement pst = conn.prepareStatement("select part.codvolo, v.codtratta, part.codgate, part.datainizio from gate_view as part natural join volo as v where part.codaeroporto = ? AND part.datafine IS NULL");
 			
 			pst.setString(1, codAeroporto);
 			
