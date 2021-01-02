@@ -93,7 +93,7 @@ public class GestioneVoli extends JFrame {
 		AggiuntaPanel.add(AggiuntaDataLbl);
 		
 		JLabel SceltaTrattaLbl = new JLabel("Scegliere la tratta del volo");
-		SceltaTrattaLbl.setBounds(166, 121, 162, 13);
+		SceltaTrattaLbl.setBounds(166, 104, 162, 13);
 		AggiuntaPanel.add(SceltaTrattaLbl);
 		
 		
@@ -112,7 +112,7 @@ public class GestioneVoli extends JFrame {
 			
 		}
 		
-		SceltaTrattaCombo.setBounds(166, 144, 192, 21);
+		SceltaTrattaCombo.setBounds(166, 127, 292, 38);
 		AggiuntaPanel.add(SceltaTrattaCombo);
 		
 		JLabel NumeroPostiLbl = new JLabel("Inserire il numero dei posti");
@@ -139,7 +139,7 @@ public class GestioneVoli extends JFrame {
 			
 		}
 		
-		SceltaCompagniaCombo.setBounds(166, 290, 192, 21);
+		SceltaCompagniaCombo.setBounds(166, 290, 292, 38);
 		AggiuntaPanel.add(SceltaCompagniaCombo);
 		
 		JButton AggiuntaVoloBtn = new JButton("Inserisci");

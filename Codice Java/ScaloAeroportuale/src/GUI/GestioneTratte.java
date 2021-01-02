@@ -20,6 +20,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
 
 public class GestioneTratte extends JFrame {
 
@@ -30,6 +32,7 @@ public class GestioneTratte extends JFrame {
 	
 	
 	public GestioneTratte(Controller c, Aeroporto a) {
+		setResizable(false);
 		setTitle("Gestione Tratte");
 		controller = c;
 		ControllerTratte controllerTratte = new ControllerTratte();
@@ -62,7 +65,7 @@ public class GestioneTratte extends JFrame {
 				
 			}
 		});
-		TratteIndietroBtn.setBounds(10, 11, 135, 37);
+		TratteIndietroBtn.setBounds(10, 11, 138, 38);
 		IndietroPanel.add(TratteIndietroBtn);
 		
 
@@ -147,8 +150,47 @@ public class GestioneTratte extends JFrame {
 		EliminaBtn.setBounds(405, 375, 113, 34);
 		EliminazionePanel.add(EliminaBtn);
 		
+		//ELENCO
 		JPanel ElencoPanel = new JPanel();
 		tabbedPane.addTab("New tab", null, ElencoPanel, null);
+		ElencoPanel.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 93, 528, 271);
+		ElencoPanel.add(scrollPane);
+		
+		JTextPane ElencoTextPane = new JTextPane();
+		scrollPane.setViewportView(ElencoTextPane);
+		
+		Tratte = controllerTratte.getTratteFromThisAirport(a.getCodAeroporto());
+		Iterator<Tratta> iTratte = Tratte.iterator();
+		
+		while(iTratte.hasNext()) {
+			Tratta tmp = iTratte.next();
+			String nomeAeroportoArrivo = new String();
+			String nomeCitt‡Arrivo = new String();
+			nomeAeroportoArrivo = (controllerAeroporti.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getNomeAeroporto();
+			nomeCitt‡Arrivo = (controllerAeroporti.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getNomeAeroporto();
+			ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
+			ElencoTextPane.setText(ElencoTextPane.getText() + "Codice della tratta: " + tmp.getCodTratta() +"\tAeroporto di arrivo: " + nomeAeroportoArrivo +"\tCitt‡: " + nomeCitt‡Arrivo +"");
+		}
+		
+		JPanel RicercaPanel = new JPanel();
+		RicercaPanel.setBounds(0, 0, 528, 85);
+		ElencoPanel.add(RicercaPanel);
+		RicercaPanel.setLayout(null);
+		
+		JLabel SceltaLbl = new JLabel("Scegli l'aeroporto di arrivo della tratta da cercare");
+		SceltaLbl.setBounds(70, 10, 362, 13);
+		RicercaPanel.add(SceltaLbl);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(70, 33, 212, 42);
+		RicercaPanel.add(comboBox);
+		
+		JButton RicercaBtn = new JButton("Cerca");
+		RicercaBtn.setBounds(380, 374, 138, 38);
+		ElencoPanel.add(RicercaBtn);
 		
 		JPanel ModificaPanel = new JPanel();
 		tabbedPane.addTab("New tab", null, ModificaPanel, null);
@@ -212,7 +254,7 @@ public class GestioneTratte extends JFrame {
 				
 			}
 		});
-		TratteAggiuntaBtn.setBounds(10, 11, 135, 31);
+		TratteAggiuntaBtn.setBounds(10, 11, 138, 38);
 		SceltaPanel.add(TratteAggiuntaBtn);
 		
 		
@@ -224,7 +266,7 @@ public class GestioneTratte extends JFrame {
 				
 			}
 		});
-		TratteEliminaBtn.setBounds(10, 95, 135, 31);
+		TratteEliminaBtn.setBounds(10, 107, 138, 38);
 		SceltaPanel.add(TratteEliminaBtn);
 		
 		
@@ -236,7 +278,7 @@ public class GestioneTratte extends JFrame {
 				
 			}
 		});
-		TratteElencoBtn.setBounds(10, 137, 135, 31);
+		TratteElencoBtn.setBounds(10, 155, 138, 38);
 		SceltaPanel.add(TratteElencoBtn);
 		
 		JButton TrattaModificaBtn = new JButton("Modifica");
@@ -247,7 +289,7 @@ public class GestioneTratte extends JFrame {
 				
 			}
 		});
-		TrattaModificaBtn.setBounds(10, 53, 135, 31);
+		TrattaModificaBtn.setBounds(10, 59, 138, 38);
 		SceltaPanel.add(TrattaModificaBtn);
 		
 		

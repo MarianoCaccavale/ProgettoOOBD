@@ -43,7 +43,7 @@ public class GestioneCompagnie extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 751, 548);
+		setBounds(100, 100, 996, 544);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -72,7 +72,7 @@ public class GestioneCompagnie extends JFrame {
 		
 		//Sezione TabbedPanel
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(178, 11, 547, 487);
+		tabbedPane.setBounds(178, 11, 794, 487);
 		contentPane.add(tabbedPane);
 		
 		//Pannello Aggiunta
@@ -108,7 +108,7 @@ public class GestioneCompagnie extends JFrame {
 				
 				}
 		});
-		btnNewButton.setBounds(436, 424, 106, 35);
+		btnNewButton.setBounds(673, 425, 106, 35);
 		AggiuntaPanel.add(btnNewButton);
 		
 		
@@ -156,7 +156,7 @@ public class GestioneCompagnie extends JFrame {
 				ModificaGrandezzaFlottaSpn.setValue(0);
 			}
 		});
-		ModificaBtn.setBounds(415, 412, 117, 36);
+		ModificaBtn.setBounds(662, 414, 117, 36);
 		ModifcaPanel.add(ModificaBtn);
 		
 		
@@ -193,7 +193,7 @@ public class GestioneCompagnie extends JFrame {
 				
 			}
 		});
-		EliminaBtn.setBounds(411, 410, 121, 38);
+		EliminaBtn.setBounds(658, 412, 121, 38);
 		EliminaPanel.add(EliminaBtn);
 		
 		
@@ -206,7 +206,7 @@ public class GestioneCompagnie extends JFrame {
 		ElencoPanel.setLayout(null);
 		
 		JPanel RicercaPanel = new JPanel();
-		RicercaPanel.setBounds(10, 11, 522, 75);
+		RicercaPanel.setBounds(10, 11, 769, 76);
 		ElencoPanel.add(RicercaPanel);
 		RicercaPanel.setLayout(null);
 		
@@ -234,7 +234,7 @@ public class GestioneCompagnie extends JFrame {
 		RicercaPanel.add(RicercaGrandezzaMassimaSpn);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 97, 522, 317);
+		scrollPane.setBounds(10, 97, 769, 319);
 		ElencoPanel.add(scrollPane);
 		
 		JTextPane RicercaTextPane = new JTextPane();
@@ -249,7 +249,8 @@ public class GestioneCompagnie extends JFrame {
 		while (i.hasNext()) {
 			
 			CompagniaAerea tmp = i.next();
-			RicercaTextPane.setText(RicercaTextPane.getText() + tmp.getCodCompagnia() + " " + tmp.getGrandezzaFlotta() +" ");
+			RicercaTextPane.setText(RicercaTextPane.getText() + "\n");
+			RicercaTextPane.setText(RicercaTextPane.getText() + "Codice Compagnia: " + tmp.getCodCompagnia() + "\t\tNome compagnia: " + tmp.getNomeCompagnia() + "\t\tGrandezza Flotta: " + tmp.getGrandezzaFlotta() +" ");
 			
 		}
 		
@@ -266,13 +267,13 @@ public class GestioneCompagnie extends JFrame {
 					
 					CompagniaAerea tmp = i.next();
 					RicercaTextPane.setText(RicercaTextPane.getText() + "\n");
-					RicercaTextPane.setText(RicercaTextPane.getText() + "<b>Codice Compagnia:<b> " + tmp.getCodCompagnia() + " Nome comapgnia: " + tmp.getNomeCompagnia() + " Grandezza Flotta: " + tmp.getGrandezzaFlotta() +" ");
+					RicercaTextPane.setText(RicercaTextPane.getText() + "Codice Compagnia: " + tmp.getCodCompagnia() + "\t\tNome compagnia: " + tmp.getNomeCompagnia() + "\t\tGrandezza Flotta: " + tmp.getGrandezzaFlotta() +" ");
 					
 					
 				}
 			}
 		});
-		RicercaBtn.setBounds(443, 425, 89, 23);
+		RicercaBtn.setBounds(690, 426, 89, 23);
 		ElencoPanel.add(RicercaBtn);
 		
 		

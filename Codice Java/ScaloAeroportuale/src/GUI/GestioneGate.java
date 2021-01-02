@@ -22,6 +22,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTabbedPane;
 import javax.swing.JSpinner;
 import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
 
 public class GestioneGate extends JFrame {
 
@@ -34,13 +36,14 @@ public class GestioneGate extends JFrame {
 	
 	
 	public GestioneGate(Controller c, Aeroporto a) {
+		setResizable(false);
 		setTitle("Gestione Gate");
 		controller = c;
 		ControllerGate controllerGate = new ControllerGate();
 		ArrayList<Gate> AllGate = new ArrayList<Gate>();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 753, 507);
+		setBounds(100, 100, 744, 501);
 		BasePanel = new JPanel();
 		BasePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(BasePanel);
@@ -48,11 +51,11 @@ public class GestioneGate extends JFrame {
 		
 		/*Inizio TabbedPanel*/
 		JPanel panel = new JPanel();
-		panel.setBounds(178, 11, 549, 23);
+		panel.setBounds(178, 10, 549, 23);
 		BasePanel.add(panel);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(178, 10, 549, 450);
+		tabbedPane.setBounds(178, 10, 542, 444);
 		BasePanel.add(tabbedPane);
 		
 		JPanel AggiuntaPanel = new JPanel();
@@ -60,7 +63,7 @@ public class GestioneGate extends JFrame {
 		AggiuntaPanel.setLayout(null);
 		
 		JLabel AggiuntaNomeLbl = new JLabel("Inserire il nome del gate:");
-		AggiuntaNomeLbl.setBounds(193, 11, 189, 32);
+		AggiuntaNomeLbl.setBounds(152, 48, 189, 32);
 		AggiuntaPanel.add(AggiuntaNomeLbl);
 		
 		JButton AggiuntaBtn = new JButton("Inserisci");
@@ -71,11 +74,11 @@ public class GestioneGate extends JFrame {
 				AggiuntaNomeTxt.setText("");
 			}
 		});
-		AggiuntaBtn.setBounds(445, 388, 89, 23);
+		AggiuntaBtn.setBounds(438, 384, 89, 23);
 		AggiuntaPanel.add(AggiuntaBtn);
 		
 		AggiuntaNomeTxt = new JTextField();
-		AggiuntaNomeTxt.setBounds(193, 54, 189, 32);
+		AggiuntaNomeTxt.setBounds(152, 90, 189, 32);
 		AggiuntaPanel.add(AggiuntaNomeTxt);
 		AggiuntaNomeTxt.setColumns(10);
 		
@@ -123,7 +126,7 @@ public class GestioneGate extends JFrame {
 				
 			}
 		});
-		ModificaBtn.setBounds(409, 372, 125, 39);
+		ModificaBtn.setBounds(402, 368, 125, 39);
 		ModificaPanel.add(ModificaBtn);
 		
 		JPanel EliminaPanel = new JPanel();
@@ -131,11 +134,11 @@ public class GestioneGate extends JFrame {
 		EliminaPanel.setLayout(null);
 		
 		JLabel EliminaNomeLbl = new JLabel("Inserire il nome del gate da cancellare:");
-		EliminaNomeLbl.setBounds(177, 11, 230, 33);
+		EliminaNomeLbl.setBounds(127, 11, 230, 33);
 		EliminaPanel.add(EliminaNomeLbl);
 		
 		JComboBox<String> EliminaNomeSpn = new JComboBox<String>();
-		EliminaNomeSpn.setBounds(177, 55, 230, 33);
+		EliminaNomeSpn.setBounds(127, 54, 230, 33);
 		
 		
 		AllGate = controllerGate.getAllGate(a.getCodAeroporto());
@@ -160,21 +163,38 @@ public class GestioneGate extends JFrame {
 				
 			}
 		});
-		EliminaBtn.setBounds(455, 399, 89, 23);
+		EliminaBtn.setBounds(438, 384, 89, 23);
 		EliminaPanel.add(EliminaBtn);
 		
 		
-		
+		//ELENCO
 		JPanel ElencoPanel = new JPanel();
 		tabbedPane.addTab("New tab", null, ElencoPanel, null);
+		ElencoPanel.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 0, 537, 417);
+		ElencoPanel.add(scrollPane);
+		
+		JTextPane ElencoTextPane = new JTextPane();
+		scrollPane.setViewportView(ElencoTextPane);
+		
+		AllGate = controllerGate.getAllGate(a.getCodAeroporto());
+		Iterator<Gate> iGate = AllGate.iterator();
+		
+		while(iGate.hasNext()) {
+			Gate tmp = iGate.next();
+			ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
+			ElencoTextPane.setText(ElencoTextPane.getText() + "Codice del Gate: " + tmp.getCodGate() +"\t\tNome Gate: " + tmp.getNomeGate() +"");
+		}
 		
 		/*Inizio pannello dei bottoni*/
 		JPanel BottoniPanel = new JPanel();
-		BottoniPanel.setLayout(null);
 		BottoniPanel.setBounds(10, 10, 158, 252);
 		BasePanel.add(BottoniPanel);
 		
 		JButton AggiungereBtn = new JButton("Aggiungere");
+		AggiungereBtn.setBounds(10, 10, 138, 38);
 		AggiungereBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -182,10 +202,11 @@ public class GestioneGate extends JFrame {
 				
 			}
 		});
-		AggiungereBtn.setBounds(10, 10, 138, 22);
+		BottoniPanel.setLayout(null);
 		BottoniPanel.add(AggiungereBtn);
 		
 		JButton ModificareBtn = new JButton("Modificare");
+		ModificareBtn.setBounds(10, 58, 138, 38);
 		ModificareBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -193,10 +214,10 @@ public class GestioneGate extends JFrame {
 				
 			}
 		});
-		ModificareBtn.setBounds(10, 42, 138, 21);
 		BottoniPanel.add(ModificareBtn);
 		
 		JButton EliminareBtn = new JButton("Eliminare");
+		EliminareBtn.setBounds(10, 106, 138, 38);
 		EliminareBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -204,10 +225,10 @@ public class GestioneGate extends JFrame {
 				
 			}
 		});
-		EliminareBtn.setBounds(10, 73, 138, 21);
 		BottoniPanel.add(EliminareBtn);
 		
 		JButton ElencoBtn = new JButton("Elenco");
+		ElencoBtn.setBounds(10, 154, 138, 38);
 		ElencoBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -215,15 +236,15 @@ public class GestioneGate extends JFrame {
 				
 			}
 		});
-		ElencoBtn.setBounds(10, 104, 138, 21);
 		BottoniPanel.add(ElencoBtn);
 		
 		/*Pannello bottone di ritorno*/
 		JPanel IndietroPanel = new JPanel();
-		IndietroPanel.setBounds(10, 429, 77, 31);
+		IndietroPanel.setBounds(10, 393, 158, 61);
 		BasePanel.add(IndietroPanel);
 		
 		JButton IndietroBtn = new JButton("Indietro");
+		IndietroBtn.setBounds(10, 10, 138, 41);
 		IndietroBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -231,6 +252,7 @@ public class GestioneGate extends JFrame {
 				
 			}
 		});
+		IndietroPanel.setLayout(null);
 		IndietroPanel.add(IndietroBtn);
 	}
 }
