@@ -67,8 +67,10 @@ public class GestioneVoli extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setFocusable(false);
 		panel.setBounds(226, 0, 575, 24);
 		contentPane.add(panel);
+		panel.setLayout(null);
 		
 		JPanel SceltaPanel = new JPanel();
 		SceltaPanel.setLayout(null);
