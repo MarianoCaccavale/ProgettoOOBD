@@ -24,16 +24,17 @@ public class ArchivioVoliDAO {
 			
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
-			PreparedStatement pt = conn.prepareStatement("Select ris1.codgate, ris1.tempostimato, ris1.tempoeffettivo from (Select codgate, sum(extract(hour from(tempomax-datainizio))) as tempostimato, sum(extract(hour from(datafine - datainizio))) as tempoeffettivo from archiviovoli as av natural join gate as g where (? <= av.datainizio AND av.datainizio <= ?) AND (? <= av.datafine AND av.datafine <= ?)  GROUP BY codgate) as ris1 natural join aeroporto as a where a.codaeroporto = ?");
+			PreparedStatement pt = conn.prepareStatement("select g.codgate, sum(extract(hour from(tempomax-datainizio))) as tempostimato, sum(extract(hour from(datafine - datainizio)))as tempoeffettivo from archiviovoli as s natural join gate as g where g.codaeroporto = ? AND ( ? <= s.datainizio AND s.datainizio <= ?) AND (? <= s.datafine AND s.datafine <= ?) group by g.codgate");
 			
 			Timestamp dataInizio = new Timestamp(tmpDataInizio.getTime());
 			Timestamp dataFine = new Timestamp(tmpDataFine.getTime());
 			
-			pt.setTimestamp(1, dataInizio);
-			pt.setTimestamp(2, dataFine);
-			pt.setTimestamp(3, dataInizio);
-			pt.setTimestamp(4, dataFine);
-			pt.setString(5, codAeroporto);
+			pt.setString(1, codAeroporto);
+			pt.setTimestamp(2, dataInizio);
+			pt.setTimestamp(3, dataFine);
+			pt.setTimestamp(4, dataInizio);
+			pt.setTimestamp(5, dataFine);
+			
 			
 			ResultSet rs = pt.executeQuery();
 			

@@ -104,6 +104,7 @@ public class Statistiche extends JFrame {
 		RicercaGateBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				RicercaGateText.setText("");
 				ArrayList<String[]> listaTempi = new ArrayList<String[]>();
 				listaTempi = controllerStatistiche.getGateChiusi(a.getCodAeroporto(), (Date) GateDataInizioSpn.getValue(), (Date)GateDataFineSpn.getValue());
 				
@@ -112,7 +113,8 @@ public class Statistiche extends JFrame {
 				while (iListaTempi.hasNext()) {
 					
 					String[] tmp = iListaTempi.next();
-					RicercaGateText.setText(RicercaGateText.getText() + " - " + tmp[0] + " - " + tmp[1] + " - " + tmp[2]);
+					RicercaGateText.setText(RicercaGateText.getText() + "\n");
+					RicercaGateText.setText(RicercaGateText.getText() + "Codice Gate: " + tmp[0] + "\t - Tempo di utilizzo stimato: " + tmp[1] + " ora/e\t - Tempo di utilizzo effettivo: " + tmp[2] + " ora/e");
 					
 				}
 			}
