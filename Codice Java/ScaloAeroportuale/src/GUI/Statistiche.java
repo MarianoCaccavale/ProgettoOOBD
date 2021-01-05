@@ -20,6 +20,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import java.util.Calendar;
 
 public class Statistiche extends JFrame {
 
@@ -43,7 +44,7 @@ public class Statistiche extends JFrame {
 		BottoniPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(178, 10, 594, 23);
+		panel.setBounds(178, 10, 594, 25);
 		BasePanel.add(panel);		
 		
 		JPanel IndietroPanel = new JPanel();
@@ -66,15 +67,56 @@ public class Statistiche extends JFrame {
 		
 		JPanel CompagniePanel = new JPanel();
 		tabbedPane.addTab("New tab", null, CompagniePanel, null);
+		CompagniePanel.setLayout(null);
 		
 		JPanel VoliPanel = new JPanel();
 		tabbedPane.addTab("New tab", null, VoliPanel, null);
+		VoliPanel.setLayout(null);
+		
+		JSpinner DataInizioRicercaVoliSpn = new JSpinner();
+		DataInizioRicercaVoliSpn.setBounds(10, 47, 197, 25);
+		VoliPanel.add(DataInizioRicercaVoliSpn);
+		DataInizioRicercaVoliSpn.setModel(new SpinnerDateModel());
+		
+		JLabel DataInizioRicercaVoliLbl = new JLabel("Data inizio della ricerca dei voli:");
+		DataInizioRicercaVoliLbl.setBounds(10, 11, 197, 25);
+		VoliPanel.add(DataInizioRicercaVoliLbl);
+		
+		JLabel DataFineRicercaVoliLlbl = new JLabel("Data fine della ricerca dei voli:");
+		DataFineRicercaVoliLlbl.setBounds(328, 10, 197, 25);
+		VoliPanel.add(DataFineRicercaVoliLlbl);
+		
+		JSpinner DataFineRicercaVoliSpn = new JSpinner();
+		DataFineRicercaVoliSpn.setBounds(328, 47, 197, 25);
+		VoliPanel.add(DataFineRicercaVoliSpn);
+		DataFineRicercaVoliSpn.setModel(new SpinnerDateModel());
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 83, 569, 274);
+		VoliPanel.add(scrollPane);
+		
+		JTextPane RicercaTextPane = new JTextPane();
+		RicercaTextPane.setEditable(false);
+		scrollPane.setViewportView(RicercaTextPane);
+		
+		JButton RicercaVoliBtn = new JButton("Ricerca ");
+		RicercaVoliBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				 String statisticheVoli[] = new String[2];
+				 statisticheVoli = controllerStatistiche.statisticheVoli(a.getCodAeroporto(), (Date)DataInizioRicercaVoliSpn.getValue(), (Date)DataFineRicercaVoliSpn.getValue());
+				 RicercaTextPane.setText(statisticheVoli[0]);
+				 RicercaTextPane.setText(RicercaTextPane.getText() + " " + statisticheVoli[1]);
+			}
+		});
+		RicercaVoliBtn.setBounds(437, 368, 142, 39);
+		VoliPanel.add(RicercaVoliBtn);
 		
 		JPanel GatePanel = new JPanel();
 		tabbedPane.addTab("New tab", null, GatePanel, null);
 		GatePanel.setLayout(null);
 		
-		JLabel GateDataInizioRicercaLbl = new JLabel("Data di partenza della ricerca:");
+		JLabel GateDataInizioRicercaLbl = new JLabel("Data di inizio della ricerca:");
 		GateDataInizioRicercaLbl.setBounds(10, 11, 197, 26);
 		GatePanel.add(GateDataInizioRicercaLbl);
 		
@@ -112,7 +154,7 @@ public class Statistiche extends JFrame {
 				
 				while (iListaTempi.hasNext()) {
 					
-					String[] tmp = iListaTempi.next();
+					String tmp[] = iListaTempi.next();
 					RicercaGateText.setText(RicercaGateText.getText() + "\n");
 					RicercaGateText.setText(RicercaGateText.getText() + "Codice Gate: " + tmp[0] + "\t - Tempo di utilizzo stimato: " + tmp[1] + " ora/e\t - Tempo di utilizzo effettivo: " + tmp[2] + " ora/e");
 					

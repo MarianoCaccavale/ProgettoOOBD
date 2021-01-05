@@ -64,6 +64,49 @@ public class ArchivioVoliDAO {
 		
 		return listaTempi;
 	}
+	public String[] statisticheVoli(String codAeroporto, Date min, Date max) throws StatisticheException {
+		
+		String[] risultato = new String[2];
+		
+		try {
+			
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
+			
+			PreparedStatement ps = conn.prepareStatement("select count(codvolo) from archiviovoli as av natural join gate as g inner join aeroporto as a on a.codaeroporto = g.codaeroporto where (? <= datafine  AND datafine <= ? and datafine <= tempomax) AND a.codaeroporto = ?");
+			
+			Timestamp dataFine = new Timestamp(max.getTime());
+			Timestamp dataInizio = new Timestamp(min.getTime());
+			
+			
+			ps.setTimestamp(1, dataInizio);
+			ps.setTimestamp(2, dataFine);
+			ps.setString(3, codAeroporto);
+			
+			
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			risultato[0] = rs.getString(1);
+			
+			ps = conn.prepareStatement("select count(codvolo) from archiviovoli as av natural join gate as g inner join aeroporto as a on a.codaeroporto = g.codaeroporto where (? <= datafine  AND datafine <= ? and datafine > tempomax) AND a.codaeroporto = ?");
+			
+			ps.setTimestamp(1, dataInizio);
+			ps.setTimestamp(2, dataFine);
+			ps.setString(3, codAeroporto);
+			
+			
+			rs = ps.executeQuery();
+			rs.next();
+			risultato[1] = rs.getString(1);
+			
+		}catch(SQLException e) {
+			
+			throw new StatisticheException(e.getMessage());
+			
+		}
+		
+		return risultato;
+	}
 	
 	
 }

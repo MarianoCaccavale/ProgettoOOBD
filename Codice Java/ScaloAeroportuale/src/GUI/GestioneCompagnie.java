@@ -22,8 +22,6 @@ import javax.swing.JSpinner;
 import javax.swing.JComboBox;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JScrollPane;
-import java.awt.FlowLayout;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 
 public class GestioneCompagnie extends JFrame {
@@ -155,14 +153,13 @@ public class GestioneCompagnie extends JFrame {
 				controllerCompagnia.Update(ModificaNomeCombo.getSelectedItem().toString(), (Integer) ModificaGrandezzaFlottaSpn.getValue(), a);
 				ModificaNomeCombo.setSelectedIndex(0);
 				ModificaGrandezzaFlottaSpn.setValue(0);
+				
 			}
 		});
 		ModificaBtn.setBounds(415, 412, 117, 36);
 		ModifcaPanel.add(ModificaBtn);
 		
 		
-		
-		//Pannello Eliminazione
 		JPanel EliminaPanel = new JPanel();
 		tabbedPane.addTab("New tab", null, EliminaPanel, null);
 		EliminaPanel.setLayout(null);
@@ -248,7 +245,6 @@ public class GestioneCompagnie extends JFrame {
 		
 		Compagnie = controllerCompagnia.getCompagnie(a);
 		Iterator<CompagniaAerea> i = Compagnie.iterator();
-		/*Prima formattazione che si crea quando avviamo il panel, ovvero il display di TUTTE le compagnie*/
 		while (i.hasNext()) {
 			
 			CompagniaAerea tmp = i.next();
@@ -265,7 +261,6 @@ public class GestioneCompagnie extends JFrame {
 				
 				ArrayList<CompagniaAerea> CompagnieTrovate = controllerCompagnia.ricerca(RicercaNomeTxt.getText(), (Integer) RicercaGrandezzaMinimaSpn.getValue(), (Integer) RicercaGrandezzaMassimaSpn.getValue(), a);
 				Iterator<CompagniaAerea> i = CompagnieTrovate.iterator();
-				/*Prima formattazione che si crea quando avviamo il panel, ovvero il display di TUTTE le compagnie*/
 				while (i.hasNext()) {
 					
 					CompagniaAerea tmp = i.next();
@@ -280,7 +275,6 @@ public class GestioneCompagnie extends JFrame {
 		ElencoPanel.add(RicercaBtn);
 		
 		
-		//Pannello dei bottoni per le scelte
 		JPanel BottoniPanel = new JPanel();
 		BottoniPanel.setLayout(null);
 		BottoniPanel.setBounds(10, 34, 158, 252);
