@@ -25,18 +25,19 @@ public class SlotImbarcoDAO {
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
 			
-			PreparedStatement pst = conn.prepareStatement("Insert into SlotImbarco values(?, ?, ?, ?, ?)");
+			PreparedStatement pst = conn.prepareStatement("Insert into SlotImbarco values(?, ?, ?, ?, ?, ?)");
 			
 			pst.setString(1, codVolo);
 			pst.setString(2, codGate);
-			pst.setString(3, coda);
-			pst.setTimestamp(5, dataInizio);
+			
+			pst.setTimestamp(4, dataInizio);
 			
 			Timestamp dataChiusura = dataInizio;
 			dataChiusura.setHours(dataInizio.getHours() + 1);
 			
-			pst.setTimestamp(4, dataChiusura);
-			
+			pst.setTimestamp(3, dataChiusura);
+			pst.setTimestamp(5, null);
+			pst.setString(6, coda);
 					
 			pst.executeUpdate();
 			pst.close();
