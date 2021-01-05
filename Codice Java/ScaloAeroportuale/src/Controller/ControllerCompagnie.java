@@ -84,9 +84,13 @@ public class ControllerCompagnie {
 		
 		try {
 			DAO.deleteByNome(nome);
+			testo.setText("Cancellazione avvenuta con successo!");
+			successo.setBounds(200,200,400,200);
+			successo.add(testo);
+			successo.setVisible(true);
 		} catch (CompagniaException e) {
 			
-			testo.setText("Cancellazione avvenuta con successo!");
+			testo.setText(e.getMessage().toString());
 			successo.setBounds(200,200,400,200);
 			successo.add(testo);
 			successo.setVisible(true);

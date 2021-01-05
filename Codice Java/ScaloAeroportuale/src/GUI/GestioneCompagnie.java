@@ -189,7 +189,9 @@ public class GestioneCompagnie extends JFrame {
 		EliminaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				controllerCompagnia.delete(CancellazioneNomeComboBox.getSelectedItem().toString());
+				if(CancellazioneNomeComboBox.getSelectedItem() != null) {
+					controllerCompagnia.delete(CancellazioneNomeComboBox.getSelectedItem().toString());
+				}	
 				
 			}
 		});
