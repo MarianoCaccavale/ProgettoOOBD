@@ -11,13 +11,14 @@ import Eccezioni.StatisticheException;
 
 public class ControllerStatistiche {
 
+	ArchivioVoliDAO DAO = new ArchivioVoliDAO();
+	JDialog successo = new JDialog();
+	JTextField testo = new JTextField();
+	
 	public ArrayList<String[]> getGateChiusi(String codAeroporto, Date dataInizio, Date dataFine) {
 		
-		ArchivioVoliDAO DAO = new ArchivioVoliDAO();
 		ArrayList<String[]> listaTempi = new ArrayList<String[]>();
 		
-		JDialog successo = new JDialog();
-		JTextField testo = new JTextField();
 		
 		try {
 			
@@ -33,6 +34,27 @@ public class ControllerStatistiche {
 		}
 		
 		return listaTempi;
+	}
+
+	public String[] statisticheVoli(String codAeroporto, Date min, Date max) {
+		
+		String[] statisticheVoli = new String[2];
+		
+		try {
+			
+			statisticheVoli = DAO.statisticheVoli(codAeroporto, min, max);
+			
+		}catch(StatisticheException e) {
+			
+			successo.setBounds(200,200,400,200);
+			testo.setText(e.getMessage()); 
+			successo.add(testo);
+			successo.setVisible(true);
+			
+		}
+			
+		
+		return statisticheVoli;
 	}
 
 

@@ -218,11 +218,43 @@ public class CompagniaAereaDAO{
 		}
 	}
 
-	public ArrayList<CompagniaAerea> ricercaByAll(String nome, Integer min, Integer max, String codAeroporto) {
+	public ArrayList<CompagniaAerea> ricercaByAll(String nome, Integer min, Integer max, String codAeroporto) throws CompagniaException {
 
-		ArrayList<CompagniaAerea> Compagnie = new ArrayList<CompagniaAerea>();
-		/*ricerca con like*/
-		return Compagnie;
+		ArrayList<CompagniaAerea> compagnie = new ArrayList<CompagniaAerea>();
+		
+		try {
+			
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
+			PreparedStatement ps = conn.prepareStatement("select * from compagniaaerea where (nomecompagnia like ? AND (? <= grandezzaflotta AND grandezzaflotta <= ?))");
+			
+			ps.setString(1, "%"+nome.toUpperCase()+"%");
+			ps.setInt(2, min);
+			ps.setInt(3, max);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			
+			while (rs.next()) {
+				
+				compagnie.add(new CompagniaAerea(rs.getString(1), rs.getString(2), rs.getInt(3)));
+				
+			}
+				
+			ps.close();
+			rs.close();
+			conn.close();
+			
+		}catch (SQLException e) {
+			
+			errore = e.getMessage();
+			
+			throw new CompagniaException(errore);
+			
+			
+		}
+		
+		return compagnie;
 	}
 
 	public CompagniaAerea getCompagniaByCod(String compagniaDiAppartenenza) throws CompagniaException {
