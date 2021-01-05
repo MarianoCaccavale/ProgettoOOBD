@@ -113,7 +113,7 @@ public class GestioneTratte extends JFrame {
 				
 			}
 		});
-		AggiungiTrattaBtn.setBounds(383, 373, 135, 36);
+		AggiungiTrattaBtn.setBounds(383, 373, 138, 38);
 		AggiuntaPanel.add(AggiungiTrattaBtn);
 		
 		

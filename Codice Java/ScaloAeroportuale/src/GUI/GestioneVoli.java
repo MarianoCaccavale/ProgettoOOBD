@@ -38,6 +38,8 @@ import java.util.Iterator;
 import java.util.ArrayList;
 import javax.swing.SpinnerNumberModel;
 import java.util.Calendar;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
 
 public class GestioneVoli extends JFrame {
 
@@ -47,6 +49,7 @@ public class GestioneVoli extends JFrame {
 	
 	
 	public GestioneVoli(Controller c, Aeroporto a) {
+		setResizable(false);
 		setTitle("Gestione Voli");
 		controller = c;
 		ControllerAeroporti controllerAeroporto = new ControllerAeroporti();
@@ -60,7 +63,7 @@ public class GestioneVoli extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 827, 504);
+		setBounds(100, 100, 903, 549);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -68,17 +71,17 @@ public class GestioneVoli extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setFocusable(false);
-		panel.setBounds(226, 0, 575, 24);
+		panel.setBounds(232, 0, 647, 24);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JPanel SceltaPanel = new JPanel();
 		SceltaPanel.setLayout(null);
-		SceltaPanel.setBounds(10, 10, 206, 307);
+		SceltaPanel.setBounds(10, 10, 212, 307);
 		contentPane.add(SceltaPanel);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(226, 0, 575, 448);
+		tabbedPane.setBounds(232, 0, 647, 509);
 		contentPane.add(tabbedPane);
 		
 		JPanel AggiuntaPanel = new JPanel();
@@ -157,7 +160,7 @@ public class GestioneVoli extends JFrame {
 				controllerVoli.apriSlotImbarco(a, volo);
 			}
 		});
-		AggiuntaVoloBtn.setBounds(475, 388, 85, 21);
+		AggiuntaVoloBtn.setBounds(494, 434, 138, 38);
 		AggiuntaPanel.add(AggiuntaVoloBtn);
 		
 		JPanel ModificaPanel = new JPanel();
@@ -219,6 +222,86 @@ public class GestioneVoli extends JFrame {
 		
 		JPanel ElencoPanel = new JPanel();
 		tabbedPane.addTab("New tab", null, ElencoPanel, null);
+		ElencoPanel.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 88, 622, 339);
+		ElencoPanel.add(scrollPane);
+		
+		JTextPane ElencoTextPane = new JTextPane();
+		scrollPane.setViewportView(ElencoTextPane);
+		
+		ArrayList<Volo> Voli = new ArrayList<Volo>();
+		Voli = controllerVoli.getAllVoli(a);
+		Iterator<Volo> iVoli = Voli.iterator();
+		
+		while(iVoli.hasNext()) {
+			Volo tmp = iVoli.next();
+			CompagniaAerea Compagnia = new CompagniaAerea();
+			String CompagniaDiAppartenenza = new String();
+			CompagniaDiAppartenenza = tmp.getTrattaAssociata();
+			Compagnia = controllerCompagnie.getCompagniaByCod(CompagniaDiAppartenenza);
+			ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
+			ElencoTextPane.setText(ElencoTextPane.getText() + "Codice del volo: " + tmp.getCodVolo() +"\tData e ora: " + tmp.getData() +"\tNumero posti: " + tmp.getNumeroPosti() + "\tNumero posti disponibili: " + tmp.getNumeroPostiDisponibili() +"\tCompagnia aerea: " + Compagnia.getNomeCompagnia() + "");
+		}
+		
+		
+		JPanel RicercaPanel = new JPanel();
+		RicercaPanel.setBounds(10, 10, 622, 68);
+		ElencoPanel.add(RicercaPanel);
+		RicercaPanel.setLayout(null);
+		
+		JLabel SceltaRicercaTrattaLbl = new JLabel("Scegliere la tratta");
+		SceltaRicercaTrattaLbl.setBounds(10, 10, 229, 13);
+		RicercaPanel.add(SceltaRicercaTrattaLbl);
+		
+		JComboBox<String> RicercaTrattaCombo = new JComboBox<String>();
+		Iterator<Tratta> TratteDaCercare = Tratte.iterator();
+		
+		while (TratteDaCercare.hasNext()) {
+			
+			Tratta tmp = TratteDaCercare.next();
+			String nomeAeroportoPartenza = new String();
+			String nomeAeroportoArrivo = new String();
+			nomeAeroportoArrivo = (controllerAeroporto.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getNomeAeroporto();
+			nomeAeroportoPartenza = (controllerAeroporto.getAeroportoByCod(tmp.getAeroportoDiPartenza())).getNomeAeroporto();
+			RicercaTrattaCombo.addItem(tmp.getCodTratta()+ ": " + nomeAeroportoPartenza + "   -   " + nomeAeroportoArrivo);
+			
+		}
+		RicercaTrattaCombo.setBounds(10, 26, 357, 32);
+		RicercaPanel.add(RicercaTrattaCombo);
+		
+		JButton RicercaBtn = new JButton("Cerca");
+		RicercaBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ElencoTextPane.setText("");
+				
+				if(RicercaTrattaCombo.getSelectedItem() != null) {
+					
+					String codTratta = RicercaTrattaCombo.getSelectedItem().toString().substring(0, RicercaTrattaCombo.getSelectedItem().toString().indexOf(":"));
+					ArrayList<Volo> VoliTrovati = controllerVoli.ricercaVoliByTratta(codTratta);
+					
+					Iterator<Volo> iVoliTrovati = VoliTrovati.iterator();
+						
+						while(iVoliTrovati.hasNext()) {
+							Volo tmpVolo = iVoliTrovati.next();
+							CompagniaAerea Compagnia = new CompagniaAerea();
+							String CompagniaDiAppartenenza = new String();
+							CompagniaDiAppartenenza = tmpVolo.getTrattaAssociata();
+							Compagnia = controllerCompagnie.getCompagniaByCod(CompagniaDiAppartenenza);
+							ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
+							ElencoTextPane.setText(ElencoTextPane.getText() + "Codice del volo: " + tmpVolo.getCodVolo() +"\tData e ora: " + tmpVolo.getData() +"\tNumero posti: " + tmpVolo.getNumeroPosti() + "\tNumero posti disponibili: " + tmpVolo.getNumeroPostiDisponibili() +"\tCompagnia aerea: " + Compagnia.getNomeCompagnia() + "");
+						}
+						
+					}
+					
+				}
+			});
+		RicercaBtn.setBounds(494, 437, 138, 38);
+		ElencoPanel.add(RicercaBtn);
+		
+		
 		ArrayList<Volo> VoliElimina = new ArrayList<Volo>();
 		VoliElimina = controllerVoli.getAllVoli(a);
 		Iterator<Volo> iVoloElimina = VoliElimina.iterator();
@@ -297,7 +380,7 @@ public class GestioneVoli extends JFrame {
 				tabbedPane.setSelectedIndex(0);
 			}
 		});
-		VoliAggiuntaBtn.setBounds(10, 11, 186, 31);
+		VoliAggiuntaBtn.setBounds(10, 11, 195, 38);
 		SceltaPanel.add(VoliAggiuntaBtn);
 		
 		JButton VoliElencoBtn = new JButton("Elenco");
@@ -306,7 +389,7 @@ public class GestioneVoli extends JFrame {
 				tabbedPane.setSelectedIndex(2);
 			}
 		});
-		VoliElencoBtn.setBounds(10, 95, 186, 31);
+		VoliElencoBtn.setBounds(10, 107, 195, 38);
 		SceltaPanel.add(VoliElencoBtn);
 		
 		JButton VoliModificaBtn = new JButton("Modifica");
@@ -315,7 +398,7 @@ public class GestioneVoli extends JFrame {
 				tabbedPane.setSelectedIndex(1);
 			}
 		});
-		VoliModificaBtn.setBounds(10, 53, 186, 31);
+		VoliModificaBtn.setBounds(10, 59, 195, 38);
 		SceltaPanel.add(VoliModificaBtn);
 		
 		JButton ChiudiImbarcoBtn = new JButton("Chiusura Slot Imbarco");
@@ -326,12 +409,12 @@ public class GestioneVoli extends JFrame {
 				
 			}
 		});
-		ChiudiImbarcoBtn.setBounds(10, 137, 186, 31);
+		ChiudiImbarcoBtn.setBounds(10, 155, 195, 38);
 		SceltaPanel.add(ChiudiImbarcoBtn);
 		
 		JPanel IndietroPanel = new JPanel();
 		IndietroPanel.setLayout(null);
-		IndietroPanel.setBounds(10, 389, 155, 59);
+		IndietroPanel.setBounds(10, 450, 155, 59);
 		contentPane.add(IndietroPanel);
 		
 		JButton VoliIndietroBtn = new JButton("Indietro");
@@ -340,7 +423,7 @@ public class GestioneVoli extends JFrame {
 				controller.VoliToHub(a);
 			}
 		});
-		VoliIndietroBtn.setBounds(10, 10, 135, 37);
+		VoliIndietroBtn.setBounds(10, 10, 138, 38);
 		IndietroPanel.add(VoliIndietroBtn);
 		
 		

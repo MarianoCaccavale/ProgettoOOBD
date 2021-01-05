@@ -33,7 +33,7 @@ public class Login extends JFrame {
 		contentPane.setLayout(null);
 		
 		JComboBox<String> ListaAeroportiCombo = new JComboBox<String>();
-		ListaAeroportiCombo.setBounds(270, 168, 187, 32);
+		ListaAeroportiCombo.setBounds(251, 165, 233, 57);
 		contentPane.add(ListaAeroportiCombo);
 		
 		
@@ -59,7 +59,7 @@ public class Login extends JFrame {
 			}
 		});
 		
-		LoginBtn.setBounds(594, 416, 89, 23);
+		LoginBtn.setBounds(565, 404, 138, 38);
 		contentPane.add(LoginBtn);
 		
 		

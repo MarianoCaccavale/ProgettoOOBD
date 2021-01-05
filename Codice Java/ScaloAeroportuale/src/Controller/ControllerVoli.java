@@ -106,4 +106,26 @@ public class ControllerVoli {
 		
 	}
 
+	public ArrayList<Volo> ricercaVoliByTratta(String codTratta) {
+		
+		ArrayList<Volo> VoliTrovati = new ArrayList<Volo>();
+		
+		try {
+			
+			VoliTrovati = VoloDAO.ricercaVoloByTratta(codTratta);
+			
+		}catch(VoloException e) {
+			
+			successo.setBounds(200,200,400,200);
+			testo.setText(e.getMessage().toString()); 
+			successo.add(testo);
+			successo.setVisible(true);
+			
+		}
+		
+		return VoliTrovati;
+	}
+	
+	
+
 }

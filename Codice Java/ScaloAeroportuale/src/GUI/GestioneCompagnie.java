@@ -155,6 +155,7 @@ public class GestioneCompagnie extends JFrame {
 				controllerCompagnia.Update(ModificaNomeCombo.getSelectedItem().toString(), (Integer) ModificaGrandezzaFlottaSpn.getValue(), a);
 				ModificaNomeCombo.setSelectedIndex(0);
 				ModificaGrandezzaFlottaSpn.setValue(0);
+				
 			}
 		});
 		ModificaBtn.setBounds(415, 412, 117, 36);

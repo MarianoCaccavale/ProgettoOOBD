@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JSeparator;
 import javax.swing.JLabel;
+import java.awt.Font;
 
 public class Hub extends JFrame {
 
@@ -37,7 +38,7 @@ public class Hub extends JFrame {
 		BasePanel.setLayout(null);
 		
 		JPanel BottoniPanel = new JPanel();
-		BottoniPanel.setBounds(10, 10, 218, 252);
+		BottoniPanel.setBounds(10, 10, 218, 333);
 		BasePanel.add(BottoniPanel);
 		BottoniPanel.setLayout(null);
 		
@@ -49,11 +50,11 @@ public class Hub extends JFrame {
 				
 			}
 		});
-		StatisticheBtn.setBounds(13, 5, 195, 23);
+		StatisticheBtn.setBounds(13, 5, 195, 38);
 		BottoniPanel.add(StatisticheBtn);
 		
 		JButton GestioneTratteBtn = new JButton("Gestione Tratte");
-		GestioneTratteBtn.setBounds(13, 33, 195, 23);
+		GestioneTratteBtn.setBounds(13, 53, 195, 38);
 		GestioneTratteBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -69,11 +70,11 @@ public class Hub extends JFrame {
 				controller.HubToVoli(a);
 			}
 		});
-		GestioneVoliBtn.setBounds(13, 61, 195, 23);
+		GestioneVoliBtn.setBounds(13, 101, 195, 38);
 		BottoniPanel.add(GestioneVoliBtn);
 		
 		JButton GestioneCompagnieBtn = new JButton("Gestione Compagnie");
-		GestioneCompagnieBtn.setBounds(13, 89, 195, 23);
+		GestioneCompagnieBtn.setBounds(13, 149, 195, 38);
 		GestioneCompagnieBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				c.HubToCompagnie(a);
@@ -82,7 +83,7 @@ public class Hub extends JFrame {
 		BottoniPanel.add(GestioneCompagnieBtn);
 		
 		JButton GestioneGateBtn = new JButton("Gestione Gate");
-		GestioneGateBtn.setBounds(13, 117, 195, 23);
+		GestioneGateBtn.setBounds(13, 197, 195, 38);
 		GestioneGateBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -100,7 +101,7 @@ public class Hub extends JFrame {
 				
 			}
 		});
-		ServizioClientiBtn.setBounds(13, 145, 195, 23);
+		ServizioClientiBtn.setBounds(13, 245, 195, 38);
 		BottoniPanel.add(ServizioClientiBtn);
 		
 		JPanel HubPanel = new JPanel();
@@ -109,17 +110,24 @@ public class Hub extends JFrame {
 		HubPanel.setLayout(null);
 		
 		JLabel AeroportoInformazioniLbl = new JLabel("");
-		AeroportoInformazioniLbl.setBounds(10, 11, 627, 23);
-		/*migliorare la grafica*/
-		AeroportoInformazioniLbl.setText(a.getCodAeroporto() + " - " +a.getNomeAeroporto() + " - " + a.getCitt‡());
+		AeroportoInformazioniLbl.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		AeroportoInformazioniLbl.setBounds(10, 11, 283, 43);
+		AeroportoInformazioniLbl.setText(a.getCodAeroporto() + ": " +a.getNomeAeroporto());
 		HubPanel.add(AeroportoInformazioniLbl);
+		
+		JLabel InformazioniCitt‡Lbl = new JLabel("New label");
+		InformazioniCitt‡Lbl.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		InformazioniCitt‡Lbl.setBounds(449, 11, 122, 43);
+		InformazioniCitt‡Lbl.setText(a.getCitt‡());
+		HubPanel.add(InformazioniCitt‡Lbl);
 		
 		
 		JPanel LogoutPanel = new JPanel();
-		LogoutPanel.setBounds(10, 414, 85, 31);
+		LogoutPanel.setBounds(10, 373, 218, 72);
 		BasePanel.add(LogoutPanel);
 		
 		JButton LogoutBtn = new JButton("Logout");
+		LogoutBtn.setBounds(10, 24, 195, 38);
 		LogoutBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -127,6 +135,7 @@ public class Hub extends JFrame {
 				
 			}
 		});
+		LogoutPanel.setLayout(null);
 		LogoutPanel.add(LogoutBtn);
 	}
 }

@@ -47,10 +47,11 @@ public class Statistiche extends JFrame {
 		BasePanel.add(panel);		
 		
 		JPanel IndietroPanel = new JPanel();
-		IndietroPanel.setBounds(10, 426, 85, 31);
+		IndietroPanel.setBounds(10, 403, 158, 54);
 		BasePanel.add(IndietroPanel);
 		
 		JButton IndietroBtn = new JButton("Indietro");
+		IndietroBtn.setBounds(10, 10, 138, 38);
 		IndietroBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -58,6 +59,7 @@ public class Statistiche extends JFrame {
 				
 			}
 		});
+		IndietroPanel.setLayout(null);
 		IndietroPanel.add(IndietroBtn);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -131,7 +133,7 @@ public class Statistiche extends JFrame {
 				
 			}
 		});
-		CompagnieBtn.setBounds(10, 10, 138, 21);
+		CompagnieBtn.setBounds(10, 10, 138, 38);
 		BottoniPanel.add(CompagnieBtn);
 		
 		JButton VoliBtn = new JButton("Voli");
@@ -142,7 +144,7 @@ public class Statistiche extends JFrame {
 				
 			}
 		});
-		VoliBtn.setBounds(10, 42, 138, 21);
+		VoliBtn.setBounds(10, 58, 138, 38);
 		BottoniPanel.add(VoliBtn);
 		
 		JButton GateBtn = new JButton("Gate");
@@ -153,7 +155,7 @@ public class Statistiche extends JFrame {
 				
 			}
 		});
-		GateBtn.setBounds(10, 73, 138, 21);
+		GateBtn.setBounds(10, 106, 138, 38);
 		BottoniPanel.add(GateBtn);
 		
 		

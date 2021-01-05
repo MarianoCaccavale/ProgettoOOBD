@@ -150,4 +150,43 @@ public class VoloDAO {
 		
 	}
 
+
+	public ArrayList<Volo> ricercaVoloByTratta(String codTratta) throws VoloException {
+		
+		ArrayList<Volo> VoliTrovati = new ArrayList<Volo>();
+		
+		try {
+			
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
+			
+			PreparedStatement ps = conn.prepareStatement("select v.codvolo, v.datavolo, v.numeroposti, v.numeropostiprenotati, v.codtratta, v.codcompagnia from volo as v natural join tratta as t where t.codtratta = (select codtratta from tratta where codtratta = ?)");
+			ps.setString(1, codTratta);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				Volo tmp = new Volo(rs.getString(1), (java.util.Date) rs.getTimestamp(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getString(6));
+				
+				VoliTrovati.add(tmp);
+				
+			}
+			ps.close();
+			conn.close();
+			
+			
+		}catch(SQLException e) {
+			
+			errore = e.getMessage();
+				
+			throw new VoloException(errore);
+			
+		}
+		
+		return VoliTrovati;
+	}
+	
+	
+
 }
