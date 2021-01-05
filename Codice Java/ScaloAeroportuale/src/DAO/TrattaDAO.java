@@ -170,5 +170,37 @@ public class TrattaDAO {
 		
 		return risultato;
 	}
+	
+	public ArrayList<Tratta> getTratte(String AeroportoPartenza, String AeroportoArrivo) throws TrattaException {
+			
+		ArrayList<Tratta> risultato = new ArrayList<Tratta>();
+		
+		try{
+			
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
+			
+			PreparedStatement ps = conn.prepareStatement("Select * from tratta where aeroportopartenza = ? and aeroportoarrivo = ?");
+
+			ps.setString(1, AeroportoPartenza);
+			ps.setString(2, AeroportoArrivo);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				Tratta tmp = new Tratta(rs.getString("codtratta"), rs.getString("aeroportopartenza"), rs.getString("aeroportoarrivo"));
+				risultato.add(tmp);
+			}
+			
+		}catch(SQLException e) {
+			
+			errore = e.getMessage();
+			
+			throw new TrattaException(errore);
+			
+		}
+		
+		return risultato;
+	}
 
 }

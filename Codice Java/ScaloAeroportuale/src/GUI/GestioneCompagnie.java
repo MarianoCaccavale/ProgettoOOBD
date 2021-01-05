@@ -250,7 +250,7 @@ public class GestioneCompagnie extends JFrame {
 			
 			CompagniaAerea tmp = i.next();
 			RicercaTextPane.setText(RicercaTextPane.getText() + "\n");
-			RicercaTextPane.setText(RicercaTextPane.getText() + "Codice Compagnia: " + tmp.getCodCompagnia() + " Nome compagnia: " + tmp.getNomeCompagnia() + " Grandezza Flotta: " + tmp.getGrandezzaFlotta() +" ");
+			RicercaTextPane.setText(RicercaTextPane.getText() + "Codice Compagnia: " + tmp.getCodCompagnia() + "\tNome compagnia: " + tmp.getNomeCompagnia() + "\tGrandezza Flotta: " + tmp.getGrandezzaFlotta() +" ");
 			
 		}
 		

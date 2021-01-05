@@ -10,6 +10,7 @@ import Classi.Tratta;
 import DAO.AeroportoDAO;
 import DAO.TrattaDAO;
 import Eccezioni.TrattaException;
+import GUI.GestioneTratte;
 
 public class ControllerTratte {
 
@@ -117,6 +118,22 @@ public class ControllerTratte {
 		
 		return tratta;
 		
+	}
+
+	public ArrayList<Tratta> ricerca(String AeroportoPartenza, String AeroportoArrivo) {
+
+		TrattaDAO DAO = new TrattaDAO();
+		ArrayList<Tratta> Tratte = new ArrayList<Tratta>();
+		
+		try {
+			
+			Tratte = DAO.getTratte(AeroportoPartenza, AeroportoArrivo);
+			
+		}catch(TrattaException e){
+			System.out.println(e.getMessage().toString());
+		}
+		
+		return Tratte;
 	}
 
 }

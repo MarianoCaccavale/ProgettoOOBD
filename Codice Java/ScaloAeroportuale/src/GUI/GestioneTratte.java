@@ -8,7 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Classi.Aeroporto;
+import Classi.CompagniaAerea;
 import Classi.Tratta;
+import Classi.Volo;
 import Controller.Controller;
 import Controller.ControllerAeroporti;
 import Controller.ControllerTratte;
@@ -184,11 +186,45 @@ public class GestioneTratte extends JFrame {
 		SceltaLbl.setBounds(70, 10, 362, 13);
 		RicercaPanel.add(SceltaLbl);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(70, 33, 212, 42);
-		RicercaPanel.add(comboBox);
+		JComboBox<String> RicercaTratteCombo = new JComboBox();
+		RicercaTratteCombo.setBounds(70, 33, 212, 42);
+		RicercaPanel.add(RicercaTratteCombo);
+		
+		ArrayList<Tratta> CercaTratta = new ArrayList<Tratta>();
+		CercaTratta = controllerTratte.getTratteFromThisAirport(a.getCodAeroporto());
+		Iterator<Tratta> iTratteRicerca = CercaTratta.iterator();
+		
+		while(iTratteRicerca.hasNext()) {
+			Tratta tmp = iTratteRicerca.next();
+			String nomeAeroportoArrivo = new String();
+			String nomeCitt‡Arrivo = new String();
+			nomeAeroportoArrivo = (controllerAeroporti.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getNomeAeroporto();
+			nomeCitt‡Arrivo = (controllerAeroporti.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getNomeAeroporto();
+			RicercaTratteCombo.addItem(tmp.getAeroportoDiArrivo()+ " - " + nomeAeroportoArrivo);
+		}
+		
 		
 		JButton RicercaBtn = new JButton("Cerca");
+		RicercaBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ElencoTextPane.setText("");
+				
+				ArrayList<Tratta> TratteTrovate = controllerTratte.ricerca(a.getCodAeroporto(), RicercaTratteCombo.getSelectedItem().toString().substring(0, RicercaTratteCombo.getSelectedItem().toString().indexOf("-")-1));
+				Iterator<Tratta> iTratteTrovate = TratteTrovate.iterator();
+				
+				while (iTratteTrovate.hasNext()) {
+					Tratta tmp = iTratteTrovate.next();
+					String nomeAeroportoArrivo = new String();
+					String nomeCitt‡Arrivo = new String();
+					nomeAeroportoArrivo = (controllerAeroporti.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getNomeAeroporto();
+					nomeCitt‡Arrivo = (controllerAeroporti.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getNomeAeroporto();
+					ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
+					ElencoTextPane.setText(ElencoTextPane.getText() + "Codice della tratta: " + tmp.getCodTratta() +"\tAeroporto di arrivo: " + nomeAeroportoArrivo +"\tCitt‡: " + nomeCitt‡Arrivo +"");
+				}
+				
+			}
+		});
 		RicercaBtn.setBounds(380, 374, 138, 38);
 		ElencoPanel.add(RicercaBtn);
 		
