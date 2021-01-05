@@ -64,7 +64,7 @@ public class CompagniaAereaDAO{
 			
 			if (errore.contains("compagniaaerea_grandezzaflotta_check")) {
 				
-				throw new CompagniaException("Inserimento fallito! La dimensione della flotta è errata. La grandezza dev'essere compresa tra 50 e 500 unità.");
+				throw new CompagniaException("Inserimento fallito! La dimensione della flotta è errata. La grandezza dev'essere compresa tra 0 e 500 unità (estremi esclusi).");
 				
 				
 			}else if (errore.contains("La chiave (nomecompagnia)=")) {

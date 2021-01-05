@@ -34,6 +34,7 @@ public class GestioneCompagnie extends JFrame {
 	private JTextField RicercaNomeTxt;
 
 	public GestioneCompagnie(Controller c, Aeroporto a) {
+		setResizable(false);
 		setTitle("Gestione Compagnia");
 		
 		
@@ -282,7 +283,7 @@ public class GestioneCompagnie extends JFrame {
 		//Pannello dei bottoni per le scelte
 		JPanel BottoniPanel = new JPanel();
 		BottoniPanel.setLayout(null);
-		BottoniPanel.setBounds(10, 11, 158, 252);
+		BottoniPanel.setBounds(10, 34, 158, 252);
 		contentPane.add(BottoniPanel);
 		
 		JButton AggiungereBtn = new JButton("Aggiungere");
@@ -293,7 +294,7 @@ public class GestioneCompagnie extends JFrame {
 			
 			}
 		});
-		AggiungereBtn.setBounds(10, 10, 138, 22);
+		AggiungereBtn.setBounds(10, 10, 138, 38);
 		BottoniPanel.add(AggiungereBtn);
 				
 		JButton ModificareBtn = new JButton("Modificare");
@@ -305,7 +306,7 @@ public class GestioneCompagnie extends JFrame {
 			}
 		});
 				
-		ModificareBtn.setBounds(10, 42, 138, 21);
+		ModificareBtn.setBounds(10, 58, 138, 38);
 		BottoniPanel.add(ModificareBtn);
 			
 		JButton EliminareBtn = new JButton("Eliminare");
@@ -316,7 +317,7 @@ public class GestioneCompagnie extends JFrame {
 				
 			}
 		});
-		EliminareBtn.setBounds(10, 73, 138, 21);
+		EliminareBtn.setBounds(10, 106, 138, 38);
 		BottoniPanel.add(EliminareBtn);
 			
 		JButton ElencoBtn = new JButton("Elenco");
@@ -327,7 +328,7 @@ public class GestioneCompagnie extends JFrame {
 				
 			}
 		});
-		ElencoBtn.setBounds(10, 104, 138, 21);
+		ElencoBtn.setBounds(10, 154, 138, 38);
 		BottoniPanel.add(ElencoBtn);
 		}
 }
