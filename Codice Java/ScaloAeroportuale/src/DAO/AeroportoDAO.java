@@ -12,8 +12,6 @@ public class AeroportoDAO{
 	private Connection conn = null;
 	private ConnessioneDB connessioneDB;
 	
-	
-	/*Aggiungere i throw*/
 	public boolean insertAeroporto(String Nome, String Città) {
 		
 		boolean buonfine = false;
