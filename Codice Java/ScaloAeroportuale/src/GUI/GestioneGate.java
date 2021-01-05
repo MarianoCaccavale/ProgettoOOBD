@@ -24,6 +24,7 @@ import javax.swing.JSpinner;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import javax.swing.DefaultComboBoxModel;
 
 public class GestioneGate extends JFrame {
 
@@ -95,6 +96,7 @@ public class GestioneGate extends JFrame {
 		ModificaPanel.add(ModificaNuovoNomeLbl);
 		
 		JComboBox<String> ModificaVecchioNomeSpn = new JComboBox<String>();
+		ModificaVecchioNomeSpn.setModel(new DefaultComboBoxModel<String>(new String[] {"Selezionare il gate"}));
 		
 		AllGate = controllerGate.getAllGate(a.getCodAeroporto());
 		
@@ -120,7 +122,7 @@ public class GestioneGate extends JFrame {
 		ModificaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(ModificaVecchioNomeSpn.getSelectedItem() != null){
+				if(ModificaVecchioNomeSpn.getSelectedIndex() != 0){
 					
 					controllerGate.update(ModificaVecchioNomeSpn.getSelectedItem().toString(), ModificaNuovoNomeTf.getText(), a.getCodAeroporto());
 					ModificaNuovoNomeTf.setText("");
@@ -141,6 +143,7 @@ public class GestioneGate extends JFrame {
 		EliminaPanel.add(EliminaNomeLbl);
 		
 		JComboBox<String> EliminaNomeSpn = new JComboBox<String>();
+		EliminaNomeSpn.setModel(new DefaultComboBoxModel(new String[] {"Selezionare il gate"}));
 		EliminaNomeSpn.setBounds(127, 54, 230, 33);
 		
 		
@@ -161,8 +164,11 @@ public class GestioneGate extends JFrame {
 		EliminaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				controllerGate.deleteByName(EliminaNomeSpn.getSelectedItem().toString(), a.getCodAeroporto());
-				
+				if(EliminaNomeSpn.getSelectedIndex() != 0) {
+					
+					controllerGate.deleteByName(EliminaNomeSpn.getSelectedItem().toString(), a.getCodAeroporto());
+					
+				}
 				
 			}
 		});

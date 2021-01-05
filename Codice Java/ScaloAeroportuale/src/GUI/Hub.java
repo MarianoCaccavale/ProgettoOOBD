@@ -1,21 +1,14 @@
 package GUI;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Classi.Aeroporto;
 import Controller.Controller;
-import javax.swing.JSplitPane;
-import javax.swing.JToggleButton;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
-import javax.swing.JSeparator;
 import javax.swing.JLabel;
 
 public class Hub extends JFrame {
@@ -23,9 +16,7 @@ public class Hub extends JFrame {
 	private JPanel BasePanel;
 	Controller controller;
 
-	/**
-	 * Create the frame.
-	 */
+
 	public Hub(Controller c, Aeroporto a) {
 		setTitle("Hub");
 		controller = c;

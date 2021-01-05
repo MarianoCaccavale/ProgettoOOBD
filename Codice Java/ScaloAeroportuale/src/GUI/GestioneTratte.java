@@ -1,16 +1,12 @@
 package GUI;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Classi.Aeroporto;
-import Classi.CompagniaAerea;
 import Classi.Tratta;
-import Classi.Volo;
 import Controller.Controller;
 import Controller.ControllerAeroporti;
 import Controller.ControllerTratte;
@@ -24,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import javax.swing.DefaultComboBoxModel;
 
 public class GestioneTratte extends JFrame {
 
@@ -89,6 +86,7 @@ public class GestioneTratte extends JFrame {
 		AggiuntaPanel.add(TrattaAggiuntaLbl);
 		
 		JComboBox<String> AggiuntaNomeCombo = new JComboBox<String>();
+		AggiuntaNomeCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere l'aeroporto"}));
 		
 		Aeroporti = controllerAeroporti.getAllAeroportiExceptThis(a);
 		Iterator<Aeroporto> iAeroporti = Aeroporti.iterator();
@@ -107,7 +105,7 @@ public class GestioneTratte extends JFrame {
 		AggiungiTrattaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(AggiuntaNomeCombo.getSelectedItem() != null){
+				if(AggiuntaNomeCombo.getSelectedIndex() != 0){
 					controllerTratte.InsertTratta(a.getCodAeroporto(), AggiuntaNomeCombo.getSelectedItem().toString());
 				}
 				
@@ -128,6 +126,7 @@ public class GestioneTratte extends JFrame {
 		EliminazionePanel.add(EliminazioneTrattaLbl);
 		
 		JComboBox<String> EliminazioneTrattaCombo = new JComboBox<String>();
+		EliminazioneTrattaCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Selezionare la tratta"}));
 		
 		Tratte = controllerTratte.getTratteFromThisAirport(a.getCodAeroporto());
 		Iterator<Tratta> TratteDaCancellare = Tratte.iterator();
@@ -151,7 +150,7 @@ public class GestioneTratte extends JFrame {
 		EliminaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if (EliminazioneTrattaCombo.getSelectedItem() != null) {
+				if (EliminazioneTrattaCombo.getSelectedIndex() != 0) {
 					String nomeAeroportoArrivo = new String(EliminazioneTrattaCombo.getSelectedItem().toString().substring(a.getNomeAeroporto().length()+7));
 					controllerTratte.delete(a.getCodAeroporto(), nomeAeroportoArrivo);
 				}	
@@ -196,6 +195,7 @@ public class GestioneTratte extends JFrame {
 		RicercaPanel.add(SceltaLbl);
 		
 		JComboBox<String> RicercaTratteCombo = new JComboBox<String>();
+		RicercaTratteCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Selezionare l'aeroporto"}));
 		RicercaTratteCombo.setBounds(70, 33, 212, 42);
 		RicercaPanel.add(RicercaTratteCombo);
 		
@@ -217,7 +217,7 @@ public class GestioneTratte extends JFrame {
 				
 				ElencoTextPane.setText("");
 				
-				if (EliminazioneTrattaCombo.getSelectedItem() != null) {
+				if (EliminazioneTrattaCombo.getSelectedIndex() != 0) {
 					
 					ArrayList<Tratta> TratteTrovate = controllerTratte.ricerca(a.getCodAeroporto(), RicercaTratteCombo.getSelectedItem().toString().substring(0, RicercaTratteCombo.getSelectedItem().toString().indexOf("-")-1));
 					Iterator<Tratta> iTratteTrovate = TratteTrovate.iterator();

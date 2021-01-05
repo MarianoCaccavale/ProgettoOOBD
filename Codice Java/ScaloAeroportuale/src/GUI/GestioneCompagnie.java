@@ -23,6 +23,7 @@ import javax.swing.JComboBox;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import javax.swing.DefaultComboBoxModel;
 
 public class GestioneCompagnie extends JFrame {
 
@@ -122,6 +123,7 @@ public class GestioneCompagnie extends JFrame {
 		ModifcaPanel.add(NomeModificaLbl);
 		
 		JComboBox<String> ModificaNomeCombo = new JComboBox<String>();
+		ModificaNomeCombo.setModel(new DefaultComboBoxModel(new String[] {"Selezionare la compagnia"}));
 		
 		Compagnie = controllerCompagnia.getCompagnie(a);
 		Iterator<CompagniaAerea> modificaIterator = Compagnie.iterator();
@@ -149,10 +151,15 @@ public class GestioneCompagnie extends JFrame {
 		JButton ModificaBtn = new JButton("Modifica");
 		ModificaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				controllerCompagnia.Update(ModificaNomeCombo.getSelectedItem().toString(), (Integer) ModificaGrandezzaFlottaSpn.getValue(), a);
-				ModificaNomeCombo.setSelectedIndex(0);
-				ModificaGrandezzaFlottaSpn.setValue(0);
+					
+				if (ModificaNomeCombo.getSelectedIndex() != 0) {
+					
+					controllerCompagnia.Update(ModificaNomeCombo.getSelectedItem().toString(), (Integer) ModificaGrandezzaFlottaSpn.getValue(), a);
+					ModificaNomeCombo.setSelectedIndex(0);
+					ModificaGrandezzaFlottaSpn.setValue(0);
+					
+				}
+					
 				
 			}
 		});
@@ -169,6 +176,7 @@ public class GestioneCompagnie extends JFrame {
 		EliminaPanel.add(CancellazioneNomeLbl);
 		
 		JComboBox<String> CancellazioneNomeComboBox = new JComboBox<String>();
+		CancellazioneNomeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Selezionare la compagnia"}));
 		
 		Compagnie = controllerCompagnia.getCompagnie(a);
 		Iterator<CompagniaAerea> cancellazioneIterator = Compagnie.iterator();
@@ -187,7 +195,7 @@ public class GestioneCompagnie extends JFrame {
 		EliminaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(CancellazioneNomeComboBox.getSelectedItem() != null) {
+				if(CancellazioneNomeComboBox.getSelectedIndex() != 0) {
 					controllerCompagnia.delete(CancellazioneNomeComboBox.getSelectedItem().toString());
 				}	
 				
