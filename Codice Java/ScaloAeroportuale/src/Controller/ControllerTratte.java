@@ -15,6 +15,7 @@ import GUI.GestioneTratte;
 public class ControllerTratte {
 
 	TrattaDAO DAO = new TrattaDAO();
+	AeroportoDAO AerDAO = new AeroportoDAO();
 	
 	JDialog successo = new JDialog();
 	JTextField testo = new JTextField();
@@ -55,10 +56,12 @@ public class ControllerTratte {
 		return Tratte;
 	}
 
-	public void delete(String codAeroportoPartenza, String codAeroportoArrivo) {
+	public void delete(String codAeroportoPartenza, String nomeAeroportoArrivo) {
 		
 		try {
-			DAO.deleteTratta(codAeroportoPartenza, codAeroportoArrivo);
+			
+			Aeroporto AeroportoArrivo = AerDAO.getAeroportoByNome(nomeAeroportoArrivo);
+			DAO.deleteTratta(codAeroportoPartenza, AeroportoArrivo.getCodAeroporto());
 			successo.setBounds(200,200,400,200);
 			testo.setText("Cancellazione avvenuta con successo!"); 
 			successo.add(testo);
@@ -75,14 +78,15 @@ public class ControllerTratte {
 		
 	}
 
-	public void update(String vecchioCodAeroporto, String nuovoNomeAeroporto, String codAeroporto) {
+	public void update(String vecchioNomeAeroporto, String nuovoNomeAeroporto, String codAeroporto) {
 		
 		try {
 			AeroportoDAO DAOAer = new AeroportoDAO();
 			Aeroporto nuovoAeroporto = DAOAer.getAeroportoByNome(nuovoNomeAeroporto);
+			Aeroporto vecchioAeroporto = DAOAer.getAeroportoByNome(vecchioNomeAeroporto);
 			
 			
-			DAO.update(vecchioCodAeroporto, nuovoAeroporto.getCodAeroporto(), codAeroporto);
+			DAO.update(vecchioAeroporto.getCodAeroporto(), nuovoAeroporto.getCodAeroporto(), codAeroporto);
 			successo.setBounds(200,200,400,200);
 			testo.setText("Modifica avvenuta con successo!"); 
 			successo.add(testo);

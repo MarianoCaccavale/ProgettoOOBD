@@ -120,9 +120,12 @@ public class GestioneGate extends JFrame {
 		ModificaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				controllerGate.update(ModificaVecchioNomeSpn.getSelectedItem().toString(), ModificaNuovoNomeTf.getText(), a.getCodAeroporto());
-				ModificaNuovoNomeTf.setText("");
-				
+				if(ModificaVecchioNomeSpn.getSelectedItem() != null){
+					
+					controllerGate.update(ModificaVecchioNomeSpn.getSelectedItem().toString(), ModificaNuovoNomeTf.getText(), a.getCodAeroporto());
+					ModificaNuovoNomeTf.setText("");
+					
+				}
 				
 			}
 		});

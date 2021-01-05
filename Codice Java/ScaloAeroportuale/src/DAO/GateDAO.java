@@ -145,7 +145,7 @@ public class GateDAO {
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
 			
-			String query = new String("(select DISTINCT(g.codgate), g.nomegate from gate as g where g.codaeroporto = ?) EXCEPT (select DISTINCT(gv.codgate), gv.nomegate from gate_view as gv where (gv.codaeroporto = ? AND ( gv.datainizio < ? AND ? < gv.tempomax) OR ( gv.datainizio < ? AND ? < gv.tempomax)))");
+			String query = new String("(select DISTINCT(g.codgate), g.nomegate from gate as g where g.codaeroporto = ?) EXCEPT (select DISTINCT(gv.codgate), gv.nomegate from gate_view as gv where (gv.codaeroporto = ? AND ( gv.datainizio <= ? AND ? <= gv.tempomax) OR ( gv.datainizio <= ? AND ? <= gv.tempomax)))");
 			
 			PreparedStatement pt = conn.prepareStatement(query);
 			

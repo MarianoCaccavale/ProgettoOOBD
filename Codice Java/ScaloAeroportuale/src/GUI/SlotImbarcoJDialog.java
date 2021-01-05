@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -35,6 +36,7 @@ public class SlotImbarcoJDialog extends JDialog {
 	public SlotImbarcoJDialog(Aeroporto a, Volo volo) {
 		setTitle("Creazione Slot Imbarco");
 		ControllerVoli controllerVoli = new ControllerVoli();
+		
 		setBounds(100, 100, 320, 400);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -86,9 +88,24 @@ public class SlotImbarcoJDialog extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
-						controllerVoli.InsertVoloAndImbarco(volo, GateCombo.getSelectedItem().toString().substring(0,  GateCombo.getSelectedItem().toString().indexOf(":")), CodaCombo.getSelectedItem().toString());
 					
+						if (GateCombo.getSelectedItem().toString() != null) {
+							
+							controllerVoli.InsertVoloAndImbarco(volo, GateCombo.getSelectedItem().toString().substring(0,  GateCombo.getSelectedItem().toString().indexOf(":")), CodaCombo.getSelectedItem().toString());
+							dispose();
+							
+						}else {
+							
+							JDialog successo = new JDialog();
+							successo.setBounds(200,200,400,200);
+							JLabel testo = new JLabel("Non è possibile inserire un volo senza Gate!\n "
+									+ "Se non ne è disponibile nessuno vuol dire che tutti i gate in questa fascia oraria sono occupati.");
+							successo.add(testo);
+							successo.setVisible(true);
+							dispose();
+							
+						}
+						
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -97,6 +114,13 @@ public class SlotImbarcoJDialog extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						dispose();
+						
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

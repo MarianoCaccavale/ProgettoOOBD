@@ -18,8 +18,7 @@ public class ControllerCompagnie {
 	JTextField testo = new JTextField();
 	
 	public void Insert(String Nome, int Flotta, Aeroporto a) {
-		
-		CompagniaAereaDAO DAO = new CompagniaAereaDAO();		
+	
 		
 		try {
 			DAO.InsertCompagnia(Nome, Flotta, a);
@@ -40,7 +39,6 @@ public class ControllerCompagnie {
 	
 	public void Update(String Nome, Integer NuovaGrandezza, Aeroporto aer) {
 		
-		CompagniaAereaDAO DAO = new CompagniaAereaDAO();
 		
 		try {
 			DAO.updateByNome(Nome, NuovaGrandezza, aer.getCodAeroporto());
@@ -63,7 +61,6 @@ public class ControllerCompagnie {
 	public ArrayList<CompagniaAerea> getCompagnie(Aeroporto aer) {
 		
 		ArrayList<CompagniaAerea> Compagnie = new ArrayList<CompagniaAerea>();
-		CompagniaAereaDAO DAO = new CompagniaAereaDAO();
 		try {
 			Compagnie = DAO.getCompagnieByAeroporto(aer.getCodAeroporto());
 		} catch (CompagniaException e) {
@@ -79,8 +76,6 @@ public class ControllerCompagnie {
 	}
 
 	public void delete(String nome) {
-		
-		CompagniaAereaDAO DAO = new CompagniaAereaDAO();
 		
 		try {
 			DAO.deleteByNome(nome);
@@ -103,7 +98,6 @@ public class ControllerCompagnie {
 
 	public ArrayList<CompagniaAerea> ricerca(String Nome, Integer Min, Integer Max, Aeroporto aer) {
 		
-		CompagniaAereaDAO DAO = new CompagniaAereaDAO();
 		ArrayList<CompagniaAerea> Compagnie = new ArrayList<CompagniaAerea>();
 		if (Nome.isBlank()) {
 			
