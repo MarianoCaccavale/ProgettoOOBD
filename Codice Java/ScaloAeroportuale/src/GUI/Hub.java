@@ -5,12 +5,18 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Classi.Aeroporto;
+import Classi.SlotImbarco;
 import Controller.Controller;
+import Controller.ControllerSlotImbarco;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JTextPane;
 
 public class Hub extends JFrame {
 
@@ -19,10 +25,12 @@ public class Hub extends JFrame {
 
 
 	public Hub(Controller c, Aeroporto a) {
+		setResizable(false);
 		setTitle("Hub");
 		controller = c;
+		ControllerSlotImbarco controllerSlot = new ControllerSlotImbarco();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 833, 492);
+		setBounds(100, 100, 1031, 525);
 		BasePanel = new JPanel();
 		BasePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(BasePanel);
@@ -96,7 +104,7 @@ public class Hub extends JFrame {
 		BottoniPanel.add(ServizioClientiBtn);
 		
 		JPanel HubPanel = new JPanel();
-		HubPanel.setBounds(238, 10, 581, 445);
+		HubPanel.setBounds(238, 10, 769, 468);
 		BasePanel.add(HubPanel);
 		HubPanel.setLayout(null);
 		
@@ -108,13 +116,28 @@ public class Hub extends JFrame {
 		
 		JLabel InformazioniCitt‡Lbl = new JLabel("New label");
 		InformazioniCitt‡Lbl.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		InformazioniCitt‡Lbl.setBounds(449, 11, 122, 43);
+		InformazioniCitt‡Lbl.setBounds(637, 11, 122, 43);
 		InformazioniCitt‡Lbl.setText(a.getCitt‡());
 		HubPanel.add(InformazioniCitt‡Lbl);
 		
+		JTextPane AvvisoSlotImbarchiPanel = new JTextPane();
+		AvvisoSlotImbarchiPanel.setBounds(10, 186, 749, 272);
+		HubPanel.add(AvvisoSlotImbarchiPanel);
+		
+		AvvisoSlotImbarchiPanel.setText("SlotImbarchi da chiudere:");
+		ArrayList<SlotImbarco> SlotDaChiudere = new ArrayList<SlotImbarco>();
+		
+		SlotDaChiudere = controllerSlot.ricercaSlotDaChiudere(a.getCodAeroporto());
+		Iterator<SlotImbarco> iSlotDaChiudere = SlotDaChiudere.iterator();
+		
+		while(iSlotDaChiudere.hasNext()) {
+			SlotImbarco tmp = iSlotDaChiudere.next();
+			AvvisoSlotImbarchiPanel.setText("Codice volo: " + tmp.getVolo() + "\tCodice Tratta: " + tmp.getTratta() + "\tCodice Gate: " + tmp.getGate() + "\tOra di partenza: " + tmp.getOraInizio() + "");
+		}
+		
 		
 		JPanel LogoutPanel = new JPanel();
-		LogoutPanel.setBounds(10, 373, 218, 72);
+		LogoutPanel.setBounds(10, 406, 218, 72);
 		BasePanel.add(LogoutPanel);
 		
 		JButton LogoutBtn = new JButton("Logout");

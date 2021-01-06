@@ -68,7 +68,7 @@ public class SlotImbarcoDAO {
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
 			
-			PreparedStatement pst = conn.prepareStatement("select part.codvolo, v.codtratta, part.codgate, part.datainizio from gate_view as part natural join volo as v where part.codaeroporto = ? AND part.datafine IS NULL");
+			PreparedStatement pst = conn.prepareStatement("select part.codvolo, v.codtratta, part.codgate, part.datainizio from gate_view as part natural join volo as v where part.codaeroporto = ? AND part.datafine IS NULL AND part.datainizio<now()");
 			
 			pst.setString(1, codAeroporto);
 			
@@ -122,6 +122,42 @@ public class SlotImbarcoDAO {
 			
 			
 		}
+		
+	}
+
+	public ArrayList<SlotImbarco> getSlotDaChiudere(String codAeroporto) throws SlotImbarcoException {
+		
+		ArrayList<SlotImbarco> SlotDaChiudere = new ArrayList<SlotImbarco>();
+		
+		try{
+			
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
+			
+			PreparedStatement pst = conn.prepareStatement("select part.codvolo, v.codtratta, part.codgate, part.datainizio from gate_view as part natural join volo as v where part.codaeroporto = ? AND part.datafine IS NULL AND part.datainizio<now()");
+			
+			pst.setString(1, codAeroporto);
+						
+			ResultSet rs = pst.executeQuery();
+			
+			while (rs.next()) {
+				
+				SlotImbarco tmp = new SlotImbarco(rs.getString(1), rs.getString(2), rs.getString(3), rs.getTimestamp(4));
+				SlotDaChiudere.add(tmp);
+				
+			}
+			pst.close();
+			conn.close();
+			
+		}catch(SQLException e) {
+			
+			errore = e.getMessage();
+			
+			throw new SlotImbarcoException(errore);
+			
+		}
+		
+		return SlotDaChiudere;
 		
 	}
 	

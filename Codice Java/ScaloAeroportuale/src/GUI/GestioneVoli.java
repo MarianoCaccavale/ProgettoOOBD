@@ -40,6 +40,7 @@ import javax.swing.SpinnerNumberModel;
 import java.util.Calendar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import javax.swing.DefaultComboBoxModel;
 
 public class GestioneVoli extends JFrame {
 
@@ -327,6 +328,7 @@ public class GestioneVoli extends JFrame {
 		ChiusuraPanel.setLayout(null);
 		
 		JComboBox<String> ChiusuraComboBox = new JComboBox<String>();
+		ChiusuraComboBox.setModel(new DefaultComboBoxModel(new String[] {"Scegliere lo SlotImbarco da chiudere"}));
 		ChiusuraComboBox.setBounds(10, 45, 550, 33);
 		
 		ArrayList<SlotImbarco> listaSlotImbarco = new ArrayList<SlotImbarco>();
@@ -356,17 +358,21 @@ public class GestioneVoli extends JFrame {
 		ChiudiBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				String itemSelezionato = new String(ChiusuraComboBox.getSelectedItem().toString());
-				
-				String codVolo = new String(itemSelezionato.substring(13, itemSelezionato.indexOf("-")-1));
-				String codGate = new String(itemSelezionato.substring(itemSelezionato.indexOf("Codice Gate: ")+13, itemSelezionato.indexOf("Ora")-3));
-				
-				Date dataFineTmp = (Date) ChiusuraDataSpn.getValue();
-				
-				Timestamp dataFine = new Timestamp(dataFineTmp.getTime());
-				
-				controllerSlotImbarco.closeSlotImbarco(codVolo, codGate, dataFine);
-				
+				if (ChiusuraComboBox.getSelectedIndex() != 0) {
+					
+					String itemSelezionato = new String(ChiusuraComboBox.getSelectedItem().toString());
+					
+					String codVolo = new String(itemSelezionato.substring(13, itemSelezionato.indexOf("-")-1));
+					String codGate = new String(itemSelezionato.substring(itemSelezionato.indexOf("Codice Gate: ")+13, itemSelezionato.indexOf("Ora")-3));
+					
+					Date dataFineTmp = (Date) ChiusuraDataSpn.getValue();
+					
+					Timestamp dataFine = new Timestamp(dataFineTmp.getTime());
+					
+					controllerSlotImbarco.closeSlotImbarco(codVolo, codGate, dataFine);
+					
+				}
+								
 			}
 		});
 		ChiudiBtn.setBounds(449, 375, 111, 34);

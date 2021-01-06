@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.swing.JDialog;
 import javax.swing.JTextField;
 
+import Classi.Aeroporto;
 import Classi.SlotImbarco;
 import DAO.SlotImbarcoDAO;
 import Eccezioni.SlotImbarcoException;
@@ -56,6 +57,26 @@ public class ControllerSlotImbarco {
 		
 		
 		
+	}
+
+	public ArrayList<SlotImbarco> ricercaSlotDaChiudere(String codAeroporto) {
+		
+		ArrayList<SlotImbarco> SlotDaChiudere = new ArrayList<SlotImbarco>();
+		
+		try {
+			
+			SlotDaChiudere = DAO.getSlotDaChiudere(codAeroporto);
+			
+		} catch (SlotImbarcoException e) {
+			
+			successo.setBounds(200,200,400,200);
+			testo.setText(e.getMessage().toString()); 
+			successo.add(testo);
+			successo.setVisible(true);
+			
+		}
+		
+		return SlotDaChiudere;
 	}
 	
 	
