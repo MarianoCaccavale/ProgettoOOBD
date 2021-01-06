@@ -107,8 +107,8 @@ public class Statistiche extends JFrame {
 				
 				 String statisticheVoli[] = new String[2];
 				 statisticheVoli = controllerStatistiche.statisticheVoli(a.getCodAeroporto(), (Date)DataInizioRicercaVoliSpn.getValue(), (Date)DataFineRicercaVoliSpn.getValue());
-				 RicercaTextPane.setText(statisticheVoli[0]);
-				 RicercaTextPane.setText(RicercaTextPane.getText() + " " + statisticheVoli[1]);
+				 RicercaTextPane.setText("Voli partiti in orario dal "+ DataInizioRicercaVoliSpn.getValue() + " al " + DataFineRicercaVoliSpn.getValue() + ": " +  statisticheVoli[0] + "\n");
+				 RicercaTextPane.setText(RicercaTextPane.getText() + "Voli partiti in ritardo dal "+ DataInizioRicercaVoliSpn.getValue() + " al " + DataFineRicercaVoliSpn.getValue() + ": " + statisticheVoli[1]);
 			}
 		});
 		RicercaVoliBtn.setBounds(437, 368, 142, 39);

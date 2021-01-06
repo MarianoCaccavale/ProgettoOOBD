@@ -74,6 +74,10 @@ public class ControllerVoli {
 		try {
 			
 			VoloDAO.delete(codVolo);
+			successo.setBounds(200,200,400,200);
+			testo.setText("Cancellazione del volo eseguita correttamente!"); 
+			successo.add(testo);
+			successo.setVisible(true);
 			
 		}catch(VoloException e) {
 			
