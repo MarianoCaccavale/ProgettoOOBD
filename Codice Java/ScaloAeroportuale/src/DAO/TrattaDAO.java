@@ -139,7 +139,7 @@ public class TrattaDAO {
 		
 	}
 
-	public Tratta getTratteByCod(String trattaAssociata) throws TrattaException {
+	public Tratta getTrattaByCod(String trattaAssociata) throws TrattaException {
 		
 		Tratta risultato = new Tratta();
 		
@@ -154,10 +154,11 @@ public class TrattaDAO {
 			ResultSet rs = ps.executeQuery();
 		
 			
-			rs.next();			
-			risultato = new Tratta(rs.getString(1), rs.getString(2), rs.getString(3));
+			if (rs.next()) {
 				
-			
+				risultato = new Tratta(rs.getString(1), rs.getString(2), rs.getString(3));
+				
+			}			
 			
 			
 		}catch(SQLException e) {

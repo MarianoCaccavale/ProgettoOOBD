@@ -197,7 +197,7 @@ public class GestioneVoli extends JFrame {
 			CompagniaAerea compagnia = new CompagniaAerea();
 			Volo tmp = iVoloModifica.next();
 				
-			tratta = controllerTratte.getTratteByCod(tmp.getCompagniaDiAppartenenza());
+			tratta = controllerTratte.getTrattaByCod(tmp.getCompagniaDiAppartenenza());
 			compagnia =  controllerCompagnie.getCompagniaByCod(tmp.getTrattaAssociata());
 			String nomeAeroportoPartenza = new String();
 			String nomeAeroportoArrivo = new String();
@@ -393,7 +393,7 @@ public class GestioneVoli extends JFrame {
 			CompagniaAerea compagnia = new CompagniaAerea();
 			Volo tmp = iVoloElimina.next();
 				
-			tratta = controllerTratte.getTratteByCod(tmp.getCompagniaDiAppartenenza());
+			tratta = controllerTratte.getTrattaByCod(tmp.getCompagniaDiAppartenenza());
 			compagnia =  controllerCompagnie.getCompagniaByCod(tmp.getTrattaAssociata());
 			String nomeAeroportoPartenza = new String();
 			String nomeAeroportoArrivo = new String();
