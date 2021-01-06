@@ -29,6 +29,7 @@ public class Statistiche extends JFrame {
 	
 	
 	public Statistiche(Controller c, Aeroporto a) {
+		setResizable(false);
 		controller = c;
 		ControllerStatistiche controllerStatistiche = new ControllerStatistiche();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

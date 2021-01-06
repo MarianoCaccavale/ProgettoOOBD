@@ -102,13 +102,13 @@ public class ControllerTratte {
 		
 	}
 
-	public Tratta getTratteByCod(String trattaAssociata) {
+	public Tratta getTrattaByCod(String trattaAssociata) {
 	
 		Tratta tratta = new Tratta();
 		
 		try {
 				
-			tratta = DAO.getTratteByCod(trattaAssociata);
+			tratta = DAO.getTrattaByCod(trattaAssociata);
 			
 		} catch (TrattaException e) {
 	

@@ -270,8 +270,12 @@ public class CompagniaAereaDAO{
 			ps.setString(1, compagniaDiAppartenenza);
 			ResultSet rs = ps.executeQuery();
 			
-			rs.next();
-			compagnia = new CompagniaAerea(rs.getString(1), rs.getString(2), rs.getInt(3));
+			if (rs.next()) {
+				
+				compagnia = new CompagniaAerea(rs.getString(1), rs.getString(2), rs.getInt(3));
+				
+			}
+			
 			
 			ps.close();
 			rs.close();

@@ -1,6 +1,5 @@
 package Controller;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -128,6 +127,29 @@ public class ControllerVoli {
 		}
 		
 		return VoliTrovati;
+	}
+
+	public void generateTicket(String codVolo, Integer numBiglietti) {
+
+		try {
+			
+			VoloDAO.generateTicket(codVolo, numBiglietti);
+			successo.setBounds(200,200,400,200);
+			testo.setText("Biglietto/i generati con successo!"); 
+			successo.add(testo);
+			successo.setVisible(true);
+			
+			
+		}catch(VoloException e) {
+			
+			successo.setBounds(200,200,400,200);
+			testo.setText(e.getMessage().toString()); 
+			successo.add(testo);
+			successo.setVisible(true);
+			
+		}
+		
+		
 	}
 	
 	

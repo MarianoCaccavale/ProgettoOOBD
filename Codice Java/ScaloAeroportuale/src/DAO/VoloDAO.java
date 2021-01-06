@@ -52,6 +52,10 @@ public class VoloDAO {
 			
 			if (errore.contains("validificadata()")){
 				throw new VoloException("Impossibile inserire un volo antecedente ad ora");
+			}else {
+				
+				throw new VoloException(errore);
+				
 			}
 				
 		}
@@ -185,6 +189,34 @@ public class VoloDAO {
 		}
 		
 		return VoliTrovati;
+	}
+
+
+	public void generateTicket(String codVolo, Integer numBiglietti) throws VoloException {
+
+		try {
+			
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
+			
+			PreparedStatement ps = conn.prepareStatement("Update volo set numeropostiprenotati = numeropostiprenotati + ? where codvolo = ?");
+			ps.setInt(1, numBiglietti);
+			ps.setString(2, codVolo);
+			
+			ps.executeUpdate();
+			
+			ps.close();
+			conn.close();
+			
+		}catch(SQLException e) {
+			
+			errore = e.getMessage();
+			
+			throw new VoloException(errore);
+			
+		}
+		
+		
 	}
 	
 	
