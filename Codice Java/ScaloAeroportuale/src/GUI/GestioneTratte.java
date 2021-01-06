@@ -249,6 +249,7 @@ public class GestioneTratte extends JFrame {
 		ModificaPanel.add(ModificaVecchiaTrattaLbl);
 		
 		JComboBox<String> ModificaVecchiaTrattaCombo = new JComboBox<String>();
+		ModificaVecchiaTrattaCombo.setModel(new DefaultComboBoxModel(new String[] {"Scegliere la tratta"}));
 		Tratte = controllerTratte.getTratteFromThisAirport(a.getCodAeroporto());
 		Iterator<Tratta> TratteDaModificare = Tratte.iterator();
 		
@@ -271,6 +272,7 @@ public class GestioneTratte extends JFrame {
 		ModificaPanel.add(ModificaNuovaTrattaLbl);
 		
 		JComboBox<String> ModificaNuovaTrattaCombo = new JComboBox<String>();
+		ModificaNuovaTrattaCombo.setModel(new DefaultComboBoxModel(new String[] {"Scegliere l'aeroporto"}));
 		
 		Aeroporti = controllerAeroporti.getAllAeroportiExceptThis(a);
 		Iterator<Aeroporto> NuoviAeroporti = Aeroporti.iterator();
@@ -289,7 +291,7 @@ public class GestioneTratte extends JFrame {
 		ModificaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(ModificaNuovaTrattaCombo.getSelectedItem() != null && ModificaVecchiaTrattaCombo.getSelectedObjects() != null){
+				if(ModificaNuovaTrattaCombo.getSelectedIndex() != 0 && ModificaVecchiaTrattaCombo.getSelectedIndex() != 0){
 					String vecchioNomeAeroporto = new String(ModificaVecchiaTrattaCombo.getSelectedItem().toString().substring((a.getNomeAeroporto()).length()+7));
 					controllerTratte.update(vecchioNomeAeroporto, ModificaNuovaTrattaCombo.getSelectedItem().toString(), a.getCodAeroporto());
 				}

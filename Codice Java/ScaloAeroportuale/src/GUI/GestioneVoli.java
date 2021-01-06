@@ -104,6 +104,7 @@ public class GestioneVoli extends JFrame {
 		
 		
 		JComboBox<String> SceltaTrattaCombo = new JComboBox<String>();
+		SceltaTrattaCombo.setModel(new DefaultComboBoxModel(new String[] {"Scegliere la tratta"}));
 		Tratte = controllerTratte.getTratteFromThisAirport(a.getCodAeroporto());
 		Iterator<Tratta> TratteDaCaricare = Tratte.iterator();
 		
@@ -135,6 +136,7 @@ public class GestioneVoli extends JFrame {
 		AggiuntaPanel.add(SceltaCompagniaLbl);
 		
 		JComboBox<String> SceltaCompagniaCombo = new JComboBox<String>();
+		SceltaCompagniaCombo.setModel(new DefaultComboBoxModel(new String[] {"Scegliere la compagnia aerea"}));
 		CompagnieAeree = controllerCompagnie.getCompagnie(a);
 		Iterator<CompagniaAerea> CompagnieDaCaricare = CompagnieAeree.iterator();
 		
@@ -151,14 +153,20 @@ public class GestioneVoli extends JFrame {
 		JButton AggiuntaVoloBtn = new JButton("Inserisci");
 		AggiuntaVoloBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Date data = (Date) DateSpn.getValue();
-				Volo volo = new Volo();
-				volo.setData(data);
-				volo.setNumeroPosti((Integer) NumeroPostiDisponibiliSpn.getValue());
-				volo.setNumeroPostiDisponibili((Integer) NumeroPostiDisponibiliSpn.getValue());
-				volo.setCompagniaDiAppartenenza(SceltaCompagniaCombo.getSelectedItem().toString().substring(0, SceltaCompagniaCombo.getSelectedItem().toString().indexOf(":")).toString());
-				volo.setTrattaAssociata(SceltaTrattaCombo.getSelectedItem().toString().subSequence(0, SceltaTrattaCombo.getSelectedItem().toString().indexOf(":")).toString());
-				controllerVoli.apriSlotImbarco(a, volo);
+				
+				if (SceltaCompagniaCombo.getSelectedIndex() != 0 && SceltaTrattaCombo.getSelectedIndex() != 0) {
+					
+					Date data = (Date) DateSpn.getValue();
+					Volo volo = new Volo();
+					volo.setData(data);
+					volo.setNumeroPosti((Integer) NumeroPostiDisponibiliSpn.getValue());
+					volo.setNumeroPostiDisponibili((Integer) NumeroPostiDisponibiliSpn.getValue());
+					volo.setCompagniaDiAppartenenza(SceltaCompagniaCombo.getSelectedItem().toString().substring(0, SceltaCompagniaCombo.getSelectedItem().toString().indexOf(":")).toString());
+					volo.setTrattaAssociata(SceltaTrattaCombo.getSelectedItem().toString().subSequence(0, SceltaTrattaCombo.getSelectedItem().toString().indexOf(":")).toString());
+					controllerVoli.apriSlotImbarco(a, volo);
+					
+				}
+			
 			}
 		});
 		AggiuntaVoloBtn.setBounds(494, 434, 138, 38);
@@ -171,12 +179,13 @@ public class GestioneVoli extends JFrame {
 		
 		JSpinner ModificaNumeroPostiSpn = new JSpinner();
 		ModificaNumeroPostiSpn.setModel(new SpinnerNumberModel(50, 50, 5000, 1));
-		ModificaNumeroPostiSpn.setBounds(147, 119, 162, 23);
+		ModificaNumeroPostiSpn.setBounds(146, 137, 162, 38);
 		ModificaPanel.add(ModificaNumeroPostiSpn);
 		
 		
 		JComboBox<String> ModificaComboBox = new JComboBox<String>();
-		ModificaComboBox.setBounds(10, 54, 550, 27);
+		ModificaComboBox.setModel(new DefaultComboBoxModel(new String[] {"Scegliere il volo"}));
+		ModificaComboBox.setBounds(10, 42, 550, 46);
 		
 		ArrayList<Volo> VoliModifica = new ArrayList<Volo>();
 		VoliModifica = controllerVoli.getAllVoli(a);
@@ -204,21 +213,25 @@ public class GestioneVoli extends JFrame {
 		ModificaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				controllerVoli.updateVolo((Integer) ModificaNumeroPostiSpn.getValue(), ModificaComboBox.getSelectedItem().toString().substring(0, ModificaComboBox.getSelectedItem().toString().indexOf("-")-1));
+				if(ModificaComboBox.getSelectedIndex() != 0) {
+					
+					controllerVoli.updateVolo((Integer) ModificaNumeroPostiSpn.getValue(), ModificaComboBox.getSelectedItem().toString().substring(0, ModificaComboBox.getSelectedItem().toString().indexOf("-")-1));
+
+				}
 				
 			}
 		});
-		ModificaBtn.setBounds(438, 386, 122, 23);
+		ModificaBtn.setBounds(494, 434, 138, 38);
 		ModificaPanel.add(ModificaBtn);
 		
 		JLabel ModificaLbl = new JLabel("Scegliere il volo da modifiare:");
-		ModificaLbl.setBounds(10, 8, 508, 35);
+		ModificaLbl.setBounds(10, 10, 508, 34);
 		ModificaPanel.add(ModificaLbl);
 		
 		
 		
-		JLabel ModificaNumeroPostiLbl = new JLabel("Scegliereil nuovo numero di posti del volo:");
-		ModificaNumeroPostiLbl.setBounds(134, 92, 175, 23);
+		JLabel ModificaNumeroPostiLbl = new JLabel("Scegliere il nuovo numero di posti del volo:");
+		ModificaNumeroPostiLbl.setBounds(133, 110, 326, 23);
 		ModificaPanel.add(ModificaNumeroPostiLbl);
 		
 		JPanel ElencoPanel = new JPanel();
@@ -257,6 +270,7 @@ public class GestioneVoli extends JFrame {
 		RicercaPanel.add(SceltaRicercaTrattaLbl);
 		
 		JComboBox<String> RicercaTrattaCombo = new JComboBox<String>();
+		RicercaTrattaCombo.setModel(new DefaultComboBoxModel(new String[] {"Scegliere la tratta"}));
 		Iterator<Tratta> TratteDaCercare = Tratte.iterator();
 		
 		while (TratteDaCercare.hasNext()) {
@@ -278,7 +292,7 @@ public class GestioneVoli extends JFrame {
 				
 				ElencoTextPane.setText("");
 				
-				if(RicercaTrattaCombo.getSelectedItem() != null) {
+				if(RicercaTrattaCombo.getSelectedIndex() != 0) {
 					
 					String codTratta = RicercaTrattaCombo.getSelectedItem().toString().substring(0, RicercaTrattaCombo.getSelectedItem().toString().indexOf(":"));
 					ArrayList<Volo> VoliTrovati = controllerVoli.ricercaVoliByTratta(codTratta);
@@ -354,7 +368,7 @@ public class GestioneVoli extends JFrame {
 								
 			}
 		});
-		ChiudiBtn.setBounds(449, 375, 111, 34);
+		ChiudiBtn.setBounds(494, 434, 138, 38);
 		ChiusuraPanel.add(ChiudiBtn);
 		
 		JPanel EliminazionePanel = new JPanel();
