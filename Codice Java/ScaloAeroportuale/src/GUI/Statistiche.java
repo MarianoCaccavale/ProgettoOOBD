@@ -29,6 +29,7 @@ public class Statistiche extends JFrame {
 	
 	
 	public Statistiche(Controller c, Aeroporto a) {
+		setResizable(false);
 		controller = c;
 		ControllerStatistiche controllerStatistiche = new ControllerStatistiche();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,7 +40,7 @@ public class Statistiche extends JFrame {
 		BasePanel.setLayout(null);
 		
 		JPanel BottoniPanel = new JPanel();
-		BottoniPanel.setBounds(10, 10, 158, 252);
+		BottoniPanel.setBounds(10, 24, 158, 252);
 		BasePanel.add(BottoniPanel);
 		BottoniPanel.setLayout(null);
 		
@@ -70,6 +71,35 @@ public class Statistiche extends JFrame {
 		JPanel CompagniePanel = new JPanel();
 		tabbedPane.addTab("New tab", null, CompagniePanel, null);
 		CompagniePanel.setLayout(null);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 82, 569, 284);
+		CompagniePanel.add(scrollPane_1);
+		
+		JTextPane RicercaCompagniePanel = new JTextPane();
+		scrollPane_1.setViewportView(RicercaCompagniePanel);
+		
+		JButton RicercaCompagnieBtn = new JButton("Cerca");
+		RicercaCompagnieBtn.setBounds(451, 376, 138, 38);
+		CompagniePanel.add(RicercaCompagnieBtn);
+		
+		JLabel InizioRicercaLbl = new JLabel("Data inizio per la ricerca delle compagnie:");
+		InizioRicercaLbl.setBounds(21, 10, 262, 13);
+		CompagniePanel.add(InizioRicercaLbl);
+		
+		JLabel FineRicercaLbl = new JLabel("Data fine per la ricerca delle compagnie:");
+		FineRicercaLbl.setBounds(298, 10, 244, 13);
+		CompagniePanel.add(FineRicercaLbl);
+		
+		JSpinner DataInizioSpn = new JSpinner();
+		DataInizioSpn.setModel(new SpinnerDateModel());
+		DataInizioSpn.setBounds(31, 33, 164, 39);
+		CompagniePanel.add(DataInizioSpn);
+		
+		JSpinner DataFineSpn = new JSpinner();
+		DataFineSpn.setModel(new SpinnerDateModel());
+		DataFineSpn.setBounds(308, 33, 164, 39);
+		CompagniePanel.add(DataFineSpn);
 		
 		JPanel VoliPanel = new JPanel();
 		tabbedPane.addTab("New tab", null, VoliPanel, null);
@@ -109,6 +139,7 @@ public class Statistiche extends JFrame {
 				 statisticheVoli = controllerStatistiche.statisticheVoli(a.getCodAeroporto(), (Date)DataInizioRicercaVoliSpn.getValue(), (Date)DataFineRicercaVoliSpn.getValue());
 				 RicercaTextPane.setText("Voli partiti in orario dal "+ DataInizioRicercaVoliSpn.getValue() + " al " + DataFineRicercaVoliSpn.getValue() + ": " +  statisticheVoli[0] + "\n");
 				 RicercaTextPane.setText(RicercaTextPane.getText() + "Voli partiti in ritardo dal "+ DataInizioRicercaVoliSpn.getValue() + " al " + DataFineRicercaVoliSpn.getValue() + ": " + statisticheVoli[1]);
+			
 			}
 		});
 		RicercaVoliBtn.setBounds(437, 368, 142, 39);

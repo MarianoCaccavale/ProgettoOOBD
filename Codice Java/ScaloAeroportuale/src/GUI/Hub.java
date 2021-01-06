@@ -124,7 +124,10 @@ public class Hub extends JFrame {
 		AvvisoSlotImbarchiPanel.setBounds(10, 186, 749, 272);
 		HubPanel.add(AvvisoSlotImbarchiPanel);
 		
-		AvvisoSlotImbarchiPanel.setText("SlotImbarchi da chiudere:");
+		JLabel lblNewLabel = new JLabel("Questi voli sono partiti. Potrebbe essere necessario chiudere gli SlotImbarchi ad essi associati.");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel.setBounds(10, 144, 722, 43);
+		HubPanel.add(lblNewLabel);
 		ArrayList<SlotImbarco> SlotDaChiudere = new ArrayList<SlotImbarco>();
 		
 		SlotDaChiudere = controllerSlot.ricercaSlotDaChiudere(a.getCodAeroporto());
