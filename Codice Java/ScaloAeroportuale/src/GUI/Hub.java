@@ -135,7 +135,8 @@ public class Hub extends JFrame {
 		
 		while(iSlotDaChiudere.hasNext()) {
 			SlotImbarco tmp = iSlotDaChiudere.next();
-			AvvisoSlotImbarchiPanel.setText("Codice volo: " + tmp.getVolo() + "\tCodice Tratta: " + tmp.getTratta() + "\tCodice Gate: " + tmp.getGate() + "\tOra di partenza: " + tmp.getOraInizio() + "");
+			AvvisoSlotImbarchiPanel.setText(AvvisoSlotImbarchiPanel.getText() + "\n");
+			AvvisoSlotImbarchiPanel.setText(AvvisoSlotImbarchiPanel.getText() + "Codice volo: " + tmp.getVolo() + "\tCodice Tratta: " + tmp.getTratta() + "\tCodice Gate: " + tmp.getGate() + "\tOra di partenza: " + tmp.getOraInizio() + "");
 		}
 		
 		

@@ -64,6 +64,8 @@ public class ArchivioVoliDAO {
 		
 		return listaTempi;
 	}
+	
+	
 	public String[] statisticheVoli(String codAeroporto, Date min, Date max) throws StatisticheException {
 		
 		String[] risultato = new String[2];
@@ -106,6 +108,55 @@ public class ArchivioVoliDAO {
 		}
 		
 		return risultato;
+	}
+	
+	
+	public ArrayList<String[]> getStatisticheCompagnie(String codAeroporto, Date dataInizio, Date dataFine) throws StatisticheException {
+		
+		ArrayList<String[]> listaStatisticheCompagnie = new ArrayList<String[]>();
+		
+		try {
+			
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
+			PreparedStatement pt = conn.prepareStatement("select c.codcompagnia, c.nomecompagnia, count(distinct codvolo) from compagniaaerea as c natural join archiviovoli as av where c.aeroportoappartenenza = ? AND (? <= av.datainizio AND av.datainizio <= ?) AND (? <= av.datafine AND av.datafine <= ?) group by c.codcompagnia, c.nomecompagnia");
+			
+			Timestamp Inizio = new Timestamp(dataInizio.getTime());
+			Timestamp Fine = new Timestamp(dataFine.getTime());
+			
+			pt.setString(1, codAeroporto);
+			pt.setTimestamp(2, Inizio);
+			pt.setTimestamp(3, Fine);
+			pt.setTimestamp(4, Inizio);
+			pt.setTimestamp(5, Fine);
+			
+			
+			ResultSet rs = pt.executeQuery();
+			
+			while (rs.next()) {
+				
+				String tmp[] = new String[3];
+				tmp[0] = rs.getString(1);
+				tmp[1] = rs.getString(2);
+				tmp[2] = rs.getString(3);
+				
+				listaStatisticheCompagnie.add(tmp);
+				
+			}
+			
+			pt.close();
+			rs.close();
+			conn.close();
+			
+			
+			
+		}catch(SQLException e) {
+			
+			throw new StatisticheException(e.getMessage());
+			
+		}
+		
+		return listaStatisticheCompagnie;
 	}
 	
 	

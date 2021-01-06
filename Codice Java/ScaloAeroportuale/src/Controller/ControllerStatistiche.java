@@ -57,5 +57,25 @@ public class ControllerStatistiche {
 		return statisticheVoli;
 	}
 
+	public ArrayList<String[]> getStatisticheCompagnie(String codAeroporto, Date dataInizio, Date dataFine) {
+		
+		ArrayList<String[]> listaStatisticheCompagnie = new ArrayList<String[]>();
+		
+		try {
+			
+			listaStatisticheCompagnie = DAO.getStatisticheCompagnie(codAeroporto, dataInizio, dataFine);
+			
+		}catch(StatisticheException e){
+			
+			successo.setBounds(200,200,400,200);
+			testo.setText(e.getMessage()); 
+			successo.add(testo);
+			successo.setVisible(true);
+			
+		}
+		
+		return listaStatisticheCompagnie;
+	}
+
 
 }
