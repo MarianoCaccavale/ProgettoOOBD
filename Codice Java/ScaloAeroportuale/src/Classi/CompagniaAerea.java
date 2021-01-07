@@ -5,7 +5,8 @@ public class CompagniaAerea {
 	private String CodCompagnia = new String();
 	private String NomeCompagnia = new String();
 	private int GrandezzaFlotta;
-	private Aeroporto AeroportoDiAppartenenza;
+	private String AeroportoDiAppartenenza;
+	private String CodCentoKilometri;
 	
 	public CompagniaAerea() {}
 	
@@ -42,12 +43,20 @@ public class CompagniaAerea {
 		GrandezzaFlotta = grandezzaFlotta;
 	}
 	
-	public Aeroporto getAeroportoDiAppartenenza() {
+	public String getAeroportoDiAppartenenza() {
 		return AeroportoDiAppartenenza;
 	}
 	
-	public void setAeroportoDiAppartenenza(Aeroporto aeroportoDiAppartenenza) {
+	public void setAeroportoDiAppartenenza(String aeroportoDiAppartenenza) {
 		AeroportoDiAppartenenza = aeroportoDiAppartenenza;
+	}
+
+	public String getCodCentoKilometri() {
+		return CodCentoKilometri;
+	}
+
+	public void setCodCentoKilometri(String codCentoKilometri) {
+		CodCentoKilometri = codCentoKilometri;
 	}
 	
 	

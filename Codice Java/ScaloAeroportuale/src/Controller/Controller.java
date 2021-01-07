@@ -3,6 +3,7 @@ package Controller;
 
 import Classi.Aeroporto;
 import DAO.AeroportoDAO;
+import GUI.GestioneClientiBusiness;
 import GUI.GestioneCompagnie;
 import GUI.GestioneGate;
 import GUI.GestioneTratte;
@@ -22,6 +23,7 @@ public class Controller {
 	GestioneVoli VoliWindow;
 	Statistiche StatisticheWindow;
 	ServizioClienti ClientiWindow;
+	GestioneClientiBusiness BusinessWindow;
 	
 	
 	
@@ -141,6 +143,21 @@ public class Controller {
 		ClientiWindow.setVisible(false);
 		HubWindow.setVisible(true);
 		
+	}
+
+	public void ServizioClientiToClientiBusiness(Aeroporto a) {
+		
+		BusinessWindow = new GestioneClientiBusiness(this, a);
+		BusinessWindow.setVisible(true);
+		ClientiWindow.setVisible(false);
+		
+		
+	}
+
+	public void ClientiBusinessToServizioClienti(Aeroporto a) {
+		
+		BusinessWindow.setVisible(false);
+		ClientiWindow.setVisible(true);
 	}
 
 }

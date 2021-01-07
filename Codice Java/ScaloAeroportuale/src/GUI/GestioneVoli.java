@@ -95,14 +95,14 @@ public class GestioneVoli extends JFrame {
 				
 		JComboBox<String> SceltaTrattaCombo = new JComboBox<String>();
 		SceltaTrattaCombo.setFont(new Font("Arial", Font.PLAIN, 20));
-		SceltaTrattaCombo.setModel(new DefaultComboBoxModel(new String[] {"Scegliere la tratta"}));
+		SceltaTrattaCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere la tratta"}));
 		
 		SceltaTrattaCombo.setBounds(155, 126, 510, 38);
 		AggiuntaPanel.add(SceltaTrattaCombo);
 		
 		JComboBox<String> SceltaCompagniaCombo = new JComboBox<String>();
 		SceltaCompagniaCombo.setFont(new Font("Arial", Font.PLAIN, 20));
-		SceltaCompagniaCombo.setModel(new DefaultComboBoxModel(new String[] {"Scegliere la compagnia aerea"}));
+		SceltaCompagniaCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere la compagnia aerea"}));
 		
 		SceltaCompagniaCombo.setBounds(265, 306, 312, 38);
 		AggiuntaPanel.add(SceltaCompagniaCombo);
@@ -141,7 +141,7 @@ public class GestioneVoli extends JFrame {
 		
 		JComboBox<String> ModificaComboBox = new JComboBox<String>();
 		ModificaComboBox.setFont(new Font("Arial", Font.PLAIN, 20));
-		ModificaComboBox.setModel(new DefaultComboBoxModel(new String[] {"Scegliere il volo"}));
+		ModificaComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere il volo"}));
 		ModificaComboBox.setBounds(30, 38, 760, 50);
 		
 		ArrayList<Volo> VoliModifica = new ArrayList<Volo>();
@@ -212,7 +212,7 @@ public class GestioneVoli extends JFrame {
 			CompagniaDiAppartenenza = tmp.getTrattaAssociata();
 			Compagnia = controllerCompagnie.getCompagniaByCod(CompagniaDiAppartenenza);
 			ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
-			ElencoTextPane.setText(ElencoTextPane.getText() + "Codice del volo: " + tmp.getCodVolo() +"\tData e ora: " + tmp.getData() +"\tNumero posti: " + tmp.getNumeroPosti() + "\tNumero posti disponibili: " + tmp.getNumeroPostiDisponibili() +"\tCompagnia aerea: " + Compagnia.getNomeCompagnia() + "");
+			ElencoTextPane.setText(ElencoTextPane.getText() + "Codice del volo: " + tmp.getCodVolo() +"\tData e ora: " + tmp.getData() +"\tNumero posti: " + tmp.getNumeroPosti() + "\tNumero posti prenotati: " + tmp.getNumeroPostiPrenotati() +"\tCompagnia aerea: " + Compagnia.getNomeCompagnia() + "");
 		}
 		
 		
@@ -223,7 +223,7 @@ public class GestioneVoli extends JFrame {
 		
 		JComboBox<String> RicercaTrattaCombo = new JComboBox<String>();
 		RicercaTrattaCombo.setFont(new Font("Arial", Font.PLAIN, 20));
-		RicercaTrattaCombo.setModel(new DefaultComboBoxModel(new String[] {"Scegliere la tratta"}));
+		RicercaTrattaCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere la tratta"}));
 		Iterator<Tratta> TratteDaCercare = Tratte.iterator();
 		
 		while (TratteDaCercare.hasNext()) {
@@ -260,7 +260,7 @@ public class GestioneVoli extends JFrame {
 							CompagniaDiAppartenenza = tmpVolo.getTrattaAssociata();
 							Compagnia = controllerCompagnie.getCompagniaByCod(CompagniaDiAppartenenza);
 							ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
-							ElencoTextPane.setText(ElencoTextPane.getText() + "Codice del volo: " + tmpVolo.getCodVolo() +"\tData e ora: " + tmpVolo.getData() +"\tNumero posti: " + tmpVolo.getNumeroPosti() + "\tNumero posti disponibili: " + tmpVolo.getNumeroPostiDisponibili() +"\t Compagnia aerea: " + Compagnia.getNomeCompagnia());
+							ElencoTextPane.setText(ElencoTextPane.getText() + "Codice del volo: " + tmpVolo.getCodVolo() +"\tData e ora: " + tmpVolo.getData() +"\tNumero posti: " + tmpVolo.getNumeroPosti() + "\tNumero posti prenotati: " + tmpVolo.getNumeroPostiPrenotati() +"\t Compagnia aerea: " + Compagnia.getNomeCompagnia());
 						}
 						
 					}
@@ -272,7 +272,7 @@ public class GestioneVoli extends JFrame {
 		
 		JComboBox<String> ChiusuraComboBox = new JComboBox<String>();
 		ChiusuraComboBox.setFont(new Font("Arial", Font.PLAIN, 18));
-		ChiusuraComboBox.setModel(new DefaultComboBoxModel(new String[] {"Scegliere lo SlotImbarco da chiudere"}));
+		ChiusuraComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere lo SlotImbarco da chiudere"}));
 		ChiusuraComboBox.setBounds(20, 52, 793, 50);
 		
 		ArrayList<SlotImbarco> listaSlotImbarco = new ArrayList<SlotImbarco>();
@@ -355,11 +355,11 @@ public class GestioneVoli extends JFrame {
 		NumeroPostiLbl.setBounds(305, 189, 250, 19);
 		AggiuntaPanel.add(NumeroPostiLbl);
 		
-		JSpinner NumeroPostiDisponibiliSpn = new JSpinner();
-		NumeroPostiDisponibiliSpn.setFont(new Font("Arial", Font.PLAIN, 16));
-		NumeroPostiDisponibiliSpn.setModel(new SpinnerNumberModel(50, 50, 500, 1));
-		NumeroPostiDisponibiliSpn.setBounds(373, 217, 96, 39);
-		AggiuntaPanel.add(NumeroPostiDisponibiliSpn);
+		JSpinner NumeroPostiPrenotatiSpn = new JSpinner();
+		NumeroPostiPrenotatiSpn.setFont(new Font("Arial", Font.PLAIN, 16));
+		NumeroPostiPrenotatiSpn.setModel(new SpinnerNumberModel(50, 50, 500, 1));
+		NumeroPostiPrenotatiSpn.setBounds(373, 217, 96, 39);
+		AggiuntaPanel.add(NumeroPostiPrenotatiSpn);
 		
 		JButton AggiuntaVoloBtn = new JButton("Aggiungi");
 		AggiuntaVoloBtn.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -371,8 +371,8 @@ public class GestioneVoli extends JFrame {
 					Date data = (Date) DateSpn.getValue();
 					Volo volo = new Volo();
 					volo.setData(data);
-					volo.setNumeroPosti((Integer) NumeroPostiDisponibiliSpn.getValue());
-					volo.setNumeroPostiDisponibili((Integer) NumeroPostiDisponibiliSpn.getValue());
+					volo.setNumeroPosti((Integer) NumeroPostiPrenotatiSpn.getValue());
+					volo.setNumeroPostiPrenotati((Integer) NumeroPostiPrenotatiSpn.getValue());
 					volo.setCompagniaDiAppartenenza(SceltaCompagniaCombo.getSelectedItem().toString().substring(0, SceltaCompagniaCombo.getSelectedItem().toString().indexOf(":")).toString());
 					volo.setTrattaAssociata(SceltaTrattaCombo.getSelectedItem().toString().subSequence(0, SceltaTrattaCombo.getSelectedItem().toString().indexOf(":")).toString());
 					controllerVoli.apriSlotImbarco(a, volo);

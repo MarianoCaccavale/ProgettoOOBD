@@ -96,6 +96,10 @@ public class ControllerVoli {
 		try {
 			
 			VoloDAO.updateVolo(numeroPosti, codVolo);
+			successo.setBounds(200,200,400,200);
+			testo.setText("Modifica effettuata con successo!"); 
+			successo.add(testo);
+			successo.setVisible(true);
 			
 		}catch(VoloException e) {
 			
@@ -149,6 +153,28 @@ public class ControllerVoli {
 			
 		}
 		
+		
+	}
+
+	public void generateBusinessTicket(String codVolo, int numBiglietti, String email) {
+
+		try {
+			
+			VoloDAO.generateBusinessTicket(codVolo, numBiglietti, email);
+			successo.setBounds(200,200,400,200);
+			testo.setText("Biglietto/i generati con successo!"); 
+			successo.add(testo);
+			successo.setVisible(true);
+			
+			
+		}catch(VoloException e) {
+			
+			successo.setBounds(200,200,400,200);
+			testo.setText(e.getMessage().toString()); 
+			successo.add(testo);
+			successo.setVisible(true);
+			
+		}
 		
 	}
 	

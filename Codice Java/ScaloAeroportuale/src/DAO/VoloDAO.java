@@ -134,7 +134,7 @@ public class VoloDAO {
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
 			
-			PreparedStatement ps = conn.prepareStatement("update on volo set numeroposti = ? where codvolo = ?");
+			PreparedStatement ps = conn.prepareStatement("update volo set numeroposti = ? where codvolo = ?");
 			ps.setInt(1, numeroPosti);
 			ps.setString(2, codVolo);
 			
@@ -199,7 +199,7 @@ public class VoloDAO {
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
 			
-			PreparedStatement ps = conn.prepareStatement("Update volo set numeropostiprenotati = numeropostiprenotati + ? where codvolo = ?");
+			PreparedStatement ps = conn.prepareStatement("Update volo set numeropostiprenotati = numeropostiPrenotati + ? where codvolo = ?");
 			ps.setInt(1, numBiglietti);
 			ps.setString(2, codVolo);
 			
@@ -216,6 +216,40 @@ public class VoloDAO {
 			
 		}
 		
+		
+	}
+
+
+	public void generateBusinessTicket(String codVolo, int numBiglietti, String email) throws VoloException {
+		
+		try {
+			
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
+			
+			PreparedStatement ps = conn.prepareStatement("Update volo set numeropostiprenotati = numeropostiPrenotati + ? where codvolo = ?");
+			ps.setInt(1, numBiglietti);
+			ps.setString(2, codVolo);
+			
+			ps.executeUpdate();
+			
+			PreparedStatement ps2 = conn.prepareStatement("Insert into clienti_voli values(?,?)");
+			ps2.setString(1, codVolo);
+			ps2.setString(2, email);
+			
+			ps2.executeUpdate();
+			
+			ps2.close();
+			ps.close();
+			conn.close();
+			
+		}catch(SQLException e) {
+			
+			errore = e.getMessage();
+			
+			throw new VoloException(errore);
+			
+		}
 		
 	}
 	

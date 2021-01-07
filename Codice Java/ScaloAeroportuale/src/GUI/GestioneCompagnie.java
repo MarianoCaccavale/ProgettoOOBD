@@ -131,7 +131,7 @@ public class GestioneCompagnie extends JFrame {
 		
 		JComboBox<String> ModificaNomeCombo = new JComboBox<String>();
 		ModificaNomeCombo.setFont(new Font("Arial", Font.PLAIN, 20));
-		ModificaNomeCombo.setModel(new DefaultComboBoxModel(new String[] {"Scegliere la compagnia"}));
+		ModificaNomeCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere la compagnia"}));
 		
 		Compagnie = controllerCompagnia.getCompagnie(a);
 		Iterator<CompagniaAerea> modificaIterator = Compagnie.iterator();
@@ -184,7 +184,7 @@ public class GestioneCompagnie extends JFrame {
 		EliminaPanel.setLayout(null);
 		
 		JComboBox<String> CancellazioneNomeComboBox = new JComboBox<String>();
-		CancellazioneNomeComboBox.setModel(new DefaultComboBoxModel(new String[] {"Scegliere la compagnia"}));
+		CancellazioneNomeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere la compagnia"}));
 		CancellazioneNomeComboBox.setFont(new Font("Arial", Font.PLAIN, 20));
 		
 		Compagnie = controllerCompagnia.getCompagnie(a);

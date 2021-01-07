@@ -1,5 +1,6 @@
 package Controller;
 
+import java.nio.file.FileSystemAlreadyExistsException;
 import java.util.ArrayList;
 
 import javax.swing.JDialog;
@@ -147,6 +148,29 @@ public class ControllerCompagnie {
 		}
 		
 		return risultato;
+	}
+
+	public ArrayList<CompagniaAerea> getAllCompagnie() {
+		
+		ArrayList<CompagniaAerea> listaCompagnia = new ArrayList<CompagniaAerea>();
+		
+		try {
+			
+			listaCompagnia = DAO.getAllCompagnie();
+			
+			
+		}catch(CompagniaException e) {
+			
+			testo.setText(e.getMessage());
+			successo.setBounds(200,200,400,200);
+			successo.add(testo);
+			successo.setVisible(true);
+			
+		}
+		
+		
+		
+		return listaCompagnia;
 	}
 	
 }

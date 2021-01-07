@@ -7,28 +7,28 @@ public class Volo {
 	private String CodVolo = new String();
 	private Date Data = new Date();
 	private int NumeroPosti;
-	private int NumeroPostiDisponibili;
+	private int NumeroPostiPrenotati;
 	private String CompagniaDiAppartenenza;
 	private String TrattaAssociata;
 	
 	public Volo() {}
 	
 	
-	public Volo(String codVolo, Date data, int numeroPosti, int numeroPostiDisponibili) {
+	public Volo(String codVolo, Date data, int numeroPosti, int numeroPostiPrenotati) {
 		super();
 		CodVolo = codVolo;
 		Data = data;
 		NumeroPosti = numeroPosti;
-		NumeroPostiDisponibili = numeroPostiDisponibili;
+		NumeroPostiPrenotati = numeroPostiPrenotati;
 	}
 		
-	public Volo(String codVolo, Date data, int numeroPosti, int numeroPostiDisponibili, String compagniaDiAppartenenza,
+	public Volo(String codVolo, Date data, int numeroPosti, int numeroPostiPrenotati, String compagniaDiAppartenenza,
 			String trattaAssociata) {
 		super();
 		CodVolo = codVolo;
 		Data = data;
 		NumeroPosti = numeroPosti;
-		NumeroPostiDisponibili = numeroPostiDisponibili;
+		NumeroPostiPrenotati = numeroPostiPrenotati;
 		CompagniaDiAppartenenza = compagniaDiAppartenenza;
 		TrattaAssociata = trattaAssociata;
 	}
@@ -52,11 +52,11 @@ public class Volo {
 	public void setNumeroPosti(int numeroPosti) {
 		NumeroPosti = numeroPosti;
 	}
-	public int getNumeroPostiDisponibili() {
-		return NumeroPostiDisponibili;
+	public int getNumeroPostiPrenotati() {
+		return NumeroPostiPrenotati;
 	}
-	public void setNumeroPostiDisponibili(int numeroPostiDisponibili) {
-		NumeroPostiDisponibili = numeroPostiDisponibili;
+	public void setNumeroPostiPrenotati(int numeroPostiPrenotati) {
+		NumeroPostiPrenotati = numeroPostiPrenotati;
 	}
 	public String getCompagniaDiAppartenenza() {
 		return CompagniaDiAppartenenza;

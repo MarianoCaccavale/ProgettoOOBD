@@ -46,14 +46,21 @@ public class CompagniaAereaDAO{
 	
 	public void InsertCompagnia(String Nome, int Flotta, Aeroporto AerAppartenenza) throws CompagniaException {
 		
+		String codCentoKilometri = new String();
+		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
-			PreparedStatement pr = conn.prepareStatement("Insert into compagniaaerea values(nextval('sequenza_compagnia'),?,?,?)");
+			PreparedStatement pr = conn.prepareStatement("Insert into compagniaaerea values(nextval('sequenza_compagnia'),?,?,?,?)");
+			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery("select last_value+1 from sequenza_compagnia");
+			rs.next();
+			codCentoKilometri = "CK"+rs.getString(1);
 			
 			pr.setString(1, Nome.toUpperCase());
 			pr.setInt(2, Flotta);
 			pr.setString(3, AerAppartenenza.getCodAeroporto());
+			pr.setString(4, codCentoKilometri);
 			pr.executeUpdate();
 			pr.close();
 			conn.close();

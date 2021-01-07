@@ -219,7 +219,7 @@ public class GestioneTratte extends JFrame {
 				
 				ElencoTextPane.setText("");
 				
-				if (EliminazioneTrattaCombo.getSelectedIndex() != -1) {
+				if (RicercaTratteCombo.getSelectedIndex() != 0) {
 					
 					ArrayList<Tratta> TratteTrovate = controllerTratte.ricerca(a.getCodAeroporto(), RicercaTratteCombo.getSelectedItem().toString().substring(0, RicercaTratteCombo.getSelectedItem().toString().indexOf(":")));
 					Iterator<Tratta> iTratteTrovate = TratteTrovate.iterator();
@@ -234,8 +234,6 @@ public class GestioneTratte extends JFrame {
 						ElencoTextPane.setText(ElencoTextPane.getText() + "Codice della tratta: " + tmp.getCodTratta() +"\tAeroporto di arrivo: " + nomeAeroportoArrivo +"\tCitt‡: " + nomeCitt‡Arrivo +"");
 					}
 					
-				}else {
-					ElencoTextPane.setText("");
 				}
 				
 				
@@ -255,7 +253,7 @@ public class GestioneTratte extends JFrame {
 		
 		JComboBox<String> ModificaVecchiaTrattaCombo = new JComboBox<String>();
 		ModificaVecchiaTrattaCombo.setFont(new Font("Arial", Font.PLAIN, 20));
-		ModificaVecchiaTrattaCombo.setModel(new DefaultComboBoxModel(new String[] {"Scegliere la tratta"}));
+		ModificaVecchiaTrattaCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere la tratta"}));
 		Tratte = controllerTratte.getTratteFromThisAirport(a.getCodAeroporto());
 		Iterator<Tratta> TratteDaModificare = Tratte.iterator();
 		
@@ -280,7 +278,7 @@ public class GestioneTratte extends JFrame {
 		
 		JComboBox<String> ModificaNuovaTrattaCombo = new JComboBox<String>();
 		ModificaNuovaTrattaCombo.setFont(new Font("Arial", Font.PLAIN, 20));
-		ModificaNuovaTrattaCombo.setModel(new DefaultComboBoxModel(new String[] {"Scegliere l'aeroporto"}));
+		ModificaNuovaTrattaCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere l'aeroporto"}));
 		
 		Aeroporti = controllerAeroporti.getAllAeroportiExceptThis(a);
 		Iterator<Aeroporto> NuoviAeroporti = Aeroporti.iterator();

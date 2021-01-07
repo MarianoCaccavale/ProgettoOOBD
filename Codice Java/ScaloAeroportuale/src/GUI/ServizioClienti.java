@@ -26,11 +26,14 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
+import javax.swing.JCheckBox;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ServizioClienti extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField EmailBusinessTf;
 
 	
 	public ServizioClienti(Controller c, Aeroporto a) {
@@ -47,10 +50,6 @@ public class ServizioClienti extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(198, 11, 914, 20);
-		contentPane.add(panel);
 		
 		JPanel BottoniPane = new JPanel();
 		BottoniPane.setBounds(10, 11, 178, 398);
@@ -74,53 +73,101 @@ public class ServizioClienti extends JFrame {
 		IndietroBtn.setBounds(10, 11, 158, 37);
 		ChiusuraPane.add(IndietroBtn);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(198, 11, 914, 468);
-		contentPane.add(tabbedPane);
-		
-		JButton BigliettiBtn = new JButton("Biglietti");
-		BigliettiBtn.setFont(new Font("Arial", Font.PLAIN, 16));
-		BigliettiBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				tabbedPane.setSelectedIndex(0);
-				
-			}
-		});
-		BigliettiBtn.setBounds(10, 11, 158, 33);
-		BottoniPane.add(BigliettiBtn);
-		
 		JButton ClientiBtn = new JButton("Clienti Business");
 		ClientiBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		ClientiBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				tabbedPane.setSelectedIndex(1);
+				controller.ServizioClientiToClientiBusiness(a);
 				
 			}
 		});
-		ClientiBtn.setBounds(10, 55, 158, 33);
+		ClientiBtn.setBounds(10, 11, 158, 33);
 		BottoniPane.add(ClientiBtn);
 		
 		JPanel BigliettiPanel = new JPanel();
-		tabbedPane.addTab("New tab", null, BigliettiPanel, null);
 		BigliettiPanel.setLayout(null);
+		BigliettiPanel.setBounds(198, 11, 909, 471);
+		contentPane.add(BigliettiPanel);
 		
 		JLabel SceltaNumeroSpn = new JLabel("Numero di biglietti da generare:");
 		SceltaNumeroSpn.setFont(new Font("Arial", Font.PLAIN, 16));
-		SceltaNumeroSpn.setBounds(307, 96, 268, 27);
+		SceltaNumeroSpn.setBounds(307, 131, 268, 27);
 		BigliettiPanel.add(SceltaNumeroSpn);
 		
 		JSpinner SceltaNumerpSpn = new JSpinner();
 		SceltaNumerpSpn.setFont(new Font("Arial", Font.PLAIN, 16));
-		SceltaNumerpSpn.setModel(new SpinnerNumberModel(1, 1, 500, 1));
-		SceltaNumerpSpn.setBounds(335, 134, 125, 38);
+		SceltaNumerpSpn.setBounds(335, 169, 125, 38);
 		BigliettiPanel.add(SceltaNumerpSpn);
 		
 		JComboBox<String> SceltaVoloSpn = new JComboBox<String>();
-		SceltaVoloSpn.setFont(new Font("Arial", Font.PLAIN, 16));
 		SceltaVoloSpn.setModel(new DefaultComboBoxModel<String>(new String[] {"Selezionare il volo"}));
-		SceltaVoloSpn.setBounds(10, 23, 889, 53);
+		SceltaVoloSpn.setFont(new Font("Arial", Font.PLAIN, 16));
+		SceltaVoloSpn.setBounds(10, 58, 889, 53);
+		BigliettiPanel.add(SceltaVoloSpn);
+		
+		JButton GeneraBigliettoBtn = new JButton("Genera");
+		
+		GeneraBigliettoBtn.setFont(new Font("Arial", Font.PLAIN, 16));
+		GeneraBigliettoBtn.setBounds(791, 419, 108, 38);
+		BigliettiPanel.add(GeneraBigliettoBtn);
+		
+		
+			
+		GeneraBigliettoBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(SceltaVoloSpn.getSelectedIndex() != 0) {
+					if(EmailBusinessTf.isEditable()){
+						
+						String codVolo = SceltaVoloSpn.getSelectedItem().toString().substring(0, SceltaVoloSpn.getSelectedItem().toString().indexOf("-")-1);
+						controllerVoli.generateBusinessTicket(codVolo, (int) SceltaNumerpSpn.getValue(), EmailBusinessTf.getText());
+						
+					}else {
+							
+						String codVolo = SceltaVoloSpn.getSelectedItem().toString().substring(0, SceltaVoloSpn.getSelectedItem().toString().indexOf("-")-1);
+						controllerVoli.generateTicket(codVolo, (int)SceltaNumerpSpn.getValue());
+							
+					}
+				}
+			}
+		});
+			
+		
+		
+		JLabel BigliettiLbl = new JLabel("Generazione dei biglietti");
+		BigliettiLbl.setFont(new Font("Arial", Font.PLAIN, 16));
+		BigliettiLbl.setBounds(10, 11, 450, 36);
+		BigliettiPanel.add(BigliettiLbl);
+		
+		JCheckBox ClientiBusinessCheck = new JCheckBox("Cliente Business");
+		ClientiBusinessCheck.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				if(ClientiBusinessCheck.isSelected()) {
+					
+					EmailBusinessTf.setEditable(true);
+					
+				}else {
+					
+					EmailBusinessTf.setEditable(false);
+					
+				}
+				
+			}
+		});
+		ClientiBusinessCheck.setFont(new Font("Arial", Font.PLAIN, 16));
+		ClientiBusinessCheck.setBounds(307, 270, 194, 23);
+		BigliettiPanel.add(ClientiBusinessCheck);
+		
+		EmailBusinessTf = new JTextField();
+		EmailBusinessTf.setEditable(false);
+		
+		EmailBusinessTf.setBounds(307, 311, 262, 38);
+		BigliettiPanel.add(EmailBusinessTf);
+		EmailBusinessTf.setColumns(10);
+		
 		ArrayList<Volo> voli = new ArrayList<Volo>();
 		
 		voli = controllerVoli.getAllVoli(a);
@@ -132,41 +179,9 @@ public class ServizioClienti extends JFrame {
 			Aeroporto aeroportoPartenzaTmp = controllerAeroporto.getAeroportoByCod(trattaTmp.getAeroportoDiPartenza());
 			Aeroporto aeroportoArrivoTmp = controllerAeroporto.getAeroportoByCod(trattaTmp.getAeroportoDiArrivo());
 			
-			SceltaVoloSpn.addItem(v.getCodVolo()+ " - Compagnia del volo: " + compagniaTmp.getNomeCompagnia() + " - Tratta del volo: " + aeroportoPartenzaTmp.getNomeAeroporto() + " / " + aeroportoArrivoTmp.getNomeAeroporto() + " - Numero dei posti disponibili: " + v.getNumeroPostiDisponibili());
+			SceltaVoloSpn.addItem(v.getCodVolo()+ " - Compagnia del volo: " + compagniaTmp.getNomeCompagnia() + " - Tratta del volo: " + aeroportoPartenzaTmp.getNomeAeroporto() + " / " + aeroportoArrivoTmp.getNomeAeroporto() + " - Numero dei posti prenotati: " + v.getNumeroPostiPrenotati());
 			
 		}
-		
-		BigliettiPanel.add(SceltaVoloSpn);
-		
-		JButton GeneraBigliettoBtn = new JButton("Genera");
-		GeneraBigliettoBtn.setFont(new Font("Arial", Font.PLAIN, 16));
-		GeneraBigliettoBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				if (SceltaVoloSpn.getSelectedIndex() != 0) {
-					
-					String stringa = SceltaVoloSpn.getSelectedItem().toString();
-					String codVolo = stringa.substring(0, stringa.indexOf("-")-1);
-					controllerVoli.generateTicket(codVolo, (Integer)SceltaNumerpSpn.getValue());
-					
-				}
-					
-				
-			}
-		});
-		GeneraBigliettoBtn.setBounds(791, 393, 108, 38);
-		BigliettiPanel.add(GeneraBigliettoBtn);
-		
-
-		
-		JPanel ClientiBusiness = new JPanel();
-		tabbedPane.addTab("New tab", null, ClientiBusiness, null);
-		ClientiBusiness.setLayout(null);
-		
-		textField = new JTextField();
-		textField.setBounds(232, 180, 86, 20);
-		ClientiBusiness.add(textField);
-		textField.setColumns(10);
 		
 		
 	}
