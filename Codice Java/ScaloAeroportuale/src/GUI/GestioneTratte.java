@@ -21,6 +21,7 @@ import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Font;
 
 public class GestioneTratte extends JFrame {
 
@@ -40,7 +41,7 @@ public class GestioneTratte extends JFrame {
 		ArrayList<Tratta> Tratte = new ArrayList<Tratta>();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 734, 509);
+		setBounds(100, 100, 972, 509);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -57,6 +58,7 @@ public class GestioneTratte extends JFrame {
 		IndietroPanel.setLayout(null);
 		
 		JButton TratteIndietroBtn = new JButton("Indietro");
+		TratteIndietroBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		TratteIndietroBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -69,23 +71,20 @@ public class GestioneTratte extends JFrame {
 		
 
 		JPanel panel = new JPanel();
-		panel.setBounds(175, 11, 533, 23);
+		panel.setBounds(175, 11, 773, 19);
 		contentPane.add(panel);
 		
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(175, 11, 533, 448);
+		tabbedPane.setBounds(175, 11, 773, 448);
 		contentPane.add(tabbedPane);
 		
 		JPanel AggiuntaPanel = new JPanel();
 		tabbedPane.addTab("New tab", null, AggiuntaPanel, null);
 		AggiuntaPanel.setLayout(null);
 		
-		JLabel TrattaAggiuntaLbl = new JLabel("Inserire l'aeroporto di destinazione:");
-		TrattaAggiuntaLbl.setBounds(161, 11, 218, 36);
-		AggiuntaPanel.add(TrattaAggiuntaLbl);
-		
 		JComboBox<String> AggiuntaNomeCombo = new JComboBox<String>();
+		AggiuntaNomeCombo.setFont(new Font("Arial", Font.PLAIN, 20));
 		AggiuntaNomeCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere l'aeroporto"}));
 		
 		Aeroporti = controllerAeroporti.getAllAeroportiExceptThis(a);
@@ -98,10 +97,11 @@ public class GestioneTratte extends JFrame {
 			
 		}
 		
-		AggiuntaNomeCombo.setBounds(161, 58, 189, 22);
+		AggiuntaNomeCombo.setBounds(230, 108, 330, 50);
 		AggiuntaPanel.add(AggiuntaNomeCombo);
 		
-		JButton AggiungiTrattaBtn = new JButton("Aggiungi Tratta");
+		JButton AggiungiTrattaBtn = new JButton("Aggiungi");
+		AggiungiTrattaBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		AggiungiTrattaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -111,7 +111,7 @@ public class GestioneTratte extends JFrame {
 				
 			}
 		});
-		AggiungiTrattaBtn.setBounds(383, 373, 138, 38);
+		AggiungiTrattaBtn.setBounds(620, 373, 138, 38);
 		AggiuntaPanel.add(AggiungiTrattaBtn);
 		
 		
@@ -121,11 +121,8 @@ public class GestioneTratte extends JFrame {
 		tabbedPane.addTab("New tab", null, EliminazionePanel, null);
 		EliminazionePanel.setLayout(null);
 		
-		JLabel EliminazioneTrattaLbl = new JLabel("Scegliere la tratta da cancellare:");
-		EliminazioneTrattaLbl.setBounds(80, 11, 376, 29);
-		EliminazionePanel.add(EliminazioneTrattaLbl);
-		
 		JComboBox<String> EliminazioneTrattaCombo = new JComboBox<String>();
+		EliminazioneTrattaCombo.setFont(new Font("Arial", Font.PLAIN, 20));
 		EliminazioneTrattaCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Selezionare la tratta"}));
 		
 		Tratte = controllerTratte.getTratteFromThisAirport(a.getCodAeroporto());
@@ -143,10 +140,11 @@ public class GestioneTratte extends JFrame {
 		}
 		
 		
-		EliminazioneTrattaCombo.setBounds(80, 51, 376, 29);
+		EliminazioneTrattaCombo.setBounds(138, 116, 508, 50);
 		EliminazionePanel.add(EliminazioneTrattaCombo);
 		
 		JButton EliminaBtn = new JButton("Elimina");
+		EliminaBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		EliminaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -157,7 +155,7 @@ public class GestioneTratte extends JFrame {
 				
 			}
 		});
-		EliminaBtn.setBounds(405, 375, 113, 34);
+		EliminaBtn.setBounds(620, 373, 138, 38);
 		EliminazionePanel.add(EliminaBtn);
 		
 		//ELENCO
@@ -166,10 +164,11 @@ public class GestioneTratte extends JFrame {
 		ElencoPanel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 93, 528, 271);
+		scrollPane.setBounds(0, 93, 758, 271);
 		ElencoPanel.add(scrollPane);
 		
 		JTextPane ElencoTextPane = new JTextPane();
+		ElencoTextPane.setFont(new Font("Arial", Font.PLAIN, 14));
 		scrollPane.setViewportView(ElencoTextPane);
 		
 		Tratte = controllerTratte.getTratteFromThisAirport(a.getCodAeroporto());
@@ -182,7 +181,7 @@ public class GestioneTratte extends JFrame {
 			nomeAeroportoArrivo = (controllerAeroporti.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getNomeAeroporto();
 			nomeCitt‡Arrivo = (controllerAeroporti.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getCitt‡();
 			ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
-			ElencoTextPane.setText(ElencoTextPane.getText() + "Codice della tratta: " + tmp.getCodTratta() +"\tAeroporto di arrivo: " + nomeAeroportoArrivo +"\tCitt‡: " + nomeCitt‡Arrivo +"");
+			ElencoTextPane.setText(ElencoTextPane.getText() + "Codice della tratta: " + tmp.getCodTratta() +"\t\tAeroporto di arrivo: " + nomeAeroportoArrivo +"\tCitt‡: " + nomeCitt‡Arrivo +"");
 		}
 		
 		JPanel RicercaPanel = new JPanel();
@@ -191,12 +190,14 @@ public class GestioneTratte extends JFrame {
 		RicercaPanel.setLayout(null);
 		
 		JLabel SceltaLbl = new JLabel("Scegli l'aeroporto di arrivo della tratta da cercare");
-		SceltaLbl.setBounds(70, 10, 362, 13);
+		SceltaLbl.setFont(new Font("Arial", Font.PLAIN, 16));
+		SceltaLbl.setBounds(10, 10, 422, 24);
 		RicercaPanel.add(SceltaLbl);
 		
 		JComboBox<String> RicercaTratteCombo = new JComboBox<String>();
+		RicercaTratteCombo.setFont(new Font("Arial", Font.PLAIN, 20));
 		RicercaTratteCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Selezionare l'aeroporto"}));
-		RicercaTratteCombo.setBounds(70, 33, 212, 42);
+		RicercaTratteCombo.setBounds(10, 44, 270, 40);
 		RicercaPanel.add(RicercaTratteCombo);
 		
 		ArrayList<Tratta> CercaTratta = new ArrayList<Tratta>();
@@ -207,19 +208,20 @@ public class GestioneTratte extends JFrame {
 			Tratta tmp = iTratteRicerca.next();
 			String nomeAeroportoArrivo = new String();
 			nomeAeroportoArrivo = (controllerAeroporti.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getNomeAeroporto();
-			RicercaTratteCombo.addItem(tmp.getAeroportoDiArrivo()+ " - " + nomeAeroportoArrivo);
+			RicercaTratteCombo.addItem(tmp.getAeroportoDiArrivo()+ ": " + nomeAeroportoArrivo);
 		}
 		
 		
 		JButton RicercaBtn = new JButton("Cerca");
+		RicercaBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		RicercaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				ElencoTextPane.setText("");
 				
-				if (EliminazioneTrattaCombo.getSelectedIndex() != 0) {
+				if (EliminazioneTrattaCombo.getSelectedIndex() != -1) {
 					
-					ArrayList<Tratta> TratteTrovate = controllerTratte.ricerca(a.getCodAeroporto(), RicercaTratteCombo.getSelectedItem().toString().substring(0, RicercaTratteCombo.getSelectedItem().toString().indexOf("-")-1));
+					ArrayList<Tratta> TratteTrovate = controllerTratte.ricerca(a.getCodAeroporto(), RicercaTratteCombo.getSelectedItem().toString().substring(0, RicercaTratteCombo.getSelectedItem().toString().indexOf(":")));
 					Iterator<Tratta> iTratteTrovate = TratteTrovate.iterator();
 					
 					while (iTratteTrovate.hasNext()) {
@@ -232,12 +234,14 @@ public class GestioneTratte extends JFrame {
 						ElencoTextPane.setText(ElencoTextPane.getText() + "Codice della tratta: " + tmp.getCodTratta() +"\tAeroporto di arrivo: " + nomeAeroportoArrivo +"\tCitt‡: " + nomeCitt‡Arrivo +"");
 					}
 					
+				}else {
+					ElencoTextPane.setText("");
 				}
 				
 				
 			}
 		});
-		RicercaBtn.setBounds(380, 374, 138, 38);
+		RicercaBtn.setBounds(620, 374, 138, 38);
 		ElencoPanel.add(RicercaBtn);
 		
 		JPanel ModificaPanel = new JPanel();
@@ -245,10 +249,12 @@ public class GestioneTratte extends JFrame {
 		ModificaPanel.setLayout(null);
 		
 		JLabel ModificaVecchiaTrattaLbl = new JLabel("Scegliere la tratta di cui modificare l'aeroporto di destinazione");
-		ModificaVecchiaTrattaLbl.setBounds(96, 54, 364, 27);
+		ModificaVecchiaTrattaLbl.setFont(new Font("Arial", Font.PLAIN, 16));
+		ModificaVecchiaTrattaLbl.setBounds(172, 62, 452, 27);
 		ModificaPanel.add(ModificaVecchiaTrattaLbl);
 		
 		JComboBox<String> ModificaVecchiaTrattaCombo = new JComboBox<String>();
+		ModificaVecchiaTrattaCombo.setFont(new Font("Arial", Font.PLAIN, 20));
 		ModificaVecchiaTrattaCombo.setModel(new DefaultComboBoxModel(new String[] {"Scegliere la tratta"}));
 		Tratte = controllerTratte.getTratteFromThisAirport(a.getCodAeroporto());
 		Iterator<Tratta> TratteDaModificare = Tratte.iterator();
@@ -264,14 +270,16 @@ public class GestioneTratte extends JFrame {
 			
 		}
 		
-		ModificaVecchiaTrattaCombo.setBounds(123, 91, 306, 27);
+		ModificaVecchiaTrattaCombo.setBounds(137, 99, 508, 50);
 		ModificaPanel.add(ModificaVecchiaTrattaCombo);
 		
 		JLabel ModificaNuovaTrattaLbl = new JLabel("Scegli il nuovo aeroporto di destinazione");
-		ModificaNuovaTrattaLbl.setBounds(144, 171, 262, 27);
+		ModificaNuovaTrattaLbl.setFont(new Font("Arial", Font.PLAIN, 16));
+		ModificaNuovaTrattaLbl.setBounds(222, 186, 345, 27);
 		ModificaPanel.add(ModificaNuovaTrattaLbl);
 		
 		JComboBox<String> ModificaNuovaTrattaCombo = new JComboBox<String>();
+		ModificaNuovaTrattaCombo.setFont(new Font("Arial", Font.PLAIN, 20));
 		ModificaNuovaTrattaCombo.setModel(new DefaultComboBoxModel(new String[] {"Scegliere l'aeroporto"}));
 		
 		Aeroporti = controllerAeroporti.getAllAeroportiExceptThis(a);
@@ -284,10 +292,11 @@ public class GestioneTratte extends JFrame {
 			
 		}
 		
-		ModificaNuovaTrattaCombo.setBounds(180, 202, 192, 27);
+		ModificaNuovaTrattaCombo.setBounds(222, 223, 330, 50);
 		ModificaPanel.add(ModificaNuovaTrattaCombo);
 		
 		JButton ModificaBtn = new JButton("Modifica");
+		ModificaBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		ModificaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -298,10 +307,11 @@ public class GestioneTratte extends JFrame {
 				
 			}
 		});
-		ModificaBtn.setBounds(409, 369, 109, 40);
+		ModificaBtn.setBounds(649, 371, 109, 40);
 		ModificaPanel.add(ModificaBtn);
 		
-		JButton TratteAggiuntaBtn = new JButton("Aggiungere");
+		JButton TratteAggiuntaBtn = new JButton("Aggiunta");
+		TratteAggiuntaBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		TratteAggiuntaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -313,7 +323,8 @@ public class GestioneTratte extends JFrame {
 		SceltaPanel.add(TratteAggiuntaBtn);
 		
 		
-		JButton TratteEliminaBtn = new JButton("Elimina");
+		JButton TratteEliminaBtn = new JButton("Eliminazione");
+		TratteEliminaBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		TratteEliminaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -325,7 +336,8 @@ public class GestioneTratte extends JFrame {
 		SceltaPanel.add(TratteEliminaBtn);
 		
 		
-		JButton TratteElencoBtn = new JButton("Elenco");
+		JButton TratteElencoBtn = new JButton("Ricerca");
+		TratteElencoBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		TratteElencoBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -337,6 +349,7 @@ public class GestioneTratte extends JFrame {
 		SceltaPanel.add(TratteElencoBtn);
 		
 		JButton TrattaModificaBtn = new JButton("Modifica");
+		TrattaModificaBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		TrattaModificaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

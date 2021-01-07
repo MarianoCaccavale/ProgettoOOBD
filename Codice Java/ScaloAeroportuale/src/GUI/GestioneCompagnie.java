@@ -25,6 +25,8 @@ import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
+import java.awt.Font;
+import javax.swing.DefaultComboBoxModel;
 
 public class GestioneCompagnie extends JFrame {
 
@@ -44,7 +46,7 @@ public class GestioneCompagnie extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 751, 548);
+		setBounds(100, 100, 1015, 548);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -52,28 +54,31 @@ public class GestioneCompagnie extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(UIManager.getColor("Button.background"));
-		panel.setBounds(178, 11, 547, 23);
+		panel.setBounds(178, 11, 813, 19);
 		contentPane.add(panel);
 		
 		
 		//Pannello Ritorno Hub
 		JPanel IndietroPanel = new JPanel();
-		IndietroPanel.setBounds(10, 467, 158, 31);
+		IndietroPanel.setBounds(10, 441, 158, 57);
 		contentPane.add(IndietroPanel);
 		
 		JButton IndietroBtn = new JButton("Indietro");
+		IndietroBtn.setFont(new Font("Arial", Font.PLAIN, 16));
+		IndietroBtn.setBounds(10, 10, 138, 38);
 		IndietroBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				c.CompagnieToHub(a);
 			}
 		});
+		IndietroPanel.setLayout(null);
 		IndietroPanel.add(IndietroBtn);
 		
 		
 		
 		//Sezione TabbedPanel
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(178, 11, 547, 487);
+		tabbedPane.setBounds(178, 11, 813, 487);
 		contentPane.add(tabbedPane);
 		
 		//Pannello Aggiunta
@@ -82,24 +87,29 @@ public class GestioneCompagnie extends JFrame {
 		AggiuntaPanel.setLayout(null);
 		
 		JLabel InsertLbl = new JLabel("Inserire nome compagnia:");
-		InsertLbl.setBounds(10, 11, 143, 25);
+		InsertLbl.setFont(new Font("Arial", Font.PLAIN, 16));
+		InsertLbl.setBounds(274, 81, 263, 25);
 		AggiuntaPanel.add(InsertLbl);
 		
 		NomeTf = new JTextField();
-		NomeTf.setBounds(10, 47, 143, 25);
+		NomeTf.setFont(new Font("Arial", Font.PLAIN, 16));
+		NomeTf.setBounds(274, 117, 236, 40);
 		AggiuntaPanel.add(NomeTf);
 		NomeTf.setColumns(10);
 		
 		JLabel FlottaLbl = new JLabel("Inserire Grandezza Flotta:");
-		FlottaLbl.setBounds(279, 11, 190, 25);
+		FlottaLbl.setFont(new Font("Arial", Font.PLAIN, 16));
+		FlottaLbl.setBounds(305, 167, 190, 25);
 		AggiuntaPanel.add(FlottaLbl);
 		
 		JSpinner FlottaSpn = new JSpinner();
+		FlottaSpn.setFont(new Font("Arial", Font.PLAIN, 16));
 		FlottaSpn.setModel(new SpinnerNumberModel(0, 0, 500, 1));
-		FlottaSpn.setBounds(279, 47, 143, 25);
+		FlottaSpn.setBounds(315, 203, 133, 40);
 		AggiuntaPanel.add(FlottaSpn);
 		
-		JButton btnNewButton = new JButton("Inserisci");
+		JButton btnNewButton = new JButton("Aggiungi");
+		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 16));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -109,7 +119,7 @@ public class GestioneCompagnie extends JFrame {
 				
 				}
 		});
-		btnNewButton.setBounds(436, 424, 106, 35);
+		btnNewButton.setBounds(692, 415, 106, 35);
 		AggiuntaPanel.add(btnNewButton);
 		
 		
@@ -119,11 +129,9 @@ public class GestioneCompagnie extends JFrame {
 		tabbedPane.addTab("New tab", null, ModifcaPanel, null);
 		ModifcaPanel.setLayout(null);
 		
-		JLabel NomeModificaLbl = new JLabel("Scegli la compagnia da modificare:");
-		NomeModificaLbl.setBounds(10, 11, 231, 26);
-		ModifcaPanel.add(NomeModificaLbl);
-		
 		JComboBox<String> ModificaNomeCombo = new JComboBox<String>();
+		ModificaNomeCombo.setFont(new Font("Arial", Font.PLAIN, 20));
+		ModificaNomeCombo.setModel(new DefaultComboBoxModel(new String[] {"Scegliere la compagnia"}));
 		
 		Compagnie = controllerCompagnia.getCompagnie(a);
 		Iterator<CompagniaAerea> modificaIterator = Compagnie.iterator();
@@ -135,30 +143,37 @@ public class GestioneCompagnie extends JFrame {
 			
 		}
 		
-		ModificaNomeCombo.setBounds(10, 48, 231, 26);
+		ModificaNomeCombo.setBounds(220, 92, 330, 50);
 		ModifcaPanel.add(ModificaNomeCombo);
 		
 		
 		JLabel FlottaModificaLbl = new JLabel("Nuova grandezza della flotta: ");
-		FlottaModificaLbl.setBounds(251, 11, 281, 26);
+		FlottaModificaLbl.setFont(new Font("Arial", Font.PLAIN, 16));
+		FlottaModificaLbl.setBounds(269, 177, 281, 26);
 		ModifcaPanel.add(FlottaModificaLbl);
 		
 		JSpinner ModificaGrandezzaFlottaSpn = new JSpinner();
+		ModificaGrandezzaFlottaSpn.setFont(new Font("Arial", Font.PLAIN, 16));
 		ModificaGrandezzaFlottaSpn.setModel(new SpinnerNumberModel(0, 0, 500, 1));
-		ModificaGrandezzaFlottaSpn.setBounds(251, 48, 281, 26);
+		ModificaGrandezzaFlottaSpn.setBounds(315, 213, 144, 46);
 		ModifcaPanel.add(ModificaGrandezzaFlottaSpn);
 		
 		JButton ModificaBtn = new JButton("Modifica");
+		ModificaBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		ModificaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				controllerCompagnia.Update(ModificaNomeCombo.getSelectedItem().toString(), (Integer) ModificaGrandezzaFlottaSpn.getValue(), a);
-				ModificaNomeCombo.setSelectedIndex(0);
-				ModificaGrandezzaFlottaSpn.setValue(0);
+				if (ModificaNomeCombo.getSelectedIndex() != 0) {
+					
+					controllerCompagnia.Update(ModificaNomeCombo.getSelectedItem().toString(), (Integer) ModificaGrandezzaFlottaSpn.getValue(), a);
+					ModificaNomeCombo.setSelectedIndex(0);
+					ModificaGrandezzaFlottaSpn.setValue(0);
+					
+				}
 				
 			}
 		});
-		ModificaBtn.setBounds(415, 412, 117, 36);
+		ModificaBtn.setBounds(681, 414, 117, 36);
 		ModifcaPanel.add(ModificaBtn);
 		
 		
@@ -168,11 +183,9 @@ public class GestioneCompagnie extends JFrame {
 		tabbedPane.addTab("New tab", null, EliminaPanel, null);
 		EliminaPanel.setLayout(null);
 		
-		JLabel CancellazioneNomeLbl = new JLabel("Scegliere il nome della compagnia da cancellare:");
-		CancellazioneNomeLbl.setBounds(107, 11, 309, 31);
-		EliminaPanel.add(CancellazioneNomeLbl);
-		
 		JComboBox<String> CancellazioneNomeComboBox = new JComboBox<String>();
+		CancellazioneNomeComboBox.setModel(new DefaultComboBoxModel(new String[] {"Scegliere la compagnia"}));
+		CancellazioneNomeComboBox.setFont(new Font("Arial", Font.PLAIN, 20));
 		
 		Compagnie = controllerCompagnia.getCompagnie(a);
 		Iterator<CompagniaAerea> cancellazioneIterator = Compagnie.iterator();
@@ -184,20 +197,26 @@ public class GestioneCompagnie extends JFrame {
 			
 		}
 				
-		CancellazioneNomeComboBox.setBounds(107, 53, 260, 31);
+		CancellazioneNomeComboBox.setBounds(243, 167, 330, 50);
 		EliminaPanel.add(CancellazioneNomeComboBox);
 		
 		JButton EliminaBtn = new JButton("Elimina");
+		EliminaBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		EliminaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(CancellazioneNomeComboBox.getSelectedItem() != null) {
-					controllerCompagnia.delete(CancellazioneNomeComboBox.getSelectedItem().toString());
+					
+					if(CancellazioneNomeComboBox.getSelectedIndex() != 0) {
+						
+						controllerCompagnia.delete(CancellazioneNomeComboBox.getSelectedItem().toString());
+						
+					}
 				}	
 				
 			}
 		});
-		EliminaBtn.setBounds(411, 410, 121, 38);
+		EliminaBtn.setBounds(660, 412, 138, 38);
 		EliminaPanel.add(EliminaBtn);
 		
 		
@@ -210,38 +229,44 @@ public class GestioneCompagnie extends JFrame {
 		ElencoPanel.setLayout(null);
 		
 		JPanel RicercaPanel = new JPanel();
-		RicercaPanel.setBounds(10, 11, 522, 75);
+		RicercaPanel.setBounds(10, 11, 788, 75);
 		ElencoPanel.add(RicercaPanel);
 		RicercaPanel.setLayout(null);
 		
-		JLabel RicercaNomeLbl = new JLabel("Inserire nome compagnia:");
-		RicercaNomeLbl.setBounds(10, 11, 189, 26);
+		JLabel RicercaNomeLbl = new JLabel("Inserire il nome della compagnia:");
+		RicercaNomeLbl.setFont(new Font("Arial", Font.PLAIN, 16));
+		RicercaNomeLbl.setBounds(10, 11, 258, 26);
 		RicercaPanel.add(RicercaNomeLbl);
 		
 		RicercaNomeTxt = new JTextField();
-		RicercaNomeTxt.setBounds(10, 44, 189, 31);
+		RicercaNomeTxt.setFont(new Font("Arial", Font.PLAIN, 16));
+		RicercaNomeTxt.setBounds(10, 44, 233, 31);
 		RicercaPanel.add(RicercaNomeTxt);
 		RicercaNomeTxt.setColumns(10);
 		
-		JLabel RicercaGrandezzaLbl = new JLabel("Scegliere grandezza flotta:");
-		RicercaGrandezzaLbl.setBounds(278, 11, 234, 26);
+		JLabel RicercaGrandezzaLbl = new JLabel("Scegliere la grandezza della flotta:");
+		RicercaGrandezzaLbl.setFont(new Font("Arial", Font.PLAIN, 16));
+		RicercaGrandezzaLbl.setBounds(389, 11, 349, 26);
 		RicercaPanel.add(RicercaGrandezzaLbl);
 		
 		JSpinner RicercaGrandezzaMinimaSpn = new JSpinner();
+		RicercaGrandezzaMinimaSpn.setFont(new Font("Arial", Font.PLAIN, 16));
 		RicercaGrandezzaMinimaSpn.setModel(new SpinnerNumberModel(0, 0, 500, 1));
-		RicercaGrandezzaMinimaSpn.setBounds(258, 44, 122, 31);
+		RicercaGrandezzaMinimaSpn.setBounds(399, 44, 122, 31);
 		RicercaPanel.add(RicercaGrandezzaMinimaSpn);
 		
 		JSpinner RicercaGrandezzaMassimaSpn = new JSpinner();
+		RicercaGrandezzaMassimaSpn.setFont(new Font("Arial", Font.PLAIN, 16));
 		RicercaGrandezzaMassimaSpn.setModel(new SpinnerNumberModel(500, 0, 500, 1));
-		RicercaGrandezzaMassimaSpn.setBounds(390, 44, 122, 31);
+		RicercaGrandezzaMassimaSpn.setBounds(531, 44, 122, 31);
 		RicercaPanel.add(RicercaGrandezzaMassimaSpn);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 97, 522, 317);
+		scrollPane.setBounds(10, 97, 788, 302);
 		ElencoPanel.add(scrollPane);
 		
 		JTextPane RicercaTextPane = new JTextPane();
+		RicercaTextPane.setFont(new Font("Arial", Font.PLAIN, 14));
 		RicercaTextPane.setEditable(false);
 		scrollPane.setViewportView(RicercaTextPane);
 		
@@ -258,7 +283,8 @@ public class GestioneCompagnie extends JFrame {
 			
 		}
 		
-		JButton RicercaBtn = new JButton("Ricerca");
+		JButton RicercaBtn = new JButton("Cerca");
+		RicercaBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		RicercaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -277,17 +303,18 @@ public class GestioneCompagnie extends JFrame {
 				}
 			}
 		});
-		RicercaBtn.setBounds(443, 425, 89, 23);
+		RicercaBtn.setBounds(660, 412, 138, 38);
 		ElencoPanel.add(RicercaBtn);
 		
 		
 		//Pannello dei bottoni per le scelte
 		JPanel BottoniPanel = new JPanel();
 		BottoniPanel.setLayout(null);
-		BottoniPanel.setBounds(10, 34, 158, 252);
+		BottoniPanel.setBounds(10, 25, 158, 252);
 		contentPane.add(BottoniPanel);
 		
-		JButton AggiungereBtn = new JButton("Aggiungere");
+		JButton AggiungereBtn = new JButton("Aggiunta");
+		AggiungereBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		AggiungereBtn.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 		
@@ -298,7 +325,8 @@ public class GestioneCompagnie extends JFrame {
 		AggiungereBtn.setBounds(10, 10, 138, 38);
 		BottoniPanel.add(AggiungereBtn);
 				
-		JButton ModificareBtn = new JButton("Modificare");
+		JButton ModificareBtn = new JButton("Modifica");
+		ModificareBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		ModificareBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -310,7 +338,8 @@ public class GestioneCompagnie extends JFrame {
 		ModificareBtn.setBounds(10, 58, 138, 38);
 		BottoniPanel.add(ModificareBtn);
 			
-		JButton EliminareBtn = new JButton("Eliminare");
+		JButton EliminareBtn = new JButton("Eliminazione");
+		EliminareBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		EliminareBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -321,7 +350,8 @@ public class GestioneCompagnie extends JFrame {
 		EliminareBtn.setBounds(10, 106, 138, 38);
 		BottoniPanel.add(EliminareBtn);
 			
-		JButton ElencoBtn = new JButton("Elenco");
+		JButton ElencoBtn = new JButton("Ricerca");
+		ElencoBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		ElencoBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

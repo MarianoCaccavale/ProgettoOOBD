@@ -25,6 +25,7 @@ import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Font;
 
 public class GestioneGate extends JFrame {
 
@@ -44,7 +45,7 @@ public class GestioneGate extends JFrame {
 		ArrayList<Gate> AllGate = new ArrayList<Gate>();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 744, 501);
+		setBounds(100, 100, 883, 501);
 		BasePanel = new JPanel();
 		BasePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(BasePanel);
@@ -52,11 +53,11 @@ public class GestioneGate extends JFrame {
 		
 		/*Inizio TabbedPanel*/
 		JPanel panel = new JPanel();
-		panel.setBounds(178, 10, 549, 23);
+		panel.setBounds(178, 10, 681, 20);
 		BasePanel.add(panel);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(178, 10, 542, 444);
+		tabbedPane.setBounds(178, 10, 681, 444);
 		BasePanel.add(tabbedPane);
 		
 		JPanel AggiuntaPanel = new JPanel();
@@ -64,10 +65,12 @@ public class GestioneGate extends JFrame {
 		AggiuntaPanel.setLayout(null);
 		
 		JLabel AggiuntaNomeLbl = new JLabel("Inserire il nome del gate:");
-		AggiuntaNomeLbl.setBounds(152, 48, 189, 32);
+		AggiuntaNomeLbl.setFont(new Font("Arial", Font.PLAIN, 16));
+		AggiuntaNomeLbl.setBounds(250, 113, 189, 32);
 		AggiuntaPanel.add(AggiuntaNomeLbl);
 		
-		JButton AggiuntaBtn = new JButton("Inserisci");
+		JButton AggiuntaBtn = new JButton("Aggiungi");
+		AggiuntaBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		AggiuntaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -75,11 +78,12 @@ public class GestioneGate extends JFrame {
 				AggiuntaNomeTxt.setText("");
 			}
 		});
-		AggiuntaBtn.setBounds(438, 384, 89, 23);
+		AggiuntaBtn.setBounds(528, 369, 138, 38);
 		AggiuntaPanel.add(AggiuntaBtn);
 		
 		AggiuntaNomeTxt = new JTextField();
-		AggiuntaNomeTxt.setBounds(152, 90, 189, 32);
+		AggiuntaNomeTxt.setFont(new Font("Arial", Font.PLAIN, 16));
+		AggiuntaNomeTxt.setBounds(250, 155, 189, 53);
 		AggiuntaPanel.add(AggiuntaNomeTxt);
 		AggiuntaNomeTxt.setColumns(10);
 		
@@ -87,16 +91,14 @@ public class GestioneGate extends JFrame {
 		tabbedPane.addTab("New tab", null, ModificaPanel, null);
 		ModificaPanel.setLayout(null);
 		
-		JLabel ModificaVecchioNomeLbl = new JLabel("Scegli il gate da modificare:");
-		ModificaVecchioNomeLbl.setBounds(10, 11, 226, 29);
-		ModificaPanel.add(ModificaVecchioNomeLbl);
-		
 		JLabel ModificaNuovoNomeLbl = new JLabel("Inserire il nuovo nome del Gate:");
-		ModificaNuovoNomeLbl.setBounds(295, 11, 226, 29);
+		ModificaNuovoNomeLbl.setFont(new Font("Arial", Font.PLAIN, 16));
+		ModificaNuovoNomeLbl.setBounds(193, 141, 226, 29);
 		ModificaPanel.add(ModificaNuovoNomeLbl);
 		
 		JComboBox<String> ModificaVecchioNomeSpn = new JComboBox<String>();
-		ModificaVecchioNomeSpn.setModel(new DefaultComboBoxModel<String>(new String[] {"Selezionare il gate"}));
+		ModificaVecchioNomeSpn.setFont(new Font("Arial", Font.PLAIN, 16));
+		ModificaVecchioNomeSpn.setModel(new DefaultComboBoxModel(new String[] {"Scegliere il gate"}));
 		
 		AllGate = controllerGate.getAllGate(a.getCodAeroporto());
 		
@@ -110,15 +112,17 @@ public class GestioneGate extends JFrame {
 			
 		}
 		
-		ModificaVecchioNomeSpn.setBounds(10, 51, 226, 29);
+		ModificaVecchioNomeSpn.setBounds(193, 69, 226, 50);
 		ModificaPanel.add(ModificaVecchioNomeSpn);
 		
 		ModificaNuovoNomeTf = new JTextField();
-		ModificaNuovoNomeTf.setBounds(295, 51, 226, 29);
+		ModificaNuovoNomeTf.setFont(new Font("Arial", Font.PLAIN, 16));
+		ModificaNuovoNomeTf.setBounds(193, 181, 226, 56);
 		ModificaPanel.add(ModificaNuovoNomeTf);
 		ModificaNuovoNomeTf.setColumns(10);
 		
 		JButton ModificaBtn = new JButton("Modifica");
+		ModificaBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		ModificaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -131,20 +135,17 @@ public class GestioneGate extends JFrame {
 				
 			}
 		});
-		ModificaBtn.setBounds(402, 368, 125, 39);
+		ModificaBtn.setBounds(541, 368, 125, 39);
 		ModificaPanel.add(ModificaBtn);
 		
 		JPanel EliminaPanel = new JPanel();
 		tabbedPane.addTab("New tab", null, EliminaPanel, null);
 		EliminaPanel.setLayout(null);
 		
-		JLabel EliminaNomeLbl = new JLabel("Inserire il nome del gate da cancellare:");
-		EliminaNomeLbl.setBounds(127, 11, 230, 33);
-		EliminaPanel.add(EliminaNomeLbl);
-		
 		JComboBox<String> EliminaNomeSpn = new JComboBox<String>();
+		EliminaNomeSpn.setFont(new Font("Arial", Font.PLAIN, 16));
 		EliminaNomeSpn.setModel(new DefaultComboBoxModel(new String[] {"Selezionare il gate"}));
-		EliminaNomeSpn.setBounds(127, 54, 230, 33);
+		EliminaNomeSpn.setBounds(212, 152, 230, 50);
 		
 		
 		AllGate = controllerGate.getAllGate(a.getCodAeroporto());
@@ -161,6 +162,7 @@ public class GestioneGate extends JFrame {
 		EliminaPanel.add(EliminaNomeSpn);
 		
 		JButton EliminaBtn = new JButton("Elimina");
+		EliminaBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		EliminaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -172,7 +174,7 @@ public class GestioneGate extends JFrame {
 				
 			}
 		});
-		EliminaBtn.setBounds(438, 384, 89, 23);
+		EliminaBtn.setBounds(528, 369, 138, 38);
 		EliminaPanel.add(EliminaBtn);
 		
 		
@@ -182,10 +184,11 @@ public class GestioneGate extends JFrame {
 		ElencoPanel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 537, 417);
+		scrollPane.setBounds(0, 0, 676, 417);
 		ElencoPanel.add(scrollPane);
 		
 		JTextPane ElencoTextPane = new JTextPane();
+		ElencoTextPane.setFont(new Font("Arial", Font.PLAIN, 20));
 		scrollPane.setViewportView(ElencoTextPane);
 		
 		AllGate = controllerGate.getAllGate(a.getCodAeroporto());
@@ -202,7 +205,8 @@ public class GestioneGate extends JFrame {
 		BottoniPanel.setBounds(10, 10, 158, 252);
 		BasePanel.add(BottoniPanel);
 		
-		JButton AggiungereBtn = new JButton("Aggiungere");
+		JButton AggiungereBtn = new JButton("Aggiunta");
+		AggiungereBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		AggiungereBtn.setBounds(10, 10, 138, 38);
 		AggiungereBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -214,7 +218,8 @@ public class GestioneGate extends JFrame {
 		BottoniPanel.setLayout(null);
 		BottoniPanel.add(AggiungereBtn);
 		
-		JButton ModificareBtn = new JButton("Modificare");
+		JButton ModificareBtn = new JButton("Modifica");
+		ModificareBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		ModificareBtn.setBounds(10, 58, 138, 38);
 		ModificareBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -225,7 +230,8 @@ public class GestioneGate extends JFrame {
 		});
 		BottoniPanel.add(ModificareBtn);
 		
-		JButton EliminareBtn = new JButton("Eliminare");
+		JButton EliminareBtn = new JButton("Eliminazione");
+		EliminareBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		EliminareBtn.setBounds(10, 106, 138, 38);
 		EliminareBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -236,7 +242,8 @@ public class GestioneGate extends JFrame {
 		});
 		BottoniPanel.add(EliminareBtn);
 		
-		JButton ElencoBtn = new JButton("Elenco");
+		JButton ElencoBtn = new JButton("Ricerca");
+		ElencoBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		ElencoBtn.setBounds(10, 154, 138, 38);
 		ElencoBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -253,6 +260,7 @@ public class GestioneGate extends JFrame {
 		BasePanel.add(IndietroPanel);
 		
 		JButton IndietroBtn = new JButton("Indietro");
+		IndietroBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		IndietroBtn.setBounds(10, 10, 138, 41);
 		IndietroBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

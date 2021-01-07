@@ -34,7 +34,7 @@ public class VoloDAO {
 			
 			ps.setTimestamp(1, dataVolo);
 			ps.setInt(2, volo.getNumeroPosti());
-			ps.setInt(3, 0);
+			ps.setInt(3, volo.getNumeroPosti());
 			ps.setString(4, volo.getTrattaAssociata());
 			ps.setString(5, volo.getCompagniaDiAppartenenza());
 			ps.executeUpdate();

@@ -16,6 +16,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class Login extends JFrame {
 
@@ -23,6 +25,7 @@ public class Login extends JFrame {
 	Controller controller;
 	
 	public Login(Controller c) {
+		setResizable(false);
 		setTitle("Login Aeroporto");
 		controller = c;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,7 +36,8 @@ public class Login extends JFrame {
 		contentPane.setLayout(null);
 		
 		JComboBox<String> ListaAeroportiCombo = new JComboBox<String>();
-		ListaAeroportiCombo.setBounds(251, 165, 233, 57);
+		ListaAeroportiCombo.setFont(new Font("Arial", Font.PLAIN, 20));
+		ListaAeroportiCombo.setBounds(203, 165, 330, 50);
 		contentPane.add(ListaAeroportiCombo);
 		
 		
@@ -53,6 +57,7 @@ public class Login extends JFrame {
 		}
 		
 		JButton LoginBtn = new JButton("Login");
+		LoginBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		LoginBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				c.LoginToHub(ListaAeroportiCombo.getSelectedItem().toString());

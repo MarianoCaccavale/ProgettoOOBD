@@ -25,6 +25,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import java.sql.Timestamp;
+import java.awt.Font;
 
 public class SlotImbarcoJDialog extends JDialog {
 
@@ -44,11 +45,13 @@ public class SlotImbarcoJDialog extends JDialog {
 		contentPanel.setLayout(null);
 		
 			JLabel SceltaGateLbl = new JLabel("Scegli il gate");
-			SceltaGateLbl.setBounds(102, 23, 98, 13);
+			SceltaGateLbl.setFont(new Font("Arial", Font.PLAIN, 16));
+			SceltaGateLbl.setBounds(106, 54, 160, 21);
 			contentPanel.add(SceltaGateLbl);
 		
 		
 			JComboBox<String> GateCombo = new JComboBox<String>();
+			GateCombo.setFont(new Font("Arial", Font.PLAIN, 16));
 			java.util.Date dataTmp = (java.util.Date) volo.getData();
 			Timestamp dataVolo = new Timestamp(dataTmp.getTime());
 			ElencoGate = controllerGate.getGateLiberi(a.getCodAeroporto(), dataVolo);
@@ -61,23 +64,25 @@ public class SlotImbarcoJDialog extends JDialog {
 				
 			}
 			
-			GateCombo.setBounds(78, 46, 120, 21);
+			GateCombo.setBounds(88, 85, 145, 41);
 			contentPanel.add(GateCombo);
 		
 	
 			JLabel SceltaCodaLbl = new JLabel("Scegli il tipo di coda");
-			SceltaCodaLbl.setBounds(78, 104, 135, 13);
+			SceltaCodaLbl.setFont(new Font("Arial", Font.PLAIN, 16));
+			SceltaCodaLbl.setBounds(83, 144, 183, 32);
 			contentPanel.add(SceltaCodaLbl);
 		
 		
 			JComboBox<String> CodaCombo = new JComboBox<String>();
+			CodaCombo.setFont(new Font("Arial", Font.PLAIN, 16));
 			CodaCombo.addItem("Prima Classe");
 			CodaCombo.addItem("Business");
 			CodaCombo.addItem("Economy");
 			CodaCombo.addItem("Priority");
 			CodaCombo.addItem("Diversamente abili");
 			CodaCombo.addItem("Famiglia");
-			CodaCombo.setBounds(65, 127, 147, 21);
+			CodaCombo.setBounds(69, 186, 197, 41);
 			contentPanel.add(CodaCombo);
 		
 		
@@ -86,6 +91,7 @@ public class SlotImbarcoJDialog extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.setFont(new Font("Arial", Font.PLAIN, 16));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 					
@@ -100,7 +106,7 @@ public class SlotImbarcoJDialog extends JDialog {
 							successo.setBounds(200,200,400,200);
 							JLabel testo = new JLabel("Non è possibile inserire un volo senza Gate!\n "
 									+ "Se non ne è disponibile nessuno vuol dire che tutti i gate in questa fascia oraria sono occupati.");
-							successo.add(testo);
+							successo.getContentPane().add(testo);
 							successo.setVisible(true);
 							dispose();
 							
@@ -111,18 +117,6 @@ public class SlotImbarcoJDialog extends JDialog {
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						
-						dispose();
-						
-					}
-				});
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
 			}
 		}
 }

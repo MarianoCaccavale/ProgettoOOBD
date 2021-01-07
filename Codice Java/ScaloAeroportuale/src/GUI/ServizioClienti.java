@@ -25,6 +25,7 @@ import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Font;
 
 public class ServizioClienti extends JFrame {
 
@@ -41,14 +42,14 @@ public class ServizioClienti extends JFrame {
 		ControllerVoli controllerVoli = new ControllerVoli();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 914, 532);
+		setBounds(100, 100, 1136, 532);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(198, 11, 690, 23);
+		panel.setBounds(198, 11, 914, 20);
 		contentPane.add(panel);
 		
 		JPanel BottoniPane = new JPanel();
@@ -62,6 +63,7 @@ public class ServizioClienti extends JFrame {
 		ChiusuraPane.setLayout(null);
 		
 		JButton IndietroBtn = new JButton("Indietro");
+		IndietroBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		IndietroBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -73,10 +75,11 @@ public class ServizioClienti extends JFrame {
 		ChiusuraPane.add(IndietroBtn);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(198, 11, 690, 468);
+		tabbedPane.setBounds(198, 11, 914, 468);
 		contentPane.add(tabbedPane);
 		
 		JButton BigliettiBtn = new JButton("Biglietti");
+		BigliettiBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		BigliettiBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -88,6 +91,7 @@ public class ServizioClienti extends JFrame {
 		BottoniPane.add(BigliettiBtn);
 		
 		JButton ClientiBtn = new JButton("Clienti Business");
+		ClientiBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		ClientiBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -103,21 +107,20 @@ public class ServizioClienti extends JFrame {
 		BigliettiPanel.setLayout(null);
 		
 		JLabel SceltaNumeroSpn = new JLabel("Numero di biglietti da generare:");
-		SceltaNumeroSpn.setBounds(211, 87, 268, 27);
+		SceltaNumeroSpn.setFont(new Font("Arial", Font.PLAIN, 16));
+		SceltaNumeroSpn.setBounds(307, 96, 268, 27);
 		BigliettiPanel.add(SceltaNumeroSpn);
 		
 		JSpinner SceltaNumerpSpn = new JSpinner();
+		SceltaNumerpSpn.setFont(new Font("Arial", Font.PLAIN, 16));
 		SceltaNumerpSpn.setModel(new SpinnerNumberModel(1, 1, 500, 1));
-		SceltaNumerpSpn.setBounds(239, 125, 125, 27);
+		SceltaNumerpSpn.setBounds(335, 134, 125, 38);
 		BigliettiPanel.add(SceltaNumerpSpn);
 		
-		JLabel SceltaVoloLbl = new JLabel("Scegliere il volo per cui generare il biglietto:");
-		SceltaVoloLbl.setBounds(10, 11, 533, 27);
-		BigliettiPanel.add(SceltaVoloLbl);
-		
 		JComboBox<String> SceltaVoloSpn = new JComboBox<String>();
+		SceltaVoloSpn.setFont(new Font("Arial", Font.PLAIN, 16));
 		SceltaVoloSpn.setModel(new DefaultComboBoxModel<String>(new String[] {"Selezionare il volo"}));
-		SceltaVoloSpn.setBounds(10, 49, 665, 27);
+		SceltaVoloSpn.setBounds(10, 23, 889, 53);
 		ArrayList<Volo> voli = new ArrayList<Volo>();
 		
 		voli = controllerVoli.getAllVoli(a);
@@ -136,6 +139,7 @@ public class ServizioClienti extends JFrame {
 		BigliettiPanel.add(SceltaVoloSpn);
 		
 		JButton GeneraBigliettoBtn = new JButton("Genera");
+		GeneraBigliettoBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		GeneraBigliettoBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -150,7 +154,7 @@ public class ServizioClienti extends JFrame {
 				
 			}
 		});
-		GeneraBigliettoBtn.setBounds(567, 391, 108, 38);
+		GeneraBigliettoBtn.setBounds(791, 393, 108, 38);
 		BigliettiPanel.add(GeneraBigliettoBtn);
 		
 

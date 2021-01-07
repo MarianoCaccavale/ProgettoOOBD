@@ -21,6 +21,7 @@ import javax.swing.SpinnerDateModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import java.util.Calendar;
+import java.awt.Font;
 
 public class Statistiche extends JFrame {
 
@@ -33,7 +34,7 @@ public class Statistiche extends JFrame {
 		controller = c;
 		ControllerStatistiche controllerStatistiche = new ControllerStatistiche();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 798, 504);
+		setBounds(100, 100, 1133, 520);
 		BasePanel = new JPanel();
 		BasePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(BasePanel);
@@ -45,14 +46,15 @@ public class Statistiche extends JFrame {
 		BottoniPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(178, 10, 594, 25);
+		panel.setBounds(178, 10, 931, 21);
 		BasePanel.add(panel);		
 		
 		JPanel IndietroPanel = new JPanel();
-		IndietroPanel.setBounds(10, 403, 158, 54);
+		IndietroPanel.setBounds(10, 419, 158, 54);
 		BasePanel.add(IndietroPanel);
 		
 		JButton IndietroBtn = new JButton("Indietro");
+		IndietroBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		IndietroBtn.setBounds(10, 10, 138, 38);
 		IndietroBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -65,7 +67,7 @@ public class Statistiche extends JFrame {
 		IndietroPanel.add(IndietroBtn);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(178, 11, 594, 446);
+		tabbedPane.setBounds(178, 11, 931, 462);
 		BasePanel.add(tabbedPane);
 		
 		JPanel CompagniePanel = new JPanel();
@@ -73,23 +75,27 @@ public class Statistiche extends JFrame {
 		CompagniePanel.setLayout(null);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 82, 569, 284);
+		scrollPane_1.setBounds(10, 82, 906, 295);
 		CompagniePanel.add(scrollPane_1);
 		
 		JTextPane RicercaCompagniePanel = new JTextPane();
+		RicercaCompagniePanel.setFont(new Font("Arial", Font.PLAIN, 14));
 		scrollPane_1.setViewportView(RicercaCompagniePanel);
 		
 		JSpinner DataInizioStatisticheCompagnieSpn = new JSpinner();
+		DataInizioStatisticheCompagnieSpn.setFont(new Font("Arial", Font.PLAIN, 16));
 		DataInizioStatisticheCompagnieSpn.setModel(new SpinnerDateModel());
 		DataInizioStatisticheCompagnieSpn.setBounds(31, 33, 164, 39);
 		CompagniePanel.add(DataInizioStatisticheCompagnieSpn);
 		
 		JSpinner DataFineStatisticheCompagnieSpn = new JSpinner();
+		DataFineStatisticheCompagnieSpn.setFont(new Font("Arial", Font.PLAIN, 16));
 		DataFineStatisticheCompagnieSpn.setModel(new SpinnerDateModel());
-		DataFineStatisticheCompagnieSpn.setBounds(308, 33, 164, 39);
+		DataFineStatisticheCompagnieSpn.setBounds(486, 33, 164, 39);
 		CompagniePanel.add(DataFineStatisticheCompagnieSpn);
 		
 		JButton RicercaCompagnieBtn = new JButton("Cerca");
+		RicercaCompagnieBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		RicercaCompagnieBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -108,15 +114,17 @@ public class Statistiche extends JFrame {
 				}
 			}
 		});
-		RicercaCompagnieBtn.setBounds(451, 376, 138, 38);
+		RicercaCompagnieBtn.setBounds(778, 387, 138, 38);
 		CompagniePanel.add(RicercaCompagnieBtn);
 		
 		JLabel InizioRicercaLbl = new JLabel("Data inizio per la ricerca delle compagnie:");
-		InizioRicercaLbl.setBounds(21, 10, 262, 13);
+		InizioRicercaLbl.setFont(new Font("Arial", Font.PLAIN, 16));
+		InizioRicercaLbl.setBounds(21, 10, 345, 19);
 		CompagniePanel.add(InizioRicercaLbl);
 		
 		JLabel FineRicercaLbl = new JLabel("Data fine per la ricerca delle compagnie:");
-		FineRicercaLbl.setBounds(298, 10, 244, 13);
+		FineRicercaLbl.setFont(new Font("Arial", Font.PLAIN, 16));
+		FineRicercaLbl.setBounds(476, 10, 369, 19);
 		CompagniePanel.add(FineRicercaLbl);
 		
 		JPanel VoliPanel = new JPanel();
@@ -124,76 +132,88 @@ public class Statistiche extends JFrame {
 		VoliPanel.setLayout(null);
 		
 		JSpinner DataInizioRicercaVoliSpn = new JSpinner();
-		DataInizioRicercaVoliSpn.setBounds(10, 47, 197, 25);
+		DataInizioRicercaVoliSpn.setFont(new Font("Arial", Font.PLAIN, 16));
+		DataInizioRicercaVoliSpn.setBounds(41, 34, 164, 39);
 		VoliPanel.add(DataInizioRicercaVoliSpn);
 		DataInizioRicercaVoliSpn.setModel(new SpinnerDateModel());
 		
-		JLabel DataInizioRicercaVoliLbl = new JLabel("Data inizio della ricerca dei voli:");
-		DataInizioRicercaVoliLbl.setBounds(10, 11, 197, 25);
-		VoliPanel.add(DataInizioRicercaVoliLbl);
-		
-		JLabel DataFineRicercaVoliLlbl = new JLabel("Data fine della ricerca dei voli:");
-		DataFineRicercaVoliLlbl.setBounds(328, 10, 197, 25);
-		VoliPanel.add(DataFineRicercaVoliLlbl);
-		
 		JSpinner DataFineRicercaVoliSpn = new JSpinner();
-		DataFineRicercaVoliSpn.setBounds(328, 47, 197, 25);
+		DataFineRicercaVoliSpn.setBounds(422, 34, 164, 39);
 		VoliPanel.add(DataFineRicercaVoliSpn);
+		DataFineRicercaVoliSpn.setFont(new Font("Arial", Font.PLAIN, 16));
 		DataFineRicercaVoliSpn.setModel(new SpinnerDateModel());
 		
+		JLabel DataInizioRicercaVoliLbl = new JLabel("Data inizio per la ricerca dei voli:");
+		DataInizioRicercaVoliLbl.setFont(new Font("Arial", Font.PLAIN, 16));
+		DataInizioRicercaVoliLbl.setBounds(31, 11, 304, 25);
+		VoliPanel.add(DataInizioRicercaVoliLbl);
+		
+		JLabel DataFineRicercaVoliLlbl = new JLabel("Data fine per la ricerca dei voli:");
+		DataFineRicercaVoliLlbl.setFont(new Font("Arial", Font.PLAIN, 16));
+		DataFineRicercaVoliLlbl.setBounds(412, 11, 354, 25);
+		VoliPanel.add(DataFineRicercaVoliLlbl);
+		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 83, 569, 274);
+		scrollPane.setBounds(10, 83, 906, 296);
 		VoliPanel.add(scrollPane);
 		
 		JTextPane RicercaTextPane = new JTextPane();
+		RicercaTextPane.setFont(new Font("Arial", Font.PLAIN, 14));
 		RicercaTextPane.setEditable(false);
 		scrollPane.setViewportView(RicercaTextPane);
 		
-		JButton RicercaVoliBtn = new JButton("Ricerca ");
+		JButton RicercaVoliBtn = new JButton("Cerca");
+		RicercaVoliBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		RicercaVoliBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				 String statisticheVoli[] = new String[2];
 				 statisticheVoli = controllerStatistiche.statisticheVoli(a.getCodAeroporto(), (Date)DataInizioRicercaVoliSpn.getValue(), (Date)DataFineRicercaVoliSpn.getValue());
-				 RicercaTextPane.setText("Voli partiti in orario dal "+ DataInizioStatisticheCompagnieSpn.getValue() + " al " + DataFineStatisticheCompagnieSpn.getValue() + ": " +  statisticheVoli[0] + "\n");
-				 RicercaTextPane.setText(RicercaTextPane.getText() + "Voli partiti in ritardo dal "+ DataInizioRicercaVoliSpn.getValue() + " al " + DataFineRicercaVoliSpn.getValue() + ": " + statisticheVoli[1]);
+				 RicercaTextPane.setText("Voli partiti in orario dal "+ DataInizioStatisticheCompagnieSpn.getValue() + " al " + DataFineStatisticheCompagnieSpn.getValue() + ":   " +  statisticheVoli[0] + "\n");
+				 RicercaTextPane.setText(RicercaTextPane.getText() + "Voli partiti in ritardo dal "+ DataInizioRicercaVoliSpn.getValue() + " al " + DataFineRicercaVoliSpn.getValue() + ":   " + statisticheVoli[1]);
 			
 			}
 		});
-		RicercaVoliBtn.setBounds(437, 368, 142, 39);
+		RicercaVoliBtn.setBounds(774, 386, 142, 39);
 		VoliPanel.add(RicercaVoliBtn);
 		
 		JPanel GatePanel = new JPanel();
 		tabbedPane.addTab("New tab", null, GatePanel, null);
 		GatePanel.setLayout(null);
 		
-		JLabel GateDataInizioRicercaLbl = new JLabel("Data di inizio della ricerca:");
-		GateDataInizioRicercaLbl.setBounds(10, 11, 197, 26);
+		JLabel GateDataInizioRicercaLbl = new JLabel("Data di inizio per la ricerca dei gate:");
+		GateDataInizioRicercaLbl.setFont(new Font("Arial", Font.PLAIN, 16));
+		GateDataInizioRicercaLbl.setBounds(10, 11, 288, 26);
 		GatePanel.add(GateDataInizioRicercaLbl);
 		
-		JLabel GateDataFineRicerca = new JLabel("Data di fine ricerca: ");
-		GateDataFineRicerca.setBounds(355, 11, 197, 26);
+		JLabel GateDataFineRicerca = new JLabel("Data di fine per la ricerca dei gate: ");
+		GateDataFineRicerca.setFont(new Font("Arial", Font.PLAIN, 16));
+		GateDataFineRicerca.setBounds(442, 11, 364, 26);
 		GatePanel.add(GateDataFineRicerca);
 		
 		JSpinner GateDataInizioSpn = new JSpinner();
+		GateDataInizioSpn.setFont(new Font("Arial", Font.PLAIN, 16));
 		GateDataInizioSpn.setModel(new SpinnerDateModel());
-		GateDataInizioSpn.setBounds(10, 47, 197, 26);
+		GateDataInizioSpn.setBounds(20, 35, 164, 39);
 		GatePanel.add(GateDataInizioSpn);
 		
 		JSpinner GateDataFineSpn = new JSpinner();
+		GateDataFineSpn.setFont(new Font("Arial", Font.PLAIN, 16));
 		GateDataFineSpn.setModel(new SpinnerDateModel());
-		GateDataFineSpn.setBounds(347, 48, 205, 26);
+		GateDataFineSpn.setBounds(452, 35, 164, 39);
 		GatePanel.add(GateDataFineSpn);
 		
 		JScrollPane RicercaGateScroll = new JScrollPane();
-		RicercaGateScroll.setBounds(10, 84, 569, 291);
+		RicercaGateScroll.setBounds(10, 84, 906, 291);
 		GatePanel.add(RicercaGateScroll);
 		
 		JTextPane RicercaGateText = new JTextPane();
+		RicercaGateText.setFont(new Font("Arial", Font.PLAIN, 14));
 		RicercaGateText.setEditable(false);
 		RicercaGateScroll.setViewportView(RicercaGateText);
 		
-		JButton RicercaGateBtn = new JButton("Ricerca");
+		JButton RicercaGateBtn = new JButton("Cerca");
+		RicercaGateBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		RicercaGateBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -212,11 +232,12 @@ public class Statistiche extends JFrame {
 				}
 			}
 		});
-		RicercaGateBtn.setBounds(442, 384, 137, 23);
+		RicercaGateBtn.setBounds(778, 387, 138, 38);
 		GatePanel.add(RicercaGateBtn);
 		
 		
 		JButton CompagnieBtn = new JButton("Compagnie");
+		CompagnieBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		CompagnieBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -228,6 +249,7 @@ public class Statistiche extends JFrame {
 		BottoniPanel.add(CompagnieBtn);
 		
 		JButton VoliBtn = new JButton("Voli");
+		VoliBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		VoliBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -239,6 +261,7 @@ public class Statistiche extends JFrame {
 		BottoniPanel.add(VoliBtn);
 		
 		JButton GateBtn = new JButton("Gate");
+		GateBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		GateBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
