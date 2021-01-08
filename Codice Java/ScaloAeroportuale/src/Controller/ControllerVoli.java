@@ -36,11 +36,22 @@ public class ControllerVoli {
 			successo.add(testo);
 			successo.setVisible(true);
 		} catch (VoloException | SlotImbarcoException e) {
-
-			successo.setBounds(200,200,400,200);
-			testo.setText(e.getMessage().toString()); 
-			successo.add(testo);
-			successo.setVisible(true);
+			
+			if (e.getMessage().contains("controllo_voli_flotta()")) {
+				
+				successo.setBounds(200,200,400,200);
+				testo.setText("Questa compagnia non ha più aerei disponibili"); 
+				successo.add(testo);
+				successo.setVisible(true);
+				
+			}else {
+				
+				successo.setBounds(200,200,400,200);
+				testo.setText(e.getMessage().toString()); 
+				successo.add(testo);
+				successo.setVisible(true);
+				
+			}
 				
 		}
 		
@@ -146,10 +157,19 @@ public class ControllerVoli {
 			
 		}catch(VoloException e) {
 			
-			successo.setBounds(200,200,400,200);
-			testo.setText(e.getMessage().toString()); 
-			successo.add(testo);
-			successo.setVisible(true);
+			if (e.getMessage().contains("numeropostiprenotaticorretti")) {
+				
+				successo.setBounds(200,200,400,200);
+				testo.setText("Posti esauriti per questo volo"); 
+				successo.add(testo);
+				successo.setVisible(true);
+				
+			}else {
+				successo.setBounds(200,200,400,200);
+				testo.setText(e.getMessage().toString()); 
+				successo.add(testo);
+				successo.setVisible(true);
+			}
 			
 		}
 		
@@ -168,11 +188,20 @@ public class ControllerVoli {
 			
 			
 		}catch(VoloException e) {
-			
-			successo.setBounds(200,200,400,200);
-			testo.setText(e.getMessage().toString()); 
-			successo.add(testo);
-			successo.setVisible(true);
+
+			if (e.getMessage().contains("numeropostiprenotaticorretti")) {
+				
+				successo.setBounds(200,200,400,200);
+				testo.setText("Posti esauriti per questo volo"); 
+				successo.add(testo);
+				successo.setVisible(true);
+				
+			}else {
+				successo.setBounds(200,200,400,200);
+				testo.setText(e.getMessage().toString()); 
+				successo.add(testo);
+				successo.setVisible(true);
+			}
 			
 		}
 		

@@ -96,6 +96,7 @@ public class ServizioClienti extends JFrame {
 		BigliettiPanel.add(SceltaNumeroSpn);
 		
 		JSpinner SceltaNumerpSpn = new JSpinner();
+		SceltaNumerpSpn.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
 		SceltaNumerpSpn.setFont(new Font("Arial", Font.PLAIN, 16));
 		SceltaNumerpSpn.setBounds(335, 169, 125, 38);
 		BigliettiPanel.add(SceltaNumerpSpn);

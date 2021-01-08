@@ -103,9 +103,15 @@ public class ControllerCompagnie {
 		if (Nome.isBlank()) {
 			
 			try {
+				
 				Compagnie = DAO.ricercaByFlotta(Min, Max, aer.getCodAeroporto());
+				
 			} catch (CompagniaException e) {
-				System.out.println(e.getMessage().toString());
+				
+				testo.setText(e.getMessage().toString());
+				successo.setBounds(200,200,400,200);
+				successo.add(testo);
+				successo.setVisible(true);
 			}
 			
 		}else {

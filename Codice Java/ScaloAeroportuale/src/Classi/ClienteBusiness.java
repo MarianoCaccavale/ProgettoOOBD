@@ -8,11 +8,23 @@ public class ClienteBusiness {
 	private String nome = new String();
 	private String cognome = new String();
 	private Date dataNascita = new Date(0);
+	private Date dataIscrizione = new Date(0);
 	private int punti;
 	private String codCentoKilometri = new String();
 	
 	public void CLienteBusiness() {};
-	
+		
+	public ClienteBusiness(String email, String nome, String cognome, int punti, String codCentoKilometri) {
+		super();
+		this.email = email;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.punti = punti;
+		this.codCentoKilometri = codCentoKilometri;
+	}
+
+
+
 	public String getEmail() {
 		return email;
 	}

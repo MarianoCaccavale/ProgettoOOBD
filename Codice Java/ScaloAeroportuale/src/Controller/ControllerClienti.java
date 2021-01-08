@@ -1,10 +1,12 @@
 package Controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JDialog;
 import javax.swing.JTextField;
 
+import Classi.ClienteBusiness;
 import DAO.ClientiDAO;
 import Eccezioni.ClientiException;
 
@@ -60,5 +62,50 @@ public class ControllerClienti {
 		}
 		
 	}
-	
+
+
+	public ArrayList<ClienteBusiness> getAllClientiBusiness() {
+		
+		ArrayList<ClienteBusiness> Clienti = new ArrayList<ClienteBusiness>();
+		
+		try {
+			
+			Clienti = DAO.getAllClientiBusiness();
+						
+		}catch(ClientiException e) {
+			
+			successo.setBounds(200,200,400,200);
+			testo.setText(e.getMessage().toString()); 
+			successo.add(testo);
+			successo.setVisible(true);
+			
+		}
+		
+		return Clienti;
+		
+	}
+
+
+	public ArrayList<ClienteBusiness> getClientiBusinessByCompagnia(String codCompagnia) {
+		
+		ArrayList<ClienteBusiness> Clienti = new ArrayList<ClienteBusiness>();
+		
+		try {
+			
+			Clienti = DAO.getClientiBusinessByCompagnia(codCompagnia);
+						
+		}catch(ClientiException e) {
+			
+			successo.setBounds(200,200,400,200);
+			testo.setText(e.getMessage().toString()); 
+			successo.add(testo);
+			successo.setVisible(true);
+			
+		}
+		
+		return Clienti;
+		
+	}
+
 }
+

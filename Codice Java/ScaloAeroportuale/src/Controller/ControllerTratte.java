@@ -134,7 +134,14 @@ public class ControllerTratte {
 			Tratte = DAO.getTratte(AeroportoPartenza, AeroportoArrivo);
 			
 		}catch(TrattaException e){
-			System.out.println(e.getMessage().toString());
+			
+			JDialog successo = new JDialog();
+			JTextField testo = new JTextField();
+			successo.setBounds(200,200,400,200);
+			testo.setText(e.getMessage().toString()); 
+			successo.add(testo);
+			successo.setVisible(true);
+			
 		}
 		
 		return Tratte;
