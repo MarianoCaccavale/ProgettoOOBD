@@ -2,28 +2,18 @@ package Classi;
 
 public class Gate {
 
-	private String CodGate = new String();
 	private String NomeGate = new String();
 	private Aeroporto AeroportoDiAppartenenza;
 	
 	
-	public Gate(String codGate, String nomeGate) {
+	public Gate(String nomeGate) {
 		super();
-		CodGate = codGate;
 		NomeGate = nomeGate;
 	}
 
 	public Gate() {
 	}
 
-	public String getCodGate() {
-		return CodGate;
-	}
-	
-	public void setCodGate(String codGate) {
-		CodGate = codGate;
-	}
-	
 	public String getNomeGate() {
 		return NomeGate;
 	}

@@ -15,6 +15,10 @@ public class Aeroporto {
 		super();
 	}
 	
+	public Aeroporto(String nome) {
+		super();
+		NomeAeroporto = nome;
+	}
 	
 	public Aeroporto(String codAeroporto, String nomeAeroporto, String città) {
 		super();

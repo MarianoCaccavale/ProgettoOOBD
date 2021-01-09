@@ -27,7 +27,7 @@ public class CompagniaAereaDAO{
 			
 			while (rs.next()) {
 				
-				tmp = new CompagniaAerea(rs.getString("CodCompagnia"), rs.getString("NomeCompagnia"), rs.getInt("GrandezzaFlotta"));
+				tmp = new CompagniaAerea(rs.getString("NomeCompagnia"), rs.getInt("GrandezzaFlotta"));
 				result.add(tmp);
 				
 			}
@@ -149,7 +149,7 @@ public class CompagniaAereaDAO{
 			
 			while (rs.next()) {
 				
-				tmp = new CompagniaAerea(rs.getString("CodCompagnia"), rs.getString("NomeCompagnia"), rs.getInt("GrandezzaFlotta"));
+				tmp = new CompagniaAerea(rs.getString("NomeCompagnia"), rs.getInt("GrandezzaFlotta"));
 				result.add(tmp);
 				
 			}
@@ -208,7 +208,7 @@ public class CompagniaAereaDAO{
 			
 			while (rs.next()) {
 				
-				CompagniaAerea tmp = new CompagniaAerea(rs.getString(1), rs.getString(2), rs.getInt(3));
+				CompagniaAerea tmp = new CompagniaAerea(rs.getString("nomecompagnia"), rs.getInt("grandezzaflotta"));
 				Compagnie.add(tmp);
 			}
 			
@@ -244,7 +244,7 @@ public class CompagniaAereaDAO{
 			
 			while (rs.next()) {
 				
-				compagnie.add(new CompagniaAerea(rs.getString(1), rs.getString(2), rs.getInt(3)));
+				compagnie.add(new CompagniaAerea(rs.getString("nomecompagnia"), rs.getInt("grandezzaflotta")));
 				
 			}
 				
@@ -264,41 +264,37 @@ public class CompagniaAereaDAO{
 		return compagnie;
 	}
 
-	public CompagniaAerea getCompagniaByCod(String compagniaDiAppartenenza) throws CompagniaException {
-		
-		CompagniaAerea compagnia = new CompagniaAerea();
+
+	public CompagniaAerea getCompagniaByNome(String nome) throws CompagniaException {
+
+		CompagniaAerea tmp = new CompagniaAerea();
 		
 		try {
 			
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
-			PreparedStatement ps = conn.prepareStatement("select * from compagniaaerea where codcompagnia = ?");
+			PreparedStatement ps = conn.prepareStatement("select * from compagniaaerea where nomecompagnia = ?");
 			
-			ps.setString(1, compagniaDiAppartenenza);
+			ps.setString(1, nome);
 			ResultSet rs = ps.executeQuery();
 			
-			if (rs.next()) {
+			rs.next();
 				
-				compagnia = new CompagniaAerea(rs.getString(1), rs.getString(2), rs.getInt(3));
-				
-			}
-			
+			tmp = new CompagniaAerea(rs.getString("nomecompagnia"), rs.getInt("grandezzaflotta"));
 			
 			ps.close();
 			rs.close();
 			conn.close();
 			
-		}catch (SQLException e) {
+		}catch(SQLException e) {
 			
 			errore = e.getMessage();
 			
 			throw new CompagniaException(errore);
 			
-			
 		}
 		
-		
-		return compagnia;
+		return tmp;
 	}
 	
 	

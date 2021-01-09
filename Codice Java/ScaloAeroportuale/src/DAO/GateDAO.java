@@ -120,7 +120,7 @@ public class GateDAO {
 			
 			while(rs.next()) {
 				
-				Gate tmp = new Gate(rs.getString("codgate"), rs.getString("nomegate"));
+				Gate tmp = new Gate(rs.getString("nomegate"));
 				AllGate.add(tmp);
 			}
 			
@@ -164,7 +164,7 @@ public class GateDAO {
 			
 			while (rs.next()) {
 				
-				Gate tmp = new Gate(rs.getString(1), rs.getString(2));
+				Gate tmp = new Gate(rs.getString(2));
 				GateLiberi.add(tmp);
 			}
 			

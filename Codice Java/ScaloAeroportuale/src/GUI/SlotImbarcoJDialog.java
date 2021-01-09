@@ -60,7 +60,7 @@ public class SlotImbarcoJDialog extends JDialog {
 			while(GateDaCaricare.hasNext()) {
 				
 				Gate tmp = GateDaCaricare.next();
-				GateCombo.addItem(tmp.getCodGate() + ":" + tmp.getNomeGate());
+				GateCombo.addItem(tmp.getNomeGate());
 				
 			}
 			
@@ -97,7 +97,7 @@ public class SlotImbarcoJDialog extends JDialog {
 					
 						if (GateCombo.getSelectedItem().toString() != null) {
 							
-							controllerVoli.InsertVoloAndImbarco(volo, GateCombo.getSelectedItem().toString().substring(0,  GateCombo.getSelectedItem().toString().indexOf(":")), CodaCombo.getSelectedItem().toString());
+							controllerVoli.InsertVoloAndImbarco(a, volo, GateCombo.getSelectedItem().toString(), CodaCombo.getSelectedItem().toString());
 							dispose();
 							
 						}else {

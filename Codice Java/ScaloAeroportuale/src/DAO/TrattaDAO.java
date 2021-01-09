@@ -39,27 +39,22 @@ public class TrattaDAO {
 		
 	}
 
-	public ArrayList<Tratta> getTratteByAeroportoDiPartenza(String codAeroportoPartenza) throws TrattaException {
+	public ArrayList<Tratta> getTratteByAeroportoDiPartenza(Aeroporto aeroportoPartenza) throws TrattaException {
 
 		ArrayList<Tratta> Tratte = new ArrayList<Tratta>();
-		
-		if(codAeroportoPartenza.isBlank()) {
-			
-			throw new TrattaException("Impossibile cercare una tratta senza aeroporto di partenza!");
-			
-		}
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
-			PreparedStatement st = conn.prepareStatement("Select * from tratta where aeroportopartenza = ?");
-			st.setString(1, codAeroportoPartenza);
+			PreparedStatement st = conn.prepareStatement("Select * from tratta as t join aeroporto as a on t.aeroportoarrivo = a.codaeroporto where aeroportopartenza = ?");
+			st.setString(1, aeroportoPartenza.getCodAeroporto());
 			
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {
 				
-				Tratta tmp = new Tratta(rs.getString("codtratta"), rs.getString("aeroportopartenza"), rs.getString("aeroportoarrivo"));
+				Aeroporto aeroportoArrivo = new Aeroporto(rs.getString("codaeroporto"), rs.getString("nomeaeroporto"), rs.getString("città"));
+				Tratta tmp = new Tratta(aeroportoPartenza, aeroportoArrivo);
 				Tratte.add(tmp);
 			}
 			
@@ -148,7 +143,7 @@ public class TrattaDAO {
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
 			
-			PreparedStatement ps = conn.prepareStatement("Select * from tratta where codtratta = ?");
+			PreparedStatement ps = conn.prepareStatement("Select t.aeroportopartenza, a1.nomeaeroporto, a1.città, t.aeroportoarrivo, a2.nomeaeroporto, a2.città from (tratta as t join aeroporto as a1 on t.aeroportoarrivo = a1.codaeroporto) join aeroporto as a2 on t.aeroportopartenza = a2.codaeroporto where codtratta = ?");
 
 			ps.setString(1, trattaAssociata);
 			ResultSet rs = ps.executeQuery();
@@ -156,7 +151,10 @@ public class TrattaDAO {
 			
 			if (rs.next()) {
 				
-				risultato = new Tratta(rs.getString(1), rs.getString(2), rs.getString(3));
+				Aeroporto aeroportoPartenza = new Aeroporto(rs.getString("aeroportopartenza"), rs.getString("nomea1"), rs.getString("cittàa1"));
+				Aeroporto aeroportoArrivo = new Aeroporto(rs.getString("aeroportoarrivo"), rs.getString("nomea2"), rs.getString("cittàa2"));
+				
+				risultato = new Tratta(aeroportoPartenza, aeroportoArrivo);
 				
 			}			
 			
@@ -172,26 +170,29 @@ public class TrattaDAO {
 		return risultato;
 	}
 	
-	public ArrayList<Tratta> getTratte(String AeroportoPartenza, String AeroportoArrivo) throws TrattaException {
+	public Tratta getTratte(String AeroportoPartenza, String AeroportoArrivo) throws TrattaException {
 			
-		ArrayList<Tratta> risultato = new ArrayList<Tratta>();
+		Tratta risultato = new Tratta();
 		
 		try{
 			
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
 			
-			PreparedStatement ps = conn.prepareStatement("Select * from tratta where aeroportopartenza = ? and aeroportoarrivo = ?");
+			PreparedStatement ps = conn.prepareStatement("Select t.aeroportopartenza, a1.nomeaeroporto as nomea1, a1.città as cittàa1, t.aeroportoarrivo, a2.nomeaeroporto as nomea2, a2.città as cittàa2 from (tratta as t join aeroporto as a1 on t.aeroportopartenza = a1.codaeroporto) join aeroporto as a2 on t.aeroportoarrivo = a2.codaeroporto where a1.nomeaeroporto = ? and a2.nomeaeroporto = ?");
 
 			ps.setString(1, AeroportoPartenza);
 			ps.setString(2, AeroportoArrivo);
 			ResultSet rs = ps.executeQuery();
 			
-			while(rs.next()) {
+			rs.next();
 				
-				Tratta tmp = new Tratta(rs.getString("codtratta"), rs.getString("aeroportopartenza"), rs.getString("aeroportoarrivo"));
-				risultato.add(tmp);
-			}
+			Aeroporto aeroportoPartenza = new Aeroporto(rs.getString("aeroportopartenza"), rs.getString("nomea1"), rs.getString("cittàa1"));
+			Aeroporto aeroportoArrivo = new Aeroporto(rs.getString("aeroportoarrivo"), rs.getString("nomea2"), rs.getString("cittàa2"));
+				
+			risultato = new Tratta(aeroportoPartenza, aeroportoArrivo);
+				
+			
 			
 		}catch(SQLException e) {
 			

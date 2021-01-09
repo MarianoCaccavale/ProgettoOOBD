@@ -14,7 +14,7 @@ public class ControllerAeroporti {
 		
 		ArrayList<Aeroporto> AllAeroporti = new ArrayList<Aeroporto>();
 		
-		AllAeroporti = DAO.getAllAeroportiExceptThis(aer.getCodAeroporto());
+		AllAeroporti = DAO.getAllAeroportiExceptThis(aer.getNomeAeroporto());
 		
 		return AllAeroporti;
 		

@@ -5,41 +5,41 @@ import java.sql.Timestamp;
 
 public class SlotImbarco {
 
-	private String Volo;
-	private String Tratta;
-	private String Gate;
+	private Volo volo;
+	private Tratta Tratta;
+	private Gate Gate;
 	private Timestamp OraInizio;
 	
 
-	public SlotImbarco(String volo, String tratta, String gate, Timestamp oraInizio) {
+	public SlotImbarco(Volo Volo, Tratta tratta, Gate gate, Timestamp oraInizio) {
 		super();
-		Volo = volo;
+		volo = Volo;
 		Tratta = tratta;
 		Gate = gate;
 		OraInizio = oraInizio;
 	}
 
-	public String getVolo() {
-		return Volo;
+	public Volo getVolo() {
+		return volo;
 	}
 	
-	public void setVolo(String volo) {
-		Volo = volo;
+	public void setVolo(Volo Volo) {
+		volo = Volo;
 	}
 	
-	public String getTratta() {
+	public Tratta getTratta() {
 		return Tratta;
 	}
 	
-	public void setTratta(String tratta) {
+	public void setTratta(Tratta tratta) {
 		Tratta = tratta;
 	}
 	
-	public String getGate() {
+	public Gate getGate() {
 		return Gate;
 	}
 	
-	public void setGate(String gate) {
+	public void setGate(Gate gate) {
 		Gate = gate;
 	}
 	

@@ -104,7 +104,7 @@ public class GestioneClientiBusiness extends JFrame {
 		
 		JComboBox<String> CompagniaCombo = new JComboBox<String>();
 		CompagniaCombo.setFont(new Font("Arial", Font.PLAIN, 20));
-		CompagniaCombo.setModel(new DefaultComboBoxModel(new String[] {"Scegliere la compagnia"}));
+		CompagniaCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere la compagnia"}));
 		CompagniaCombo.setBounds(44, 286, 330, 50);
 		
 		ArrayList<CompagniaAerea> compagniaLista = new ArrayList<CompagniaAerea>();
@@ -112,7 +112,7 @@ public class GestioneClientiBusiness extends JFrame {
 		
 		for(CompagniaAerea tmp:compagniaLista) {
 			
-			CompagniaCombo.addItem(tmp.getCodCompagnia() + ": " + tmp.getNomeCompagnia());
+			CompagniaCombo.addItem(tmp.getNomeCompagnia());
 			
 		}
 		
@@ -237,15 +237,15 @@ public class GestioneClientiBusiness extends JFrame {
 		RicercaPanel.add(RicercaClientiPanel);
 		RicercaClientiPanel.setLayout(null);
 		
-		JComboBox CercaCompagnieCombo = new JComboBox();
+		JComboBox<String> CercaCompagnieCombo = new JComboBox<String>();
 		CercaCompagnieCombo.setFont(new Font("Arial", Font.PLAIN, 20));
-		CercaCompagnieCombo.setModel(new DefaultComboBoxModel(new String[] {"Scegliere la compagnia"}));
+		CercaCompagnieCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere la compagnia"}));
 		CercaCompagnieCombo.setBounds(10, 10, 330, 50);
 		RicercaClientiPanel.add(CercaCompagnieCombo);
 		
 		for(CompagniaAerea tmp:compagniaLista) {
 			
-			CercaCompagnieCombo.addItem(tmp.getCodCompagnia() + ": " + tmp.getNomeCompagnia());
+			CercaCompagnieCombo.addItem(tmp.getNomeCompagnia());
 			
 		}
 		

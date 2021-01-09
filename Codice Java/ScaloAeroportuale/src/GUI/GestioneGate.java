@@ -197,7 +197,7 @@ public class GestioneGate extends JFrame {
 		while(iGate.hasNext()) {
 			Gate tmp = iGate.next();
 			ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
-			ElencoTextPane.setText(ElencoTextPane.getText() + "Codice del Gate: " + tmp.getCodGate() +"\t\tNome Gate: " + tmp.getNomeGate() +"");
+			ElencoTextPane.setText(ElencoTextPane.getText() + "Nome Gate: " + tmp.getNomeGate() +"");
 		}
 		
 		/*Inizio pannello dei bottoni*/

@@ -10,17 +10,17 @@ public class ClienteBusiness {
 	private Date dataNascita = new Date(0);
 	private Date dataIscrizione = new Date(0);
 	private int punti;
-	private String codCentoKilometri = new String();
+	private CompagniaAerea compagniaDiIscrizione = new CompagniaAerea();
 	
 	public void CLienteBusiness() {};
 		
-	public ClienteBusiness(String email, String nome, String cognome, int punti, String codCentoKilometri) {
+	public ClienteBusiness(String email, String nome, String cognome, int punti, CompagniaAerea compagniaDiIscrizione) {
 		super();
 		this.email = email;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.punti = punti;
-		this.codCentoKilometri = codCentoKilometri;
+		this.compagniaDiIscrizione = compagniaDiIscrizione;
 	}
 
 
@@ -49,17 +49,25 @@ public class ClienteBusiness {
 	public void setDataNascita(Date dataNascita) {
 		this.dataNascita = dataNascita;
 	}
+	public Date getDataIscrizione() {
+		return dataIscrizione;
+	}
+
+	public void setDataIscrizione(Date dataIscrizione) {
+		this.dataIscrizione = dataIscrizione;
+	}
+
 	public int getPunti() {
 		return punti;
 	}
 	public void setPunti(int punti) {
 		this.punti = punti;
 	}
-	public String getCodCentoKilometri() {
-		return codCentoKilometri;
+	public CompagniaAerea getCodCentoKilometri() {
+		return compagniaDiIscrizione;
 	}
-	public void setCodCentoKilometri(String codCentoKilometri) {
-		this.codCentoKilometri = codCentoKilometri;
+	public void setCodCentoKilometri(CompagniaAerea codCentoKilometri) {
+		this.compagniaDiIscrizione = codCentoKilometri;
 	}
 	
 }

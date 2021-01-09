@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import Classi.ClienteBusiness;
+import Classi.CompagniaAerea;
 import Connessione.ConnessioneDB;
 import Eccezioni.ClientiException;
 
@@ -19,7 +20,7 @@ public class ClientiDAO {
 	private ConnessioneDB connessioneDB;
 	String errore = new String("");
 
-	public void insert(String email, String nome, String cognome, Date dataNascitaTmp, String codCompagnia) throws ClientiException {
+	public void insert(String email, String nome, String cognome, Date dataNascitaTmp, CompagniaAerea compagnia) throws ClientiException {
 		
 		try {
 			
@@ -34,7 +35,7 @@ public class ClientiDAO {
 			ps.setTimestamp(4, dataNascita);
 			
 			ps.setInt(5, 0);
-			ps.setString(6, "CK"+codCompagnia);
+			ps.setString(6, "CK"+compagnia.getCodCompagnia());
 			
 			ps.executeUpdate();
 			ps.close();
@@ -90,7 +91,8 @@ public class ClientiDAO {
 			ResultSet rs = st.executeQuery("select * from clientibusiness");
 			
 			while (rs.next()) {
-				
+				//Restituire una compagnia aerea dal proprio codcentokilometri
+				(rs.getString("codcentokilometri"));
 				ClienteBusiness tmp = new ClienteBusiness(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getInt("punti"), rs.getString("codcentokilometri"));
 				Clienti.add(tmp);
 				
@@ -110,7 +112,7 @@ public class ClientiDAO {
 		return Clienti;
 	}
 
-	public ArrayList<ClienteBusiness> getClientiBusinessByCompagnia(String codCompagnia) throws ClientiException {
+	public ArrayList<ClienteBusiness> getClientiBusinessByCompagnia(CompagniaAerea compagnia) throws ClientiException {
 	
 		ArrayList<ClienteBusiness> Clienti = new ArrayList<ClienteBusiness>();
 		
@@ -119,13 +121,13 @@ public class ClientiDAO {
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
 			PreparedStatement ps = conn.prepareStatement("select cb.email, cb.nome, cb.cognome, cb.punti, ca.codcentokilometri from clientibusiness as cb natural join compagniaaerea as ca where ca.codcompagnia = ?");
-			ps.setString(1, codCompagnia);
+			ps.setString(1, compagnia.getCodCompagnia());
 			
 			ResultSet rs = ps.executeQuery();
 			
 			while (rs.next()) {
 				
-				ClienteBusiness tmp = new ClienteBusiness(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getInt("punti"), rs.getString("codcentokilometri"));
+				ClienteBusiness tmp = new ClienteBusiness(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getInt("punti"), compagnia);
 				Clienti.add(tmp);
 				
 			}

@@ -7,34 +7,44 @@ import javax.swing.JDialog;
 import javax.swing.JTextField;
 
 import Classi.Aeroporto;
+import Classi.CompagniaAerea;
+import Classi.Tratta;
 import Classi.Volo;
+import DAO.CompagniaAereaDAO;
 import DAO.SlotImbarcoDAO;
+import DAO.TrattaDAO;
 import DAO.VoloDAO;
+import Eccezioni.CompagniaException;
 import Eccezioni.SlotImbarcoException;
+import Eccezioni.TrattaException;
 import Eccezioni.VoloException;
 import GUI.SlotImbarcoJDialog;
 
 public class ControllerVoli {
 		
-	VoloDAO VoloDAO = new VoloDAO();
-	SlotImbarcoDAO ImbarcoDAO = new SlotImbarcoDAO();
+	VoloDAO voloDAO = new VoloDAO();
+	TrattaDAO trattaDAO = new TrattaDAO();
+	CompagniaAereaDAO compagniaDAO = new CompagniaAereaDAO();
+	SlotImbarcoDAO imbarcoDAO = new SlotImbarcoDAO();
 	
 	JDialog successo = new JDialog();
 	JTextField testo = new JTextField();
 	
-	public void InsertVoloAndImbarco(Volo volo, String codGate, String coda){
+	public void InsertVoloAndImbarco(Aeroporto aeroporto, Volo volo, String codGate, String coda){
 		
 		try {
-			VoloDAO.Insert(volo);
+
+			voloDAO.Insert(volo);
 			
 			java.util.Date dataTmp = (java.util.Date) volo.getData();
 			Timestamp dataInizio = new Timestamp(dataTmp.getTime());
 			
-			ImbarcoDAO.insert(volo.getCodVolo(), codGate, coda, dataInizio);
+			imbarcoDAO.insert(aeroporto, volo.getCodVolo(), codGate, coda, dataInizio);
 			successo.setBounds(200,200,400,200);
 			testo.setText("Inserimento avvenuto con successo!"); 
 			successo.add(testo);
 			successo.setVisible(true);
+			
 		} catch (VoloException | SlotImbarcoException e) {
 			
 			if (e.getMessage().contains("controllo_voli_flotta()")) {
@@ -67,7 +77,7 @@ public class ControllerVoli {
 		ArrayList<Volo> Voli = new ArrayList<Volo>();
 		
 		try {
-			Voli = VoloDAO.getAllVoli(a.getCodAeroporto());
+			Voli = voloDAO.getAllVoli(a);
 		} catch (VoloException e) {
 			successo.setBounds(200,200,400,200);
 			testo.setText(e.getMessage().toString()); 
@@ -83,7 +93,7 @@ public class ControllerVoli {
 		
 		try {
 			
-			VoloDAO.delete(codVolo);
+			voloDAO.delete(codVolo);
 			successo.setBounds(200,200,400,200);
 			testo.setText("Cancellazione del volo eseguita correttamente!"); 
 			successo.add(testo);
@@ -106,7 +116,7 @@ public class ControllerVoli {
 
 		try {
 			
-			VoloDAO.updateVolo(numeroPosti, codVolo);
+			voloDAO.updateVolo(numeroPosti, codVolo);
 			successo.setBounds(200,200,400,200);
 			testo.setText("Modifica effettuata con successo!"); 
 			successo.add(testo);
@@ -130,9 +140,9 @@ public class ControllerVoli {
 		
 		try {
 			
-			VoliTrovati = VoloDAO.ricercaVoloByTratta(codTratta);
+			VoliTrovati = voloDAO.ricercaVoloByTratta(trattaDAO.getTrattaByCod(codTratta));
 			
-		}catch(VoloException e) {
+		}catch(VoloException | TrattaException e) {
 			
 			successo.setBounds(200,200,400,200);
 			testo.setText(e.getMessage().toString()); 
@@ -148,7 +158,7 @@ public class ControllerVoli {
 
 		try {
 			
-			VoloDAO.generateTicket(codVolo, numBiglietti);
+			voloDAO.generateTicket(codVolo, numBiglietti);
 			successo.setBounds(200,200,400,200);
 			testo.setText("Biglietto/i generati con successo!"); 
 			successo.add(testo);
@@ -180,7 +190,7 @@ public class ControllerVoli {
 
 		try {
 			
-			VoloDAO.generateBusinessTicket(codVolo, numBiglietti, email);
+			voloDAO.generateBusinessTicket(codVolo, numBiglietti, email);
 			successo.setBounds(200,200,400,200);
 			testo.setText("Biglietto/i generati con successo!"); 
 			successo.add(testo);

@@ -9,6 +9,9 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import Classi.Aeroporto;
+import Classi.CompagniaAerea;
+import Classi.Tratta;
 import Classi.Volo;
 import Connessione.ConnessioneDB;
 import Eccezioni.VoloException;
@@ -28,6 +31,26 @@ public class VoloDAO {
 			
 			PreparedStatement ps = conn.prepareStatement("Insert into volo values(nextval('sequenza_volo'), ?, ?, ?, ?, ?)");
 			
+			Statement st = conn.createStatement();
+			ResultSet rs_codAeroportoPartenza = st.executeQuery("select codaeroporto from aeroporto where nomeaeroporto = '" + volo.getTrattaAssociata().getAeroportoDiPartenza().getNomeAeroporto()+ "'");
+			rs_codAeroportoPartenza.next();
+			ResultSet rs_codAeroportoArrivo = st.executeQuery("select codaeroporto from aeroporto where nomeaeroporto = '" + volo.getTrattaAssociata().getAeroportoDiArrivo().getNomeAeroporto()+ "'");
+			rs_codAeroportoArrivo.next();
+			PreparedStatement codiceTratta = conn.prepareStatement("select codtratta from tratta where aeroportopartenza = ? AND aeroportoarrivo = ?");
+			codiceTratta.setString(1, rs_codAeroportoPartenza.getString("codaeroporto"));
+			codiceTratta.setString(2, rs_codAeroportoArrivo.getString("codaeroporto"));
+			ResultSet rs_codiceTratta = codiceTratta.executeQuery();
+			rs_codiceTratta.next();
+			String codTratta = rs_codiceTratta.getString("codtratta");
+			
+			
+			PreparedStatement codiceCompagnia = conn.prepareStatement("select codcompagnia from compagniaaerea where nomecompagnia= ?");
+			codiceCompagnia.setString(1, volo.getCompagniaDiAppartenenza().getNomeCompagnia());
+			ResultSet rs_codiceCompagnia = codiceCompagnia.executeQuery();
+			rs_codiceCompagnia.next();
+			String codCompagnia = rs_codiceCompagnia.getString("codcompagnia");
+			
+			
 			java.util.Date dataTmp = (java.util.Date)volo.getData();
 			Timestamp dataVolo = new Timestamp(dataTmp.getTime());
 			
@@ -35,12 +58,12 @@ public class VoloDAO {
 			ps.setTimestamp(1, dataVolo);
 			ps.setInt(2, volo.getNumeroPosti());
 			ps.setInt(3, 0);
-			ps.setString(4, volo.getTrattaAssociata());
-			ps.setString(5, volo.getCompagniaDiAppartenenza());
+			ps.setString(4, codTratta);
+			ps.setString(5, codCompagnia);
 			ps.executeUpdate();
 			
-			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery("select last_value from sequenza_volo");
+			Statement sequenza = conn.createStatement();
+			ResultSet rs = sequenza.executeQuery("select last_value from sequenza_volo");
 			rs.next();
 			volo.setCodVolo(rs.getString("last_value"));
 			
@@ -62,7 +85,7 @@ public class VoloDAO {
 	}
 
 
-	public ArrayList<Volo> getAllVoli(String codAeroporto) throws VoloException {
+	public ArrayList<Volo> getAllVoli(Aeroporto aeroporto) throws VoloException {
 		
 		ArrayList<Volo> risultato = new ArrayList<Volo>();
 		
@@ -71,14 +94,17 @@ public class VoloDAO {
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
 			
-			PreparedStatement ps = conn.prepareStatement("Select * from volo as v inner join tratta as t on v.codtratta = t.codtratta where t.aeroportopartenza = ?");
-			ps.setString(1, codAeroporto);
+			PreparedStatement ps = conn.prepareStatement("Select * from ((volo as v natural join compagniaaerea as c) inner join tratta as t on v.codtratta = t.codtratta) as vt inner join aeroporto as a on vt.aeroportoarrivo = a.codaeroporto where vt.aeroportopartenza = ?");
+			ps.setString(1, aeroporto.getCodAeroporto());
 			
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				
-				Volo tmp = new Volo(rs.getString(1), (java.util.Date) rs.getTimestamp(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getString(6));
+				Aeroporto aeroportoTmp = new Aeroporto(rs.getString("aeroportoarrivo"), rs.getString("nomeaeroporto"), rs.getString("città"));
+				Tratta trattaTmp = new Tratta(aeroporto, aeroportoTmp);
+				CompagniaAerea compagniaTmp = new CompagniaAerea(rs.getString("nomecompagnia"), rs.getInt("grandezzaflotta"));
+				Volo tmp = new Volo(rs.getString("codvolo"),(java.util.Date)rs.getTimestamp("datavolo"), rs.getInt("numeroposti"), rs.getInt("numeropostiprenotati"), compagniaTmp, trattaTmp);
 				
 				risultato.add(tmp);
 				
@@ -155,7 +181,7 @@ public class VoloDAO {
 	}
 
 
-	public ArrayList<Volo> ricercaVoloByTratta(String codTratta) throws VoloException {
+	public ArrayList<Volo> ricercaVoloByTratta(Tratta tratta) throws VoloException {
 		
 		ArrayList<Volo> VoliTrovati = new ArrayList<Volo>();
 		
@@ -164,14 +190,16 @@ public class VoloDAO {
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
 			
-			PreparedStatement ps = conn.prepareStatement("select v.codvolo, v.datavolo, v.numeroposti, v.numeropostiprenotati, v.codtratta, v.codcompagnia from volo as v natural join tratta as t where t.codtratta = (select codtratta from tratta where codtratta = ?)");
-			ps.setString(1, codTratta);
+			PreparedStatement ps = conn.prepareStatement("select v.codvolo, v.datavolo, v.numeroposti, v.numeropostiprenotati, v.codtratta, v.codcompagnia from volo as v natural join tratta as t where t.codtratta = ?");
+			ps.setString(1, tratta.getCodTratta());
 			
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				
-				Volo tmp = new Volo(rs.getString(1), (java.util.Date) rs.getTimestamp(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getString(6));
+				CompagniaAerea compagniaTmp = new CompagniaAerea(rs.getString("nomecompagnia"), rs.getInt("grandezzaflotta"));
+				
+				Volo tmp = new Volo(rs.getString("codvolo"), (java.util.Date) rs.getTimestamp("datavolo"), rs.getInt("numeroposti"), rs.getInt("numeropostiprenotati"), compagniaTmp, tratta);
 				
 				VoliTrovati.add(tmp);
 				

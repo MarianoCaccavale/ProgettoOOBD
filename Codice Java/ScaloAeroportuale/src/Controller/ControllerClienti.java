@@ -7,12 +7,16 @@ import javax.swing.JDialog;
 import javax.swing.JTextField;
 
 import Classi.ClienteBusiness;
+import Classi.CompagniaAerea;
 import DAO.ClientiDAO;
+import DAO.CompagniaAereaDAO;
 import Eccezioni.ClientiException;
+import Eccezioni.CompagniaException;
 
 public class ControllerClienti {
 
-	ClientiDAO DAO = new ClientiDAO();
+	ClientiDAO DAOClienti = new ClientiDAO();
+	CompagniaAereaDAO DAOCompagnia = new CompagniaAereaDAO();
 	
 	JDialog successo = new JDialog();
 	JTextField testo = new JTextField();
@@ -22,13 +26,14 @@ public class ControllerClienti {
 		
 		try {
 			
-			DAO.insert(email, nome, cognome, dataNascita, codCompagnia);
+			CompagniaAerea compagnia = DAOCompagnia.getCompagniaByCod(codCompagnia);
+			DAOClienti.insert(email, nome, cognome, dataNascita, compagnia);
 			successo.setBounds(200,200,400,200);
 			testo.setText("Inserimento avvenuto con successo!"); 
 			successo.add(testo);
 			successo.setVisible(true);
 			
-		}catch(ClientiException e) {
+		}catch(ClientiException | CompagniaException e) {
 			
 			successo.setBounds(200,200,400,200);
 			testo.setText(e.getMessage().toString()); 
@@ -45,7 +50,7 @@ public class ControllerClienti {
 		
 		try {
 			
-			DAO.delete(email);
+			DAOClienti.delete(email);
 			successo.setBounds(200,200,400,200);
 			testo.setText("Cliente eliminato con successo!"); 
 			successo.add(testo);
@@ -70,7 +75,7 @@ public class ControllerClienti {
 		
 		try {
 			
-			Clienti = DAO.getAllClientiBusiness();
+			Clienti = DAOClienti.getAllClientiBusiness();
 						
 		}catch(ClientiException e) {
 			
@@ -92,9 +97,10 @@ public class ControllerClienti {
 		
 		try {
 			
-			Clienti = DAO.getClientiBusinessByCompagnia(codCompagnia);
+			CompagniaAerea compagnia = DAOCompagnia.getCompagniaByCod(codCompagnia);
+			Clienti = DAOClienti.getClientiBusinessByCompagnia(compagnia);
 						
-		}catch(ClientiException e) {
+		}catch(ClientiException | CompagniaException e) {
 			
 			successo.setBounds(200,200,400,200);
 			testo.setText(e.getMessage().toString()); 

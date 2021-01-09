@@ -54,7 +54,6 @@ public class GestioneVoli extends JFrame {
 		setResizable(false);
 		setTitle("Gestione Voli");
 		controller = c;
-		ControllerAeroporti controllerAeroporto = new ControllerAeroporti();
 		ControllerVoli controllerVoli = new ControllerVoli();
 		ControllerTratte controllerTratte = new ControllerTratte();
 		ControllerCompagnie controllerCompagnie = new ControllerCompagnie();
@@ -86,7 +85,7 @@ public class GestioneVoli extends JFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(232, 0, 840, 509);
 		contentPane.add(tabbedPane);
-		Tratte = controllerTratte.getTratteFromThisAirport(a.getCodAeroporto());
+		Tratte = controllerTratte.getTratteFromThisAirport(a);
 		Iterator<Tratta> TratteDaCaricare = Tratte.iterator();
 		
 		JPanel AggiuntaPanel = new JPanel();
@@ -112,9 +111,9 @@ public class GestioneVoli extends JFrame {
 			Tratta tmp = TratteDaCaricare.next();
 			String nomeAeroportoPartenza = new String();
 			String nomeAeroportoArrivo = new String();
-			nomeAeroportoPartenza = (controllerAeroporto.getAeroportoByCod(tmp.getAeroportoDiPartenza())).getNomeAeroporto();
-			nomeAeroportoArrivo = (controllerAeroporto.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getNomeAeroporto();
-			SceltaTrattaCombo.addItem(tmp.getCodTratta()+ ": " +nomeAeroportoArrivo + " - " + nomeAeroportoPartenza);
+			nomeAeroportoPartenza = (tmp.getAeroportoDiPartenza()).getNomeAeroporto();
+			nomeAeroportoArrivo = (tmp.getAeroportoDiArrivo()).getNomeAeroporto();
+			SceltaTrattaCombo.addItem(nomeAeroportoPartenza + "<->" + nomeAeroportoArrivo);
 			
 		}
 		CompagnieAeree = controllerCompagnie.getCompagnie(a);
@@ -123,7 +122,7 @@ public class GestioneVoli extends JFrame {
 		while(CompagnieDaCaricare.hasNext()) {
 			
 			CompagniaAerea tmp = CompagnieDaCaricare.next();
-			SceltaCompagniaCombo.addItem(tmp.getCodCompagnia() + ":" + tmp.getNomeCompagnia());
+			SceltaCompagniaCombo.addItem(tmp.getNomeCompagnia());
 			
 		}
 		
@@ -146,21 +145,14 @@ public class GestioneVoli extends JFrame {
 		
 		ArrayList<Volo> VoliModifica = new ArrayList<Volo>();
 		VoliModifica = controllerVoli.getAllVoli(a);
-		Iterator<Volo> iVoloModifica = VoliModifica.iterator();
 		
-		while (iVoloModifica.hasNext()) {
+		for(Volo tmp:VoliModifica) {				
 			
-			Tratta tratta = new Tratta();
-			CompagniaAerea compagnia = new CompagniaAerea();
-			Volo tmp = iVoloModifica.next();
-				
-			tratta = controllerTratte.getTrattaByCod(tmp.getCompagniaDiAppartenenza());
-			compagnia =  controllerCompagnie.getCompagniaByCod(tmp.getTrattaAssociata());
 			String nomeAeroportoPartenza = new String();
 			String nomeAeroportoArrivo = new String();
-			nomeAeroportoPartenza = (controllerAeroporto.getAeroportoByCod(tratta.getAeroportoDiPartenza())).getNomeAeroporto();
-			nomeAeroportoArrivo = (controllerAeroporto.getAeroportoByCod(tratta.getAeroportoDiArrivo())).getNomeAeroporto();
-			ModificaComboBox.addItem(tmp.getCodVolo() + " - " + nomeAeroportoPartenza +" - " + nomeAeroportoArrivo +" - " + compagnia.getNomeCompagnia() + " - " + tmp.getData().toString());;
+			nomeAeroportoPartenza = tmp.getTrattaAssociata().getAeroportoDiPartenza().getNomeAeroporto();
+			nomeAeroportoArrivo = tmp.getTrattaAssociata().getAeroportoDiArrivo().getNomeAeroporto();
+			ModificaComboBox.addItem(tmp.getCodVolo()+ ":" + nomeAeroportoPartenza +"<->" + nomeAeroportoArrivo +" - Svolto da: " + tmp.getCompagniaDiAppartenenza().getNomeCompagnia() + " - " + tmp.getData().toString());;
 			
 		}
 		
@@ -173,7 +165,7 @@ public class GestioneVoli extends JFrame {
 				
 				if(ModificaComboBox.getSelectedIndex() != 0) {
 					
-					controllerVoli.updateVolo((Integer) ModificaNumeroPostiSpn.getValue(), ModificaComboBox.getSelectedItem().toString().substring(0, ModificaComboBox.getSelectedItem().toString().indexOf("-")-1));
+					controllerVoli.updateVolo((Integer) ModificaNumeroPostiSpn.getValue(),(String) ModificaComboBox.getSelectedItem().toString().subSequence(0, ModificaComboBox.getSelectedItem().toString().indexOf(":")));
 
 				}
 				
@@ -206,13 +198,10 @@ public class GestioneVoli extends JFrame {
 		Iterator<Volo> iVoli = Voli.iterator();
 		
 		while(iVoli.hasNext()) {
+			
 			Volo tmp = iVoli.next();
-			CompagniaAerea Compagnia = new CompagniaAerea();
-			String CompagniaDiAppartenenza = new String();
-			CompagniaDiAppartenenza = tmp.getTrattaAssociata();
-			Compagnia = controllerCompagnie.getCompagniaByCod(CompagniaDiAppartenenza);
 			ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
-			ElencoTextPane.setText(ElencoTextPane.getText() + "Codice del volo: " + tmp.getCodVolo() +"\tData e ora: " + tmp.getData() +"\tNumero posti: " + tmp.getNumeroPosti() + "\tNumero posti prenotati: " + tmp.getNumeroPostiPrenotati() +"\tCompagnia aerea: " + Compagnia.getNomeCompagnia() + "");
+			ElencoTextPane.setText(ElencoTextPane.getText() + "Codice del volo: " + tmp.getCodVolo() +"\tData e ora: " + tmp.getData() +"\tNumero posti: " + tmp.getNumeroPosti() + "\tNumero posti prenotati: " + tmp.getNumeroPostiPrenotati() +"\tCompagnia aerea: " + tmp.getCompagniaDiAppartenenza().getNomeCompagnia() + "");
 		}
 		
 		
@@ -224,15 +213,13 @@ public class GestioneVoli extends JFrame {
 		JComboBox<String> RicercaTrattaCombo = new JComboBox<String>();
 		RicercaTrattaCombo.setFont(new Font("Arial", Font.PLAIN, 20));
 		RicercaTrattaCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere la tratta"}));
-		Iterator<Tratta> TratteDaCercare = Tratte.iterator();
 		
-		while (TratteDaCercare.hasNext()) {
+		for (Tratta tmp:Tratte){
 			
-			Tratta tmp = TratteDaCercare.next();
 			String nomeAeroportoPartenza = new String();
 			String nomeAeroportoArrivo = new String();
-			nomeAeroportoArrivo = (controllerAeroporto.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getNomeAeroporto();
-			nomeAeroportoPartenza = (controllerAeroporto.getAeroportoByCod(tmp.getAeroportoDiPartenza())).getNomeAeroporto();
+			nomeAeroportoArrivo = tmp.getAeroportoDiArrivo().getNomeAeroporto();
+			nomeAeroportoPartenza = tmp.getAeroportoDiPartenza().getNomeAeroporto();
 			RicercaTrattaCombo.addItem(tmp.getCodTratta()+ ": " + nomeAeroportoPartenza + "   -   " + nomeAeroportoArrivo);
 			
 		}
@@ -250,17 +237,12 @@ public class GestioneVoli extends JFrame {
 					
 					String codTratta = RicercaTrattaCombo.getSelectedItem().toString().substring(0, RicercaTrattaCombo.getSelectedItem().toString().indexOf(":"));
 					ArrayList<Volo> VoliTrovati = controllerVoli.ricercaVoliByTratta(codTratta);
-					
-					Iterator<Volo> iVoliTrovati = VoliTrovati.iterator();
 						
-						while(iVoliTrovati.hasNext()) {
-							Volo tmpVolo = iVoliTrovati.next();
-							CompagniaAerea Compagnia = new CompagniaAerea();
-							String CompagniaDiAppartenenza = new String();
-							CompagniaDiAppartenenza = tmpVolo.getTrattaAssociata();
-							Compagnia = controllerCompagnie.getCompagniaByCod(CompagniaDiAppartenenza);
+						for(Volo tmpVolo:VoliTrovati) {
+							
 							ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
-							ElencoTextPane.setText(ElencoTextPane.getText() + "Codice del volo: " + tmpVolo.getCodVolo() +"\tData e ora: " + tmpVolo.getData() +"\tNumero posti: " + tmpVolo.getNumeroPosti() + "\tNumero posti prenotati: " + tmpVolo.getNumeroPostiPrenotati() +"\t Compagnia aerea: " + Compagnia.getNomeCompagnia());
+							ElencoTextPane.setText(ElencoTextPane.getText() + "Codice del volo: " + tmpVolo.getCodVolo() +"\tData e ora: " + tmpVolo.getData() +"\tNumero posti: " + tmpVolo.getNumeroPosti() + "\tNumero posti prenotati: " + tmpVolo.getNumeroPostiPrenotati() +"\t Compagnia aerea: " + tmpVolo.getCompagniaDiAppartenenza().getNomeCompagnia());
+							
 						}
 						
 					}
@@ -283,7 +265,7 @@ public class GestioneVoli extends JFrame {
 		while(iSlotImbarco.hasNext()) {
 			
 			SlotImbarco tmp = iSlotImbarco.next();
-			ChiusuraComboBox.addItem("Codice volo: " + tmp.getVolo() + " - Codice Tratta: " + tmp.getTratta() + " - Codice Gate: " + tmp.getGate() + " - Ora di partenza: " + tmp.getOraInizio());
+			ChiusuraComboBox.addItem("Codice volo: " + tmp.getVolo() + " - Codice Tratta: " + tmp.getTratta().getAeroportoDiPartenza() + " - "+ tmp.getTratta().getAeroportoDiArrivo() + " - Gate: " + tmp.getGate().getNomeGate() + " - Ora di partenza: " + tmp.getOraInizio());
 			
 		}
 		
@@ -298,21 +280,14 @@ public class GestioneVoli extends JFrame {
 		
 		ArrayList<Volo> VoliElimina = new ArrayList<Volo>();
 		VoliElimina = controllerVoli.getAllVoli(a);
-		Iterator<Volo> iVoloElimina = VoliElimina.iterator();
 		
-		while (iVoloElimina.hasNext()) {
+		for (Volo tmp: VoliElimina) {
 			
-			Tratta tratta = new Tratta();
-			CompagniaAerea compagnia = new CompagniaAerea();
-			Volo tmp = iVoloElimina.next();
-				
-			tratta = controllerTratte.getTrattaByCod(tmp.getCompagniaDiAppartenenza());
-			compagnia =  controllerCompagnie.getCompagniaByCod(tmp.getTrattaAssociata());
 			String nomeAeroportoPartenza = new String();
 			String nomeAeroportoArrivo = new String();
-			nomeAeroportoPartenza = (controllerAeroporto.getAeroportoByCod(tratta.getAeroportoDiPartenza())).getNomeAeroporto();
-			nomeAeroportoArrivo = (controllerAeroporto.getAeroportoByCod(tratta.getAeroportoDiArrivo())).getNomeAeroporto();
-			EliminaVoloComboBox.addItem(tmp.getCodVolo() + " - " + nomeAeroportoPartenza +" - " + nomeAeroportoArrivo +" - " + compagnia.getNomeCompagnia() + " - " + tmp.getData().toString());;
+			nomeAeroportoPartenza = tmp.getTrattaAssociata().getAeroportoDiPartenza().getNomeAeroporto();
+			nomeAeroportoArrivo = tmp.getTrattaAssociata().getAeroportoDiPartenza().getNomeAeroporto();
+			EliminaVoloComboBox.addItem(tmp.getCodVolo() + " - " + nomeAeroportoPartenza +" - " + nomeAeroportoArrivo +" - " + tmp.getCompagniaDiAppartenenza().getNomeCompagnia() + " - " + tmp.getData().toString());;
 			
 		}
 		
@@ -373,8 +348,12 @@ public class GestioneVoli extends JFrame {
 					volo.setData(data);
 					volo.setNumeroPosti((Integer) NumeroPostiPrenotatiSpn.getValue());
 					volo.setNumeroPostiPrenotati((Integer) NumeroPostiPrenotatiSpn.getValue());
-					volo.setCompagniaDiAppartenenza(SceltaCompagniaCombo.getSelectedItem().toString().substring(0, SceltaCompagniaCombo.getSelectedItem().toString().indexOf(":")).toString());
-					volo.setTrattaAssociata(SceltaTrattaCombo.getSelectedItem().toString().subSequence(0, SceltaTrattaCombo.getSelectedItem().toString().indexOf(":")).toString());
+					CompagniaAerea tmpCompagnia = controllerCompagnie.getCompagniaByNome(SceltaCompagniaCombo.getSelectedItem().toString());
+					volo.setCompagniaDiAppartenenza(tmpCompagnia);
+					String aeroportoPartenza = SceltaTrattaCombo.getSelectedItem().toString().substring(0, SceltaTrattaCombo.getSelectedItem().toString().indexOf("<->"));
+					String aeroportoArrivo = SceltaTrattaCombo.getSelectedItem().toString().substring(SceltaTrattaCombo.getSelectedItem().toString().indexOf("<->")+3);
+					Tratta tmpTratta = controllerTratte.ricerca(aeroportoPartenza, aeroportoArrivo);
+					volo.setTrattaAssociata(tmpTratta);
 					controllerVoli.apriSlotImbarco(a, volo);
 					
 				}

@@ -2,29 +2,17 @@ package Classi;
 
 public class CompagniaAerea {
 
-	private String CodCompagnia = new String();
 	private String NomeCompagnia = new String();
 	private int GrandezzaFlotta;
-	private String AeroportoDiAppartenenza;
+	private CompagniaAerea AeroportoDiAppartenenza;
 	private String CodCentoKilometri;
 	
 	public CompagniaAerea() {}
 	
-	public CompagniaAerea(String codCompagnia, String nomeCompagnia, int grandezzaFlotta) {
+	public CompagniaAerea(String nomeCompagnia, int grandezzaFlotta) {
 		super();
-		CodCompagnia = codCompagnia;
 		NomeCompagnia = nomeCompagnia;
 		GrandezzaFlotta = grandezzaFlotta;
-	}
-
-
-
-	public String getCodCompagnia() {
-		return CodCompagnia;
-	}
-	
-	public void setCodCompagnia(String codCompagnia) {
-		CodCompagnia = codCompagnia;
 	}
 	
 	public String getNomeCompagnia() {
@@ -43,11 +31,11 @@ public class CompagniaAerea {
 		GrandezzaFlotta = grandezzaFlotta;
 	}
 	
-	public String getAeroportoDiAppartenenza() {
+	public CompagniaAerea getAeroportoDiAppartenenza() {
 		return AeroportoDiAppartenenza;
 	}
 	
-	public void setAeroportoDiAppartenenza(String aeroportoDiAppartenenza) {
+	public void setAeroportoDiAppartenenza(CompagniaAerea aeroportoDiAppartenenza) {
 		AeroportoDiAppartenenza = aeroportoDiAppartenenza;
 	}
 

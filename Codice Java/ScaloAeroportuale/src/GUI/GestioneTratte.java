@@ -125,16 +125,12 @@ public class GestioneTratte extends JFrame {
 		EliminazioneTrattaCombo.setFont(new Font("Arial", Font.PLAIN, 20));
 		EliminazioneTrattaCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Selezionare la tratta"}));
 		
-		Tratte = controllerTratte.getTratteFromThisAirport(a.getCodAeroporto());
-		Iterator<Tratta> TratteDaCancellare = Tratte.iterator();
+		Tratte = controllerTratte.getTratteFromThisAirport(a);
 		
-		while (TratteDaCancellare.hasNext()) {
+		for (Tratta tmp: Tratte) {
 			
-			Tratta tmp = TratteDaCancellare.next();
-			String nomeAeroportoPartenza = new String();
-			String nomeAeroportoArrivo = new String();
-			nomeAeroportoArrivo = (controllerAeroporti.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getNomeAeroporto();
-			nomeAeroportoPartenza = (controllerAeroporti.getAeroportoByCod(tmp.getAeroportoDiPartenza())).getNomeAeroporto();
+			String nomeAeroportoPartenza = tmp.getAeroportoDiPartenza().getNomeAeroporto();
+			String nomeAeroportoArrivo = tmp.getAeroportoDiArrivo().getNomeAeroporto();
 			EliminazioneTrattaCombo.addItem(nomeAeroportoPartenza + "   -   " + nomeAeroportoArrivo);
 			
 		}
@@ -171,15 +167,12 @@ public class GestioneTratte extends JFrame {
 		ElencoTextPane.setFont(new Font("Arial", Font.PLAIN, 14));
 		scrollPane.setViewportView(ElencoTextPane);
 		
-		Tratte = controllerTratte.getTratteFromThisAirport(a.getCodAeroporto());
-		Iterator<Tratta> iTratte = Tratte.iterator();
-		
-		while(iTratte.hasNext()) {
-			Tratta tmp = iTratte.next();
+		for (Tratta tmp: Tratte) {
+			
 			String nomeAeroportoArrivo = new String();
 			String nomeCitt‡Arrivo = new String();
-			nomeAeroportoArrivo = (controllerAeroporti.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getNomeAeroporto();
-			nomeCitt‡Arrivo = (controllerAeroporti.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getCitt‡();
+			nomeAeroportoArrivo = tmp.getAeroportoDiPartenza().getNomeAeroporto();
+			nomeCitt‡Arrivo = tmp.getAeroportoDiArrivo().getCitt‡();
 			ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
 			ElencoTextPane.setText(ElencoTextPane.getText() + "Codice della tratta: " + tmp.getCodTratta() +"\t\tAeroporto di arrivo: " + nomeAeroportoArrivo +"\tCitt‡: " + nomeCitt‡Arrivo +"");
 		}
@@ -199,16 +192,12 @@ public class GestioneTratte extends JFrame {
 		RicercaTratteCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Selezionare l'aeroporto"}));
 		RicercaTratteCombo.setBounds(10, 44, 270, 40);
 		RicercaPanel.add(RicercaTratteCombo);
-		
-		ArrayList<Tratta> CercaTratta = new ArrayList<Tratta>();
-		CercaTratta = controllerTratte.getTratteFromThisAirport(a.getCodAeroporto());
-		Iterator<Tratta> iTratteRicerca = CercaTratta.iterator();
-		
-		while(iTratteRicerca.hasNext()) {
-			Tratta tmp = iTratteRicerca.next();
+				
+		for (Tratta tmp: Tratte) {
+			
 			String nomeAeroportoArrivo = new String();
-			nomeAeroportoArrivo = (controllerAeroporti.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getNomeAeroporto();
-			RicercaTratteCombo.addItem(tmp.getAeroportoDiArrivo()+ ": " + nomeAeroportoArrivo);
+			nomeAeroportoArrivo = (tmp.getAeroportoDiArrivo()).getNomeAeroporto();
+			RicercaTratteCombo.addItem(nomeAeroportoArrivo);
 		}
 		
 		
@@ -221,18 +210,16 @@ public class GestioneTratte extends JFrame {
 				
 				if (RicercaTratteCombo.getSelectedIndex() != 0) {
 					
-					ArrayList<Tratta> TratteTrovate = controllerTratte.ricerca(a.getCodAeroporto(), RicercaTratteCombo.getSelectedItem().toString().substring(0, RicercaTratteCombo.getSelectedItem().toString().indexOf(":")));
-					Iterator<Tratta> iTratteTrovate = TratteTrovate.iterator();
+					Tratta TrattaTrovate = controllerTratte.ricerca(a.getNomeAeroporto(), RicercaTratteCombo.getSelectedItem().toString());
+										
 					
-					while (iTratteTrovate.hasNext()) {
-						Tratta tmp = iTratteTrovate.next();
-						String nomeAeroportoArrivo = new String();
-						String nomeCitt‡Arrivo = new String();
-						nomeAeroportoArrivo = (controllerAeroporti.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getNomeAeroporto();
-						nomeCitt‡Arrivo = (controllerAeroporti.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getNomeAeroporto();
-						ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
-						ElencoTextPane.setText(ElencoTextPane.getText() + "Codice della tratta: " + tmp.getCodTratta() +"\tAeroporto di arrivo: " + nomeAeroportoArrivo +"\tCitt‡: " + nomeCitt‡Arrivo +"");
-					}
+					String nomeAeroportoArrivo = new String();
+					String nomeCitt‡Arrivo = new String();
+					nomeAeroportoArrivo = TrattaTrovate.getAeroportoDiArrivo().getNomeAeroporto();
+					nomeCitt‡Arrivo = TrattaTrovate.getAeroportoDiPartenza().getNomeAeroporto();
+					ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
+					ElencoTextPane.setText(ElencoTextPane.getText() + "Aeroporto di arrivo: " + nomeAeroportoArrivo +"\tCitt‡: " + nomeCitt‡Arrivo +"");
+					
 					
 				}
 				
@@ -254,16 +241,13 @@ public class GestioneTratte extends JFrame {
 		JComboBox<String> ModificaVecchiaTrattaCombo = new JComboBox<String>();
 		ModificaVecchiaTrattaCombo.setFont(new Font("Arial", Font.PLAIN, 20));
 		ModificaVecchiaTrattaCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere la tratta"}));
-		Tratte = controllerTratte.getTratteFromThisAirport(a.getCodAeroporto());
-		Iterator<Tratta> TratteDaModificare = Tratte.iterator();
 		
-		while (TratteDaModificare.hasNext()) {
+		for (Tratta tmp: Tratte) {
 			
-			Tratta tmp = TratteDaModificare.next();
 			String nomeAeroportoPartenza = new String();
 			String nomeAeroportoArrivo = new String();
-			nomeAeroportoArrivo = (controllerAeroporti.getAeroportoByCod(tmp.getAeroportoDiArrivo())).getNomeAeroporto();
-			nomeAeroportoPartenza = (controllerAeroporti.getAeroportoByCod(tmp.getAeroportoDiPartenza())).getNomeAeroporto();
+			nomeAeroportoArrivo = tmp.getAeroportoDiArrivo().getNomeAeroporto();
+			nomeAeroportoPartenza = tmp.getAeroportoDiPartenza().getNomeAeroporto();
 			ModificaVecchiaTrattaCombo.addItem(nomeAeroportoPartenza + "   -   " + nomeAeroportoArrivo);
 			
 		}

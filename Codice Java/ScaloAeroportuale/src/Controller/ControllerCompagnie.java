@@ -135,26 +135,6 @@ public class ControllerCompagnie {
 		
 	}
 
-	public CompagniaAerea getCompagniaByCod(String compagniaDiAppartenenza) {
-		
-		CompagniaAerea risultato = new CompagniaAerea();
-				
-		try {
-			
-			risultato = DAO.getCompagniaByCod(compagniaDiAppartenenza);
-			
-		}catch(CompagniaException e){
-			
-			testo.setText(e.getMessage());
-			successo.setBounds(200,200,400,200);
-			successo.add(testo);
-			successo.setVisible(true);
-			
-			
-		}
-		
-		return risultato;
-	}
 
 	public ArrayList<CompagniaAerea> getAllCompagnie() {
 		
@@ -177,6 +157,25 @@ public class ControllerCompagnie {
 		
 		
 		return listaCompagnia;
+	}
+
+	public CompagniaAerea getCompagniaByNome(String nome) {
+		
+		CompagniaAerea compagnia = new CompagniaAerea();
+		
+		try {
+			
+			compagnia = DAO.getCompagniaByNome(nome);
+			
+		}catch(CompagniaException e) {
+			
+			testo.setText(e.getMessage());
+			successo.setBounds(200,200,400,200);
+			successo.add(testo);
+			successo.setVisible(true);
+			
+		}
+		return compagnia;
 	}
 	
 }

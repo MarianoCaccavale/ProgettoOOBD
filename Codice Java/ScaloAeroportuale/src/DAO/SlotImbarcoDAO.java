@@ -8,7 +8,11 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
+import Classi.Aeroporto;
+import Classi.Gate;
 import Classi.SlotImbarco;
+import Classi.Tratta;
+import Classi.Volo;
 import Connessione.ConnessioneDB;
 import Eccezioni.SlotImbarcoException;
 
@@ -18,12 +22,20 @@ public class SlotImbarcoDAO {
 	private ConnessioneDB connessioneDB;
 	String errore = new String("");
 	
-	public void insert(String codVolo, String codGate, String coda, Timestamp dataInizio) throws SlotImbarcoException {
+	@SuppressWarnings("deprecation")
+	public void insert(Aeroporto aer, String codVolo, String nomeGate, String coda, Timestamp dataInizio) throws SlotImbarcoException {
 		
 		try{
 			
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
+			
+			PreparedStatement codiceGate = conn.prepareStatement("select codgate from gate where nomegate = ? AND codaeroporto = ?");
+			codiceGate.setString(1, nomeGate);
+			codiceGate.setString(2, aer.getCodAeroporto());
+			ResultSet rs_codiceGate = codiceGate.executeQuery();
+			rs_codiceGate.next();
+			String codGate = rs_codiceGate.getString("codgate");
 			
 			PreparedStatement pst = conn.prepareStatement("Insert into SlotImbarco values(?, ?, ?, ?, ?, ?)");
 			
@@ -48,7 +60,9 @@ public class SlotImbarcoDAO {
 			errore = e.getMessage();
 			
 			if (errore.contains("tempomax_check")) {
+				
 				throw new SlotImbarcoException("Impossibile inserire un volo con chiusura gate stimata antecedente al volo.");
+				
 			}else{
 				
 				throw new SlotImbarcoException(errore);
@@ -62,13 +76,16 @@ public class SlotImbarcoDAO {
 	public ArrayList<SlotImbarco> getAllImbarchi(String codAeroporto) throws SlotImbarcoException{
 		
 		ArrayList<SlotImbarco> risultato = new ArrayList<SlotImbarco>();
+		Volo voloTmp = new Volo();
+		Tratta trattaTmp = new Tratta();
+		Gate gateTmp = new Gate();
 		
 		try{
 			
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
 			
-			PreparedStatement pst = conn.prepareStatement("select part.codvolo, v.codtratta, part.codgate, part.datainizio from gate_view as part natural join volo as v where part.codaeroporto = ? AND part.datafine IS NULL AND part.datainizio<now()");
+			PreparedStatement pst = conn.prepareStatement("select vt.codvolo, si.datainizio, vt.numeroposti, vt.numeropostiprenotati, a1.nomeaeroporto as nomea1, a2.nomeaeroporto as nomea2, g.nomegate from slotimbarco as si natural join (volo as v natural join tratta as t) as vt natural join gate as g join aeroporto as a1 on vt.aeroportopartenza = a1.codaeroporto join aeroporto as a2 on vt.aeroportoarrivo = a2.codaeroporto where vt.aeroportopartenza = ? AND si.datafine is null and si.datainizio < now()");
 			
 			pst.setString(1, codAeroporto);
 			
@@ -76,7 +93,13 @@ public class SlotImbarcoDAO {
 			
 			while (rs.next()) {
 				
-				SlotImbarco tmp = new SlotImbarco(rs.getString(1), rs.getString(2), rs.getString(3), rs.getTimestamp(4));
+				voloTmp = new Volo(rs.getString("codvolo"), (java.util.Date) rs.getTimestamp("datainizio"), rs.getInt("numeroposti"), rs.getInt("numeropostiprenotati"));
+				Aeroporto aeroportoPartenza = new Aeroporto(rs.getString("nomea1"));
+				Aeroporto aeroportoArrivo = new Aeroporto(rs.getString("nomea2"));
+				trattaTmp = new Tratta(aeroportoPartenza, aeroportoArrivo);
+				gateTmp = new Gate(rs.getString("nomegate"));
+				
+				SlotImbarco tmp = new SlotImbarco(voloTmp, trattaTmp, gateTmp, rs.getTimestamp(4));
 				risultato.add(tmp);
 				
 			}
@@ -128,13 +151,16 @@ public class SlotImbarcoDAO {
 	public ArrayList<SlotImbarco> getSlotDaChiudere(String codAeroporto) throws SlotImbarcoException {
 		
 		ArrayList<SlotImbarco> SlotDaChiudere = new ArrayList<SlotImbarco>();
+		Volo voloTmp = new Volo();
+		Tratta trattaTmp = new Tratta();
+		Gate gateTmp = new Gate();
 		
 		try{
 			
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
 			
-			PreparedStatement pst = conn.prepareStatement("select part.codvolo, v.codtratta, part.codgate, part.datainizio from gate_view as part natural join volo as v where part.codaeroporto = ? AND part.datafine IS NULL AND part.datainizio<now()");
+			PreparedStatement pst = conn.prepareStatement("select vt.codvolo, si.datainizio, vt.numeroposti, vt.numeropostiprenotati, a1.nomeaeroporto as nomea1, a2.nomeaeroporto as nomea2, g.nomegate from slotimbarco as si natural join (volo as v natural join tratta as t) as vt natural join gate as g join aeroporto as a1 on vt.aeroportopartenza = a1.codaeroporto join aeroporto as a2 on vt.aeroportoarrivo = a2.codaeroporto where vt.aeroportopartenza = ? AND si.datafine is null and si.datainizio < now() AND si.tempomax < now()");
 			
 			pst.setString(1, codAeroporto);
 						
@@ -142,7 +168,13 @@ public class SlotImbarcoDAO {
 			
 			while (rs.next()) {
 				
-				SlotImbarco tmp = new SlotImbarco(rs.getString(1), rs.getString(2), rs.getString(3), rs.getTimestamp(4));
+				voloTmp = new Volo(rs.getString("codvolo"), (Date) rs.getTimestamp("datainizio"), rs.getInt("numeroposti"), rs.getInt("numeropostiprenotati"));
+				Aeroporto aeroportoPartenza = new Aeroporto(rs.getString("nomea1"));
+				Aeroporto aeroportoArrivo = new Aeroporto(rs.getString("nomea2"));
+				trattaTmp = new Tratta(aeroportoPartenza, aeroportoArrivo);
+				gateTmp = new Gate(rs.getString("nomegate"));
+				
+				SlotImbarco tmp = new SlotImbarco(voloTmp, trattaTmp, gateTmp, rs.getTimestamp(4));
 				SlotDaChiudere.add(tmp);
 				
 			}

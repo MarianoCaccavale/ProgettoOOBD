@@ -44,7 +44,7 @@ public class ControllerTratte {
 		
 	}
 
-	public ArrayList<Tratta> getTratteFromThisAirport(String codAeroporto) {
+	public ArrayList<Tratta> getTratteFromThisAirport(Aeroporto codAeroporto) {
 
 		ArrayList<Tratta> Tratte = new ArrayList<Tratta>();
 		try {
@@ -124,14 +124,14 @@ public class ControllerTratte {
 		
 	}
 
-	public ArrayList<Tratta> ricerca(String AeroportoPartenza, String AeroportoArrivo) {
+	public Tratta ricerca(String AeroportoPartenza, String AeroportoArrivo) {
 
 		TrattaDAO DAO = new TrattaDAO();
-		ArrayList<Tratta> Tratte = new ArrayList<Tratta>();
+		Tratta Tratta = new Tratta();
 		
 		try {
 			
-			Tratte = DAO.getTratte(AeroportoPartenza, AeroportoArrivo);
+			Tratta = DAO.getTratte(AeroportoPartenza, AeroportoArrivo);
 			
 		}catch(TrattaException e){
 			
@@ -144,7 +144,7 @@ public class ControllerTratte {
 			
 		}
 		
-		return Tratte;
+		return Tratta;
 	}
 
 }

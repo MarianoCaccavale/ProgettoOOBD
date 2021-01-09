@@ -86,7 +86,7 @@ public class AeroportoDAO{
 	
 	public Aeroporto getAeroportoByCod(String Codice) {
 		
-		Aeroporto Aeroporto = new Aeroporto("", "", "");
+		Aeroporto Aeroporto = new Aeroporto();
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
@@ -113,7 +113,7 @@ public class AeroportoDAO{
 	public Aeroporto getAeroportoByNome(String Nome) {
 		
 		
-		Aeroporto Aeroporto = new Aeroporto("", "", "");
+		Aeroporto Aeroporto = new Aeroporto();
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();

@@ -5,16 +5,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Classi.Aeroporto;
-import Classi.CompagniaAerea;
-import Classi.Tratta;
 import Classi.Volo;
 import Controller.Controller;
-import Controller.ControllerAeroporti;
-import Controller.ControllerCompagnie;
-import Controller.ControllerTratte;
 import Controller.ControllerVoli;
 
-import javax.swing.JTabbedPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -39,9 +33,6 @@ public class ServizioClienti extends JFrame {
 	public ServizioClienti(Controller c, Aeroporto a) {
 		
 		Controller controller = c;
-		ControllerAeroporti controllerAeroporto = new ControllerAeroporti();
-		ControllerCompagnie controllerCompagnie = new ControllerCompagnie();
-		ControllerTratte controllerTratte = new ControllerTratte();
 		ControllerVoli controllerVoli = new ControllerVoli();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -175,12 +166,7 @@ public class ServizioClienti extends JFrame {
 		
 		for (Volo v:voli) {
 			
-			CompagniaAerea compagniaTmp = controllerCompagnie.getCompagniaByCod(v.getTrattaAssociata());
-			Tratta trattaTmp = controllerTratte.getTrattaByCod(v.getCompagniaDiAppartenenza());
-			Aeroporto aeroportoPartenzaTmp = controllerAeroporto.getAeroportoByCod(trattaTmp.getAeroportoDiPartenza());
-			Aeroporto aeroportoArrivoTmp = controllerAeroporto.getAeroportoByCod(trattaTmp.getAeroportoDiArrivo());
-			
-			SceltaVoloSpn.addItem(v.getCodVolo()+ " - Compagnia del volo: " + compagniaTmp.getNomeCompagnia() + " - Tratta del volo: " + aeroportoPartenzaTmp.getNomeAeroporto() + " / " + aeroportoArrivoTmp.getNomeAeroporto() + " - Numero dei posti prenotati: " + v.getNumeroPostiPrenotati());
+			SceltaVoloSpn.addItem(v.getCodVolo()+ " - Compagnia del volo: " + v.getCompagniaDiAppartenenza().getNomeCompagnia() + " - Tratta del volo: " + v.getTrattaAssociata().getAeroportoDiPartenza().getNomeAeroporto() + " / " + v.getTrattaAssociata().getAeroportoDiArrivo().getNomeAeroporto() + " - Numero dei posti prenotati: " + v.getNumeroPostiPrenotati());
 			
 		}
 		
