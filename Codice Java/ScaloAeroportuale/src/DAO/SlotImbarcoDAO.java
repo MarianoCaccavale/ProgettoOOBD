@@ -93,7 +93,7 @@ public class SlotImbarcoDAO {
 			
 			while (rs.next()) {
 				
-				voloTmp = new Volo(rs.getString("codvolo"), (java.util.Date) rs.getTimestamp("datainizio"), rs.getInt("numeroposti"), rs.getInt("numeropostiprenotati"));
+				voloTmp = new Volo(rs.getString("codvolo"), rs.getTimestamp("datainizio"), rs.getInt("numeroposti"), rs.getInt("numeropostiprenotati"));
 				Aeroporto aeroportoPartenza = new Aeroporto(rs.getString("nomea1"));
 				Aeroporto aeroportoArrivo = new Aeroporto(rs.getString("nomea2"));
 				trattaTmp = new Tratta(aeroportoPartenza, aeroportoArrivo);
@@ -168,7 +168,7 @@ public class SlotImbarcoDAO {
 			
 			while (rs.next()) {
 				
-				voloTmp = new Volo(rs.getString("codvolo"), (Date) rs.getTimestamp("datainizio"), rs.getInt("numeroposti"), rs.getInt("numeropostiprenotati"));
+				voloTmp = new Volo(rs.getString("codvolo"), rs.getTimestamp("datainizio"), rs.getInt("numeroposti"), rs.getInt("numeropostiprenotati"));
 				Aeroporto aeroportoPartenza = new Aeroporto(rs.getString("nomea1"));
 				Aeroporto aeroportoArrivo = new Aeroporto(rs.getString("nomea2"));
 				trattaTmp = new Tratta(aeroportoPartenza, aeroportoArrivo);

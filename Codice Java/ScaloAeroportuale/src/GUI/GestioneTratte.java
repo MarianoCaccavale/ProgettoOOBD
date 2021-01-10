@@ -174,7 +174,7 @@ public class GestioneTratte extends JFrame {
 			nomeAeroportoArrivo = tmp.getAeroportoDiPartenza().getNomeAeroporto();
 			nomeCitt‡Arrivo = tmp.getAeroportoDiArrivo().getCitt‡();
 			ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
-			ElencoTextPane.setText(ElencoTextPane.getText() + "Codice della tratta: " + tmp.getCodTratta() +"\t\tAeroporto di arrivo: " + nomeAeroportoArrivo +"\tCitt‡: " + nomeCitt‡Arrivo +"");
+			ElencoTextPane.setText(ElencoTextPane.getText() + "Aeroporto di arrivo: " + nomeAeroportoArrivo +"\tCitt‡: " + nomeCitt‡Arrivo +"");
 		}
 		
 		JPanel RicercaPanel = new JPanel();

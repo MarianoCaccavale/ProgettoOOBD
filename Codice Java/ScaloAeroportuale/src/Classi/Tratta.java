@@ -2,8 +2,6 @@ package Classi;
 
 public class Tratta {
 
-	
-	private String CodTratta = new String();
 	private Aeroporto AeroportoDiPartenza;
 	private Aeroporto AeroportoDiArrivo;
 	
@@ -16,14 +14,6 @@ public class Tratta {
 		AeroportoDiArrivo = aeroportoDiArrivo;
 	}
 
-	public String getCodTratta() {
-		return CodTratta;
-	}
-	
-	public void setCodTratta(String codTratta) {
-		CodTratta = codTratta;
-	}
-	
 	public Aeroporto getAeroportoDiPartenza() {
 		return AeroportoDiPartenza;
 	}

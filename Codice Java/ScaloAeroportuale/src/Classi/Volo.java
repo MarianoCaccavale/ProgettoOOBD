@@ -1,11 +1,13 @@
 package Classi;
 
+
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Volo {
 
 	private String CodVolo = new String();
-	private Date Data = new Date();
+	private Timestamp Data;
 	private int NumeroPosti;
 	private int NumeroPostiPrenotati;
 	private CompagniaAerea CompagniaDiAppartenenza;
@@ -14,7 +16,7 @@ public class Volo {
 	public Volo() {}
 	
 	
-	public Volo(String codVolo, Date data, int numeroPosti, int numeroPostiPrenotati) {
+	public Volo(String codVolo, Timestamp data, int numeroPosti, int numeroPostiPrenotati) {
 		super();
 		CodVolo = codVolo;
 		Data = data;
@@ -22,7 +24,7 @@ public class Volo {
 		NumeroPostiPrenotati = numeroPostiPrenotati;
 	}
 		
-	public Volo(String codVolo, Date data, int numeroPosti, int numeroPostiPrenotati, CompagniaAerea compagniaDiAppartenenza,
+	public Volo(String codVolo, Timestamp data, int numeroPosti, int numeroPostiPrenotati, CompagniaAerea compagniaDiAppartenenza,
 			Tratta trattaAssociata) {
 		super();
 		CodVolo = codVolo;
@@ -40,10 +42,10 @@ public class Volo {
 	public void setCodVolo(String codVolo) {
 		CodVolo = codVolo;
 	}
-	public Date getData() {
+	public Timestamp getData() {
 		return Data;
 	}
-	public void setData(Date data) {
+	public void setData(Timestamp data) {
 		Data = data;
 	}
 	public int getNumeroPosti() {

@@ -220,7 +220,7 @@ public class GestioneVoli extends JFrame {
 			String nomeAeroportoArrivo = new String();
 			nomeAeroportoArrivo = tmp.getAeroportoDiArrivo().getNomeAeroporto();
 			nomeAeroportoPartenza = tmp.getAeroportoDiPartenza().getNomeAeroporto();
-			RicercaTrattaCombo.addItem(tmp.getCodTratta()+ ": " + nomeAeroportoPartenza + "   -   " + nomeAeroportoArrivo);
+			RicercaTrattaCombo.addItem(nomeAeroportoPartenza + "<->" + nomeAeroportoArrivo);
 			
 		}
 		RicercaTrattaCombo.setBounds(10, 27, 562, 50);
@@ -235,8 +235,8 @@ public class GestioneVoli extends JFrame {
 				
 				if(RicercaTrattaCombo.getSelectedIndex() != 0) {
 					
-					String codTratta = RicercaTrattaCombo.getSelectedItem().toString().substring(0, RicercaTrattaCombo.getSelectedItem().toString().indexOf(":"));
-					ArrayList<Volo> VoliTrovati = controllerVoli.ricercaVoliByTratta(codTratta);
+					String
+					ArrayList<Volo> VoliTrovati = controllerVoli.ricercaVoliByTratta();
 						
 						for(Volo tmpVolo:VoliTrovati) {
 							
@@ -343,7 +343,7 @@ public class GestioneVoli extends JFrame {
 				
 				if (SceltaCompagniaCombo.getSelectedIndex() != 0 && SceltaTrattaCombo.getSelectedIndex() != 0) {
 					
-					Date data = (Date) DateSpn.getValue();
+					Timestamp data = (Timestamp) DateSpn.getValue();
 					Volo volo = new Volo();
 					volo.setData(data);
 					volo.setNumeroPosti((Integer) NumeroPostiPrenotatiSpn.getValue());

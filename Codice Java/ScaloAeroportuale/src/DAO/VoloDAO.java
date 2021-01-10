@@ -104,7 +104,7 @@ public class VoloDAO {
 				Aeroporto aeroportoTmp = new Aeroporto(rs.getString("aeroportoarrivo"), rs.getString("nomeaeroporto"), rs.getString("città"));
 				Tratta trattaTmp = new Tratta(aeroporto, aeroportoTmp);
 				CompagniaAerea compagniaTmp = new CompagniaAerea(rs.getString("nomecompagnia"), rs.getInt("grandezzaflotta"));
-				Volo tmp = new Volo(rs.getString("codvolo"),(java.util.Date)rs.getTimestamp("datavolo"), rs.getInt("numeroposti"), rs.getInt("numeropostiprenotati"), compagniaTmp, trattaTmp);
+				Volo tmp = new Volo(rs.getString("codvolo"), rs.getTimestamp("datavolo"), rs.getInt("numeroposti"), rs.getInt("numeropostiprenotati"), compagniaTmp, trattaTmp);
 				
 				risultato.add(tmp);
 				
@@ -190,8 +190,9 @@ public class VoloDAO {
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
 			
-			PreparedStatement ps = conn.prepareStatement("select v.codvolo, v.datavolo, v.numeroposti, v.numeropostiprenotati, v.codtratta, v.codcompagnia from volo as v natural join tratta as t where t.codtratta = ?");
-			ps.setString(1, tratta.getCodTratta());
+			PreparedStatement ps = conn.prepareStatement("select v.codvolo, v.datavolo, v.numeroposti, v.numeropostiprenotati, v.codtratta, v.codcompagnia from volo as v natural join (tratta as t inner join aeroporto as a1 on t.aeroportopartenza = a1.codaeroporto) as ris inner join aeroporto as a2 on ris.aeroportoarrivo = a2.codaeroporto where ris.nomeaeroporto = ? and a2.nomeaeroporto = ?");
+			ps.setString(1, (tratta.getAeroportoDiPartenza()).getNomeAeroporto());
+			ps.setString(2, (tratta.getAeroportoDiArrivo()).getNomeAeroporto());
 			
 			ResultSet rs = ps.executeQuery();
 			
@@ -199,7 +200,7 @@ public class VoloDAO {
 				
 				CompagniaAerea compagniaTmp = new CompagniaAerea(rs.getString("nomecompagnia"), rs.getInt("grandezzaflotta"));
 				
-				Volo tmp = new Volo(rs.getString("codvolo"), (java.util.Date) rs.getTimestamp("datavolo"), rs.getInt("numeroposti"), rs.getInt("numeropostiprenotati"), compagniaTmp, tratta);
+				Volo tmp = new Volo(rs.getString("codvolo"), rs.getTimestamp("datavolo"), rs.getInt("numeroposti"), rs.getInt("numeropostiprenotati"), compagniaTmp, tratta);
 				
 				VoliTrovati.add(tmp);
 				
