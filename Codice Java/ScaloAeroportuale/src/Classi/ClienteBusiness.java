@@ -1,6 +1,7 @@
 package Classi;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class ClienteBusiness {
 	
@@ -10,11 +11,11 @@ public class ClienteBusiness {
 	private Date dataNascita = new Date(0);
 	private Date dataIscrizione = new Date(0);
 	private int punti;
-	private CompagniaAerea compagniaDiIscrizione = new CompagniaAerea();
+	private ArrayList<CompagniaAerea> compagniaDiIscrizione = new ArrayList<CompagniaAerea>();
 	
 	public void CLienteBusiness() {};
 		
-	public ClienteBusiness(String email, String nome, String cognome, int punti, CompagniaAerea compagniaDiIscrizione) {
+	public ClienteBusiness(String email, String nome, String cognome, int punti, ArrayList<CompagniaAerea> compagniaDiIscrizione) {
 		super();
 		this.email = email;
 		this.nome = nome;
@@ -24,6 +25,13 @@ public class ClienteBusiness {
 	}
 
 
+	public ClienteBusiness(String email, String nome, String cognome, int punti) {
+		super();
+		this.email = email;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.punti = punti;
+	}
 
 	public String getEmail() {
 		return email;
@@ -63,10 +71,10 @@ public class ClienteBusiness {
 	public void setPunti(int punti) {
 		this.punti = punti;
 	}
-	public CompagniaAerea getCodCentoKilometri() {
+	public ArrayList<CompagniaAerea> getCodCentoKilometri() {
 		return compagniaDiIscrizione;
 	}
-	public void setCodCentoKilometri(CompagniaAerea codCentoKilometri) {
+	public void setCodCentoKilometri(ArrayList<CompagniaAerea> codCentoKilometri) {
 		this.compagniaDiIscrizione = codCentoKilometri;
 	}
 	

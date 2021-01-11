@@ -227,7 +227,7 @@ public class Statistiche extends JFrame {
 					
 					String tmp[] = iListaTempi.next();
 					RicercaGateText.setText(RicercaGateText.getText() + "\n");
-					RicercaGateText.setText(RicercaGateText.getText() + "Codice Gate: " + tmp[0] + "\t - Tempo di utilizzo stimato: " + tmp[1] + " ora/e\t - Tempo di utilizzo effettivo: " + tmp[2] + " ora/e");
+					RicercaGateText.setText(RicercaGateText.getText() + "Nome Gate: " + tmp[0] + "\t - Tempo di utilizzo stimato: " + tmp[1] + " ora/e\t - Tempo di utilizzo effettivo: " + tmp[2] + " ora/e");
 					
 				}
 			}

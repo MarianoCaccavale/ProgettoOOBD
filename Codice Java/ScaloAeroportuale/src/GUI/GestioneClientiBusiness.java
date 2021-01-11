@@ -130,8 +130,8 @@ public class GestioneClientiBusiness extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(!(EmailTf.getText().isBlank()) && !(NomeTf.getText().isBlank()) && !(CognomeTf.getText().isBlank())) {
 					
-					String codCompagnia = CompagniaCombo.getSelectedItem().toString().substring(0, CompagniaCombo.getSelectedItem().toString().indexOf(":"));
-					controllerClienti.insert(EmailTf.getText(), NomeTf.getText(), CognomeTf.getText(), (Date) DataNascitaSpn.getValue(), codCompagnia);
+					String nomeCompagnia = CompagniaCombo.getSelectedItem().toString();
+					controllerClienti.insert(EmailTf.getText(), NomeTf.getText(), CognomeTf.getText(), (Date) DataNascitaSpn.getValue(), nomeCompagnia);
 				}
 				
 			}

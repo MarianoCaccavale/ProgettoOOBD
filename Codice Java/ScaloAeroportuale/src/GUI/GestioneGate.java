@@ -188,6 +188,7 @@ public class GestioneGate extends JFrame {
 		ElencoPanel.add(scrollPane);
 		
 		JTextPane ElencoTextPane = new JTextPane();
+		ElencoTextPane.setEditable(false);
 		ElencoTextPane.setFont(new Font("Arial", Font.PLAIN, 20));
 		scrollPane.setViewportView(ElencoTextPane);
 		

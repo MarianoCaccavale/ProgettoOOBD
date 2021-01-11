@@ -35,7 +35,7 @@ public class ClientiDAO {
 			ps.setTimestamp(4, dataNascita);
 			
 			ps.setInt(5, 0);
-			ps.setString(6, "CK"+compagnia.getCodCompagnia());
+			ps.setString(6, compagnia.getCodCentoKilometri());
 			
 			ps.executeUpdate();
 			ps.close();
@@ -91,9 +91,8 @@ public class ClientiDAO {
 			ResultSet rs = st.executeQuery("select * from clientibusiness");
 			
 			while (rs.next()) {
-				//Restituire una compagnia aerea dal proprio codcentokilometri
-				(rs.getString("codcentokilometri"));
-				ClienteBusiness tmp = new ClienteBusiness(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getInt("punti"), rs.getString("codcentokilometri"));
+				
+				ClienteBusiness tmp = new ClienteBusiness(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getInt("punti"));
 				Clienti.add(tmp);
 				
 			}
@@ -120,14 +119,16 @@ public class ClientiDAO {
 			
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
-			PreparedStatement ps = conn.prepareStatement("select cb.email, cb.nome, cb.cognome, cb.punti, ca.codcentokilometri from clientibusiness as cb natural join compagniaaerea as ca where ca.codcompagnia = ?");
-			ps.setString(1, compagnia.getCodCompagnia());
+			PreparedStatement ps = conn.prepareStatement("select cb.email, cb.nome, cb.cognome, cb.punti, ca.codcentokilometri from clientibusiness as cb natural join compagniaaerea as ca where ca.nomecompagnia = ?");
+			ps.setString(1, compagnia.getNomeCompagnia());
 			
 			ResultSet rs = ps.executeQuery();
 			
 			while (rs.next()) {
 				
-				ClienteBusiness tmp = new ClienteBusiness(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getInt("punti"), compagnia);
+				ArrayList<CompagniaAerea> compagnie = new ArrayList<CompagniaAerea>();
+				compagnie.add(compagnia);
+				ClienteBusiness tmp = new ClienteBusiness(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getInt("punti"), compagnie);
 				Clienti.add(tmp);
 				
 			}

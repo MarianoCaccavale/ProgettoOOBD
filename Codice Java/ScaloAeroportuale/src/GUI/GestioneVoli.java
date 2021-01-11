@@ -235,20 +235,21 @@ public class GestioneVoli extends JFrame {
 				
 				if(RicercaTrattaCombo.getSelectedIndex() != 0) {
 					
-					String
-					ArrayList<Volo> VoliTrovati = controllerVoli.ricercaVoliByTratta();
+					String nomeAeroportoPartenza = RicercaTrattaCombo.getSelectedItem().toString().substring(0, RicercaTrattaCombo.getSelectedItem().toString().indexOf("<"));
+					String nomeAeroportoArrivo = RicercaTrattaCombo.getSelectedItem().toString().substring(RicercaTrattaCombo.getSelectedItem().toString().indexOf(">")+1);
+					ArrayList<Volo> VoliTrovati = controllerVoli.ricercaVoliByTratta(nomeAeroportoPartenza, nomeAeroportoArrivo);
 						
-						for(Volo tmpVolo:VoliTrovati) {
-							
-							ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
-							ElencoTextPane.setText(ElencoTextPane.getText() + "Codice del volo: " + tmpVolo.getCodVolo() +"\tData e ora: " + tmpVolo.getData() +"\tNumero posti: " + tmpVolo.getNumeroPosti() + "\tNumero posti prenotati: " + tmpVolo.getNumeroPostiPrenotati() +"\t Compagnia aerea: " + tmpVolo.getCompagniaDiAppartenenza().getNomeCompagnia());
-							
-						}
+					for(Volo tmpVolo:VoliTrovati) {
+						
+						ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
+						ElencoTextPane.setText(ElencoTextPane.getText() + "Codice del volo: " + tmpVolo.getCodVolo() +"\tData e ora: " + tmpVolo.getData() +"\tNumero posti: " + tmpVolo.getNumeroPosti() + "\tNumero posti prenotati: " + tmpVolo.getNumeroPostiPrenotati() +"\t Compagnia aerea: " + tmpVolo.getCompagniaDiAppartenenza().getNomeCompagnia());
 						
 					}
-					
+						
 				}
-			});
+					
+			}
+		});
 		RicercaBtn.setBounds(687, 434, 138, 38);
 		ElencoPanel.add(RicercaBtn);
 		
@@ -265,7 +266,7 @@ public class GestioneVoli extends JFrame {
 		while(iSlotImbarco.hasNext()) {
 			
 			SlotImbarco tmp = iSlotImbarco.next();
-			ChiusuraComboBox.addItem("Codice volo: " + tmp.getVolo() + " - Codice Tratta: " + tmp.getTratta().getAeroportoDiPartenza() + " - "+ tmp.getTratta().getAeroportoDiArrivo() + " - Gate: " + tmp.getGate().getNomeGate() + " - Ora di partenza: " + tmp.getOraInizio());
+			ChiusuraComboBox.addItem("Codice volo: " + tmp.getVolo().getCodVolo() + " - " + tmp.getTratta().getAeroportoDiPartenza().getNomeAeroporto() + "<->"+ tmp.getTratta().getAeroportoDiArrivo().getNomeAeroporto() + " - Ora di partenza: " + tmp.getOraInizio() +" - Gate: " + tmp.getGate().getNomeGate());
 			
 		}
 		
@@ -343,7 +344,8 @@ public class GestioneVoli extends JFrame {
 				
 				if (SceltaCompagniaCombo.getSelectedIndex() != 0 && SceltaTrattaCombo.getSelectedIndex() != 0) {
 					
-					Timestamp data = (Timestamp) DateSpn.getValue();
+					Date datatmp = (Date) DateSpn.getValue();
+					Timestamp data = new Timestamp(datatmp.getTime());
 					Volo volo = new Volo();
 					volo.setData(data);
 					volo.setNumeroPosti((Integer) NumeroPostiPrenotatiSpn.getValue());
@@ -385,13 +387,11 @@ public class GestioneVoli extends JFrame {
 					String itemSelezionato = new String(ChiusuraComboBox.getSelectedItem().toString());
 					
 					String codVolo = new String(itemSelezionato.substring(13, itemSelezionato.indexOf("-")-1));
-					String codGate = new String(itemSelezionato.substring(itemSelezionato.indexOf("Codice Gate: ")+13, itemSelezionato.indexOf("Ora")-3));
-					
 					Date dataFineTmp = (Date) ChiusuraDataSpn.getValue();
 					
 					Timestamp dataFine = new Timestamp(dataFineTmp.getTime());
 					
-					controllerSlotImbarco.closeSlotImbarco(codVolo, codGate, dataFine);
+					controllerSlotImbarco.closeSlotImbarco(codVolo, dataFine);
 					
 				}
 								

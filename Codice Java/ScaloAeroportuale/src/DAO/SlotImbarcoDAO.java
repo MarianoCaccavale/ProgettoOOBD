@@ -99,7 +99,7 @@ public class SlotImbarcoDAO {
 				trattaTmp = new Tratta(aeroportoPartenza, aeroportoArrivo);
 				gateTmp = new Gate(rs.getString("nomegate"));
 				
-				SlotImbarco tmp = new SlotImbarco(voloTmp, trattaTmp, gateTmp, rs.getTimestamp(4));
+				SlotImbarco tmp = new SlotImbarco(voloTmp, trattaTmp, gateTmp, rs.getTimestamp("datainizio"));
 				risultato.add(tmp);
 				
 			}
@@ -119,18 +119,17 @@ public class SlotImbarcoDAO {
 		return risultato;
 	}
 
-	public void closeSlotImbarco(String codVolo, String codGate, Timestamp dataFine) throws SlotImbarcoException {
+	public void closeSlotImbarco(String codVolo, Timestamp dataFine) throws SlotImbarcoException {
 		
 		try{
 			
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
 			
-			PreparedStatement pst = conn.prepareStatement("update SlotImbarco set datafine = ? where codVolo = ? AND codGate = ?");
+			PreparedStatement pst = conn.prepareStatement("update SlotImbarco set datafine = ? where codVolo = ?");
 			
 			pst.setTimestamp(1, dataFine);
 			pst.setString(2, codVolo);
-			pst.setString(3, codGate);
 			
 			pst.executeUpdate();
 			
@@ -160,7 +159,7 @@ public class SlotImbarcoDAO {
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
 			
-			PreparedStatement pst = conn.prepareStatement("select vt.codvolo, si.datainizio, vt.numeroposti, vt.numeropostiprenotati, a1.nomeaeroporto as nomea1, a2.nomeaeroporto as nomea2, g.nomegate from slotimbarco as si natural join (volo as v natural join tratta as t) as vt natural join gate as g join aeroporto as a1 on vt.aeroportopartenza = a1.codaeroporto join aeroporto as a2 on vt.aeroportoarrivo = a2.codaeroporto where vt.aeroportopartenza = ? AND si.datafine is null and si.datainizio < now() AND si.tempomax < now()");
+			PreparedStatement pst = conn.prepareStatement("select vt.codvolo, si.datainizio, vt.numeroposti, vt.numeropostiprenotati, a1.nomeaeroporto as nomea1, a2.nomeaeroporto as nomea2, g.nomegate from slotimbarco as si natural join (volo as v natural join tratta as t) as vt natural join gate as g join aeroporto as a1 on vt.aeroportopartenza = a1.codaeroporto join aeroporto as a2 on vt.aeroportoarrivo = a2.codaeroporto where vt.aeroportopartenza = ? AND si.datafine is null and si.datainizio < now()");
 			
 			pst.setString(1, codAeroporto);
 						
@@ -174,7 +173,7 @@ public class SlotImbarcoDAO {
 				trattaTmp = new Tratta(aeroportoPartenza, aeroportoArrivo);
 				gateTmp = new Gate(rs.getString("nomegate"));
 				
-				SlotImbarco tmp = new SlotImbarco(voloTmp, trattaTmp, gateTmp, rs.getTimestamp(4));
+				SlotImbarco tmp = new SlotImbarco(voloTmp, trattaTmp, gateTmp, rs.getTimestamp("datainizio"));
 				SlotDaChiudere.add(tmp);
 				
 			}

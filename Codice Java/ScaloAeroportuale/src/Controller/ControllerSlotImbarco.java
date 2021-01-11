@@ -36,11 +36,11 @@ public class ControllerSlotImbarco {
 		return listaSlotImbarco;
 	}
 
-	public void closeSlotImbarco(String codVolo, String codGate, Timestamp dataFine) {
+	public void closeSlotImbarco(String codVolo, Timestamp dataFine) {
 		
 		try {
 			
-			DAO.closeSlotImbarco(codVolo, codGate, dataFine);
+			DAO.closeSlotImbarco(codVolo, dataFine);
 			successo.setBounds(200,200,400,200);
 			testo.setText("Chiusura avvenuta con successo!"); 
 			successo.add(testo);

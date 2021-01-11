@@ -26,7 +26,7 @@ public class ControllerClienti {
 		
 		try {
 			
-			CompagniaAerea compagnia = DAOCompagnia.getCompagniaByCod(codCompagnia);
+			CompagniaAerea compagnia = DAOCompagnia.getCompagniaByNome(codCompagnia);
 			DAOClienti.insert(email, nome, cognome, dataNascita, compagnia);
 			successo.setBounds(200,200,400,200);
 			testo.setText("Inserimento avvenuto con successo!"); 
@@ -91,13 +91,13 @@ public class ControllerClienti {
 	}
 
 
-	public ArrayList<ClienteBusiness> getClientiBusinessByCompagnia(String codCompagnia) {
+	public ArrayList<ClienteBusiness> getClientiBusinessByCompagnia(String nomeCompagnia) {
 		
 		ArrayList<ClienteBusiness> Clienti = new ArrayList<ClienteBusiness>();
 		
 		try {
 			
-			CompagniaAerea compagnia = DAOCompagnia.getCompagniaByCod(codCompagnia);
+			CompagniaAerea compagnia = DAOCompagnia.getCompagniaByNome(nomeCompagnia);
 			Clienti = DAOClienti.getClientiBusinessByCompagnia(compagnia);
 						
 		}catch(ClientiException | CompagniaException e) {

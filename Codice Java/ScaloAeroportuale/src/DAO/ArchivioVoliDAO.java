@@ -24,7 +24,7 @@ public class ArchivioVoliDAO {
 			
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
-			PreparedStatement pt = conn.prepareStatement("select g.codgate, sum(extract(hour from(tempomax-datainizio))) as tempostimato, sum(extract(hour from(datafine - datainizio)))as tempoeffettivo from archiviovoli as s natural join gate as g where g.codaeroporto = ? AND ( ? <= s.datainizio AND s.datainizio <= ?) AND (? <= s.datafine AND s.datafine <= ?) group by g.codgate");
+			PreparedStatement pt = conn.prepareStatement("select g.nomegate, sum(extract(hour from(tempomax-datainizio))) as tempostimato, sum(extract(hour from(datafine - datainizio)))as tempoeffettivo from archiviovoli as s natural join gate as g where g.codaeroporto = ? AND ( ? <= s.datainizio AND s.datainizio <= ?) AND (? <= s.datafine AND s.datafine <= ?) group by g.codgate");
 			
 			Timestamp dataInizio = new Timestamp(tmpDataInizio.getTime());
 			Timestamp dataFine = new Timestamp(tmpDataFine.getTime());

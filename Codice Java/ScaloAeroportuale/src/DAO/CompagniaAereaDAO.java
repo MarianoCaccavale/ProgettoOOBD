@@ -280,7 +280,7 @@ public class CompagniaAereaDAO{
 			
 			rs.next();
 				
-			tmp = new CompagniaAerea(rs.getString("nomecompagnia"), rs.getInt("grandezzaflotta"));
+			tmp = new CompagniaAerea(rs.getString("nomecompagnia"), rs.getInt("grandezzaflotta"), rs.getString("codcentokilometri"));
 			
 			ps.close();
 			rs.close();

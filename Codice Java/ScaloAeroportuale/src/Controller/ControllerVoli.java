@@ -7,14 +7,11 @@ import javax.swing.JDialog;
 import javax.swing.JTextField;
 
 import Classi.Aeroporto;
-import Classi.CompagniaAerea;
-import Classi.Tratta;
 import Classi.Volo;
 import DAO.CompagniaAereaDAO;
 import DAO.SlotImbarcoDAO;
 import DAO.TrattaDAO;
 import DAO.VoloDAO;
-import Eccezioni.CompagniaException;
 import Eccezioni.SlotImbarcoException;
 import Eccezioni.TrattaException;
 import Eccezioni.VoloException;
@@ -134,15 +131,15 @@ public class ControllerVoli {
 		
 	}
 
-	public ArrayList<Volo> ricercaVoliByTratta(String codTratta) {
+	public ArrayList<Volo> ricercaVoliByTratta(String nomeAeroportoPartenza, String nomeAeroportoArrivo) {
 		
 		ArrayList<Volo> VoliTrovati = new ArrayList<Volo>();
 		
 		try {
 			
-			VoliTrovati = voloDAO.ricercaVoloByTratta(trattaDAO.getTrattaByCod(codTratta));
+			VoliTrovati = voloDAO.ricercaVoloByTratta(nomeAeroportoPartenza, nomeAeroportoArrivo);
 			
-		}catch(VoloException | TrattaException e) {
+		}catch(VoloException e) {
 			
 			successo.setBounds(200,200,400,200);
 			testo.setText(e.getMessage().toString()); 

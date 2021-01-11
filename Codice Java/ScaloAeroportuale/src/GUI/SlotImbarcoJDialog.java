@@ -5,7 +5,6 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -17,8 +16,6 @@ import Controller.ControllerVoli;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerDateModel;
 import java.util.Iterator;
 import java.util.ArrayList;
 import java.awt.event.ActionListener;

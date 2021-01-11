@@ -15,6 +15,13 @@ public class CompagniaAerea {
 		GrandezzaFlotta = grandezzaFlotta;
 	}
 	
+	public CompagniaAerea(String nomeCompagnia, int grandezzaFlotta, String codCentoKilometri) {
+		super();
+		NomeCompagnia = nomeCompagnia;
+		GrandezzaFlotta = grandezzaFlotta;
+		CodCentoKilometri = codCentoKilometri;
+	}
+
 	public String getNomeCompagnia() {
 		return NomeCompagnia;
 	}

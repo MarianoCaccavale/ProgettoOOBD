@@ -127,11 +127,12 @@ public class Hub extends JFrame {
 		HubPanel.add(InformazioniCitt‡Lbl);
 		
 		JTextPane AvvisoSlotImbarchiPanel = new JTextPane();
+		AvvisoSlotImbarchiPanel.setEditable(false);
 		AvvisoSlotImbarchiPanel.setFont(new Font("Arial", Font.PLAIN, 14));
 		AvvisoSlotImbarchiPanel.setBounds(10, 186, 749, 272);
 		HubPanel.add(AvvisoSlotImbarchiPanel);
 		
-		JLabel lblNewLabel = new JLabel("Questi voli sono partiti. Potrebbe essere necessario chiudere gli SlotImbarchi ad essi associati.");
+		JLabel lblNewLabel = new JLabel("Questi voli potrebbero essere partiti. Potrebbe essere necessario chiudere gli SlotImbarchi ad essi associati.");
 		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblNewLabel.setBounds(10, 144, 722, 43);
 		HubPanel.add(lblNewLabel);
