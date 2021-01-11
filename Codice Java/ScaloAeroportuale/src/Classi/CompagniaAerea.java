@@ -1,10 +1,13 @@
 package Classi;
 
+import java.util.ArrayList;
+
 public class CompagniaAerea {
 
 	private String NomeCompagnia = new String();
 	private int GrandezzaFlotta;
 	private CompagniaAerea AeroportoDiAppartenenza;
+	private ArrayList<Volo> VoliGestiti = new ArrayList<Volo>();
 	private String CodCentoKilometri;
 	
 	public CompagniaAerea() {}
@@ -44,6 +47,14 @@ public class CompagniaAerea {
 	
 	public void setAeroportoDiAppartenenza(CompagniaAerea aeroportoDiAppartenenza) {
 		AeroportoDiAppartenenza = aeroportoDiAppartenenza;
+	}
+
+	public ArrayList<Volo> getVoliGestiti() {
+		return VoliGestiti;
+	}
+
+	public void setVoliGestiti(ArrayList<Volo> voliGestiti) {
+		VoliGestiti = voliGestiti;
 	}
 
 	public String getCodCentoKilometri() {

@@ -12,6 +12,7 @@ public class Volo {
 	private int NumeroPostiPrenotati;
 	private CompagniaAerea CompagniaDiAppartenenza;
 	private Tratta TrattaAssociata;
+	private SlotImbarco slotImbarco = new SlotImbarco();
 	
 	public Volo() {}
 	

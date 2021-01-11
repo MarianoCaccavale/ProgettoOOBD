@@ -9,6 +9,8 @@ public class Aeroporto {
 	private String CodAeroporto = new String();
 	private String NomeAeroporto = new String();
 	private String Città = new String();
+	private ArrayList<Gate> Gate = new ArrayList<Gate>();			
+	private ArrayList<Tratta> Tratte = new ArrayList<Tratta>();
 	private ArrayList<CompagniaAerea> CompagnieStanziate;
 	
 	public Aeroporto() {
@@ -50,7 +52,22 @@ public class Aeroporto {
 	public void setCittà(String città) {
 		Città = città;
 	}
+	
+	public ArrayList<Gate> getGate() {
+		return Gate;
+	}
 
+	public void setGate(ArrayList<Gate> gate) {
+		Gate = gate;
+	}
+	
+	public ArrayList<Tratta> getTratte() {
+		return Tratte;
+	}
+
+	public void setTratte(ArrayList<Tratta> tratte) {
+		Tratte = tratte;
+	}
 
 	public ArrayList<CompagniaAerea> getCompagnieStanziate() {
 		return CompagnieStanziate;

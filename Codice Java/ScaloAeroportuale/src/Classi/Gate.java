@@ -5,14 +5,13 @@ public class Gate {
 	private String NomeGate = new String();
 	private Aeroporto AeroportoDiAppartenenza;
 	
+	public Gate() {}
 	
 	public Gate(String nomeGate) {
 		super();
 		NomeGate = nomeGate;
 	}
 
-	public Gate() {
-	}
 
 	public String getNomeGate() {
 		return NomeGate;

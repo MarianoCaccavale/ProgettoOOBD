@@ -10,6 +10,8 @@ public class SlotImbarco {
 	private Gate Gate;
 	private Timestamp OraInizio;
 	
+	
+	public SlotImbarco() {}
 
 	public SlotImbarco(Volo Volo, Tratta tratta, Gate gate, Timestamp oraInizio) {
 		super();
