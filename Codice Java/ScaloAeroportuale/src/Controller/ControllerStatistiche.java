@@ -6,12 +6,12 @@ import java.util.Date;
 import javax.swing.JDialog;
 import javax.swing.JTextField;
 
-import DAO.ArchivioVoliDAO;
+import DAO.StatisticheDAO;
 import Eccezioni.StatisticheException;
 
 public class ControllerStatistiche {
 
-	ArchivioVoliDAO DAO = new ArchivioVoliDAO();
+	StatisticheDAO DAO = new StatisticheDAO();
 	JDialog successo = new JDialog();
 	JTextField testo = new JTextField();
 	

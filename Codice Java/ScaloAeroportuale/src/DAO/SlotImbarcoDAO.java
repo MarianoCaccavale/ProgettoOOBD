@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 
 import Classi.Aeroporto;
 import Classi.Gate;
@@ -23,7 +22,7 @@ public class SlotImbarcoDAO {
 	String errore = new String("");
 	
 	@SuppressWarnings("deprecation")
-	public void insert(Aeroporto aer, String codVolo, String nomeGate, String coda, Timestamp dataInizio) throws SlotImbarcoException {
+	public void insert(Aeroporto aer, Volo volo, String nomeGate, String coda, Timestamp dataInizio) throws SlotImbarcoException {
 		
 		try{
 			
@@ -39,7 +38,7 @@ public class SlotImbarcoDAO {
 			
 			PreparedStatement pst = conn.prepareStatement("Insert into SlotImbarco values(?, ?, ?, ?, ?, ?)");
 			
-			pst.setString(1, codVolo);
+			pst.setString(1, volo.getCodVolo());
 			pst.setString(2, codGate);
 			
 			pst.setTimestamp(4, dataInizio);

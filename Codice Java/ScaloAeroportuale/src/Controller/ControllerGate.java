@@ -1,13 +1,11 @@
 package Controller;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
-import Classi.Aeroporto;
 import Classi.Gate;
 import DAO.GateDAO;
 import Eccezioni.GateException;

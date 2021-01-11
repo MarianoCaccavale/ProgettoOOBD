@@ -1,6 +1,5 @@
 package Controller;
 
-import java.nio.file.FileSystemAlreadyExistsException;
 import java.util.ArrayList;
 
 import javax.swing.JDialog;
@@ -8,7 +7,6 @@ import javax.swing.JTextField;
 
 import Classi.Aeroporto;
 import Classi.CompagniaAerea;
-import DAO.AeroportoDAO;
 import DAO.CompagniaAereaDAO;
 import Eccezioni.CompagniaException;
 

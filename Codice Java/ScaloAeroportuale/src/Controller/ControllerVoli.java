@@ -1,48 +1,35 @@
 package Controller;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.swing.JDialog;
 import javax.swing.JTextField;
 
 import Classi.Aeroporto;
+import Classi.Tratta;
 import Classi.Volo;
-import DAO.CompagniaAereaDAO;
-import DAO.SlotImbarcoDAO;
-import DAO.TrattaDAO;
 import DAO.VoloDAO;
-import Eccezioni.SlotImbarcoException;
-import Eccezioni.TrattaException;
 import Eccezioni.VoloException;
-import GUI.SlotImbarcoJDialog;
 
 public class ControllerVoli {
 		
 	VoloDAO voloDAO = new VoloDAO();
-	TrattaDAO trattaDAO = new TrattaDAO();
-	CompagniaAereaDAO compagniaDAO = new CompagniaAereaDAO();
-	SlotImbarcoDAO imbarcoDAO = new SlotImbarcoDAO();
 	
 	JDialog successo = new JDialog();
 	JTextField testo = new JTextField();
 	
-	public void InsertVoloAndImbarco(Aeroporto aeroporto, Volo volo, String codGate, String coda){
+	public void InsertVolo(Volo volo){
 		
 		try {
 
 			voloDAO.Insert(volo);
 			
-			java.util.Date dataTmp = (java.util.Date) volo.getData();
-			Timestamp dataInizio = new Timestamp(dataTmp.getTime());
-			
-			imbarcoDAO.insert(aeroporto, volo.getCodVolo(), codGate, coda, dataInizio);
 			successo.setBounds(200,200,400,200);
 			testo.setText("Inserimento avvenuto con successo!"); 
 			successo.add(testo);
 			successo.setVisible(true);
 			
-		} catch (VoloException | SlotImbarcoException e) {
+		} catch (VoloException e) {
 			
 			if (e.getMessage().contains("controllo_voli_flotta()")) {
 				
@@ -62,11 +49,6 @@ public class ControllerVoli {
 				
 		}
 		
-	}
-	
-	public void apriSlotImbarco(Aeroporto aer, Volo volo) {
-		SlotImbarcoJDialog SlotImbarco = new SlotImbarcoJDialog(aer, volo);
-		SlotImbarco.setVisible(true);
 	}
 
 	public ArrayList<Volo> getAllVoli(Aeroporto a) {
@@ -131,13 +113,13 @@ public class ControllerVoli {
 		
 	}
 
-	public ArrayList<Volo> ricercaVoliByTratta(String nomeAeroportoPartenza, String nomeAeroportoArrivo) {
+	public ArrayList<Volo> ricercaVoliByTratta(Tratta tratta) {
 		
 		ArrayList<Volo> VoliTrovati = new ArrayList<Volo>();
 		
 		try {
 			
-			VoliTrovati = voloDAO.ricercaVoloByTratta(nomeAeroportoPartenza, nomeAeroportoArrivo);
+			VoliTrovati = voloDAO.ricercaVoloByTratta(tratta);
 			
 		}catch(VoloException e) {
 			

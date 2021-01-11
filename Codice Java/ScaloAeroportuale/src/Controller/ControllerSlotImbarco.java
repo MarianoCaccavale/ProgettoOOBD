@@ -2,13 +2,13 @@ package Controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.JDialog;
 import javax.swing.JTextField;
 
 import Classi.Aeroporto;
 import Classi.SlotImbarco;
+import Classi.Volo;
 import DAO.SlotImbarcoDAO;
 import Eccezioni.SlotImbarcoException;
 
@@ -18,6 +18,26 @@ public class ControllerSlotImbarco {
 	
 	JDialog successo = new JDialog();
 	JTextField testo = new JTextField();
+	
+	public void insertSlotImbarco(Aeroporto a, Volo volo, String nomeGate, String coda) {
+		
+		
+		try {
+			
+			Timestamp dataInizio = new Timestamp(volo.getData().getTime());
+			
+			DAO.insert(a, volo, nomeGate, coda, dataInizio);
+			
+		}catch(SlotImbarcoException e) {
+			
+			successo.setBounds(200,200,400,200);
+			testo.setText(e.getMessage().toString()); 
+			successo.add(testo);
+			successo.setVisible(true);
+						
+		}
+		
+	}
 
 	public ArrayList<SlotImbarco> getImbarchi(String codAeroporto) {
 		

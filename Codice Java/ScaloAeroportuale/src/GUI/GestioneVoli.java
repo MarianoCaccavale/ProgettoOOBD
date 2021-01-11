@@ -10,26 +10,18 @@ import Classi.SlotImbarco;
 import Classi.Tratta;
 import Classi.Volo;
 import Controller.Controller;
-import Controller.ControllerAeroporti;
 import Controller.ControllerCompagnie;
 import Controller.ControllerSlotImbarco;
 import Controller.ControllerTratte;
 import Controller.ControllerVoli;
-import DAO.AeroportoDAO;
-import DAO.CompagniaAereaDAO;
-import DAO.TrattaDAO;
-import Eccezioni.TrattaException;
 
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
@@ -37,7 +29,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.ArrayList;
 import javax.swing.SpinnerNumberModel;
-import java.util.Calendar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.DefaultComboBoxModel;
@@ -237,7 +228,10 @@ public class GestioneVoli extends JFrame {
 					
 					String nomeAeroportoPartenza = RicercaTrattaCombo.getSelectedItem().toString().substring(0, RicercaTrattaCombo.getSelectedItem().toString().indexOf("<"));
 					String nomeAeroportoArrivo = RicercaTrattaCombo.getSelectedItem().toString().substring(RicercaTrattaCombo.getSelectedItem().toString().indexOf(">")+1);
-					ArrayList<Volo> VoliTrovati = controllerVoli.ricercaVoliByTratta(nomeAeroportoPartenza, nomeAeroportoArrivo);
+					
+					Tratta tratta = controllerTratte.getTrattaByAeroporti(nomeAeroportoPartenza, nomeAeroportoArrivo);
+					
+					ArrayList<Volo> VoliTrovati = controllerVoli.ricercaVoliByTratta(tratta);
 						
 					for(Volo tmpVolo:VoliTrovati) {
 						
@@ -354,9 +348,9 @@ public class GestioneVoli extends JFrame {
 					volo.setCompagniaDiAppartenenza(tmpCompagnia);
 					String aeroportoPartenza = SceltaTrattaCombo.getSelectedItem().toString().substring(0, SceltaTrattaCombo.getSelectedItem().toString().indexOf("<->"));
 					String aeroportoArrivo = SceltaTrattaCombo.getSelectedItem().toString().substring(SceltaTrattaCombo.getSelectedItem().toString().indexOf("<->")+3);
-					Tratta tmpTratta = controllerTratte.ricerca(aeroportoPartenza, aeroportoArrivo);
+					Tratta tmpTratta = controllerTratte.getTrattaByAeroporti(aeroportoPartenza, aeroportoArrivo);
 					volo.setTrattaAssociata(tmpTratta);
-					controllerVoli.apriSlotImbarco(a, volo);
+					controller.VoliToSlotImbarco(a, volo);
 					
 				}
 			

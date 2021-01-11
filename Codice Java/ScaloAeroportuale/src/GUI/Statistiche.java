@@ -20,7 +20,6 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
-import java.util.Calendar;
 import java.awt.Font;
 
 public class Statistiche extends JFrame {

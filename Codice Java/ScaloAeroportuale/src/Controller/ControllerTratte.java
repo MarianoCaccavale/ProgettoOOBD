@@ -7,28 +7,22 @@ import javax.swing.JTextField;
 
 import Classi.Aeroporto;
 import Classi.Tratta;
-import DAO.AeroportoDAO;
 import DAO.TrattaDAO;
 import Eccezioni.TrattaException;
-import GUI.GestioneTratte;
 
 public class ControllerTratte {
 
 	TrattaDAO DAO = new TrattaDAO();
-	AeroportoDAO AerDAO = new AeroportoDAO();
 	
 	JDialog successo = new JDialog();
 	JTextField testo = new JTextField();
 	
 	
-	public void InsertTratta(String codAeroportoPartenza, String codAeroportoArrivo) {
+	public void InsertTratta(Aeroporto aeroportoPartenza, Aeroporto aeroportoArrivo) {
 		
-		Aeroporto AeroportoArrivo = new Aeroporto();
-		AeroportoDAO DAOAer = new AeroportoDAO();
-		AeroportoArrivo = DAOAer.getAeroportoByNome(codAeroportoArrivo);
 		
 		try {
-			DAO.Insert(codAeroportoPartenza, AeroportoArrivo.getCodAeroporto());
+			DAO.Insert(aeroportoPartenza.getCodAeroporto(), aeroportoArrivo.getCodAeroporto());
 			successo.setBounds(200,200,400,200);
 			testo.setText("Inserimento avvenuto con successo!"); 
 			successo.add(testo);
@@ -56,12 +50,11 @@ public class ControllerTratte {
 		return Tratte;
 	}
 
-	public void delete(String codAeroportoPartenza, String nomeAeroportoArrivo) {
+	public void delete(Aeroporto aeroportoPartenza, Aeroporto aeroportoArrivo) {
 		
 		try {
 			
-			Aeroporto AeroportoArrivo = AerDAO.getAeroportoByNome(nomeAeroportoArrivo);
-			DAO.deleteTratta(codAeroportoPartenza, AeroportoArrivo.getCodAeroporto());
+			DAO.deleteTratta(aeroportoPartenza.getCodAeroporto(), aeroportoArrivo.getCodAeroporto());
 			successo.setBounds(200,200,400,200);
 			testo.setText("Cancellazione avvenuta con successo!"); 
 			successo.add(testo);
@@ -78,15 +71,11 @@ public class ControllerTratte {
 		
 	}
 
-	public void update(String vecchioNomeAeroporto, String nuovoNomeAeroporto, String codAeroporto) {
+	public void update(Aeroporto vecchioAeroporto, Aeroporto nuovoAeroporto, Aeroporto a) {
 		
 		try {
-			AeroportoDAO DAOAer = new AeroportoDAO();
-			Aeroporto nuovoAeroporto = DAOAer.getAeroportoByNome(nuovoNomeAeroporto);
-			Aeroporto vecchioAeroporto = DAOAer.getAeroportoByNome(vecchioNomeAeroporto);
 			
-			
-			DAO.update(vecchioAeroporto.getCodAeroporto(), nuovoAeroporto.getCodAeroporto(), codAeroporto);
+			DAO.update(vecchioAeroporto.getCodAeroporto(), nuovoAeroporto.getCodAeroporto(), a.getCodAeroporto());
 			successo.setBounds(200,200,400,200);
 			testo.setText("Modifica avvenuta con successo!"); 
 			successo.add(testo);
@@ -124,7 +113,7 @@ public class ControllerTratte {
 		
 	}
 
-	public Tratta ricerca(String AeroportoPartenza, String AeroportoArrivo) {
+	public Tratta getTrattaByAeroporti(String AeroportoPartenza, String AeroportoArrivo) {
 
 		TrattaDAO DAO = new TrattaDAO();
 		Tratta Tratta = new Tratta();

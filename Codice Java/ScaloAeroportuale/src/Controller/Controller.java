@@ -2,10 +2,12 @@ package Controller;
 
 
 import Classi.Aeroporto;
+import Classi.Volo;
 import DAO.AeroportoDAO;
 import GUI.GestioneClientiBusiness;
 import GUI.GestioneCompagnie;
 import GUI.GestioneGate;
+import GUI.GestioneSlotImbarco;
 import GUI.GestioneTratte;
 import GUI.GestioneVoli;
 import GUI.Hub;
@@ -21,6 +23,7 @@ public class Controller {
 	GestioneGate GateWindow;
 	GestioneTratte TratteWindow;
 	GestioneVoli VoliWindow;
+	GestioneSlotImbarco ImbarcoWindow;
 	Statistiche StatisticheWindow;
 	ServizioClienti ClientiWindow;
 	GestioneClientiBusiness BusinessWindow;
@@ -112,6 +115,13 @@ public class Controller {
 		
 		VoliWindow.setVisible(false);
 		HubWindow.setVisible(true);
+		
+	}
+	
+	public void VoliToSlotImbarco(Aeroporto aer, Volo volo) {
+		
+		ImbarcoWindow = new GestioneSlotImbarco(aer, volo);
+		ImbarcoWindow.setVisible(true);
 		
 	}
 	

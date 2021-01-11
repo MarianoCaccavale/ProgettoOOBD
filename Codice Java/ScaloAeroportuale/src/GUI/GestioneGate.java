@@ -1,7 +1,5 @@
 package GUI;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.awt.event.ActionEvent;
 import javax.swing.JTabbedPane;
-import javax.swing.JSpinner;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;

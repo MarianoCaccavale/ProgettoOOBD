@@ -22,8 +22,6 @@ import javax.swing.JSpinner;
 import javax.swing.JComboBox;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JScrollPane;
-import java.awt.FlowLayout;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.DefaultComboBoxModel;

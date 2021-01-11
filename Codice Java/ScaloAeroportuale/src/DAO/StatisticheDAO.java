@@ -11,7 +11,7 @@ import java.util.Date;
 import Connessione.ConnessioneDB;
 import Eccezioni.StatisticheException;
 
-public class ArchivioVoliDAO {
+public class StatisticheDAO {
 
 	private Connection conn = null;
 	private ConnessioneDB connessioneDB;

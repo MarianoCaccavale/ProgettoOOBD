@@ -10,6 +10,8 @@ import Classi.Tratta;
 import Controller.Controller;
 import Controller.ControllerAeroporti;
 import Controller.ControllerTratte;
+
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -88,11 +90,9 @@ public class GestioneTratte extends JFrame {
 		AggiuntaNomeCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere l'aeroporto"}));
 		
 		Aeroporti = controllerAeroporti.getAllAeroportiExceptThis(a);
-		Iterator<Aeroporto> iAeroporti = Aeroporti.iterator();
 		
-		while (iAeroporti.hasNext()) {
+		for (Aeroporto tmp: Aeroporti){
 			
-			Aeroporto tmp = iAeroporti.next();
 			AggiuntaNomeCombo.addItem(tmp.getNomeAeroporto());
 			
 		}
@@ -106,7 +106,8 @@ public class GestioneTratte extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(AggiuntaNomeCombo.getSelectedIndex() != 0){
-					controllerTratte.InsertTratta(a.getCodAeroporto(), AggiuntaNomeCombo.getSelectedItem().toString());
+					Aeroporto aeroportoArrivo = controllerAeroporti.getAeroportoByNome(AggiuntaNomeCombo.getSelectedItem().toString());
+					controllerTratte.InsertTratta(a, aeroportoArrivo);
 				}
 				
 			}
@@ -146,7 +147,8 @@ public class GestioneTratte extends JFrame {
 				
 				if (EliminazioneTrattaCombo.getSelectedIndex() != 0) {
 					String nomeAeroportoArrivo = new String(EliminazioneTrattaCombo.getSelectedItem().toString().substring(a.getNomeAeroporto().length()+7));
-					controllerTratte.delete(a.getCodAeroporto(), nomeAeroportoArrivo);
+					Aeroporto aeroportoArrivo = controllerAeroporti.getAeroportoByNome(nomeAeroportoArrivo);
+					controllerTratte.delete(a, aeroportoArrivo);
 				}	
 				
 			}
@@ -210,7 +212,7 @@ public class GestioneTratte extends JFrame {
 				
 				if (RicercaTratteCombo.getSelectedIndex() != 0) {
 					
-					Tratta TrattaTrovate = controllerTratte.ricerca(a.getNomeAeroporto(), RicercaTratteCombo.getSelectedItem().toString());
+					Tratta TrattaTrovate = controllerTratte.getTrattaByAeroporti(a.getNomeAeroporto(), RicercaTratteCombo.getSelectedItem().toString());
 										
 					
 					String nomeAeroportoArrivo = new String();
@@ -283,8 +285,13 @@ public class GestioneTratte extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(ModificaNuovaTrattaCombo.getSelectedIndex() != 0 && ModificaVecchiaTrattaCombo.getSelectedIndex() != 0){
+					
 					String vecchioNomeAeroporto = new String(ModificaVecchiaTrattaCombo.getSelectedItem().toString().substring((a.getNomeAeroporto()).length()+7));
-					controllerTratte.update(vecchioNomeAeroporto, ModificaNuovaTrattaCombo.getSelectedItem().toString(), a.getCodAeroporto());
+					Aeroporto vecchioAeroporto = controllerAeroporti.getAeroportoByNome(vecchioNomeAeroporto);
+					
+					Aeroporto nuovoAeroporto = controllerAeroporti.getAeroportoByNome(ModificaNuovaTrattaCombo.getSelectedItem().toString());
+					controllerTratte.update(vecchioAeroporto,nuovoAeroporto, a);
+					
 				}
 				
 			}

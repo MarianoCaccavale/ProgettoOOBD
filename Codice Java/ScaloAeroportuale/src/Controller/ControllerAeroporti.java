@@ -10,6 +10,17 @@ public class ControllerAeroporti {
 
 	AeroportoDAO DAO = new AeroportoDAO();
 	
+	public ArrayList<Aeroporto> getAeroporti() {
+		
+		ArrayList<Aeroporto> listaAeroporti = new ArrayList<>();
+		
+		AeroportoDAO ad = new AeroportoDAO();
+		
+		listaAeroporti = ad.getAllAeroporti();
+		
+		return listaAeroporti;
+	}
+	
 	public ArrayList<Aeroporto> getAllAeroportiExceptThis(Aeroporto aer) {
 		
 		ArrayList<Aeroporto> AllAeroporti = new ArrayList<Aeroporto>();
@@ -25,6 +36,15 @@ public class ControllerAeroporti {
 		Aeroporto aeroporto = new Aeroporto();
 		
 		aeroporto = DAO.getAeroportoByCod(codAeroporto);
+		
+		return aeroporto;
+	}
+
+	public Aeroporto getAeroportoByNome(String nomeAeroporto) {
+		
+		Aeroporto aeroporto = new Aeroporto();
+		
+		aeroporto = DAO.getAeroportoByNome(nomeAeroporto);
 		
 		return aeroporto;
 	}

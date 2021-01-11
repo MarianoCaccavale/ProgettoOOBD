@@ -181,7 +181,7 @@ public class VoloDAO {
 	}
 
 
-	public ArrayList<Volo> ricercaVoloByTratta(String nomeAeroportoPartenza, String nomeAeroportoArrivo) throws VoloException {
+	public ArrayList<Volo> ricercaVoloByTratta(Tratta tratta) throws VoloException {
 		
 		ArrayList<Volo> VoliTrovati = new ArrayList<Volo>();
 		
@@ -191,8 +191,8 @@ public class VoloDAO {
 			conn = connessioneDB.getConnection();
 			
 			PreparedStatement ps = conn.prepareStatement("select *, a1.nomeaeroporto as nomepartenza, a2.nomeaeroporto as nomearrivo from volo natural join compagniaaerea as c natural join tratta as t inner join aeroporto as a1 on t.aeroportopartenza = a1.codaeroporto inner join aeroporto as a2 on t.aeroportoarrivo = a2.codaeroporto where a1.nomeaeroporto = ? AND a2.nomeaeroporto = ?");
-			ps.setString(1, nomeAeroportoPartenza);
-			ps.setString(2, nomeAeroportoArrivo);
+			ps.setString(1, tratta.getAeroportoDiPartenza().getNomeAeroporto());
+			ps.setString(2, tratta.getAeroportoDiArrivo().getNomeAeroporto());
 			
 			ResultSet rs = ps.executeQuery();
 			

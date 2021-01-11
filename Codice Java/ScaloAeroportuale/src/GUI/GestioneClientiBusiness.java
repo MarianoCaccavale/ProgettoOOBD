@@ -4,8 +4,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.postgresql.copy.CopyManager;
-
 import Classi.Aeroporto;
 import Classi.ClienteBusiness;
 import Classi.CompagniaAerea;
@@ -135,7 +133,10 @@ public class GestioneClientiBusiness extends JFrame {
 				if(!(EmailTf.getText().isBlank()) && !(NomeTf.getText().isBlank()) && !(CognomeTf.getText().isBlank())) {
 					
 					String nomeCompagnia = CompagniaCombo.getSelectedItem().toString();
-					controllerClienti.insert(EmailTf.getText(), NomeTf.getText(), CognomeTf.getText(), (Date) DataNascitaSpn.getValue(), nomeCompagnia);
+					
+					CompagniaAerea compagnia = controllerCompagnie.getCompagniaByNome(nomeCompagnia);
+					
+					controllerClienti.insert(EmailTf.getText(), NomeTf.getText(), CognomeTf.getText(), (Date) DataNascitaSpn.getValue(), compagnia);
 				}
 				
 			}
@@ -277,7 +278,10 @@ public class GestioneClientiBusiness extends JFrame {
 					
 					ArrayList<ClienteBusiness> ClientiDaStampare = new ArrayList<ClienteBusiness>();
 					String nomeCompagnia = CercaCompagnieCombo.getSelectedItem().toString().substring(0);
-					ClientiDaStampare = controllerClienti.getClientiBusinessByCompagnia(nomeCompagnia);
+					
+					CompagniaAerea compagnia = controllerCompagnie.getCompagniaByNome(nomeCompagnia);
+					
+					ClientiDaStampare = controllerClienti.getClientiBusinessByCompagnia(compagnia);
 					
 					for(ClienteBusiness tmp:ClientiDaStampare) {
 						ElencoPane.setText(ElencoPane.getText() + "\n");

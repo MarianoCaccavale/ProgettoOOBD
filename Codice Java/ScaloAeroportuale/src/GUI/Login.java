@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import Classi.Aeroporto;
 import Controller.Controller;
+import Controller.ControllerAeroporti;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -42,16 +43,13 @@ public class Login extends JFrame {
 		
 		
 		ArrayList<Aeroporto> Aeroporti = new ArrayList<>();
-		Aeroporto aer = new Aeroporto();
+		ControllerAeroporti controllerAeroporto = new ControllerAeroporti();
 		ListaAeroportiCombo.setModel(new DefaultComboBoxModel<String>());
 		
-		Aeroporti = aer.getAeroporti();
-		Iterator<Aeroporto> i = Aeroporti.iterator();
+		Aeroporti = controllerAeroporto.getAeroporti();
 		
-		
-		while(i.hasNext()) {
+		for(Aeroporto tmp: Aeroporti){
 			
-			Aeroporto tmp = i.next();
 			ListaAeroportiCombo.addItem(tmp.getNomeAeroporto());
 			
 		}

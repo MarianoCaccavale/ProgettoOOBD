@@ -12,6 +12,7 @@ import Classi.Aeroporto;
 import Classi.Gate;
 import Classi.Volo;
 import Controller.ControllerGate;
+import Controller.ControllerSlotImbarco;
 import Controller.ControllerVoli;
 
 import javax.swing.JLabel;
@@ -24,16 +25,17 @@ import java.awt.event.ActionEvent;
 import java.sql.Timestamp;
 import java.awt.Font;
 
-public class SlotImbarcoJDialog extends JDialog {
+public class GestioneSlotImbarco extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	ControllerGate controllerGate = new ControllerGate();
 	ArrayList<Gate> ElencoGate = new ArrayList<Gate>();
 
 	
-	public SlotImbarcoJDialog(Aeroporto a, Volo volo) {
+	public GestioneSlotImbarco(Aeroporto a, Volo volo) {
 		setTitle("Creazione Slot Imbarco");
 		ControllerVoli controllerVoli = new ControllerVoli();
+		ControllerSlotImbarco controllerSlotImbarco = new ControllerSlotImbarco();
 		
 		setBounds(100, 100, 320, 400);
 		getContentPane().setLayout(new BorderLayout());
@@ -94,7 +96,8 @@ public class SlotImbarcoJDialog extends JDialog {
 					
 						if (GateCombo.getSelectedItem().toString() != null) {
 							
-							controllerVoli.InsertVoloAndImbarco(a, volo, GateCombo.getSelectedItem().toString(), CodaCombo.getSelectedItem().toString());
+							controllerVoli.InsertVolo(volo);
+							controllerSlotImbarco.insertSlotImbarco(a, volo, GateCombo.getSelectedItem().toString(),  CodaCombo.getSelectedItem().toString());
 							dispose();
 							
 						}else {
