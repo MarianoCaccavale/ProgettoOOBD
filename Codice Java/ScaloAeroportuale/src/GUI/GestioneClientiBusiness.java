@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.postgresql.copy.CopyManager;
+
 import Classi.Aeroporto;
 import Classi.ClienteBusiness;
 import Classi.CompagniaAerea;
@@ -36,6 +38,8 @@ public class GestioneClientiBusiness extends JFrame {
 	private JTextField EliminazioneEmailTf;
 
 	public GestioneClientiBusiness(Controller c, Aeroporto a) {
+		setResizable(false);
+		setTitle("Clienti Business");
 		Controller controller = c;
 		ControllerClienti controllerClienti = new ControllerClienti();
 		ControllerCompagnie controllerCompagnie = new ControllerCompagnie();
@@ -258,7 +262,8 @@ public class GestioneClientiBusiness extends JFrame {
 		
 		for(ClienteBusiness tmp:ClientiDaStampare) {
 				ElencoPane.setText(ElencoPane.getText() + "\n");
-				ElencoPane.setText(ElencoPane.getText() + "Nome: " + tmp.getNome() + "\tCognome: " + tmp.getCognome() +"\tEmail: " + tmp.getEmail() + "\tPunti: " + tmp.getPunti() + "\tCodice CentoKilometri: " + tmp.getCodCentoKilometri() + "");
+				ElencoPane.setText(ElencoPane.getText() + "Nome: " + tmp.getNome() + "\tCognome: " + tmp.getCognome() +"\tEmail: " + tmp.getEmail() + "\tPunti: " + tmp.getPunti() + "\tCompagnia di appartenenza: " + tmp.getCompagniaDiIscrizione().getCodCentoKilometri());
+					 
 		}
 		
 		
@@ -271,12 +276,12 @@ public class GestioneClientiBusiness extends JFrame {
 				if (CercaCompagnieCombo.getSelectedIndex() != 0 ) {
 					
 					ArrayList<ClienteBusiness> ClientiDaStampare = new ArrayList<ClienteBusiness>();
-					String codCompagnia = CercaCompagnieCombo.getSelectedItem().toString().substring(0, CercaCompagnieCombo.getSelectedItem().toString().indexOf(":"));
-					ClientiDaStampare = controllerClienti.getClientiBusinessByCompagnia(codCompagnia);
+					String nomeCompagnia = CercaCompagnieCombo.getSelectedItem().toString().substring(0);
+					ClientiDaStampare = controllerClienti.getClientiBusinessByCompagnia(nomeCompagnia);
 					
 					for(ClienteBusiness tmp:ClientiDaStampare) {
 						ElencoPane.setText(ElencoPane.getText() + "\n");
-						ElencoPane.setText(ElencoPane.getText() + "Nome: " + tmp.getNome() + "\tCognome: " + tmp.getCognome() +"\tEmail: " + tmp.getEmail() + "\tPunti: " + tmp.getPunti() + "\tCodice CentoKilometri: " + tmp.getCodCentoKilometri() + "");
+						ElencoPane.setText(ElencoPane.getText() + "Nome: " + tmp.getNome() + "\tCognome: " + tmp.getCognome() +"\tEmail: " + tmp.getEmail() + "\tPunti: " + tmp.getPunti() + "\tCompagnia di appartenenza: " + tmp.getCompagniaDiIscrizione().getCodCentoKilometri());
 					}
 					
 				}

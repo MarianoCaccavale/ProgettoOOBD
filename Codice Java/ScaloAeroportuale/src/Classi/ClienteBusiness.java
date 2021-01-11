@@ -11,11 +11,11 @@ public class ClienteBusiness {
 	private Date dataNascita = new Date(0);
 	private Date dataIscrizione = new Date(0);
 	private int punti;
-	private ArrayList<CompagniaAerea> compagniaDiIscrizione = new ArrayList<CompagniaAerea>();
+	private CompagniaAerea compagniaDiIscrizione = new CompagniaAerea();
 	
 	public void CLienteBusiness() {};
 		
-	public ClienteBusiness(String email, String nome, String cognome, int punti, ArrayList<CompagniaAerea> compagniaDiIscrizione) {
+	public ClienteBusiness(String email, String nome, String cognome, int punti, CompagniaAerea compagniaDiIscrizione) {
 		super();
 		this.email = email;
 		this.nome = nome;
@@ -71,11 +71,11 @@ public class ClienteBusiness {
 	public void setPunti(int punti) {
 		this.punti = punti;
 	}
-	public ArrayList<CompagniaAerea> getCodCentoKilometri() {
+	public CompagniaAerea getCompagniaDiIscrizione() {
 		return compagniaDiIscrizione;
 	}
-	public void setCodCentoKilometri(ArrayList<CompagniaAerea> codCentoKilometri) {
-		this.compagniaDiIscrizione = codCentoKilometri;
+	public void setCompagniaDiIscrizione(CompagniaAerea compagniaDiIscrizione) {
+		this.compagniaDiIscrizione = compagniaDiIscrizione;
 	}
 	
 }

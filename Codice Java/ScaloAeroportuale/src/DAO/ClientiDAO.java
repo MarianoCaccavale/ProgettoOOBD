@@ -88,11 +88,12 @@ public class ClientiDAO {
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
 			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery("select * from clientibusiness");
+			ResultSet rs = st.executeQuery("select * from clientibusiness natural join compagniaaerea");
 			
 			while (rs.next()) {
 				
-				ClienteBusiness tmp = new ClienteBusiness(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getInt("punti"));
+				CompagniaAerea compagniaCliente = new CompagniaAerea(rs.getString("nomecompagnia"), rs.getInt("grandezzaflotta"), rs.getString("codcentokilometri")); 
+				ClienteBusiness tmp = new ClienteBusiness(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getInt("punti"), compagniaCliente);
 				Clienti.add(tmp);
 				
 			}
@@ -119,16 +120,15 @@ public class ClientiDAO {
 			
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
-			PreparedStatement ps = conn.prepareStatement("select cb.email, cb.nome, cb.cognome, cb.punti, ca.codcentokilometri from clientibusiness as cb natural join compagniaaerea as ca where ca.nomecompagnia = ?");
+			PreparedStatement ps = conn.prepareStatement("select * from clientibusiness as cb natural join compagniaaerea as ca where ca.nomecompagnia = ?");
 			ps.setString(1, compagnia.getNomeCompagnia());
 			
 			ResultSet rs = ps.executeQuery();
 			
 			while (rs.next()) {
 				
-				ArrayList<CompagniaAerea> compagnie = new ArrayList<CompagniaAerea>();
-				compagnie.add(compagnia);
-				ClienteBusiness tmp = new ClienteBusiness(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getInt("punti"), compagnie);
+				CompagniaAerea compagniaCliente = new CompagniaAerea(rs.getString("nomecompagnia"), rs.getInt("grandezzaflotta"), rs.getString("codcentokilometri"));
+				ClienteBusiness tmp = new ClienteBusiness(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getInt("punti"), compagniaCliente);
 				Clienti.add(tmp);
 				
 			}
