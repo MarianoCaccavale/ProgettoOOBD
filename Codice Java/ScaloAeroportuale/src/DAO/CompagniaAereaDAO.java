@@ -15,8 +15,36 @@ public class CompagniaAereaDAO{
 	private ConnessioneDB connessioneDB;
 	String errore = new String("");
 	
+	public ArrayList<CompagniaAerea> getAllCompagnie() throws CompagniaException{
+		
+		ArrayList<CompagniaAerea> result = new ArrayList<CompagniaAerea>();
+		CompagniaAerea tmp;
+		try {
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
+			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery("Select * from compagniaaerea");
+			
+			while (rs.next()) {
+				
+				tmp = new CompagniaAerea(rs.getString("NomeCompagnia"), rs.getInt("GrandezzaFlotta"));
+				result.add(tmp);
+				
+			}
+			st.close();
+			rs.close();
+			conn.close();
+		} catch (SQLException e) {
+			
+			errore = e.getMessage();
+			throw new CompagniaException(errore);
+			
+		}
+		
+		return result;
+	}
 	
-	public void insert(String Nome, int Flotta, Aeroporto AerAppartenenza) throws CompagniaException {
+	public void InsertCompagnia(String Nome, int Flotta, Aeroporto AerAppartenenza) throws CompagniaException {
 		
 		String codCentoKilometri = new String();
 		
@@ -72,7 +100,7 @@ public class CompagniaAereaDAO{
 		
 	}
 
-	public void update(String nome, Integer nuovaGrandezza, String codAeroporto) throws CompagniaException {
+	public void updateByNome(String nome, Integer nuovaGrandezza, String codAeroporto) throws CompagniaException {
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
@@ -109,63 +137,6 @@ public class CompagniaAereaDAO{
 		}
 	}
 
-
-	public void delete(String nome) throws CompagniaException {
-		
-		try {
-			connessioneDB = ConnessioneDB.getIstanza();
-			conn = connessioneDB.getConnection();
-	
-			PreparedStatement pr = conn.prepareStatement("Delete from compagniaaerea where nomecompagnia = ?");
-			
-			pr.setString(1, nome);
-			pr.executeUpdate();
-			
-			pr.close();
-			conn.close();
-	
-		} catch (SQLException e) {
-
-			errore = e.getMessage();
-			
-			throw new CompagniaException(errore);
-			
-		}
-		
-	}
-	
-	public CompagniaAerea getCompagniaByNome(String nome) throws CompagniaException {
-
-		CompagniaAerea tmp = new CompagniaAerea();
-		
-		try {
-			
-			connessioneDB = ConnessioneDB.getIstanza();
-			conn = connessioneDB.getConnection();
-			PreparedStatement ps = conn.prepareStatement("select * from compagniaaerea where nomecompagnia = ?");
-			
-			ps.setString(1, nome);
-			ResultSet rs = ps.executeQuery();
-			
-			rs.next();
-				
-			tmp = new CompagniaAerea(rs.getString("nomecompagnia"), rs.getInt("grandezzaflotta"), rs.getString("codcentokilometri"));
-			
-			ps.close();
-			rs.close();
-			conn.close();
-			
-		}catch(SQLException e) {
-			
-			errore = e.getMessage();
-			
-			throw new CompagniaException(errore);
-			
-		}
-		
-		return tmp;
-	}
-	
 	public ArrayList<CompagniaAerea> getCompagnieByAeroporto(String codAeroporto) throws CompagniaException {
 		
 		ArrayList<CompagniaAerea> result = new ArrayList<CompagniaAerea>();
@@ -196,34 +167,29 @@ public class CompagniaAereaDAO{
 		
 		return result;
 	}
-	
-	public ArrayList<CompagniaAerea> getAllCompagnie() throws CompagniaException{
+
+	public void deleteByNome(String nome) throws CompagniaException {
 		
-		ArrayList<CompagniaAerea> result = new ArrayList<CompagniaAerea>();
-		CompagniaAerea tmp;
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			conn = connessioneDB.getConnection();
-			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery("Select * from compagniaaerea");
+	
+			PreparedStatement pr = conn.prepareStatement("Delete from compagniaaerea where nomecompagnia = ?");
 			
-			while (rs.next()) {
-				
-				tmp = new CompagniaAerea(rs.getString("NomeCompagnia"), rs.getInt("GrandezzaFlotta"));
-				result.add(tmp);
-				
-			}
-			st.close();
-			rs.close();
+			pr.setString(1, nome);
+			pr.executeUpdate();
+			
+			pr.close();
 			conn.close();
+	
 		} catch (SQLException e) {
-			
+
 			errore = e.getMessage();
+			
 			throw new CompagniaException(errore);
 			
 		}
 		
-		return result;
 	}
 
 	public ArrayList<CompagniaAerea> ricercaByFlotta(Integer min, Integer max, String codAeroporto) throws CompagniaException {
@@ -299,7 +265,37 @@ public class CompagniaAereaDAO{
 	}
 
 
-	
+	public CompagniaAerea getCompagniaByNome(String nome) throws CompagniaException {
+
+		CompagniaAerea tmp = new CompagniaAerea();
+		
+		try {
+			
+			connessioneDB = ConnessioneDB.getIstanza();
+			conn = connessioneDB.getConnection();
+			PreparedStatement ps = conn.prepareStatement("select * from compagniaaerea where nomecompagnia = ?");
+			
+			ps.setString(1, nome);
+			ResultSet rs = ps.executeQuery();
+			
+			rs.next();
+				
+			tmp = new CompagniaAerea(rs.getString("nomecompagnia"), rs.getInt("grandezzaflotta"), rs.getString("codcentokilometri"));
+			
+			ps.close();
+			rs.close();
+			conn.close();
+			
+		}catch(SQLException e) {
+			
+			errore = e.getMessage();
+			
+			throw new CompagniaException(errore);
+			
+		}
+		
+		return tmp;
+	}
 	
 	
 		

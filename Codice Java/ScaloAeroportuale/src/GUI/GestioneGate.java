@@ -71,7 +71,7 @@ public class GestioneGate extends JFrame {
 		AggiuntaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				controllerGate.insert(AggiuntaNomeTxt.getText(), a.getCodAeroporto());
+				controllerGate.insertGate(AggiuntaNomeTxt.getText(), a.getCodAeroporto());
 				AggiuntaNomeTxt.setText("");
 			}
 		});

@@ -107,7 +107,7 @@ public class GestioneTratte extends JFrame {
 				
 				if(AggiuntaNomeCombo.getSelectedIndex() != 0){
 					Aeroporto aeroportoArrivo = controllerAeroporti.getAeroportoByNome(AggiuntaNomeCombo.getSelectedItem().toString());
-					controllerTratte.insert(a, aeroportoArrivo);
+					controllerTratte.InsertTratta(a, aeroportoArrivo);
 				}
 				
 			}

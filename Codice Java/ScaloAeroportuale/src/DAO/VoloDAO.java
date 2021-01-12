@@ -1,6 +1,7 @@
 package DAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,7 +23,7 @@ public class VoloDAO {
 	String errore = new String("");
 	
 	
-	public void insert (Volo volo) throws VoloException {
+	public void Insert (Volo volo) throws VoloException {
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
@@ -152,7 +153,7 @@ public class VoloDAO {
 	}
 
 
-	public void update(int numeroPosti, String codVolo) throws VoloException {
+	public void updateVolo(int numeroPosti, String codVolo) throws VoloException {
 		
 		try {
 			

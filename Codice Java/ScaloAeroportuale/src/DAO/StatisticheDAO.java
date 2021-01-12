@@ -16,7 +16,6 @@ public class StatisticheDAO {
 	private Connection conn = null;
 	private ConnessioneDB connessioneDB;
 	String errore = new String("");
-	
 	public ArrayList<String[]> getGateChiusi(String codAeroporto, Date tmpDataInizio, Date tmpDataFine) throws StatisticheException {
 		
 		ArrayList<String[]> listaTempi = new ArrayList<String[]>();

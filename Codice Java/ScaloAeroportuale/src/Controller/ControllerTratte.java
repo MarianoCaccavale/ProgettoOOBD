@@ -18,7 +18,7 @@ public class ControllerTratte {
 	JTextField testo = new JTextField();
 	
 	
-	public void insert(Aeroporto aeroportoPartenza, Aeroporto aeroportoArrivo) {
+	public void InsertTratta(Aeroporto aeroportoPartenza, Aeroporto aeroportoArrivo) {
 		
 		
 		try {
@@ -38,24 +38,16 @@ public class ControllerTratte {
 		
 	}
 
-	public void update(Aeroporto vecchioAeroporto, Aeroporto nuovoAeroporto, Aeroporto a) {
-		
+	public ArrayList<Tratta> getTratteFromThisAirport(Aeroporto codAeroporto) {
+
+		ArrayList<Tratta> Tratte = new ArrayList<Tratta>();
 		try {
-			
-			DAO.update(vecchioAeroporto.getCodAeroporto(), nuovoAeroporto.getCodAeroporto(), a.getCodAeroporto());
-			successo.setBounds(200,200,400,200);
-			testo.setText("Modifica avvenuta con successo!"); 
-			successo.add(testo);
-			successo.setVisible(true);
+			Tratte = DAO.getTratteByAeroportoDiPartenza(codAeroporto);
 		} catch (TrattaException e) {
-			
-			successo.setBounds(200,200,400,200);
-			testo.setText(e.getMessage()); 
-			successo.add(testo);
-			successo.setVisible(true);
-		}
+			e.printStackTrace();
+		} 
 		
-		
+		return Tratte;
 	}
 
 	public void delete(Aeroporto aeroportoPartenza, Aeroporto aeroportoArrivo) {
@@ -79,17 +71,46 @@ public class ControllerTratte {
 		
 	}
 
-	
-	public ArrayList<Tratta> getTratteFromThisAirport(Aeroporto aeroporto) {
-
-		ArrayList<Tratta> Tratte = new ArrayList<Tratta>();
-		try {
-			Tratte = DAO.getTratteByAeroportoDiPartenza(aeroporto);
-		} catch (TrattaException e) {
-			e.printStackTrace();
-		} 
+	public void update(Aeroporto vecchioAeroporto, Aeroporto nuovoAeroporto, Aeroporto a) {
 		
-		return Tratte;
+		try {
+			
+			DAO.update(vecchioAeroporto.getCodAeroporto(), nuovoAeroporto.getCodAeroporto(), a.getCodAeroporto());
+			successo.setBounds(200,200,400,200);
+			testo.setText("Modifica avvenuta con successo!"); 
+			successo.add(testo);
+			successo.setVisible(true);
+		} catch (TrattaException e) {
+			
+			successo.setBounds(200,200,400,200);
+			testo.setText(e.getMessage()); 
+			successo.add(testo);
+			successo.setVisible(true);
+		}
+		
+		
+	}
+
+	public Tratta getTrattaByCod(String trattaAssociata) {
+	
+		Tratta tratta = new Tratta();
+		
+		try {
+				
+			tratta = DAO.getTrattaByCod(trattaAssociata);
+			
+		} catch (TrattaException e) {
+	
+			JDialog successo = new JDialog();
+			JTextField testo = new JTextField();
+			successo.setBounds(200,200,400,200);
+			testo.setText(e.getMessage().toString()); 
+			successo.add(testo);
+			successo.setVisible(true);
+		}
+		
+		return tratta;
+		
 	}
 
 	public Tratta getTrattaByAeroporti(String AeroportoPartenza, String AeroportoArrivo) {

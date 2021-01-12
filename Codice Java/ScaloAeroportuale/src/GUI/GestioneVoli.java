@@ -156,7 +156,7 @@ public class GestioneVoli extends JFrame {
 				
 				if(ModificaComboBox.getSelectedIndex() != 0) {
 					
-					controllerVoli.update((Integer) ModificaNumeroPostiSpn.getValue(),(String) ModificaComboBox.getSelectedItem().toString().subSequence(0, ModificaComboBox.getSelectedItem().toString().indexOf(":")));
+					controllerVoli.updateVolo((Integer) ModificaNumeroPostiSpn.getValue(),(String) ModificaComboBox.getSelectedItem().toString().subSequence(0, ModificaComboBox.getSelectedItem().toString().indexOf(":")));
 
 				}
 				
@@ -298,7 +298,7 @@ public class GestioneVoli extends JFrame {
 					String voloDaCancellare = new String(EliminaVoloComboBox.getSelectedItem().toString());
 					String tmp = voloDaCancellare.substring(0, voloDaCancellare.indexOf("-")-1);
 					System.out.println(tmp);
-					controllerVoli.delete(voloDaCancellare.substring(0, voloDaCancellare.indexOf("-")-1));
+					controllerVoli.deleteVolo(voloDaCancellare.substring(0, voloDaCancellare.indexOf("-")-1));
 					
 				}
 				
