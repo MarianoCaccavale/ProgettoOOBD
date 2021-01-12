@@ -2,8 +2,7 @@ package Controller;
 
 
 import Classi.Aeroporto;
-import Classi.Volo;
-import DAO.AeroportoDAO;
+import Classi.Volo; 
 import GUI.GestioneClientiBusiness;
 import GUI.GestioneCompagnie;
 import GUI.GestioneGate;
@@ -45,10 +44,10 @@ public class Controller {
 	
 	public void LoginToHub(String nomeAeroporto) {
 		
-		AeroportoDAO aDAO = new AeroportoDAO();
+		ControllerAeroporti controllerAeroporti = new ControllerAeroporti();
 		Aeroporto a = new Aeroporto();
 		LoginWindow.setVisible(false);
-		a = aDAO.getAeroportoByNome(nomeAeroporto);
+		a = controllerAeroporti.getAeroportoByNome(nomeAeroporto);
 		HubWindow = new Hub(this, a);
 		HubWindow.setVisible(true);
 		
