@@ -217,11 +217,14 @@ public class GestioneTratte extends JFrame {
 					
 					String nomeAeroportoArrivo = new String();
 					String nomeCitt‡Arrivo = new String();
-					nomeAeroportoArrivo = TrattaTrovate.getAeroportoDiArrivo().getNomeAeroporto();
-					nomeCitt‡Arrivo = TrattaTrovate.getAeroportoDiPartenza().getNomeAeroporto();
-					ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
-					ElencoTextPane.setText(ElencoTextPane.getText() + "Aeroporto di arrivo: " + nomeAeroportoArrivo +"\tCitt‡: " + nomeCitt‡Arrivo +"");
-					
+					if(TrattaTrovate.getAeroportoDiArrivo() != null) {
+						
+						nomeAeroportoArrivo = TrattaTrovate.getAeroportoDiArrivo().getNomeAeroporto();
+						nomeCitt‡Arrivo = TrattaTrovate.getAeroportoDiPartenza().getNomeAeroporto();
+						ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
+						ElencoTextPane.setText(ElencoTextPane.getText() + "Aeroporto di arrivo: " + nomeAeroportoArrivo +"\tCitt‡: " + nomeCitt‡Arrivo +"");
+						
+					}
 					
 				}
 				

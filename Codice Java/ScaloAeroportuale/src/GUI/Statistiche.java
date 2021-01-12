@@ -78,6 +78,7 @@ public class Statistiche extends JFrame {
 		CompagniePanel.add(scrollPane_1);
 		
 		JTextPane RicercaCompagniePanel = new JTextPane();
+		RicercaCompagniePanel.setEditable(false);
 		RicercaCompagniePanel.setFont(new Font("Arial", Font.PLAIN, 14));
 		scrollPane_1.setViewportView(RicercaCompagniePanel);
 		
