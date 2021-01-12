@@ -166,6 +166,7 @@ public class GestioneTratte extends JFrame {
 		ElencoPanel.add(scrollPane);
 		
 		JTextPane ElencoTextPane = new JTextPane();
+		ElencoTextPane.setEditable(false);
 		ElencoTextPane.setFont(new Font("Arial", Font.PLAIN, 14));
 		scrollPane.setViewportView(ElencoTextPane);
 		
@@ -173,7 +174,7 @@ public class GestioneTratte extends JFrame {
 			
 			String nomeAeroportoArrivo = new String();
 			String nomeCitt‡Arrivo = new String();
-			nomeAeroportoArrivo = tmp.getAeroportoDiPartenza().getNomeAeroporto();
+			nomeAeroportoArrivo = tmp.getAeroportoDiArrivo().getNomeAeroporto();
 			nomeCitt‡Arrivo = tmp.getAeroportoDiArrivo().getCitt‡();
 			ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
 			ElencoTextPane.setText(ElencoTextPane.getText() + "Aeroporto di arrivo: " + nomeAeroportoArrivo +"\tCitt‡: " + nomeCitt‡Arrivo +"");
