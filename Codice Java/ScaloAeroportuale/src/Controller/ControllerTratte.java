@@ -17,15 +17,10 @@ public class ControllerTratte {
 	JDialog successo = new JDialog();
 	JTextField testo = new JTextField();
 	
-<<<<<<< Updated upstream
 	
 	public void insert(Aeroporto aeroportoPartenza, Aeroporto aeroportoArrivo) {
-=======
-		
-	public void InsertTratta(Aeroporto aeroportoPartenza, Aeroporto aeroportoArrivo) {
->>>>>>> Stashed changes
-		
-		
+
+				
 		try {
 			DAO.Insert(aeroportoPartenza.getCodAeroporto(), aeroportoArrivo.getCodAeroporto());
 			successo.setBounds(200,200,600,100);
@@ -47,25 +42,16 @@ public class ControllerTratte {
 		
 		try {
 			
-<<<<<<< Updated upstream
+
 			DAO.update(vecchioAeroporto.getCodAeroporto(), nuovoAeroporto.getCodAeroporto(), a.getCodAeroporto());
-			successo.setBounds(200,200,400,200);
-			testo.setText("Modifica avvenuta con successo!"); 
-=======
-			DAO.deleteTratta(aeroportoPartenza.getCodAeroporto(), aeroportoArrivo.getCodAeroporto());
 			successo.setBounds(200,200,600,100);
-			testo.setText("Cancellazione avvenuta con successo!"); 
->>>>>>> Stashed changes
+			testo.setText("Modifica avvenuta con successo!"); 
 			successo.add(testo);
 			successo.setVisible(true);
-		} catch (TrattaException e) {
-<<<<<<< Updated upstream
 			
-			successo.setBounds(200,200,400,200);
-=======
-
+		} catch (TrattaException e) {
+			
 			successo.setBounds(200,200,600,100);
->>>>>>> Stashed changes
 			testo.setText(e.getMessage()); 
 			successo.add(testo);
 			successo.setVisible(true);
@@ -78,28 +64,19 @@ public class ControllerTratte {
 		
 		try {
 			
-<<<<<<< Updated upstream
 			DAO.deleteTratta(aeroportoPartenza.getCodAeroporto(), aeroportoArrivo.getCodAeroporto());
-			successo.setBounds(200,200,400,200);
 			testo.setText("Cancellazione avvenuta con successo!"); 
-=======
-			DAO.update(vecchioAeroporto.getCodAeroporto(), nuovoAeroporto.getCodAeroporto(), a.getCodAeroporto());
 			successo.setBounds(200,200,600,100);
-			testo.setText("Modifica avvenuta con successo!"); 
->>>>>>> Stashed changes
 			successo.add(testo);
 			successo.setVisible(true);
-			
-<<<<<<< Updated upstream
+	
 		} catch (TrattaException e) {
 
-			successo.setBounds(200,200,400,200);
-=======
 			successo.setBounds(200,200,600,100);
->>>>>>> Stashed changes
 			testo.setText(e.getMessage()); 
 			successo.add(testo);
 			successo.setVisible(true);
+			
 		}
 		
 		
@@ -109,24 +86,18 @@ public class ControllerTratte {
 	public ArrayList<Tratta> getTratteFromThisAirport(Aeroporto aeroporto) {
 
 		ArrayList<Tratta> Tratte = new ArrayList<Tratta>();
+		
 		try {
 			Tratte = DAO.getTratteByAeroportoDiPartenza(aeroporto);
 		} catch (TrattaException e) {
-<<<<<<< Updated upstream
-			e.printStackTrace();
-		} 
-=======
-	
-			JDialog successo = new JDialog();
-			JTextField testo = new JTextField();
+			
 			successo.setBounds(200,200,600,100);
 			testo.setText(e.getMessage().toString()); 
 			successo.add(testo);
 			successo.setVisible(true);
-		}
-		
-		return tratta;
->>>>>>> Stashed changes
+			
+		} 
+
 		
 		return Tratte;
 	}

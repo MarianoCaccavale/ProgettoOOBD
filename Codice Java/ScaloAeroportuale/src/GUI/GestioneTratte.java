@@ -214,7 +214,6 @@ public class GestioneTratte extends JFrame {
 					
 					Tratta TrattaTrovate = controllerTratte.getTrattaByAeroporti(a.getNomeAeroporto(), RicercaTratteCombo.getSelectedItem().toString());
 										
-					
 					String nomeAeroportoArrivo = new String();
 					String nomeCitt‡Arrivo = new String();
 					if(TrattaTrovate.getAeroportoDiArrivo() != null) {
