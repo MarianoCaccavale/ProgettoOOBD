@@ -20,7 +20,7 @@ public class ControllerCompagnie {
 	
 		
 		try {
-			DAO.InsertCompagnia(Nome, Flotta, a);
+			DAO.insert(Nome, Flotta, a);
 			
 			testo.setText("Inserimento avvenuto con successo!");
 			successo.setBounds(200,200,400,200);
@@ -40,7 +40,7 @@ public class ControllerCompagnie {
 		
 		
 		try {
-			DAO.updateByNome(Nome, NuovaGrandezza, aer.getCodAeroporto());
+			DAO.update(Nome, NuovaGrandezza, aer.getCodAeroporto());
 			testo.setText("Modifica avvenuta con successo!");
 			successo.setBounds(200,200,400,200);
 			successo.add(testo);
@@ -77,7 +77,7 @@ public class ControllerCompagnie {
 	public void delete(String nome) {
 		
 		try {
-			DAO.deleteByNome(nome);
+			DAO.delete(nome);
 			testo.setText("Cancellazione avvenuta con successo!");
 			successo.setBounds(200,200,400,200);
 			successo.add(testo);

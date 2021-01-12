@@ -14,7 +14,7 @@ public class GateDAO {
 	private ConnessioneDB connessioneDB;
 	String errore = new String("");
 	
-	public void insertGate(String nomeGate, String codAeroporto) throws GateException{
+	public void insert(String nomeGate, String codAeroporto) throws GateException{
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
@@ -45,7 +45,7 @@ public class GateDAO {
 		
 	}
 	
-	public void updateGate(String vecchioNome, String nuovoNome, String codAeroporto) throws GateException {
+	public void update(String vecchioNome, String nuovoNome, String codAeroporto) throws GateException {
 		
 		try {
 			

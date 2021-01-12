@@ -96,8 +96,8 @@ public class GestioneSlotImbarco extends JDialog {
 					
 						if (GateCombo.getSelectedItem().toString() != null) {
 							
-							controllerVoli.InsertVolo(volo);
-							controllerSlotImbarco.insertSlotImbarco(a, volo, GateCombo.getSelectedItem().toString(),  CodaCombo.getSelectedItem().toString());
+							controllerVoli.insert(volo);
+							controllerSlotImbarco.insert(a, volo, GateCombo.getSelectedItem().toString(),  CodaCombo.getSelectedItem().toString());
 							dispose();
 							
 						}else {

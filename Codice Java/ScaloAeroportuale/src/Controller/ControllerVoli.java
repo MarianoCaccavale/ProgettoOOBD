@@ -13,16 +13,16 @@ import Eccezioni.VoloException;
 
 public class ControllerVoli {
 		
-	VoloDAO voloDAO = new VoloDAO();
+	VoloDAO DAO = new VoloDAO();
 	
 	JDialog successo = new JDialog();
 	JTextField testo = new JTextField();
 	
-	public void InsertVolo(Volo volo){
+	public void insert(Volo volo){
 		
 		try {
 
-			voloDAO.Insert(volo);
+			DAO.insert(volo);
 			
 			successo.setBounds(200,200,400,200);
 			testo.setText("Inserimento avvenuto con successo!"); 
@@ -56,7 +56,7 @@ public class ControllerVoli {
 		ArrayList<Volo> Voli = new ArrayList<Volo>();
 		
 		try {
-			Voli = voloDAO.getAllVoli(a);
+			Voli = DAO.getAllVoli(a);
 		} catch (VoloException e) {
 			successo.setBounds(200,200,400,200);
 			testo.setText(e.getMessage().toString()); 
@@ -68,11 +68,11 @@ public class ControllerVoli {
 		return Voli;
 	}
 	
-	public void deleteVolo(String codVolo) {
+	public void delete(String codVolo) {
 		
 		try {
 			
-			voloDAO.delete(codVolo);
+			DAO.delete(codVolo);
 			successo.setBounds(200,200,400,200);
 			testo.setText("Cancellazione del volo eseguita correttamente!"); 
 			successo.add(testo);
@@ -91,11 +91,11 @@ public class ControllerVoli {
 		
 	}
 
-	public void updateVolo(int numeroPosti, String codVolo) {
+	public void update(int numeroPosti, String codVolo) {
 
 		try {
 			
-			voloDAO.updateVolo(numeroPosti, codVolo);
+			DAO.update(numeroPosti, codVolo);
 			successo.setBounds(200,200,400,200);
 			testo.setText("Modifica effettuata con successo!"); 
 			successo.add(testo);
@@ -119,7 +119,7 @@ public class ControllerVoli {
 		
 		try {
 			
-			VoliTrovati = voloDAO.ricercaVoloByTratta(tratta);
+			VoliTrovati = DAO.ricercaVoloByTratta(tratta);
 			
 		}catch(VoloException e) {
 			
@@ -137,7 +137,7 @@ public class ControllerVoli {
 
 		try {
 			
-			voloDAO.generateTicket(codVolo, numBiglietti);
+			DAO.generateTicket(codVolo, numBiglietti);
 			successo.setBounds(200,200,400,200);
 			testo.setText("Biglietto/i generati con successo!"); 
 			successo.add(testo);
@@ -169,7 +169,7 @@ public class ControllerVoli {
 
 		try {
 			
-			voloDAO.generateBusinessTicket(codVolo, numBiglietti, email);
+			DAO.generateBusinessTicket(codVolo, numBiglietti, email);
 			successo.setBounds(200,200,400,200);
 			testo.setText("Biglietto/i generati con successo!"); 
 			successo.add(testo);

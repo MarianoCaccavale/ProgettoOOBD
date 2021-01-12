@@ -16,13 +16,13 @@ public class ControllerGate {
 	JDialog successo = new JDialog();
 	JLabel testo = new JLabel();
 	
-	public void insertGate(String nomeGate, String codAeroporto) {
+	public void insert(String nomeGate, String codAeroporto) {
 		
 		
 		if (nomeGate.isBlank() == false) {
 			
 			try {
-				DAO.insertGate(nomeGate, codAeroporto);
+				DAO.insert(nomeGate, codAeroporto);
 				testo.setText("Inserimento avvenuto con successo!");
 				successo.setBounds(200,200,400,200);
 				successo.add(testo);
@@ -51,7 +51,7 @@ public class ControllerGate {
 	public void update(String vecchioNome, String nuovoNome, String codAeroporto) {
 		
 		try {
-			DAO.updateGate(vecchioNome, nuovoNome, codAeroporto);
+			DAO.update(vecchioNome, nuovoNome, codAeroporto);
 			testo.setText("Modifica avvenuta con successo!");
 			successo.setBounds(200,200,400,200);
 			successo.add(testo);

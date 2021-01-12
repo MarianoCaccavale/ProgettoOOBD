@@ -19,7 +19,7 @@ public class ControllerSlotImbarco {
 	JDialog successo = new JDialog();
 	JTextField testo = new JTextField();
 	
-	public void insertSlotImbarco(Aeroporto a, Volo volo, String nomeGate, String coda) {
+	public void insert(Aeroporto a, Volo volo, String nomeGate, String coda) {
 		
 		
 		try {
