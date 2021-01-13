@@ -103,11 +103,9 @@ public class Statistiche extends JFrame {
 				ArrayList<String[]> listaStatisticheCompagnie = new ArrayList<String[]>();
 				listaStatisticheCompagnie = controllerStatistiche.getStatisticheCompagnie(a.getCodAeroporto(), (Date)DataInizioStatisticheCompagnieSpn.getValue(), (Date)DataFineStatisticheCompagnieSpn.getValue());
 				
-				Iterator<String[]> iStatisticheCompagnie = listaStatisticheCompagnie.iterator();
 				
-				while (iStatisticheCompagnie.hasNext()) {
+				for (String[] tmp : listaStatisticheCompagnie) {
 					
-					String tmp[] = iStatisticheCompagnie.next();
 					RicercaCompagniePanel.setText(RicercaCompagniePanel.getText() + "\n");
 					RicercaCompagniePanel.setText(RicercaCompagniePanel.getText() + "Codice Compagnia: " + tmp[0] + "\tNome compagnia aerea: " + tmp[1] + "\tVoli effettuati nell'arco di tempo selezionato: " + tmp[2] + "");
 					
@@ -220,12 +218,9 @@ public class Statistiche extends JFrame {
 				RicercaGateText.setText("");
 				ArrayList<String[]> listaTempi = new ArrayList<String[]>();
 				listaTempi = controllerStatistiche.getGateChiusi(a.getCodAeroporto(), (Date) GateDataInizioSpn.getValue(), (Date)GateDataFineSpn.getValue());
-				
-				Iterator<String[]> iListaTempi = listaTempi.iterator();
-				
-				while (iListaTempi.hasNext()) {
-					
-					String tmp[] = iListaTempi.next();
+
+				for (String[] tmp : listaTempi) {
+
 					RicercaGateText.setText(RicercaGateText.getText() + "\n");
 					RicercaGateText.setText(RicercaGateText.getText() + "Nome Gate: " + tmp[0] + "\t - Tempo di utilizzo stimato: " + tmp[1] + " ora/e\t - Tempo di utilizzo effettivo: " + tmp[2] + " ora/e");
 					

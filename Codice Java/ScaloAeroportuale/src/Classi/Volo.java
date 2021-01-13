@@ -2,7 +2,6 @@ package Classi;
 
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 public class Volo {
 
@@ -72,6 +71,16 @@ public class Volo {
 	}
 	public void setTrattaAssociata(Tratta trattaAssociata) {
 		TrattaAssociata = trattaAssociata;
+	}
+
+
+	public SlotImbarco getSlotImbarco() {
+		return slotImbarco;
+	}
+
+
+	public void setSlotImbarco(SlotImbarco slotImbarco) {
+		this.slotImbarco = slotImbarco;
 	}
 	
 	

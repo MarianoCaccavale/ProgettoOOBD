@@ -95,16 +95,12 @@ public class GestioneGate extends JFrame {
 		
 		JComboBox<String> ModificaVecchioNomeSpn = new JComboBox<String>();
 		ModificaVecchioNomeSpn.setFont(new Font("Arial", Font.PLAIN, 16));
-		ModificaVecchioNomeSpn.setModel(new DefaultComboBoxModel(new String[] {"Scegliere il gate"}));
+		ModificaVecchioNomeSpn.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere il gate"}));
 		
 		AllGate = controllerGate.getAllGate(a.getCodAeroporto());
 		
-		Iterator<Gate> iModificaGate = AllGate.iterator();
-		
-		while(iModificaGate.hasNext()) {
+		for (Gate tmp : AllGate) {
 			
-			Gate tmp = new Gate();
-			tmp = iModificaGate.next();
 			ModificaVecchioNomeSpn.addItem(tmp.getNomeGate());
 			
 		}
@@ -141,17 +137,11 @@ public class GestioneGate extends JFrame {
 		
 		JComboBox<String> EliminaNomeSpn = new JComboBox<String>();
 		EliminaNomeSpn.setFont(new Font("Arial", Font.PLAIN, 16));
-		EliminaNomeSpn.setModel(new DefaultComboBoxModel(new String[] {"Selezionare il gate"}));
+		EliminaNomeSpn.setModel(new DefaultComboBoxModel<String>(new String[] {"Selezionare il gate"}));
 		EliminaNomeSpn.setBounds(212, 152, 230, 50);
 		
-		
-		AllGate = controllerGate.getAllGate(a.getCodAeroporto());
-		Iterator<Gate> iEliminaGate = AllGate.iterator();
-		
-		while(iEliminaGate.hasNext()) {
+		for(Gate tmp : AllGate){
 			
-			Gate tmp = new Gate();
-			tmp = iEliminaGate.next();
 			EliminaNomeSpn.addItem(tmp.getNomeGate());
 			
 		}
@@ -189,16 +179,12 @@ public class GestioneGate extends JFrame {
 		ElencoTextPane.setFont(new Font("Arial", Font.PLAIN, 20));
 		scrollPane.setViewportView(ElencoTextPane);
 		
-		AllGate = controllerGate.getAllGate(a.getCodAeroporto());
-		Iterator<Gate> iGate = AllGate.iterator();
-		
-		while(iGate.hasNext()) {
-			Gate tmp = iGate.next();
-			ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
+		for(Gate tmp: AllGate) {
+			
 			ElencoTextPane.setText(ElencoTextPane.getText() + "Nome Gate: " + tmp.getNomeGate() +"");
+			
 		}
 		
-		/*Inizio pannello dei bottoni*/
 		JPanel BottoniPanel = new JPanel();
 		BottoniPanel.setBounds(10, 10, 158, 252);
 		BasePanel.add(BottoniPanel);

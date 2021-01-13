@@ -136,6 +136,7 @@ public class GateDAO {
 		return AllGate;
 	}
 
+	@SuppressWarnings("deprecation")
 	public ArrayList<Gate> getGateLiberi(String codAeroporto, Timestamp dataVolo) throws GateException {
 		
 		ArrayList<Gate> GateLiberi = new ArrayList<Gate>();

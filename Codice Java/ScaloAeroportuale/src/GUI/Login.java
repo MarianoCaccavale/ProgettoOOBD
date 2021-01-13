@@ -1,8 +1,6 @@
 package GUI;
 
-import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,7 +16,6 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
-import javax.swing.SwingConstants;
 
 public class Login extends JFrame {
 

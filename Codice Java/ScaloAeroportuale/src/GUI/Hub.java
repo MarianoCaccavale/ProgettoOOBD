@@ -139,10 +139,9 @@ public class Hub extends JFrame {
 		ArrayList<SlotImbarco> SlotDaChiudere = new ArrayList<SlotImbarco>();
 		
 		SlotDaChiudere = controllerSlot.ricercaSlotDaChiudere(a.getCodAeroporto());
-		Iterator<SlotImbarco> iSlotDaChiudere = SlotDaChiudere.iterator();
 		
-		while(iSlotDaChiudere.hasNext()) {
-			SlotImbarco tmp = iSlotDaChiudere.next();
+		for (SlotImbarco tmp: SlotDaChiudere) {
+
 			AvvisoSlotImbarchiPanel.setText(AvvisoSlotImbarchiPanel.getText() + "\n");
 			AvvisoSlotImbarchiPanel.setText(AvvisoSlotImbarchiPanel.getText() + "Codice volo: " + tmp.getVolo().getCodVolo() + "\tTratta: " + tmp.getTratta().getAeroportoDiPartenza().getNomeAeroporto() + "  -  "+ tmp.getTratta().getAeroportoDiArrivo().getNomeAeroporto() + "\tOra di partenza: " + tmp.getOraInizio() + "");
 		}

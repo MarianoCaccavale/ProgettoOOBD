@@ -77,7 +77,6 @@ public class GestioneVoli extends JFrame {
 		tabbedPane.setBounds(232, 0, 840, 509);
 		contentPane.add(tabbedPane);
 		Tratte = controllerTratte.getTratteFromThisAirport(a);
-		Iterator<Tratta> TratteDaCaricare = Tratte.iterator();
 		
 		JPanel AggiuntaPanel = new JPanel();
 		tabbedPane.addTab("New tab", null, AggiuntaPanel, null);
@@ -97,9 +96,8 @@ public class GestioneVoli extends JFrame {
 		SceltaCompagniaCombo.setBounds(265, 306, 312, 38);
 		AggiuntaPanel.add(SceltaCompagniaCombo);
 		
-		while(TratteDaCaricare.hasNext()) {
+		for (Tratta tmp : Tratte) {
 			
-			Tratta tmp = TratteDaCaricare.next();
 			String nomeAeroportoPartenza = new String();
 			String nomeAeroportoArrivo = new String();
 			nomeAeroportoPartenza = (tmp.getAeroportoDiPartenza()).getNomeAeroporto();
@@ -107,12 +105,11 @@ public class GestioneVoli extends JFrame {
 			SceltaTrattaCombo.addItem(nomeAeroportoPartenza + "<->" + nomeAeroportoArrivo);
 			
 		}
-		CompagnieAeree = controllerCompagnie.getCompagnie(a);
-		Iterator<CompagniaAerea> CompagnieDaCaricare = CompagnieAeree.iterator();
 		
-		while(CompagnieDaCaricare.hasNext()) {
+		CompagnieAeree = controllerCompagnie.getCompagnie(a);
+		
+		for (CompagniaAerea tmp: CompagnieAeree) {
 			
-			CompagniaAerea tmp = CompagnieDaCaricare.next();
 			SceltaCompagniaCombo.addItem(tmp.getNomeCompagnia());
 			
 		}
@@ -187,11 +184,9 @@ public class GestioneVoli extends JFrame {
 		
 		ArrayList<Volo> Voli = new ArrayList<Volo>();
 		Voli = controllerVoli.getAllVoli(a);
-		Iterator<Volo> iVoli = Voli.iterator();
 		
-		while(iVoli.hasNext()) {
+		for (Volo tmp : Voli){
 			
-			Volo tmp = iVoli.next();
 			ElencoTextPane.setText(ElencoTextPane.getText() + "\n");
 			ElencoTextPane.setText(ElencoTextPane.getText() + "Codice del volo: " + tmp.getCodVolo() +"\tData e ora: " + tmp.getData() +"\tNumero posti: " + tmp.getNumeroPosti() + "\tNumero posti prenotati: " + tmp.getNumeroPostiPrenotati() +"\tCompagnia aerea: " + tmp.getCompagniaDiAppartenenza().getNomeCompagnia() + "");
 		}
@@ -256,11 +251,8 @@ public class GestioneVoli extends JFrame {
 		ArrayList<SlotImbarco> listaSlotImbarco = new ArrayList<SlotImbarco>();
 		listaSlotImbarco = controllerSlotImbarco.getImbarchi(a.getCodAeroporto());
 		
-		Iterator<SlotImbarco> iSlotImbarco = listaSlotImbarco.iterator();
-		
-		while(iSlotImbarco.hasNext()) {
+		for (SlotImbarco tmp:listaSlotImbarco) {
 			
-			SlotImbarco tmp = iSlotImbarco.next();
 			ChiusuraComboBox.addItem("Codice volo: " + tmp.getVolo().getCodVolo() + " - " + tmp.getTratta().getAeroportoDiPartenza().getNomeAeroporto() + "<->"+ tmp.getTratta().getAeroportoDiArrivo().getNomeAeroporto() + " - Ora di partenza: " + tmp.getOraInizio() +" - Gate: " + tmp.getGate().getNomeGate());
 			
 		}

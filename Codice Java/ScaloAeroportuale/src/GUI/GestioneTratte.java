@@ -270,11 +270,8 @@ public class GestioneTratte extends JFrame {
 		ModificaNuovaTrattaCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere l'aeroporto"}));
 		
 		Aeroporti = controllerAeroporti.getAllAeroportiExceptThis(a);
-		Iterator<Aeroporto> NuoviAeroporti = Aeroporti.iterator();
 		
-		while (NuoviAeroporti.hasNext()) {
-			
-			Aeroporto tmp = NuoviAeroporti.next();
+		for (Aeroporto tmp : Aeroporti) {
 			ModificaNuovaTrattaCombo.addItem(tmp.getNomeAeroporto());
 			
 		}

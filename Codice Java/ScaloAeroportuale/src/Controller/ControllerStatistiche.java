@@ -36,13 +36,13 @@ public class ControllerStatistiche {
 		return listaTempi;
 	}
 
-	public String[] statisticheVoli(String codAeroporto, Date min, Date max) {
+	public String[] statisticheVoli(String codAeroporto, Date inizio, Date fine) {
 		
 		String[] statisticheVoli = new String[2];
 		
 		try {
 			
-			statisticheVoli = DAO.statisticheVoli(codAeroporto, min, max);
+			statisticheVoli = DAO.statisticheVoli(codAeroporto, inizio, fine);
 			
 		}catch(StatisticheException e) {
 			

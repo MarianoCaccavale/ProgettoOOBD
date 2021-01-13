@@ -132,11 +132,9 @@ public class GestioneCompagnie extends JFrame {
 		ModificaNomeCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere la compagnia"}));
 		
 		Compagnie = controllerCompagnia.getCompagnie(a);
-		Iterator<CompagniaAerea> modificaIterator = Compagnie.iterator();
-		while (modificaIterator.hasNext()) {
+		
+		for (CompagniaAerea tmp : Compagnie) {
 			
-			CompagniaAerea tmp = new CompagniaAerea();
-			tmp = modificaIterator.next();
 			ModificaNomeCombo.addItem(tmp.getNomeCompagnia());
 			
 		}
@@ -185,12 +183,8 @@ public class GestioneCompagnie extends JFrame {
 		CancellazioneNomeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere la compagnia"}));
 		CancellazioneNomeComboBox.setFont(new Font("Arial", Font.PLAIN, 20));
 		
-		Compagnie = controllerCompagnia.getCompagnie(a);
-		Iterator<CompagniaAerea> cancellazioneIterator = Compagnie.iterator();
-		
-		while(cancellazioneIterator.hasNext()) {
+		for (CompagniaAerea tmp : Compagnie) {
 			
-			CompagniaAerea tmp = cancellazioneIterator.next();
 			CancellazioneNomeComboBox.addItem(tmp.getNomeCompagnia());
 			
 		}
@@ -268,14 +262,8 @@ public class GestioneCompagnie extends JFrame {
 		RicercaTextPane.setEditable(false);
 		scrollPane.setViewportView(RicercaTextPane);
 		
-		//ELENCO DA SISTEMARE
-		
-		Compagnie = controllerCompagnia.getCompagnie(a);
-		Iterator<CompagniaAerea> i = Compagnie.iterator();
-		/*Prima formattazione che si crea quando avviamo il panel, ovvero il display di TUTTE le compagnie*/
-		while (i.hasNext()) {
+		for (CompagniaAerea tmp : Compagnie) {
 			
-			CompagniaAerea tmp = i.next();
 			RicercaTextPane.setText(RicercaTextPane.getText() + "\n");
 			RicercaTextPane.setText(RicercaTextPane.getText() + "Nome compagnia: " + tmp.getNomeCompagnia() + "\tGrandezza Flotta: " + tmp.getGrandezzaFlotta() +" ");
 			
@@ -289,11 +277,9 @@ public class GestioneCompagnie extends JFrame {
 				RicercaTextPane.setText("");
 				
 				ArrayList<CompagniaAerea> CompagnieTrovate = controllerCompagnia.ricerca(RicercaNomeTxt.getText(), (Integer) RicercaGrandezzaMinimaSpn.getValue(), (Integer) RicercaGrandezzaMassimaSpn.getValue(), a);
-				Iterator<CompagniaAerea> i = CompagnieTrovate.iterator();
-				/*Prima formattazione che si crea quando avviamo il panel, ovvero il display di TUTTE le compagnie*/
-				while (i.hasNext()) {
+
+				for(CompagniaAerea tmp : CompagnieTrovate) {
 					
-					CompagniaAerea tmp = i.next();
 					RicercaTextPane.setText(RicercaTextPane.getText() + "\n");
 					RicercaTextPane.setText(RicercaTextPane.getText() + "Nome compagnia: " + tmp.getNomeCompagnia() + " Grandezza Flotta: " + tmp.getGrandezzaFlotta() +" ");
 					

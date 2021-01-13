@@ -54,11 +54,9 @@ public class GestioneSlotImbarco extends JDialog {
 			java.util.Date dataTmp = (java.util.Date) volo.getData();
 			Timestamp dataVolo = new Timestamp(dataTmp.getTime());
 			ElencoGate = controllerGate.getGateLiberi(a.getCodAeroporto(), dataVolo);
-			Iterator<Gate> GateDaCaricare = ElencoGate.iterator();
 			
-			while(GateDaCaricare.hasNext()) {
+			for (Gate tmp : ElencoGate) {
 				
-				Gate tmp = GateDaCaricare.next();
 				GateCombo.addItem(tmp.getNomeGate());
 				
 			}

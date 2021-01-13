@@ -30,6 +30,7 @@ public class ServizioClienti extends JFrame {
 	private JTextField EmailBusinessTf;
 
 	
+	@SuppressWarnings("deprecation")
 	public ServizioClienti(Controller c, Aeroporto a) {
 		
 		Controller controller = c;

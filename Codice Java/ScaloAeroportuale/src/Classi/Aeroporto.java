@@ -2,8 +2,6 @@ package Classi;
 
 import java.util.ArrayList;
 
-import DAO.AeroportoDAO;
-
 public class Aeroporto {
 
 	private String CodAeroporto = new String();
