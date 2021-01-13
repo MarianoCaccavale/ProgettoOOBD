@@ -29,12 +29,7 @@ public class ControllerSlotImbarco {
 			DAO.insert(a, volo, nomeGate, coda, dataInizio);
 			
 		}catch(SlotImbarcoException e) {
-			
-			successo.setBounds(200,200,600,100);
-			testo.setText(e.getMessage().toString()); 
-			successo.add(testo);
-			successo.setVisible(true);
-						
+									
 		}
 		
 	}
