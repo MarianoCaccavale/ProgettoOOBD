@@ -24,14 +24,14 @@ public class ControllerGate {
 			try {
 				DAO.insert(nomeGate, codAeroporto);
 				testo.setText("Inserimento avvenuto con successo!");
-				successo.setBounds(200,200,400,200);
+				successo.setBounds(200,200,600,100);
 				successo.add(testo);
 				successo.setVisible(true);
 				
 			} catch (GateException e) {
 				
 				testo.setText(e.getMessage().toString());
-				successo.setBounds(200,200,400,200);
+				successo.setBounds(200,200,600,100);
 				successo.add(testo);
 				successo.setVisible(true);
 			}
@@ -39,7 +39,7 @@ public class ControllerGate {
 		}else {
 			
 			testo.setText("Impossibile aggiungere un gate con nome nullo!");
-			successo.setBounds(200,200,400,200);
+			successo.setBounds(200,200,600,100);
 			successo.add(testo);
 			successo.setVisible(true);
 			
@@ -53,14 +53,14 @@ public class ControllerGate {
 		try {
 			DAO.update(vecchioNome, nuovoNome, codAeroporto);
 			testo.setText("Modifica avvenuta con successo!");
-			successo.setBounds(200,200,400,200);
+			successo.setBounds(200,200,600,100);
 			successo.add(testo);
 			successo.setVisible(true);
 			
 		} catch (GateException e) {
 			
 			testo.setText(e.getMessage().toString());
-			successo.setBounds(200,200,400,200);
+			successo.setBounds(200,200,600,100);
 			successo.add(testo);
 			successo.setVisible(true);
 			
@@ -73,14 +73,14 @@ public class ControllerGate {
 		try {
 			DAO.delete(nomeGate, codAeroporto);
 			testo.setText("Eliminazione avvenuta con successo!");
-			successo.setBounds(200,200,400,200);
+			successo.setBounds(200,200,600,100);
 			successo.add(testo);
 			successo.setVisible(true);
 			
 		} catch (GateException e) {
 			
 			testo.setText(e.getMessage());
-			successo.setBounds(200,200,400,200);
+			successo.setBounds(200,200,600,100);
 			successo.add(testo);
 			successo.setVisible(true);
 		}

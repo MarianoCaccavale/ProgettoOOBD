@@ -181,6 +181,7 @@ public class GestioneVoli extends JFrame {
 		ElencoPanel.add(scrollPane);
 		
 		JTextPane ElencoTextPane = new JTextPane();
+		ElencoTextPane.setEditable(false);
 		ElencoTextPane.setFont(new Font("Arial", Font.PLAIN, 14));
 		scrollPane.setViewportView(ElencoTextPane);
 		

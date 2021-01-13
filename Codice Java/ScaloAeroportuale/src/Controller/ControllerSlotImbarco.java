@@ -30,7 +30,7 @@ public class ControllerSlotImbarco {
 			
 		}catch(SlotImbarcoException e) {
 			
-			successo.setBounds(200,200,400,200);
+			successo.setBounds(200,200,600,100);
 			testo.setText(e.getMessage().toString()); 
 			successo.add(testo);
 			successo.setVisible(true);
@@ -46,7 +46,7 @@ public class ControllerSlotImbarco {
 			listaSlotImbarco = DAO.getAllImbarchi(codAeroporto);
 		} catch (SlotImbarcoException e) {
 			
-			successo.setBounds(200,200,400,200);
+			successo.setBounds(200,200,600,100);
 			testo.setText(e.getMessage().toString()); 
 			successo.add(testo);
 			successo.setVisible(true);
@@ -61,17 +61,29 @@ public class ControllerSlotImbarco {
 		try {
 			
 			DAO.closeSlotImbarco(codVolo, dataFine);
-			successo.setBounds(200,200,400,200);
+			successo.setBounds(200,200,600,100);
 			testo.setText("Chiusura avvenuta con successo!"); 
 			successo.add(testo);
 			successo.setVisible(true);
 			
 		}catch(SlotImbarcoException e) {
 			
-			successo.setBounds(200,200,400,200);
-			testo.setText(e.getMessage().toString()); 
-			successo.add(testo);
-			successo.setVisible(true);
+			 if (e.getMessage().contains("la nuova riga per la relazione \"slotimbarco\" viola il vincolo di controllo \"oracorretta\"")) {
+					JDialog successo = new JDialog();
+					JTextField testo = new JTextField();
+					successo.setBounds(200,200,600,100);
+					testo.setText("Impossibile chiudere lo SlotImbarco. Verificare che la data inserita sia corretta e non antecedente al volo"); 
+					successo.add(testo);
+					successo.setVisible(true);
+					
+				}else {
+					
+					successo.setBounds(200,200,600,100);
+					testo.setText(e.getMessage().toString()); 
+					successo.add(testo);
+					successo.setVisible(true);
+					
+				}
 			
 		}
 		
@@ -89,7 +101,7 @@ public class ControllerSlotImbarco {
 			
 		} catch (SlotImbarcoException e) {
 			
-			successo.setBounds(200,200,400,200);
+			successo.setBounds(200,200,600,100);
 			testo.setText(e.getMessage().toString()); 
 			successo.add(testo);
 			successo.setVisible(true);
