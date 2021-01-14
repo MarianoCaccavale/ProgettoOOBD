@@ -23,12 +23,12 @@ public class ControllerCompagnie {
 			DAO.insert(Nome, Flotta, a);
 			
 			testo.setText("Inserimento avvenuto con successo!");
-			successo.setBounds(200,200,400,200);
+			successo.setBounds(200,200,1000,100);
 			successo.add(testo);
 			successo.setVisible(true);
 			
 		} catch (CompagniaException e) {
-			successo.setBounds(200,200,400,200);
+			successo.setBounds(200,200,1000,100);
 			testo.setText(e.getMessage().toString()); 
 			successo.add(testo);
 			successo.setVisible(true);
@@ -42,13 +42,13 @@ public class ControllerCompagnie {
 		try {
 			DAO.update(Nome, NuovaGrandezza, aer.getCodAeroporto());
 			testo.setText("Modifica avvenuta con successo!");
-			successo.setBounds(200,200,400,200);
+			successo.setBounds(200,200,800,100);
 			successo.add(testo);
 			successo.setVisible(true);
 			
 		} catch (CompagniaException e) {
 			
-			successo.setBounds(200,200,400,200);
+			successo.setBounds(200,200,800,100);
 			testo.setText(e.getMessage().toString()); 
 			successo.add(testo);
 			successo.setVisible(true);
@@ -65,7 +65,7 @@ public class ControllerCompagnie {
 		} catch (CompagniaException e) {
 			
 			testo.setText(e.getMessage());
-			successo.setBounds(200,200,400,200);
+			successo.setBounds(200,200,800,100);
 			successo.add(testo);
 			successo.setVisible(true);
 		
@@ -79,13 +79,13 @@ public class ControllerCompagnie {
 		try {
 			DAO.delete(nome);
 			testo.setText("Cancellazione avvenuta con successo!");
-			successo.setBounds(200,200,400,200);
+			successo.setBounds(200,200,800,100);
 			successo.add(testo);
 			successo.setVisible(true);
 		} catch (CompagniaException e) {
 			
 			testo.setText(e.getMessage().toString());
-			successo.setBounds(200,200,400,200);
+			successo.setBounds(200,200,800,100);
 			successo.add(testo);
 			successo.setVisible(true);
 			
@@ -107,7 +107,7 @@ public class ControllerCompagnie {
 			} catch (CompagniaException e) {
 				
 				testo.setText(e.getMessage().toString());
-				successo.setBounds(200,200,400,200);
+				successo.setBounds(200,200,800,100);
 				successo.add(testo);
 				successo.setVisible(true);
 			}
@@ -121,7 +121,7 @@ public class ControllerCompagnie {
 			}catch(CompagniaException e) {
 				
 				testo.setText(e.getMessage().toString());
-				successo.setBounds(200,200,400,200);
+				successo.setBounds(200,200,800,100);
 				successo.add(testo);
 				successo.setVisible(true);
 				
@@ -146,7 +146,7 @@ public class ControllerCompagnie {
 		}catch(CompagniaException e) {
 			
 			testo.setText(e.getMessage());
-			successo.setBounds(200,200,400,200);
+			successo.setBounds(200,200,800,100);
 			successo.add(testo);
 			successo.setVisible(true);
 			
@@ -168,7 +168,7 @@ public class ControllerCompagnie {
 		}catch(CompagniaException e) {
 			
 			testo.setText(e.getMessage());
-			successo.setBounds(200,200,400,200);
+			successo.setBounds(200,200,800,100);
 			successo.add(testo);
 			successo.setVisible(true);
 			

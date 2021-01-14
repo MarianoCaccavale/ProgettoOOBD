@@ -102,7 +102,7 @@ public class GestioneCompagnie extends JFrame {
 		
 		JSpinner FlottaSpn = new JSpinner();
 		FlottaSpn.setFont(new Font("Arial", Font.PLAIN, 16));
-		FlottaSpn.setModel(new SpinnerNumberModel(0, 0, 500, 1));
+		FlottaSpn.setModel(new SpinnerNumberModel(1, 1, 500, 1));
 		FlottaSpn.setBounds(315, 203, 133, 40);
 		AggiuntaPanel.add(FlottaSpn);
 		
