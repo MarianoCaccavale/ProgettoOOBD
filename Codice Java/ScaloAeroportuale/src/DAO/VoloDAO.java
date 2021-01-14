@@ -73,7 +73,9 @@ public class VoloDAO {
 			errore = e.getMessage();	
 			
 			if (errore.contains("validificadata()")){
+				
 				throw new VoloException("Impossibile inserire un volo antecedente ad ora");
+				
 			}else {
 				
 				throw new VoloException(errore);
@@ -171,8 +173,16 @@ public class VoloDAO {
 		}catch(SQLException e) {
 			
 			errore = e.getMessage();
+			
+			if (errore.contains("la nuova riga per la relazione \"volo\" viola il vincolo di controllo \"numeropostiprenotaticorretti\"")){
 				
-			throw new VoloException(errore);
+				throw new VoloException("Impossibile modificare il volo. I posti prenotati sono maggiori.");
+				
+			}else{
+				
+				throw new VoloException(errore);
+				
+			}
 			
 		}
 		

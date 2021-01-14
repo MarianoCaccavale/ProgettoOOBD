@@ -46,10 +46,25 @@ public class ClientiDAO {
 			
 			errore = e.getMessage();
 			
-			throw new ClientiException(errore);
+			if(e.getMessage().contains("un valore chiave duplicato viola il vincolo univoco \"clientibusiness_pkey\"")) {
+				
+				throw new ClientiException("Questa email già è associata ad un altro account business.");
+				
+			}else if(e.getMessage().contains("la nuova riga per la relazione \"clientibusiness\" viola il vincolo di controllo \"email_regex\"")){
+				  
+				throw new ClientiException("email non valida!");
+				
+			}else if(e.getMessage().contains("la nuova riga per la relazione \"clientibusiness\" viola il vincolo di controllo \"datanascita_corretta\"")){
+				  
+				throw new ClientiException("Data di nascita posteriore ad oggi!");
+				
+			} else {
+				
+				throw new ClientiException(errore);
+				
+			}
 			
 		}
-		
 		
 	}
 
