@@ -72,7 +72,7 @@ public class CompagniaAereaDAO{
 		
 	}
 
-	public void update(String nome, Integer nuovaGrandezza, String codAeroporto) throws CompagniaException {
+	public void update(String nome, int nuovaGrandezza, String codAeroporto) throws CompagniaException {
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();

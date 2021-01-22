@@ -36,7 +36,7 @@ public class ControllerCompagnie {
 				
 	}
 	
-	public void Update(String Nome, Integer NuovaGrandezza, Aeroporto aer) {
+	public void Update(String Nome, int NuovaGrandezza, Aeroporto aer) {
 		
 		
 		try {

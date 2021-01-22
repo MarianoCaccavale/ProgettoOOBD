@@ -15,7 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.awt.event.ActionEvent;
 import javax.swing.JTabbedPane;
 import javax.swing.JComboBox;
@@ -50,7 +49,7 @@ public class GestioneGate extends JFrame {
 		
 		/*Inizio TabbedPanel*/
 		JPanel panel = new JPanel();
-		panel.setBounds(178, 10, 681, 20);
+		panel.setBounds(178, 10, 681, 26);
 		BasePanel.add(panel);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -66,12 +65,17 @@ public class GestioneGate extends JFrame {
 		AggiuntaNomeLbl.setBounds(250, 113, 189, 32);
 		AggiuntaPanel.add(AggiuntaNomeLbl);
 		
+		JComboBox<String> ModificaVecchioNomeCombo = new JComboBox<String>();
+		JComboBox<String> EliminaNomeCombo = new JComboBox<String>();
+		
 		JButton AggiuntaBtn = new JButton("Aggiungi");
 		AggiuntaBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		AggiuntaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				controllerGate.insert(AggiuntaNomeTxt.getText(), a.getCodAeroporto());
+				ModificaVecchioNomeCombo.addItem(AggiuntaNomeTxt.getText());
+				EliminaNomeCombo.addItem(AggiuntaNomeTxt.getText());
 				AggiuntaNomeTxt.setText("");
 			}
 		});
@@ -93,20 +97,20 @@ public class GestioneGate extends JFrame {
 		ModificaNuovoNomeLbl.setBounds(193, 141, 226, 29);
 		ModificaPanel.add(ModificaNuovoNomeLbl);
 		
-		JComboBox<String> ModificaVecchioNomeSpn = new JComboBox<String>();
-		ModificaVecchioNomeSpn.setFont(new Font("Arial", Font.PLAIN, 16));
-		ModificaVecchioNomeSpn.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere il gate"}));
+		
+		ModificaVecchioNomeCombo.setFont(new Font("Arial", Font.PLAIN, 16));
+		ModificaVecchioNomeCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere il gate"}));
 		
 		AllGate = controllerGate.getAllGate(a.getCodAeroporto());
 		
 		for (Gate tmp : AllGate) {
 			
-			ModificaVecchioNomeSpn.addItem(tmp.getNomeGate());
+			ModificaVecchioNomeCombo.addItem(tmp.getNomeGate());
 			
 		}
 		
-		ModificaVecchioNomeSpn.setBounds(193, 69, 226, 50);
-		ModificaPanel.add(ModificaVecchioNomeSpn);
+		ModificaVecchioNomeCombo.setBounds(193, 69, 226, 50);
+		ModificaPanel.add(ModificaVecchioNomeCombo);
 		
 		ModificaNuovoNomeTf = new JTextField();
 		ModificaNuovoNomeTf.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -119,9 +123,14 @@ public class GestioneGate extends JFrame {
 		ModificaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(ModificaVecchioNomeSpn.getSelectedIndex() != 0){
+				if(ModificaVecchioNomeCombo.getSelectedIndex() != 0){
 					
-					controllerGate.update(ModificaVecchioNomeSpn.getSelectedItem().toString(), ModificaNuovoNomeTf.getText(), a.getCodAeroporto());
+					controllerGate.update(ModificaVecchioNomeCombo.getSelectedItem().toString(), ModificaNuovoNomeTf.getText(), a.getCodAeroporto());
+					EliminaNomeCombo.removeItemAt(ModificaVecchioNomeCombo.getSelectedIndex());
+					EliminaNomeCombo.addItem(ModificaNuovoNomeTf.getText());
+					ModificaVecchioNomeCombo.removeItemAt(ModificaVecchioNomeCombo.getSelectedIndex());
+					ModificaVecchioNomeCombo.addItem(ModificaNuovoNomeTf.getText());
+					
 					ModificaNuovoNomeTf.setText("");
 					
 				}
@@ -134,28 +143,28 @@ public class GestioneGate extends JFrame {
 		JPanel EliminaPanel = new JPanel();
 		tabbedPane.addTab("New tab", null, EliminaPanel, null);
 		EliminaPanel.setLayout(null);
-		
-		JComboBox<String> EliminaNomeSpn = new JComboBox<String>();
-		EliminaNomeSpn.setFont(new Font("Arial", Font.PLAIN, 16));
-		EliminaNomeSpn.setModel(new DefaultComboBoxModel<String>(new String[] {"Selezionare il gate"}));
-		EliminaNomeSpn.setBounds(212, 152, 230, 50);
+		EliminaNomeCombo.setFont(new Font("Arial", Font.PLAIN, 16));
+		EliminaNomeCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Selezionare il gate"}));
+		EliminaNomeCombo.setBounds(212, 152, 230, 50);
 		
 		for(Gate tmp : AllGate){
 			
-			EliminaNomeSpn.addItem(tmp.getNomeGate());
+			EliminaNomeCombo.addItem(tmp.getNomeGate());
 			
 		}
 		
-		EliminaPanel.add(EliminaNomeSpn);
+		EliminaPanel.add(EliminaNomeCombo);
 		
 		JButton EliminaBtn = new JButton("Elimina");
 		EliminaBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		EliminaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(EliminaNomeSpn.getSelectedIndex() != 0) {
+				if(EliminaNomeCombo.getSelectedIndex() != 0) {
 					
-					controllerGate.deleteByName(EliminaNomeSpn.getSelectedItem().toString(), a.getCodAeroporto());
+					controllerGate.deleteByName(EliminaNomeCombo.getSelectedItem().toString(), a.getCodAeroporto());
+					ModificaVecchioNomeCombo.removeItemAt(EliminaNomeCombo.getSelectedIndex());
+					EliminaNomeCombo.removeItemAt(EliminaNomeCombo.getSelectedIndex());
 					
 				}
 				

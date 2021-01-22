@@ -26,7 +26,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.ArrayList;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JScrollPane;
@@ -131,18 +130,7 @@ public class GestioneVoli extends JFrame {
 		ModificaComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere il volo"}));
 		ModificaComboBox.setBounds(30, 38, 760, 50);
 		
-		ArrayList<Volo> VoliModifica = new ArrayList<Volo>();
-		VoliModifica = controllerVoli.getAllVoli(a);
-		
-		for(Volo tmp:VoliModifica) {				
-			
-			String nomeAeroportoPartenza = new String();
-			String nomeAeroportoArrivo = new String();
-			nomeAeroportoPartenza = tmp.getTrattaAssociata().getAeroportoDiPartenza().getNomeAeroporto();
-			nomeAeroportoArrivo = tmp.getTrattaAssociata().getAeroportoDiArrivo().getNomeAeroporto();
-			ModificaComboBox.addItem(tmp.getCodVolo()+ ":" + nomeAeroportoPartenza +"<->" + nomeAeroportoArrivo +" - Svolto da: " + tmp.getCompagniaDiAppartenenza().getNomeCompagnia() + " - " + tmp.getData().toString());;
-			
-		}
+		ArrayList<Volo> Voli = new ArrayList<Volo>();
 		
 		ModificaPanel.add(ModificaComboBox);
 		
@@ -181,9 +169,6 @@ public class GestioneVoli extends JFrame {
 		ElencoTextPane.setEditable(false);
 		ElencoTextPane.setFont(new Font("Arial", Font.PLAIN, 14));
 		scrollPane.setViewportView(ElencoTextPane);
-		
-		ArrayList<Volo> Voli = new ArrayList<Volo>();
-		Voli = controllerVoli.getAllVoli(a);
 		
 		for (Volo tmp : Voli){
 			
@@ -253,7 +238,7 @@ public class GestioneVoli extends JFrame {
 		
 		for (SlotImbarco tmp:listaSlotImbarco) {
 			
-			ChiusuraComboBox.addItem("Codice volo: " + tmp.getVolo().getCodVolo() + " - " + tmp.getTratta().getAeroportoDiPartenza().getNomeAeroporto() + "<->"+ tmp.getTratta().getAeroportoDiArrivo().getNomeAeroporto() + " - Ora di partenza: " + tmp.getOraInizio() +" - Gate: " + tmp.getGate().getNomeGate());
+			ChiusuraComboBox.addItem("Codice volo: " + tmp.getVolo().getCodVolo() + " - " + tmp.getVolo().getTrattaAssociata().getAeroportoDiPartenza().getNomeAeroporto() + "<->"+ tmp.getVolo().getTrattaAssociata().getAeroportoDiArrivo().getNomeAeroporto() + " - Ora di partenza: " + tmp.getOraInizio() +" - Gate: " + tmp.getGate().getNomeGate());
 			
 		}
 		
@@ -266,10 +251,8 @@ public class GestioneVoli extends JFrame {
 		EliminaVoloComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Selezionare il volo:"}));
 		EliminaVoloComboBox.setBounds(22, 127, 792, 50);
 		
-		ArrayList<Volo> VoliElimina = new ArrayList<Volo>();
-		VoliElimina = controllerVoli.getAllVoli(a);
 		
-		for (Volo tmp: VoliElimina) {
+		for (Volo tmp: Voli) {
 			
 			String nomeAeroportoPartenza = new String();
 			String nomeAeroportoArrivo = new String();
@@ -289,9 +272,7 @@ public class GestioneVoli extends JFrame {
 				if (EliminaVoloComboBox.getSelectedIndex() != 0) {
 					
 					String voloDaCancellare = new String(EliminaVoloComboBox.getSelectedItem().toString());
-					String tmp = voloDaCancellare.substring(0, voloDaCancellare.indexOf("-")-1);
-					System.out.println(tmp);
-					controllerVoli.delete(voloDaCancellare.substring(0, voloDaCancellare.indexOf("-")-1));
+					controllerVoli.delete(voloDaCancellare.substring(0, voloDaCancellare.indexOf(":")));
 					
 				}
 				
@@ -402,7 +383,9 @@ public class GestioneVoli extends JFrame {
 		JButton VoliElencoBtn = new JButton("Ricerca");
 		VoliElencoBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		VoliElencoBtn.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
+				
 				tabbedPane.setSelectedIndex(2);
 			}
 		});
@@ -413,6 +396,22 @@ public class GestioneVoli extends JFrame {
 		VoliModificaBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		VoliModificaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				ArrayList<Volo> voliTmp = controllerVoli.getAllVoli(a);
+				
+				ModificaComboBox.removeAllItems();
+				
+				for(Volo tmp:voliTmp) {				
+					
+					String nomeAeroportoPartenza = new String();
+					String nomeAeroportoArrivo = new String();
+					nomeAeroportoPartenza = tmp.getTrattaAssociata().getAeroportoDiPartenza().getNomeAeroporto();
+					nomeAeroportoArrivo = tmp.getTrattaAssociata().getAeroportoDiArrivo().getNomeAeroporto();
+					ModificaComboBox.addItem(tmp.getCodVolo()+ ":" + nomeAeroportoPartenza +"<->" + nomeAeroportoArrivo +" - Svolto da: " + tmp.getCompagniaDiAppartenenza().getNomeCompagnia() + " - " + tmp.getData().toString());;
+					
+				}
+				
+				
 				tabbedPane.setSelectedIndex(1);
 			}
 		});
@@ -435,6 +434,20 @@ public class GestioneVoli extends JFrame {
 		EliminaBtn.setFont(new Font("Arial", Font.PLAIN, 16));
 		EliminaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				ArrayList<Volo> voliTmp = controllerVoli.getAllVoli(a);
+				
+				EliminaVoloComboBox.removeAllItems();
+				
+				for(Volo tmp:voliTmp) {				
+					
+					String nomeAeroportoPartenza = new String();
+					String nomeAeroportoArrivo = new String();
+					nomeAeroportoPartenza = tmp.getTrattaAssociata().getAeroportoDiPartenza().getNomeAeroporto();
+					nomeAeroportoArrivo = tmp.getTrattaAssociata().getAeroportoDiArrivo().getNomeAeroporto();
+					EliminaVoloComboBox.addItem(tmp.getCodVolo()+ ":" + nomeAeroportoPartenza +"<->" + nomeAeroportoArrivo +" - Svolto da: " + tmp.getCompagniaDiAppartenenza().getNomeCompagnia() + " - " + tmp.getData().toString());;
+					
+				}
 				
 				tabbedPane.setSelectedIndex(3);
 			}

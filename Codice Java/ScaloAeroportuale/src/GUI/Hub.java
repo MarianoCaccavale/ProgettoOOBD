@@ -12,7 +12,6 @@ import Controller.ControllerSlotImbarco;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -143,7 +142,7 @@ public class Hub extends JFrame {
 		for (SlotImbarco tmp: SlotDaChiudere) {
 
 			AvvisoSlotImbarchiPanel.setText(AvvisoSlotImbarchiPanel.getText() + "\n");
-			AvvisoSlotImbarchiPanel.setText(AvvisoSlotImbarchiPanel.getText() + "Codice volo: " + tmp.getVolo().getCodVolo() + "\tTratta: " + tmp.getTratta().getAeroportoDiPartenza().getNomeAeroporto() + "  -  "+ tmp.getTratta().getAeroportoDiArrivo().getNomeAeroporto() + "\tOra di partenza: " + tmp.getOraInizio() + "");
+			AvvisoSlotImbarchiPanel.setText(AvvisoSlotImbarchiPanel.getText() + "Codice volo: " + tmp.getVolo().getCodVolo() + "\tTratta: " + tmp.getVolo().getTrattaAssociata().getAeroportoDiPartenza().getNomeAeroporto() + "  -  "+ tmp.getVolo().getTrattaAssociata().getAeroportoDiArrivo().getNomeAeroporto() + "\tOra di partenza: " + tmp.getOraInizio() + "");
 		}
 		
 		

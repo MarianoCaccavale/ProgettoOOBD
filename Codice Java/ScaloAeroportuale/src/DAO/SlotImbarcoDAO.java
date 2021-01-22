@@ -96,9 +96,10 @@ public class SlotImbarcoDAO {
 				Aeroporto aeroportoPartenza = new Aeroporto(rs.getString("nomea1"));
 				Aeroporto aeroportoArrivo = new Aeroporto(rs.getString("nomea2"));
 				trattaTmp = new Tratta(aeroportoPartenza, aeroportoArrivo);
+				voloTmp.setTrattaAssociata(trattaTmp);
 				gateTmp = new Gate(rs.getString("nomegate"));
 				
-				SlotImbarco tmp = new SlotImbarco(voloTmp, trattaTmp, gateTmp, rs.getTimestamp("datainizio"));
+				SlotImbarco tmp = new SlotImbarco(voloTmp, gateTmp, rs.getTimestamp("datainizio"));
 				risultato.add(tmp);
 				
 			}
@@ -170,9 +171,10 @@ public class SlotImbarcoDAO {
 				Aeroporto aeroportoPartenza = new Aeroporto(rs.getString("nomea1"));
 				Aeroporto aeroportoArrivo = new Aeroporto(rs.getString("nomea2"));
 				trattaTmp = new Tratta(aeroportoPartenza, aeroportoArrivo);
+				voloTmp.setTrattaAssociata(trattaTmp);
 				gateTmp = new Gate(rs.getString("nomegate"));
 				
-				SlotImbarco tmp = new SlotImbarco(voloTmp, trattaTmp, gateTmp, rs.getTimestamp("datainizio"));
+				SlotImbarco tmp = new SlotImbarco(voloTmp, gateTmp, rs.getTimestamp("datainizio"));
 				SlotDaChiudere.add(tmp);
 				
 			}
