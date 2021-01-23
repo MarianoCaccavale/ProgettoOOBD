@@ -5209,7 +5209,7 @@
 											"top": 718,
 											"width": 428.13037109375,
 											"height": 13,
-											"text": "+ConnessioneDB connessione",
+											"text": "#ConnessioneDB connessione",
 											"horizontalAlignment": 0
 										}
 									],
@@ -5457,7 +5457,7 @@
 											"top": 718,
 											"width": 437.048828125,
 											"height": 13,
-											"text": "+ConnessioneDB connessioneDB",
+											"text": "-ConnessioneDB connessioneDB",
 											"horizontalAlignment": 0
 										}
 									],
@@ -5739,7 +5739,7 @@
 											"top": 694,
 											"width": 600.8056640625,
 											"height": 13,
-											"text": "+ConnessioneDB connessioneDB",
+											"text": "-ConnessioneDB connessioneDB",
 											"horizontalAlignment": 0
 										}
 									],
@@ -6072,7 +6072,7 @@
 											"top": 702,
 											"width": 479.91455078125,
 											"height": 13,
-											"text": "+ConnessioneDB connessioneDB",
+											"text": "-ConnessioneDB connessioneDB",
 											"horizontalAlignment": 0
 										}
 									],
@@ -6354,7 +6354,7 @@
 											"top": 718,
 											"width": 405.96435546875,
 											"height": 13,
-											"text": "+ConnessioneDB connessioneDB",
+											"text": "-ConnessioneDB connessioneDB",
 											"horizontalAlignment": 0
 										}
 									],
@@ -13893,7 +13893,7 @@
 											"top": 718,
 											"width": 495.57421875,
 											"height": 13,
-											"text": "+ConnessioneDB connessioneDB",
+											"text": "-ConnessioneDB connessioneDB",
 											"horizontalAlignment": 0
 										}
 									],
@@ -15691,7 +15691,7 @@
 											"top": 718,
 											"width": 586.3837890625,
 											"height": 13,
-											"text": "+ConnessioneDB connessioneDB",
+											"text": "-ConnessioneDB connessioneDB",
 											"horizontalAlignment": 0
 										}
 									],
@@ -18194,7 +18194,7 @@
 											"top": 726,
 											"width": 600.818359375,
 											"height": 13,
-											"text": "+ConnessioneDB connessioneDB",
+											"text": "-ConnessioneDB connessioneDB",
 											"horizontalAlignment": 0
 										}
 									],
@@ -23628,6 +23628,7 @@
 								"$ref": "AAAAAAF26+H+CPg5FyE="
 							},
 							"name": "ConnessioneDB connessione",
+							"visibility": "protected",
 							"type": ""
 						}
 					],
@@ -23726,6 +23727,7 @@
 								"$ref": "AAAAAAF26+IyDPm15vg="
 							},
 							"name": "ConnessioneDB connessioneDB",
+							"visibility": "private",
 							"type": ""
 						}
 					],
@@ -23934,6 +23936,7 @@
 								"$ref": "AAAAAAF26+JQ3Ppyb0A="
 							},
 							"name": "ConnessioneDB connessioneDB",
+							"visibility": "private",
 							"type": ""
 						}
 					],
@@ -24224,6 +24227,7 @@
 								"$ref": "AAAAAAF26+J8BvsvEfY="
 							},
 							"name": "ConnessioneDB connessioneDB",
+							"visibility": "private",
 							"type": ""
 						}
 					],
@@ -24413,6 +24417,7 @@
 								"$ref": "AAAAAAF26+LJk/+y1gI="
 							},
 							"name": "ConnessioneDB connessioneDB",
+							"visibility": "private",
 							"type": ""
 						}
 					],
@@ -25311,6 +25316,7 @@
 								"$ref": "AAAAAAF28lnXa0uqEGU="
 							},
 							"name": "ConnessioneDB connessioneDB",
+							"visibility": "private",
 							"type": ""
 						}
 					],
@@ -25688,6 +25694,7 @@
 								"$ref": "AAAAAAF28nA3IuIsTJc="
 							},
 							"name": "ConnessioneDB connessioneDB",
+							"visibility": "private",
 							"type": ""
 						}
 					],
@@ -25976,6 +25983,7 @@
 								"$ref": "AAAAAAF28nM3gCG5+Ew="
 							},
 							"name": "ConnessioneDB connessioneDB",
+							"visibility": "private",
 							"type": ""
 						}
 					],
