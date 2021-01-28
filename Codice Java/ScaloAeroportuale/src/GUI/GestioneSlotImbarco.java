@@ -33,6 +33,7 @@ public class GestioneSlotImbarco extends JDialog {
 
 	
 	public GestioneSlotImbarco(Aeroporto a, Volo volo) {
+		setResizable(false);
 		setTitle("Creazione Slot Imbarco");
 		ControllerVoli controllerVoli = new ControllerVoli();
 		ControllerSlotImbarco controllerSlotImbarco = new ControllerSlotImbarco();

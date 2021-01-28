@@ -6,7 +6,7 @@ public class CompagniaAerea {
 
 	private String NomeCompagnia = new String();
 	private int GrandezzaFlotta;
-	private CompagniaAerea AeroportoDiAppartenenza;
+	private Aeroporto AeroportoDiAppartenenza;
 	private ArrayList<Volo> VoliGestiti = new ArrayList<Volo>();
 	private String CodCentoKilometri;
 	
@@ -41,11 +41,11 @@ public class CompagniaAerea {
 		GrandezzaFlotta = grandezzaFlotta;
 	}
 	
-	public CompagniaAerea getAeroportoDiAppartenenza() {
+	public Aeroporto getAeroportoDiAppartenenza() {
 		return AeroportoDiAppartenenza;
 	}
 	
-	public void setAeroportoDiAppartenenza(CompagniaAerea aeroportoDiAppartenenza) {
+	public void setAeroportoDiAppartenenza(Aeroporto aeroportoDiAppartenenza) {
 		AeroportoDiAppartenenza = aeroportoDiAppartenenza;
 	}
 

@@ -29,7 +29,7 @@ public class Hub extends JFrame {
 		controller = c;
 		ControllerSlotImbarco controllerSlot = new ControllerSlotImbarco();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1031, 525);
+		setBounds(100, 100, 1122, 525);
 		BasePanel = new JPanel();
 		BasePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(BasePanel);
@@ -109,7 +109,7 @@ public class Hub extends JFrame {
 		BottoniPanel.add(ServizioClientiBtn);
 		
 		JPanel HubPanel = new JPanel();
-		HubPanel.setBounds(238, 10, 769, 468);
+		HubPanel.setBounds(238, 10, 860, 468);
 		BasePanel.add(HubPanel);
 		HubPanel.setLayout(null);
 		
@@ -121,19 +121,19 @@ public class Hub extends JFrame {
 		
 		JLabel InformazioniCitt‡Lbl = new JLabel("New label");
 		InformazioniCitt‡Lbl.setFont(new Font("Arial", Font.PLAIN, 16));
-		InformazioniCitt‡Lbl.setBounds(637, 11, 122, 43);
+		InformazioniCitt‡Lbl.setBounds(717, 11, 122, 43);
 		InformazioniCitt‡Lbl.setText(a.getCitt‡());
 		HubPanel.add(InformazioniCitt‡Lbl);
 		
 		JTextPane AvvisoSlotImbarchiPanel = new JTextPane();
 		AvvisoSlotImbarchiPanel.setEditable(false);
 		AvvisoSlotImbarchiPanel.setFont(new Font("Arial", Font.PLAIN, 14));
-		AvvisoSlotImbarchiPanel.setBounds(10, 186, 749, 272);
+		AvvisoSlotImbarchiPanel.setBounds(10, 186, 840, 272);
 		HubPanel.add(AvvisoSlotImbarchiPanel);
 		
 		JLabel lblNewLabel = new JLabel("Questi voli potrebbero essere partiti. Potrebbe essere necessario chiudere gli SlotImbarchi ad essi associati.");
 		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblNewLabel.setBounds(10, 144, 722, 43);
+		lblNewLabel.setBounds(10, 144, 840, 43);
 		HubPanel.add(lblNewLabel);
 		ArrayList<SlotImbarco> SlotDaChiudere = new ArrayList<SlotImbarco>();
 		

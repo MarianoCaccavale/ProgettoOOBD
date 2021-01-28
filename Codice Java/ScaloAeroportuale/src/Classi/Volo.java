@@ -73,11 +73,9 @@ public class Volo {
 		TrattaAssociata = trattaAssociata;
 	}
 
-
 	public SlotImbarco getSlotImbarco() {
 		return slotImbarco;
 	}
-
 
 	public void setSlotImbarco(SlotImbarco slotImbarco) {
 		this.slotImbarco = slotImbarco;

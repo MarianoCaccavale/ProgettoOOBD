@@ -126,9 +126,9 @@ public class GestioneVoli extends JFrame {
 		
 		
 		JComboBox<String> ModificaComboBox = new JComboBox<String>();
-		ModificaComboBox.setFont(new Font("Arial", Font.PLAIN, 20));
+		ModificaComboBox.setFont(new Font("Arial", Font.PLAIN, 18));
 		ModificaComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere il volo"}));
-		ModificaComboBox.setBounds(30, 38, 760, 50);
+		ModificaComboBox.setBounds(10, 38, 815, 50);
 		
 		ArrayList<Volo> Voli = new ArrayList<Volo>();
 		
@@ -229,9 +229,9 @@ public class GestioneVoli extends JFrame {
 		ElencoPanel.add(RicercaBtn);
 		
 		JComboBox<String> ChiusuraComboBox = new JComboBox<String>();
-		ChiusuraComboBox.setFont(new Font("Arial", Font.PLAIN, 18));
+		ChiusuraComboBox.setFont(new Font("Arial", Font.PLAIN, 14));
 		ChiusuraComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Scegliere lo SlotImbarco da chiudere"}));
-		ChiusuraComboBox.setBounds(20, 52, 793, 50);
+		ChiusuraComboBox.setBounds(10, 52, 815, 50);
 		
 		ArrayList<SlotImbarco> listaSlotImbarco = new ArrayList<SlotImbarco>();
 		listaSlotImbarco = controllerSlotImbarco.getImbarchi(a.getCodAeroporto());
