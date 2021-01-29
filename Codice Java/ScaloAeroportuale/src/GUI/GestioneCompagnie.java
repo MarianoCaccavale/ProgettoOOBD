@@ -193,9 +193,9 @@ public class GestioneCompagnie extends JFrame {
 		FlottaSpn.setBounds(315, 203, 133, 40);
 		AggiuntaPanel.add(FlottaSpn);
 
-		JButton btnNewButton = new JButton("Aggiungi");
-		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 16));
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton AggiuntaBtn = new JButton("Aggiungi");
+		AggiuntaBtn.setFont(new Font("Arial", Font.PLAIN, 16));
+		AggiuntaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				controllerCompagnia.Insert(NomeTf.getText(), (Integer) FlottaSpn.getValue(), a);
@@ -207,8 +207,8 @@ public class GestioneCompagnie extends JFrame {
 
 			}
 		});
-		btnNewButton.setBounds(692, 415, 106, 35);
-		AggiuntaPanel.add(btnNewButton);
+		AggiuntaBtn.setBounds(692, 415, 106, 35);
+		AggiuntaPanel.add(AggiuntaBtn);
 
 		// Pannello Elenco
 		JPanel ElencoPanel = new JPanel();

@@ -125,24 +125,24 @@ public class Hub extends JFrame {
 		InformazioniCitt‡Lbl.setText(a.getCitt‡());
 		HubPanel.add(InformazioniCitt‡Lbl);
 		
-		JTextPane AvvisoSlotImbarchiPanel = new JTextPane();
-		AvvisoSlotImbarchiPanel.setEditable(false);
-		AvvisoSlotImbarchiPanel.setFont(new Font("Arial", Font.PLAIN, 14));
-		AvvisoSlotImbarchiPanel.setBounds(10, 186, 840, 272);
-		HubPanel.add(AvvisoSlotImbarchiPanel);
+		JTextPane AvvisoSlotImbarchi = new JTextPane();
+		AvvisoSlotImbarchi.setEditable(false);
+		AvvisoSlotImbarchi.setFont(new Font("Arial", Font.PLAIN, 14));
+		AvvisoSlotImbarchi.setBounds(10, 186, 840, 272);
+		HubPanel.add(AvvisoSlotImbarchi);
 		
-		JLabel lblNewLabel = new JLabel("Questi voli potrebbero essere partiti. Potrebbe essere necessario chiudere gli SlotImbarchi ad essi associati.");
-		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblNewLabel.setBounds(10, 144, 840, 43);
-		HubPanel.add(lblNewLabel);
+		JLabel AvvisoLbl = new JLabel("Questi voli potrebbero essere partiti. Potrebbe essere necessario chiudere gli SlotImbarchi ad essi associati.");
+		AvvisoLbl.setFont(new Font("Arial", Font.PLAIN, 16));
+		AvvisoLbl.setBounds(10, 144, 840, 43);
+		HubPanel.add(AvvisoLbl);
 		ArrayList<SlotImbarco> SlotDaChiudere = new ArrayList<SlotImbarco>();
 		
 		SlotDaChiudere = controllerSlot.ricercaSlotDaChiudere(a.getCodAeroporto());
 		
 		for (SlotImbarco tmp: SlotDaChiudere) {
 
-			AvvisoSlotImbarchiPanel.setText(AvvisoSlotImbarchiPanel.getText() + "\n");
-			AvvisoSlotImbarchiPanel.setText(AvvisoSlotImbarchiPanel.getText() + "Codice volo: " + tmp.getVolo().getCodVolo() + "\tTratta: " + tmp.getVolo().getTrattaAssociata().getAeroportoDiPartenza().getNomeAeroporto() + "  -  "+ tmp.getVolo().getTrattaAssociata().getAeroportoDiArrivo().getNomeAeroporto() + "\tOra di partenza: " + tmp.getOraInizio() + "");
+			AvvisoSlotImbarchi.setText(AvvisoSlotImbarchi.getText() + "\n");
+			AvvisoSlotImbarchi.setText(AvvisoSlotImbarchi.getText() + "Codice volo: " + tmp.getVolo().getCodVolo() + "\tTratta: " + tmp.getVolo().getTrattaAssociata().getAeroportoDiPartenza().getNomeAeroporto() + "  -  "+ tmp.getVolo().getTrattaAssociata().getAeroportoDiArrivo().getNomeAeroporto() + "\tOra di partenza: " + tmp.getOraInizio() + "");
 		}
 		
 		

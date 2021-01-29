@@ -84,9 +84,9 @@ public class GestioneSlotImbarco extends JDialog {
 			contentPanel.add(CodaCombo);
 		
 		
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			JPanel ButtonPanel = new JPanel();
+			ButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			getContentPane().add(ButtonPanel, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
 				okButton.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -114,7 +114,7 @@ public class GestioneSlotImbarco extends JDialog {
 					}
 				});
 				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
+				ButtonPanel.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 		}

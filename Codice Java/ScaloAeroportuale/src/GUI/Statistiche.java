@@ -73,14 +73,14 @@ public class Statistiche extends JFrame {
 		tabbedPane.addTab("New tab", null, CompagniePanel, null);
 		CompagniePanel.setLayout(null);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 82, 906, 295);
-		CompagniePanel.add(scrollPane_1);
+		JScrollPane scrollPaneCompagnie = new JScrollPane();
+		scrollPaneCompagnie.setBounds(10, 82, 906, 295);
+		CompagniePanel.add(scrollPaneCompagnie);
 		
 		JTextPane RicercaCompagniePanel = new JTextPane();
 		RicercaCompagniePanel.setEditable(false);
 		RicercaCompagniePanel.setFont(new Font("Arial", Font.PLAIN, 14));
-		scrollPane_1.setViewportView(RicercaCompagniePanel);
+		scrollPaneCompagnie.setViewportView(RicercaCompagniePanel);
 		
 		JSpinner DataInizioStatisticheCompagnieSpn = new JSpinner();
 		DataInizioStatisticheCompagnieSpn.setFont(new Font("Arial", Font.PLAIN, 16));

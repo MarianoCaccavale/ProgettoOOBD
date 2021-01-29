@@ -43,15 +43,15 @@ public class ServizioClienti extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel BottoniPane = new JPanel();
-		BottoniPane.setBounds(10, 11, 178, 398);
-		contentPane.add(BottoniPane);
-		BottoniPane.setLayout(null);
+		JPanel BottoniPanel = new JPanel();
+		BottoniPanel.setBounds(10, 11, 178, 398);
+		contentPane.add(BottoniPanel);
+		BottoniPanel.setLayout(null);
 		
-		JPanel ChiusuraPane = new JPanel();
-		ChiusuraPane.setBounds(10, 420, 178, 59);
-		contentPane.add(ChiusuraPane);
-		ChiusuraPane.setLayout(null);
+		JPanel IndietroPanel = new JPanel();
+		IndietroPanel.setBounds(10, 420, 178, 59);
+		contentPane.add(IndietroPanel);
+		IndietroPanel.setLayout(null);
 		
 		JButton IndietroBtn = new JButton("Indietro");
 		IndietroBtn.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -63,7 +63,7 @@ public class ServizioClienti extends JFrame {
 			}
 		});
 		IndietroBtn.setBounds(10, 11, 158, 37);
-		ChiusuraPane.add(IndietroBtn);
+		IndietroPanel.add(IndietroBtn);
 		
 		JButton ClientiBtn = new JButton("Clienti Business");
 		ClientiBtn.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -75,29 +75,29 @@ public class ServizioClienti extends JFrame {
 			}
 		});
 		ClientiBtn.setBounds(10, 11, 158, 33);
-		BottoniPane.add(ClientiBtn);
+		BottoniPanel.add(ClientiBtn);
 		
 		JPanel BigliettiPanel = new JPanel();
 		BigliettiPanel.setLayout(null);
 		BigliettiPanel.setBounds(198, 11, 909, 471);
 		contentPane.add(BigliettiPanel);
 		
-		JLabel SceltaNumeroSpn = new JLabel("Numero di biglietti da generare:");
+		JLabel SceltaNumeroLbl = new JLabel("Numero di biglietti da generare:");
+		SceltaNumeroLbl.setFont(new Font("Arial", Font.PLAIN, 16));
+		SceltaNumeroLbl.setBounds(307, 131, 268, 27);
+		BigliettiPanel.add(SceltaNumeroLbl);
+		
+		JSpinner SceltaNumeroSpn = new JSpinner();
+		SceltaNumeroSpn.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
 		SceltaNumeroSpn.setFont(new Font("Arial", Font.PLAIN, 16));
-		SceltaNumeroSpn.setBounds(307, 131, 268, 27);
+		SceltaNumeroSpn.setBounds(335, 169, 125, 38);
 		BigliettiPanel.add(SceltaNumeroSpn);
 		
-		JSpinner SceltaNumerpSpn = new JSpinner();
-		SceltaNumerpSpn.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
-		SceltaNumerpSpn.setFont(new Font("Arial", Font.PLAIN, 16));
-		SceltaNumerpSpn.setBounds(335, 169, 125, 38);
-		BigliettiPanel.add(SceltaNumerpSpn);
-		
-		JComboBox<String> SceltaVoloSpn = new JComboBox<String>();
-		SceltaVoloSpn.setModel(new DefaultComboBoxModel<String>(new String[] {"Selezionare il volo"}));
-		SceltaVoloSpn.setFont(new Font("Arial", Font.PLAIN, 16));
-		SceltaVoloSpn.setBounds(10, 58, 889, 53);
-		BigliettiPanel.add(SceltaVoloSpn);
+		JComboBox<String> SceltaVoloCombo = new JComboBox<String>();
+		SceltaVoloCombo.setModel(new DefaultComboBoxModel<String>(new String[] {"Selezionare il volo"}));
+		SceltaVoloCombo.setFont(new Font("Arial", Font.PLAIN, 16));
+		SceltaVoloCombo.setBounds(10, 58, 889, 53);
+		BigliettiPanel.add(SceltaVoloCombo);
 		
 		JButton GeneraBigliettoBtn = new JButton("Genera");
 		
@@ -110,16 +110,16 @@ public class ServizioClienti extends JFrame {
 		GeneraBigliettoBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(SceltaVoloSpn.getSelectedIndex() != 0) {
+				if(SceltaVoloCombo.getSelectedIndex() != 0) {
 					if(EmailBusinessTf.isEditable()){
 						
-						String codVolo = SceltaVoloSpn.getSelectedItem().toString().substring(0, SceltaVoloSpn.getSelectedItem().toString().indexOf("-")-1);
-						controllerVoli.generateBusinessTicket(codVolo, (int) SceltaNumerpSpn.getValue(), EmailBusinessTf.getText());
+						String codVolo = SceltaVoloCombo.getSelectedItem().toString().substring(0, SceltaVoloCombo.getSelectedItem().toString().indexOf("-")-1);
+						controllerVoli.generateBusinessTicket(codVolo, (int) SceltaNumeroSpn.getValue(), EmailBusinessTf.getText());
 						
 					}else {
 							
-						String codVolo = SceltaVoloSpn.getSelectedItem().toString().substring(0, SceltaVoloSpn.getSelectedItem().toString().indexOf("-")-1);
-						controllerVoli.generateTicket(codVolo, (int)SceltaNumerpSpn.getValue());
+						String codVolo = SceltaVoloCombo.getSelectedItem().toString().substring(0, SceltaVoloCombo.getSelectedItem().toString().indexOf("-")-1);
+						controllerVoli.generateTicket(codVolo, (int)SceltaNumeroSpn.getValue());
 							
 					}
 				}
@@ -167,7 +167,7 @@ public class ServizioClienti extends JFrame {
 		
 		for (Volo v:voli) {
 			
-			SceltaVoloSpn.addItem(v.getCodVolo()+ " - Compagnia del volo: " + v.getCompagniaDiAppartenenza().getNomeCompagnia() + " - Tratta del volo: " + v.getTrattaAssociata().getAeroportoDiPartenza().getNomeAeroporto() + " / " + v.getTrattaAssociata().getAeroportoDiArrivo().getNomeAeroporto() + " - Numero dei posti prenotati: " + v.getNumeroPostiPrenotati());
+			SceltaVoloCombo.addItem(v.getCodVolo()+ " - Compagnia del volo: " + v.getCompagniaDiAppartenenza().getNomeCompagnia() + " - Tratta del volo: " + v.getTrattaAssociata().getAeroportoDiPartenza().getNomeAeroporto() + " / " + v.getTrattaAssociata().getAeroportoDiArrivo().getNomeAeroporto() + " - Numero dei posti prenotati: " + v.getNumeroPostiPrenotati());
 			
 		}
 		
