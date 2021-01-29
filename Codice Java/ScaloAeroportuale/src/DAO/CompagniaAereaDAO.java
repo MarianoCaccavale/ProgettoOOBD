@@ -104,6 +104,10 @@ public class CompagniaAereaDAO{
 				
 				throw new CompagniaException("Grandezza flotta errata, inserire un valore compreso tra 50 e 500");
 				
+			}else if (errore.contains("voli_corretti()")) {
+				
+				throw new CompagniaException("Impossibile modificare grandezza della flotta! Ci sono più voli prenotati di quanti aerei disponibili, alcuni voli rimarrebbero scoperti!");
+				
 			}
 			
 		}
