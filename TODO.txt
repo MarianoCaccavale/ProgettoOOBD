@@ -1,7 +1,0 @@
-Aggiungere attributi
-Segnarci eventuali vincoli che aggiungiamo
-creare le sequenze per i codici e trigger
-Aggiungere espressioni regolari
-Popolare il db
-Aggiungere il controller e le associazioni con le classi DAO
-Inserire nel CD anche i JFrame, ma magari iniziare a pensare prima come vogliamo strutturare l'applicazione(Mary roba tua eh)
